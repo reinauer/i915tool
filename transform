@@ -33,7 +33,8 @@
 # for things that don't build yet.
 
 # Step 1
-rm inputs/* per-file-changes/* final/* tmp/*
+rm -f inputs/* per-file-changes/* final/* tmp/*
+mkdir -p inputs per-file-changes final tmp
 cp $LINUX/drivers/gpu/drm/i915/i915_reg.h inputs 
 cp $LINUX/drivers/gpu/drm/i915/i915_drv.? inputs 
 cp $LINUX/drivers/gpu/drm/i915/intel_display.c inputs 
