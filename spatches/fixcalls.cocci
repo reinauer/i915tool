@@ -185,10 +185,8 @@ E1
 expression E1;
 @@
 -BUG_ON(
-+assert(!(
-E1
-+)
-);
++assert(!
+E1);
 @@
 @@
 -jiffies
