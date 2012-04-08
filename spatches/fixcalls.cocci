@@ -182,12 +182,6 @@ E1
 +) fprintf(stderr, 
 ...);
 @@
-expression E1;
-@@
--BUG_ON(
-+assert(!
-E1);
-@@
 @@
 -jiffies
 +msecs()
@@ -369,3 +363,22 @@ v =
 @@
 @@
 -drm_sysfs_connector_add(...);
+@@
+@@
+-drm_mode_destroy(...);
+@ ruleidr @
+identifier t;
+identifier f;
+expression E1, E2;
+type T;
+@@
+T f(...){<...
+t = idr_pre_get(E1, E2);
+...>}
+@@
+identifier ruleidr.f;
+expression E1, E2;
+@@
+idr_pre_get(E1
+-  ,E2
+   )

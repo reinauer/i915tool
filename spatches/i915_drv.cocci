@@ -234,3 +234,7 @@ identifier d, m;
 type T;
 @@
 -T d(struct intel_ring_buffer *m) {...}
+@@
+@@
+-intel_gmbus_is_forced_bit(...){...}
+

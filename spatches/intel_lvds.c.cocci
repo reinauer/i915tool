@@ -6,49 +6,23 @@
 - centre_vertically(...){...}
 @@
 @@
-- intel_attached_lvds(...){...}
-@@
-@@
-- intel_find_lvds_downclock(...){...}
-@@
-@@
 - intel_lid_notify(...){...}
 @@
 @@
 - intel_lvds_commit(...){...}
 @@
 @@
-- intel_lvds_destroy(...){...}
+-intel_lvds_destroy(...){...}
 @@
+identifier d;
 @@
-- intel_lvds_detect(...){...}
+intel_lvds_detect(...){...
+- d = intel_panel_detect(...);
++d = connector_status_connected;
+...}
 @@
 @@
 - intel_lvds_disable(...){...}
-@@
-@@
-- intel_lvds_dpms(...){...}
-@@
-@@
-- intel_lvds_enable(...){...}
-@@
-@@
-- intel_lvds_get_modes(...){...}
-@@
-@@
-- intel_lvds_mode_fixup(...){...}
-@@
-@@
-- intel_lvds_mode_set(...){...}
-@@
-@@
-- intel_lvds_mode_valid(...){...}
-@@
-@@
-- intel_lvds_prepare(...){...}
-@@
-@@
-- intel_lvds_set_property(...){...}
 @@
 @@
 - intel_no_lvds_dmi_callback(...){...}
@@ -68,19 +42,11 @@ lvds_is_present_in_vbt(...){...}
 @@
 identifier d;
 @@
--struct dmi_system_id d[] = {...};
+-struct dmi_system_id d [] = {...};
 @@
 identifier d;
 @@
 - struct drm_encoder_helper_funcs d = {...};
-@@
-identifier d;
-@@
--struct drm_connector_funcs d = {...};
-@@
-identifier d;
-@@
-- struct drm_encoder_funcs d = {...};
 @@
 identifier d;
 @@
@@ -100,12 +66,6 @@ T f(...){<...
 ...>}
 @@
 @@
--drm_connector_init(...);
-@@
-@@
--drm_encoder_init(...);
-@@
-@@
 -drm_encoder_helper_add(...);
 @@
 @@
@@ -119,6 +79,3 @@ T f(...){<...
 @@
 @@
 -drm_mode_connector_update_edid_property(...);
-@@
-@@
--intel_find_lvds_downclock(...);

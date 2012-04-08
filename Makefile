@@ -1,5 +1,5 @@
 goodsource=pci.c final/intel_bios.c final/drm_modes.c final/i915_drv.c  final/intel_i2c.c
-brokensource=final/intel_display.c final/intel_dp.c final/intel_panel.c final/drm_dp_i2c_helper.c final/i915_dma.c final/intel_lvds.c final/drm_edid.c final/drm_crtc.c \
+brokensource=final/intel_display.c final/intel_dp.c final/intel_panel.c final/drm_dp_i2c_helper.c final/i915_dma.c final/intel_lvds.c final/drm_edid.c final/drm_crtc.c final/drm_crtc_helper.c\
 	common.c i2c.c hexdump.c
 
 all: probe

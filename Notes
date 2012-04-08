@@ -1,1 +1,3 @@
 intel_choose_pipe_bpp_dither -- taken out. Consider going with 6 bit graphics only for bios screens. Saves compute. 
+
+OK, that's weird, --dir did not work. Hmm. 

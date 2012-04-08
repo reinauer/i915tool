@@ -16,6 +16,9 @@
 #include <sys/time.h>
 #include <linux/types.h>
 #include <errno.h>
+
+#define BUG_ON(x) assert((x))
+
 enum {
 	DUMP_PREFIX_OFFSET, 
 	DUMP_PREFIX_ADDRESS, 
@@ -52,7 +55,7 @@ struct drm_file {};
 #define VGA_RSRC_NORMAL_MEM    0x08
 
 
-/* define in pci.h! */
+/* defined in pci.h! */
 #include <pci/pci.h>
 /* idiocy. how many names to we need for a type? */
 typedef u8 uint8_t;
@@ -60,10 +63,15 @@ typedef u16 uint16_t;
 typedef u32 uint32_t;
 typedef u64 uint64_t;
 typedef long long s64;
+typedef u32 resource_size_t;
 /* WTF */
 typedef int bool;
 enum {false = 0, true};
 
+/* we don't want the complex one */
+struct idr {
+	int val;
+};
 
 struct list_head {
 	struct list_head *next, *prev;
@@ -131,33 +139,29 @@ static inline void list_add(struct list_head *new, struct list_head *head)
 }
 
 
+/**
+ * list_add_tail - add a new entry
+ * @new: new entry to be added
+ * @head: list head to add it before
+ *
+ * Insert a new entry before the specified head.
+ * This is useful for implementing queues.
+ */
+static inline void list_add_tail(struct list_head *new, struct list_head *head)
+{
+	__list_add(new, head->prev, head);
+}
+
 /* we define our own. The kernel one is too full of stuff. */
 struct drm_i915_gem_object {
 	signed int fence_reg : 5;
 	uint32_t gtt_offset;
 	unsigned int tiling_mode : 2;
 };
-struct drm_mode_config {
 
-	int min_width, min_height, max_width, max_height;
-
-	int num_fb;
-	struct list_head fb_list;
-	int num_connector;
-	struct list_head connector_list;
-	int num_encoder;
-	struct list_head encoder_list;
-
-	int num_crtc;
-	struct list_head crtc_list;
-
-	struct list_head property_list;
-
-	struct drm_mode_config_funcs *funcs;
-
-	/* Optional properties */
-	struct drm_property *scaling_mode_property;
-};
+#include "final/drm_mode.h"
+#include "final/drm_edid.h"
+#include "final/drm_crtc.h"
 
 /* For now, we define a shim layer of drm devices. The long term 
  * goal is to use coccinelle to gather up all this crap into 
@@ -171,39 +175,6 @@ struct drm_device {
 	struct drm_i915_private *dev_private;
 	struct drm_mode_config mode_config;
 	int vblank_disable_allowed;
-};
-
-#include "final/drm_mode.h"
-#include "final/drm_edid.h"
-#include "final/drm_crtc.h"
-
-/* we're going to have to drop this private definition and use the one in drm_crtc.h
- * but I need this to build. 
- */
-struct drm_connector {
-	struct drm_mode_object base;
-	struct list_head head;
-	int connector_type;
-	int connector_type_id;
-
-	/* forced on connector */
-	enum drm_connector_force force;
-	uint32_t encoder_ids[DRM_CONNECTOR_MAX_ENCODER];
-	uint32_t force_encoder_id;
-	struct drm_encoder *encoder; /* currently active encoder */
-	struct drm_device *dev;
-  struct drm_display_info display_info;
-  struct list_head probed_modes;
-  bool interlace_allowed;
-  int doublescan_allowed;
-	/* EDID bits */
-	uint8_t eld[MAX_ELD_BYTES];
-	bool dvi_dual;
-	int max_tmds_clock;	/* in MHz */
-	bool latency_present[2];
-	int video_latency[2];	/* [0]: progressive, [1]: interlaced */
-	int audio_latency[2];
-	int null_edid_counter; /* needed to workaround some HW bugs where we get all 0s */
 };
 
 /* we're going to have to have a hook for this somehow. It will vary between 
@@ -432,6 +403,7 @@ void *dmi_check_system(unsigned long);
 #include "final/i915_reg.h"
 #include "final/i915_drv.h"
 #include "final/drm_dp_helper.h"
+#include "final/drm_crtc_helper.h"
 #include "final/drm_mode.h"
 #include "final/drm_crtc.h"
 #include "final/intel_drv.h"

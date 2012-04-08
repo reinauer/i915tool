@@ -3,13 +3,7 @@
 -DRM_ENUM_NAME_FN(...){...}
 @@
 @@
--drm_connector_attach_property(...){...}
-@@
-@@
 -drm_connector_cleanup(...){...}
-@@
-@@
--drm_connector_init(...){...}
 @@
 @@
 -drm_connector_property_get_value(...){...}
@@ -31,9 +25,6 @@
 @@
 @@
 -drm_encoder_cleanup(...){...}
-@@
-@@
--drm_encoder_init(...){...}
 @@
 @@
 -drm_fb_release(...){...}
@@ -166,9 +157,6 @@
 @@
 @@
 -drm_mode_object_find(...){...}
-@@
-@@
--drm_mode_object_get(...){...}
 @@
 @@
 -drm_mode_object_put(...){...}

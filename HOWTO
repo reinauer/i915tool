@@ -1,0 +1,10 @@
+Stuff learned the hard way. I got this wrong and am still dealing with mistakes I am going to have to undo. 
+
+We're extracting kernel code to run out of kernel. Some learning. 
+- start with the .h files, figure out what data structures you need. Anything that references user access (ioctl, struct file, etc) can probably be removed. Try to avoid naming the struct, rather write a 
+rule that names the struct elements and you can remove lots of structs. It's a bad idea to create your own structs with the same names (DUH!) and I am going to have to unwind some of this (see: video.h)
+- now pick some .c files. Try to write rules that elide functions in all the files. This may not always work.
+- try to remove everything, and add things back as you think you need them. You want minimal code. 
+- Go for subtraction (i.e. -x(...){...}) instead of the rev-patch approach, the latter is not reliable. 
+- When bringing in a .c, use ctags to extract functions and write a .cocci that removes them all. It's actually easier to start that way.
+- sometimes, due to  coccinelle issues, there is no avoiding an ed/sed script. Accept it.

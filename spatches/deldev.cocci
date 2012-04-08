@@ -47,3 +47,21 @@ struct s {...
 -struct mutex d;
 ...
 };
+@@
+identifier d, f;
+@@
+struct drm_connector_funcs d = {
+-.fill_modes = f,
+};
+@@
+identifier d, f;
+@@
+struct drm_connector_funcs d = {
+-.destroy = f,
+};
+@@
+identifier d, f;
+@@
+struct drm_encoder_funcs d = {
+-.destroy = f,
+};
