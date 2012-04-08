@@ -268,9 +268,6 @@ identifier d;
 - intel_enable_pll(...){...}
 @@
 @@
-- intel_encoder_clones(...){...}
-@@
-@@
 - intel_encoder_commit(...){...}
 @@
 @@
@@ -502,29 +499,11 @@ T f(...)
 ...>}
 @@
 type T;
-identifier f, d, e;
-@@
-T f(...)
-{<...
-d->base.e  = 
-- intel_encoder_clones(...);
-+ NULL;
-...>}
-@@
-type T;
 identifier f;
 @@
 T f(...)
 {<...
 - intel_update_fbc(...);
-...>}
-@@
-type T;
-identifier f;
-@@
-T f(...)
-{<...
-- drm_crtc_init(...);
 ...>}
 @@
 type T;

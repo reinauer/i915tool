@@ -47,13 +47,6 @@ identifier f;
 type T;
 @@
 T f(...){<...
--drm_mode_config_init(...);
-...>}
-@@
-identifier f;
-type T;
-@@
-T f(...){<...
 -drm_helper_disable_unused_functions(...);
 ...>}
 @@

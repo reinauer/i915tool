@@ -239,7 +239,7 @@ int main(int argc, char *argv[])
 	pin = GMBUS_PORT_PANEL;
 	printf("lvds_is_present_in_vbt returns %d\n", 
 		lvds_is_present_in_vbt(i915, &pin));
-	i915_driver_load(i915, i915->dev_private->info);
+	i915_driver_load(i915, (unsigned long)i915->dev_private->info);
 	/* where we want to be someday ... */
 	intel_setup_outputs(i915);
 }

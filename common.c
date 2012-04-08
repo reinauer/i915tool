@@ -27,8 +27,14 @@ getrawmonotonic(struct timespec *t)
 /* I'm almost certain we don't need these IDs but we'll see */
 static int idr = 1;
 
+void
+idr_init(void *v)
+{
+}
+
 int
-idr_pre_get(void *x, int level) {
+idr_pre_get(void *x, int level)
+{
 	return 1;
 }
 

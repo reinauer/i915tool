@@ -80,14 +80,6 @@ q
 EOF
 
 ed per-file-changes/drm_crtc.h <<EOF
-/drm_crtc_init/,/endif/-d
-w
-q
-EOF
-
-ed per-file-changes/intel_drv.h <<EOF
-/ddc_get_modes/,/intel_attached_encoder/-d
-/intel_connector_attach_encoder/,/endif/-d
 w
 q
 EOF

@@ -21,9 +21,6 @@
 -drm_crtc_convert_umode(...){...}
 @@
 @@
--drm_crtc_init(...){...}
-@@
-@@
 -drm_encoder_cleanup(...){...}
 @@
 @@
@@ -52,9 +49,6 @@
 @@
 @@
 -drm_mode_config_cleanup(...){...}
-@@
-@@
--drm_mode_config_init(...){...}
 @@
 @@
 -drm_mode_config_reset(...){...}
@@ -88,9 +82,6 @@
 @@
 @@
 -drm_mode_create_scaling_mode_property(...){...}
-@@
-@@
--drm_mode_create_standard_connector_properties(...){...}
 @@
 @@
 -drm_mode_create_tv_properties(...){...}
@@ -172,12 +163,6 @@
 @@
 @@
 -drm_mode_setcrtc(...){...}
-@@
-@@
--drm_property_add_enum(...){...}
-@@
-@@
--drm_property_create(...){...}
 @@
 @@
 -drm_property_create_blob(...){...}

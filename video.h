@@ -17,7 +17,7 @@
 #include <linux/types.h>
 #include <errno.h>
 
-#define BUG_ON(x) assert((x))
+#define BUG_ON(x) assert(!(x))
 
 enum {
 	DUMP_PREFIX_OFFSET, 
@@ -151,31 +151,6 @@ static inline void list_add_tail(struct list_head *new, struct list_head *head)
 {
 	__list_add(new, head->prev, head);
 }
-
-/* we define our own. The kernel one is too full of stuff. */
-struct drm_i915_gem_object {
-	signed int fence_reg : 5;
-	uint32_t gtt_offset;
-	unsigned int tiling_mode : 2;
-};
-
-#include "final/drm_mode.h"
-#include "final/drm_edid.h"
-#include "final/drm_crtc.h"
-
-/* For now, we define a shim layer of drm devices. The long term 
- * goal is to use coccinelle to gather up all this crap into 
- * one struct because we don't need this layer of indirection. 
- * but we need to optimize this process for automated translation
- * and it may turn out we want this layer. Anyway, one war at a time
- */
-struct drm_device {
-	struct pci_dev *pdev;
-	u8 *bios_bin;
-	struct drm_i915_private *dev_private;
-	struct drm_mode_config mode_config;
-	int vblank_disable_allowed;
-};
 
 /* we're going to have to have a hook for this somehow. It will vary between 
  * user mode and coreboot
@@ -329,6 +304,31 @@ union i2c_smbus_data {
 #define I2C_SMBUS_I2C_BLOCK_BROKEN  6
 #define I2C_SMBUS_BLOCK_PROC_CALL   7		/* SMBus 2.0 */
 #define I2C_SMBUS_I2C_BLOCK_DATA    8
+
+/* we define our own. The kernel one is too full of stuff. */
+struct drm_i915_gem_object {
+	signed int fence_reg : 5;
+	uint32_t gtt_offset;
+	unsigned int tiling_mode : 2;
+};
+
+#include "final/drm_mode.h"
+#include "final/drm_edid.h"
+#include "final/drm_crtc.h"
+
+/* For now, we define a shim layer of drm devices. The long term 
+ * goal is to use coccinelle to gather up all this crap into 
+ * one struct because we don't need this layer of indirection. 
+ * but we need to optimize this process for automated translation
+ * and it may turn out we want this layer. Anyway, one war at a time
+ */
+struct drm_device {
+	struct pci_dev *pdev;
+	u8 *bios_bin;
+	struct drm_i915_private *dev_private;
+	struct drm_mode_config mode_config;
+	int vblank_disable_allowed;
+};
 
 
 /* we're willing to define our own here because it's relatively unchanging */

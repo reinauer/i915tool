@@ -34,9 +34,6 @@ intel_lvds_detect(...){...
 - panel_fitter_scaling(...){...}
 @@
 @@
-- to_intel_lvds(...){...}
-@@
-@@
 -static
 lvds_is_present_in_vbt(...){...}
 @@

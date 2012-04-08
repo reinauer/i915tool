@@ -26,3 +26,8 @@ identifier d, e;
 struct d {...
 -struct device_attribute *e;
 ...};
+@@
+type T;
+identifier d, e;
+@@
+-T d(...,struct drm_file *e, ...);
