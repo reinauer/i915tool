@@ -131,13 +131,6 @@ identifier f;
 type T;
 @@
 T f(...){<...
--intel_init_display(...);
-...>}
-@@
-identifier f;
-type T;
-@@
-T f(...){<...
 -kfree(
 +free(
 ...);

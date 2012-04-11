@@ -50,7 +50,7 @@ hexdump(u8 *base, int size)
 }
 void udelay(int i)
 {
-	printf("UDELAY!\n");
+  mdelay(i);
 }
 
 unsigned long io_I915_READ(unsigned long addr)

@@ -611,6 +611,10 @@ T f(...){<...
 @@
 statement S;
 @@
+-if (I915_HAS_FBC(...)) S 
+@@
+statement S;
+@@
 -if (HAS_PCH_IBX(...)) S 
 @@
 statement S;
