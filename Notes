@@ -1,3 +1,31 @@
 intel_choose_pipe_bpp_dither -- taken out. Consider going with 6 bit graphics only for bios screens. Saves compute. 
 
 OK, that's weird, --dir did not work. Hmm. 
+
+Found CougarPoint PCH
+Set default to SSC at 100MHz
+failed to find VBIOS tables
+2 display pipes available.
+master_xfer[0] W, addr=0x50, len=1
+master_xfer[1] R, addr=0x50, len=1
+master_xfer[0] W, addr=0x50, len=1
+master_xfer[1] R, addr=0x50, len=128
+get backlight PWM = 4882
+intel_crt_init called
+intel_hdmi_init called
+i2c_init DPDDC-D
+aux_i2c nack
+has_panel 1 has_lvds 1 has_pch_edp 0 has_cpu_edp 0 has_ck505 0
+Using SSC on panel
+
+But: 
+intel_modeset_init (dev=0x6d46c0) at final/intel_display.c:3762
+3762		intel_init_clock_gating(dev);
+(gdb) s
+intel_init_clock_gating (dev=0x6d46c0) at final/intel_display.c:3614
+3614		struct drm_i915_private *dev_priv = dev->dev_private;
+(gdb) n
+3616		dev_priv->display.init_clock_gating(dev);
+(gdb) 
+
+
