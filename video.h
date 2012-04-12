@@ -432,4 +432,24 @@ extern unsigned int i915_lvds_downclock;
 extern int i915_vbt_sdvo_panel_type;
 unsigned long lvds_do_not_use_alternate_frequency;
 extern int i915_panel_ignore_lid;
+
+/* common.c */
+void BUG(void);
+void getrawmonotonic(struct timespec *t);
+void idr_init(void *v);
+int idr_pre_get(void *x);
+int idr_get_new_above(void *v, void *o, int unused, int *new_id);
+unsigned long io_I915_READ(unsigned long addr);
+void io_I915_WRITE(unsigned long addr, unsigned long val);
+unsigned long msecs(void);
+void mdelay(unsigned long ms);
+void udelay(int i);
+unsigned long I915_READ(unsigned long addr);
+void I915_WRITE(unsigned long addr, unsigned long val);
+void *pci_unmap_rom(struct pci_dev *dev, void *bios);
+void *dmi_check_system(unsigned long ignore);
+void *mapit(u32 phys, u32 size);
+void devinit(void);
+void init(int argc, char *argv[]);
+
 #endif /* VIDEO_H */
