@@ -368,3 +368,15 @@ expression E1, E2;
 idr_pre_get(E1
 -  ,E2
    )
+@@
+@@
+-in_atomic(...)
++0
+@@
+@@
+-in_dbg_master(...)
++0
+@@
+@@
+-usleep_range(...)
+

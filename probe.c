@@ -7,7 +7,7 @@ extern unsigned short vendor, device;
 extern struct pci_dev fake;
 extern int dofake;
 extern u8 *bios_image;
-extern u32 *mmiobase;
+extern void *mmiobase;
 extern u32 mmiophys;
 extern int mmiosize;
 extern size_t bios_image_size;

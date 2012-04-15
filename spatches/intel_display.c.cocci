@@ -9,10 +9,6 @@ identifier d;
 @@
 identifier d;
 @@
--static struct drm_crtc_helper_funcs d = {...};
-@@
-identifier d;
-@@
 - struct intel_quirk d[] = {...};
 @@
 @@
@@ -139,10 +135,7 @@ identifier d;
 - i9xx_crtc_commit(...){...}
 @@
 @@
-- i9xx_crtc_disable(...){...}
-@@
-@@
-- i9xx_crtc_dpms(...){...}
+-i9xx_crtc_disable(...){...}
 @@
 @@
 - i9xx_crtc_enable(...){...}
@@ -200,9 +193,6 @@ identifier d;
 @@
 @@
 - intel_crtc_disable(...){...}
-@@
-@@
-- intel_crtc_dpms(...){...}
 @@
 @@
 - intel_crtc_dpms_overlay(...){...}
@@ -358,9 +348,6 @@ identifier d;
 - intel_pin_and_fence_fb_obj(...){...}
 @@
 @@
-- intel_pipe_set_base_atomic(...){...}
-@@
-@@
 - intel_prepare_page_flip(...){...}
 @@
 @@
@@ -458,9 +445,6 @@ identifier d;
 @@
 @@
 - intel_choose_pipe_bpp_dither(...){...}
-@@
-@@
-- intel_pipe_set_base(...){...}
 @@
 @@
 - static
@@ -593,6 +577,48 @@ expression E;
 @@
 struct drm_crtc_funcs s = {
 -.set_config = E,
+};
+@@
+identifier s;
+expression E;
+@@
+struct drm_crtc_helper_funcs s = {
+-	.mode_fixup = E,
+};
+@@
+identifier s;
+expression E;
+@@
+struct drm_crtc_helper_funcs s = {
+-	.mode_set = E,
+};
+@@
+identifier s;
+expression E;
+@@
+struct drm_crtc_helper_funcs s = {
+-	.mode_set_base = E,
+};
+@@
+identifier s;
+expression E;
+@@
+struct drm_crtc_helper_funcs s = {
+-	.mode_set_base_atomic = E,
+};
+@@
+identifier s;
+expression E;
+@@
+struct drm_crtc_helper_funcs s = {
+-	.load_lut = E,
+};
+@@
+identifier s;
+expression E;
+@@
+struct drm_crtc_helper_funcs s = {
+-	.disable = E,
 };
 @@
 identifier f;
@@ -793,3 +819,36 @@ identifier dev, d, f;
 identifier dev, d, f;
 @@
 -dev->d.force_wake_put = f;
+@@
+@@
+-drm_vblank_post_modeset(...);
+@@
+@@
+-drm_vblank_pre_modeset(...);
+@@
+identifier m, d;
+@@
+-m = d->primary->master->driver_priv;
+@@
+identifier d;
+@@
+-struct drm_i915_master_private *d;
+@@
+identifier d, m;
+expression e;
+@@
+-d->sarea_priv->m = e;
+@@
+identifer a,c;
+@@
+-a = b->primary->master->driver_priv;
+@@
+identifier m;
+statement S;
+@@
+-if (!m->sarea_priv) S
+@@
+identifier m;
+statement S;
+@@
+-if (!m->primary->master) S

@@ -410,12 +410,6 @@ void *dmi_check_system(unsigned long);
 #include "final/i2c-algo-bit.h"
 #include "final/drm_edid_modes.h"
 /* yuck */
-#undef _wait_for
-#define _wait_for(condition, time, ignored) (sleep(1+time/50)  && (!condition))
-//unsigned long I915_READ(unsigned long addr);
-//void I915_WRITE(unsigned long addr, unsigned long val);
-//u16 I915_READ16(unsigned long addr);
-//void I915_WRITE16(unsigned long addr, u16 val);
 #define I915_READ_NOTRACE(x) I915_READ((x))
 #define I915_READ16_NOTRACE(x) I915_READ16((x))
 #define I915_WRITE_NOTRACE(x, y) I915_WRITE((x), (y))

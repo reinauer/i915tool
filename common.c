@@ -7,11 +7,11 @@ unsigned short vendor=0x8086, device=0x0116;
 struct pci_dev fake = {.vendor_id=0x8086, .device_id = 0x0116}, *dev0;
 int dofake = 0;
 u8 *bios_image = NULL;
-u32 *mmiobase;
+void *mmiobase;
 u32 mmiophys;
 u32 gsmphys;
 u32 aperture, aperturesize;
-u8 *gfx;
+void *gfx;
 int mmiosize;
 size_t bios_image_size;
 int gencode = 0;
@@ -119,7 +119,7 @@ hexdump(u32 *base, int size)
 }
 void udelay(int i)
 {
-	printf("UDELAY!\n");
+	printf("UDELAY %d!\n", i);
 }
 
 unsigned long I915_READ(unsigned long addr)

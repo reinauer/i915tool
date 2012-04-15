@@ -1,5 +1,6 @@
 int i2c_transfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 {
+	fprintf(stderr, "%s\n", __func__);
 	int try, ret;
 
 		for (ret = 0; ret < num; ret++) {
@@ -14,5 +15,6 @@ int i2c_transfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 			if (ret != -EAGAIN)
 				break;
 		}
+printf("i2c transfer returns %d\n", ret);
 		return ret;
 }
