@@ -5,10 +5,11 @@ int cangencode = 0;
 int main(int argc, char *argv[])
 {
 	int i;
+	int num = 32768;
 
 	init(argc, argv);
 
-	for(i = 0; i < 32768; i += 4){
+	for(i = 0; i < num; i += 4){
 		u32 word = io_I915_READ32(i|1);
 		u32 base = word;
 		u32 lowbits = word;

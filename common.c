@@ -289,5 +289,7 @@ void init(int argc, char *argv[])
 	gfx = mapit(aperture, aperturesize);
 	dev0 = pci_get_bus_and_slot(0,0);
 	gsmphys = pci_read_long(dev0, 0xb8);
+	/* adjust for TSEG */
+	gsmphys += 8*1024*1024;
 	printf("gsmphys is %#x\n", gsmphys);
 }

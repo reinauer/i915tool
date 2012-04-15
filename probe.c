@@ -19,10 +19,7 @@ int main(int argc, char *argv[])
 
 	init(argc, argv);
 	devinit();
-	//hexdump(mmiobase, mmiosize);
 	
-	/* we should use ioperm but hey ... it's had troubles */
-	iopl(3);
 	intel_setup_bios(i915);
 	if (i915->bios_bin)
 		intel_parse_bios(i915);

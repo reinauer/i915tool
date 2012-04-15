@@ -60,6 +60,9 @@ cp $LINUX/include/drm/drm_dp_helper.h inputs
 cp $LINUX/drivers/gpu/drm/drm_dp_i2c_helper.c inputs
 cp $LINUX/drivers/gpu/drm/drm_modes.c inputs 
 cp $LINUX//include/drm/drm_crtc_helper.h inputs
+
+# sigh .. gtt is in agp ...
+#cp $LINUX/drivers/char/agp/intel-gtt.c inputs
 # Step 2
 cp inputs/* per-file-changes
 
@@ -163,6 +166,7 @@ spatch --in-place -sp_file spatches/i915_drv.cocci per-file-changes/i915_drv.h >
 spatch --in-place -sp_file spatches/i915_dma.c.cocci per-file-changes/i915_dma.c >/dev/null
 spatch --in-place -sp_file spatches/intel_i2c.c.cocci per-file-changes/intel_i2c.c >/dev/null
 spatch --in-place -sp_file spatches/i915_drv.c.cocci per-file-changes/i915_drv.c >/dev/null
+#spatch --in-place -sp_file spatches/intel-gtt.c.cocci per-file-changes/intel-gtt.c >/dev/null
 
 # and another thing ...
 # cocinnelle needs to fix this.
