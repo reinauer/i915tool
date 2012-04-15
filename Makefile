@@ -26,7 +26,7 @@ clean:
 	rm -f *.o video probe gttdump dumpscreen gttbreak gttset
 
 moreclean:  clean
-	rm -f final/* per-file-changes/* tmp/*
+	rm -f final/* per-file-changes/* tmp/* tags
 
 superclean: moreclean
 	rm -f inputs/*
