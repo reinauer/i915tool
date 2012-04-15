@@ -29,3 +29,5 @@ intel_init_clock_gating (dev=0x6d46c0) at final/intel_display.c:3614
 (gdb) 
 
 
+EDID is fine. The issue now is getting DPMS going. I guess the driver does not do this? 
+Seems to happen later. 
