@@ -19,6 +19,7 @@
  */
 #include "video.h"
 
+extern int verbose;
 /* this all needs cleaning up but basically ... I don't like libpci. The coreboot stuff is nicer. */
 struct pci_dev *
 pci_get_bus_and_slot(u16 bus, u16 devfn)
@@ -68,16 +69,17 @@ struct pci_dev *pci_get_class(u32 class, void *unused)
 
 	for (temp = pacc->devices; temp && ! ret; temp = temp->next){
 		u32 linuxclass = temp->device_class << 8;
-printf("Check %x against dev %x\n", class, temp->device_class & 0xffff00);
+		if (verbose > 2)
+			fprintf(stderr, "Check %x against dev %x\n", class, temp->device_class & 0xffff00);
 		if ((linuxclass) ==  class) {
-printf("HIT\n");
+			if (verbose > 2) fprintf(stderr, "HIT\n");
 			pci_fill_info(temp, PCI_FILL_IDENT | PCI_FILL_BASES | PCI_FILL_CLASS);
 			/* gcc issue? Must have the return here. */
 			return temp;
 			ret = temp;
 		}
 	}
-printf("return %p\n",ret);
+	if (verbose > 2) fprintf(stderr, "return %p\n",ret);
 	return ret;
 }
 

@@ -13,6 +13,10 @@ extern int mmiosize;
 extern size_t bios_image_size;
 int cangencode = 0;
 
+/*
+DRM_MODE_CONNECTOR_LVDS
+and set the mode to 0, and hope we're not already in that mode. 
+*/
 int main(int argc, char *argv[])
 {
 	init(argc, argv);

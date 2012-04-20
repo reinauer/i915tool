@@ -197,14 +197,14 @@ void print_hex_dump(const char *level, const char *prefix_str, int prefix_type,
 
 		switch (prefix_type) {
 		case DUMP_PREFIX_ADDRESS:
-			fprintf(stderr, "%s%s%p: %s\n",
+			printf( "%s%s%p: %s\n",
 			       level, prefix_str, ptr + i, linebuf);
 			break;
 		case DUMP_PREFIX_OFFSET:
-			fprintf(stderr, "%s%s%.8x: %s\n", level, prefix_str, i, linebuf);
+			printf( "%s%s%.8x: %s\n", level, prefix_str, i, linebuf);
 			break;
 		default:
-			fprintf(stderr, "%s%s%s\n", level, prefix_str, linebuf);
+			printf( "%s%s%s\n", level, prefix_str, linebuf);
 			break;
 		}
 	}
@@ -225,7 +225,7 @@ void print_hex_dump(const char *level, const char *prefix_str, int prefix_type,
 void print_hex_dump_bytes(const char *prefix_str, int prefix_type,
 			  const void *buf, size_t len)
 {
-	print_hex_dump("Dump: ", prefix_str, prefix_type, 16, 1,
+	print_hex_dump("", prefix_str, prefix_type, 16, 1,
 		       buf, len, true);
 }
 

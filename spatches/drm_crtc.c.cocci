@@ -6,12 +6,6 @@
 -drm_connector_cleanup(...){...}
 @@
 @@
--drm_connector_property_get_value(...){...}
-@@
-@@
--drm_connector_property_set_value(...){...}
-@@
-@@
 -drm_crtc_cleanup(...){...}
 @@
 @@
@@ -31,9 +25,6 @@
 @@
 @@
 -drm_framebuffer_init(...){...}
-@@
-@@
--drm_get_connector_status_name(...){...}
 @@
 @@
 -drm_mode_addfb(...){...}
@@ -61,9 +52,6 @@
 @@
 @@
 -drm_mode_connector_property_set_ioctl(...){...}
-@@
-@@
--drm_mode_connector_update_edid_property(...){...}
 @@
 @@
 -drm_mode_create(...){...}
@@ -165,10 +153,10 @@
 -drm_mode_setcrtc(...){...}
 @@
 @@
--drm_property_create_blob(...){...}
-@@
-@@
 -drm_property_destroy(...){...}
 @@
 @@
 -drm_property_destroy_blob(...){...}
+@@
+@@
+-drm_property_destroy_blob(...);

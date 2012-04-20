@@ -75,4 +75,4 @@ T f(...){<...
 -drm_connector_attach_property(...);
 @@
 @@
--drm_mode_connector_update_edid_property(...);
+-intel_lvds_disable(...);

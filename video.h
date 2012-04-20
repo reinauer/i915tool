@@ -445,5 +445,5 @@ void *dmi_check_system(unsigned long ignore);
 void *mapit(u32 phys, u32 size);
 void devinit(void);
 void init(int argc, char *argv[]);
-
+void dumpeld(char *name, u8 *eld);
 #endif /* VIDEO_H */

@@ -111,15 +111,15 @@ hexdump(u32 *base, int size)
 {
 	int i, j;
 	for(i = 0; i < size/sizeof(u32); i += 8) {
-		printf("%#x: ", i);
+		fprintf(stderr, "%#x: ", i);
 		for(j = 0; j < 8; j++)
-			printf("%08x", base[i+j]);
-		printf("\n");
+			fprintf(stderr, "%08x", base[i+j]);
+		fprintf(stderr, "\n");
 	}
 }
 void udelay(int i)
 {
-	printf("UDELAY %d!\n", i);
+	fprintf(stderr, "UDELAY %d!\n", i);
 }
 
 unsigned long I915_READ(unsigned long addr)
@@ -175,7 +175,7 @@ static int gtt_poll(u32 reg, u32 mask, u32 value)
         while (try--) {
                 data = I915_READ(reg);
                 if ((data & mask) == value){
-			printf("succeeds after %d tries\n", GTT_RETRY-try);
+			fprintf(stderr, "succeeds after %d tries\n", GTT_RETRY-try);
                         return 1;
 		}
                 udelay(10);
@@ -277,19 +277,31 @@ void init(int argc, char *argv[])
 	iopl(3);
 	addrport = i915->pdev->base_addr[4] & ~3;
 	dataport = addrport + 4;
-	printf("Addrport is at %x, dataport at %x\n", addrport, dataport);
+	if (verbose > 2)
+		fprintf(stderr, "Addrport is at %x, dataport at %x\n", 
+				addrport, dataport);
 	/* get the base of the mmio space */
 	mmiophys = i915->pdev->base_addr[0] & ~0xf;
 	mmiosize = i915->pdev->size[0];
-	printf("phys base is %#x, size %d\n", mmiophys, mmiosize);
+	if (verbose > 2)
+		fprintf(stderr, "phys base is %#x, size %d\n", mmiophys, mmiosize);
 	mmiobase = mapit(mmiophys, mmiosize);
 	aperture = i915->pdev->base_addr[2] & ~0xf;
 	aperturesize = i915->pdev->size[2];
-	printf("aperture base is %#x, size %d\n", aperture, aperturesize);
+	if (verbose > 2)
+		fprintf(stderr, "aperture base is %#x, size %d\n", 
+			aperture, aperturesize);
 	gfx = mapit(aperture, aperturesize);
 	dev0 = pci_get_bus_and_slot(0,0);
 	gsmphys = pci_read_long(dev0, 0xb8);
 	/* adjust for TSEG */
 	gsmphys += 8*1024*1024;
-	printf("gsmphys is %#x\n", gsmphys);
+	if (verbose > 2)
+		fprintf(stderr, "gsmphys is %#x\n", gsmphys);
+}
+
+void
+dumpeld(char *name, u8 *eld)
+{
+  print_hex_dump_bytes(name, DUMP_PREFIX_OFFSET, eld, MAX_ELD_BYTES);
 }

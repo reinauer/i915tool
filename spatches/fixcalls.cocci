@@ -78,7 +78,7 @@ type T;
 @@
 T f(...){<...
 -DRM_LOG_KMS(
-+fprintf(stderr, 
++ fprintf(stderr, 
 ...);
 ...>}
 @@
@@ -96,7 +96,7 @@ type T;
 @@
 T f(...){<...
 -DRM_INFO(
-+fprintf(stderr, 
++ fprintf(stderr, 
 ...);
 ...>}
 @@
