@@ -450,6 +450,10 @@ identifier d;
 - static
 intel_setup_outputs(...){...}
 @@
+@@
+- static
+has_edp_a(...){...}
+@@
 type T;
 identifier f;
 @@

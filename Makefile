@@ -5,13 +5,16 @@ goodsource=pci.c final/intel_bios.c final/drm_modes.c final/i915_drv.c  final/in
 brokensource=final/intel_display.c final/intel_dp.c final/intel_panel.c final/drm_dp_i2c_helper.c final/i915_dma.c final/intel_lvds.c final/drm_edid.c final/drm_crtc.c final/drm_crtc_helper.c \
 	  i2c.c 
 
-all: probe gttdump dumpscreen gttbreak gttset edid video timegttsetup
+all: probe gttdump dumpscreen gttbreak gttset edid video timegttsetup ports
 
 timegttsetup: timegttsetup.c $(goodsource) $(brokensource) video.h
 	cc -O2 -g -include video.h -Iinputs -static -g -o timegttsetup timegttsetup.c $(goodsource) $(brokensource) -lpci  -lrt
 
 edid: edid.c $(goodsource) $(brokensource) video.h
 	cc -O2 -g -include video.h -Iinputs -static -g -o edid edid.c $(goodsource) $(brokensource) -lpci  -lrt
+
+ports: ports.c $(goodsource) $(brokensource) video.h
+	cc -O2 -g -include video.h -Iinputs -static -g -o ports ports.c $(goodsource) $(brokensource) -lpci  -lrt
 
 video: video.c $(goodsource) $(brokensource) video.h
 	cc -O2 -g -include video.h -Iinputs -static -g -o video video.c $(goodsource) $(brokensource) -lpci  -lrt
