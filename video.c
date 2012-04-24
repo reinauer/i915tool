@@ -19,6 +19,7 @@ and set the mode to 0, and hope we're not already in that mode.
 */
 int main(int argc, char *argv[])
 {
+	struct drm_i915_private *dp;
 	init(argc, argv);
 	devinit();
 	//hexdump(mmiobase, mmiosize);
@@ -37,4 +38,14 @@ int main(int argc, char *argv[])
 	intel_panel_enable_backlight(i915);
 	i915_driver_load(i915, (unsigned long)i915->dev_private->info);
 	hexdump(mmiobase, 128);
+	dp = i915->dev_private;
+
+	if (dp->int_lvds_connector) {
+		if (verbose){
+			fprintf(stderr, "We have an lvds: \n");
+		}
+		drm_helper_connector_dpms(dp->int_lvds_connector, 0);
+	}
+
+
 }
