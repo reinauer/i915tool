@@ -215,14 +215,50 @@ mapit(u32 phys, u32 size)
 	return virt;
 }
 
+/* keep it here. */
+static inline unsigned int cpuid_eax(unsigned int op)
+{
+        unsigned int eax;
+
+        __asm__("mov %%ebx, %%edi;"
+                "cpuid;"
+                "mov %%edi, %%ebx;"
+                : "=a" (eax)
+                : "0" (op)
+                : "ecx", "edx", "edi");
+        return eax;
+}
+/* from coreboot. We're willing to do this as we're going into coreboot someday */
+static int bridge_revision_id = -1;
+
+int bridge_silicon_revision(void)
+{
+	struct pci_dev *bridge;
+	if (bridge_revision_id < 0) {
+		bridge = pci_get_bus_and_slot(0, 0);
+
+		uint8_t stepping = cpuid_eax(1) & 0xf;
+		uint8_t bridge_id = pci_read_byte(bridge, PCI_DEVICE_ID) & 0xf0;
+		bridge_revision_id = bridge_id | stepping;
+		printf("bridge revision %x\n", bridge_revision_id);
+	}
+	return bridge_revision_id;
+}
+
 void
 devinit()
 {
-	u32 val;
-	/* force wake. */
-	I915_WRITE(0xa18c, 1);
-	gtt_poll(0x130090, 1, 1);
-	
+	if (bridge_silicon_revision() < IVB_STEP_C0) {
+		/* 1: Enable force wake */
+		I915_WRITE(0xa18c, 0x00000001);
+		if (!gtt_poll(0x130090, (1 << 0), (1 << 0)))
+			return;
+	} else {
+		I915_WRITE(0xa180, 1 << 5);
+		I915_WRITE(0xa188, 0xffff0001);
+		if (!gtt_poll(0x130090, (1 << 0), (1 << 0)))
+			return;
+	}
 }
 
 void init(int argc, char *argv[])

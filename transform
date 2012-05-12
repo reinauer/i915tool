@@ -82,11 +82,6 @@ w
 q
 EOF
 
-ed per-file-changes/drm_crtc.h <<EOF
-w
-q
-EOF
-
 ed per-file-changes/intel_display.c << EOF
 g/mode_config.funcs  *=/d
 g/fb_base/d
@@ -103,7 +98,6 @@ w
 q
 EOF
 
-# covering bits we can't yet do with cocci
 ed per-file-changes/intel_i2c.c << EOF
 g/adapter.owner/d
 g/adapter.class/d
@@ -137,6 +131,7 @@ q
 EOF
 
 # note that .,$d does not work below. F-ing weird. 
+# so we have the .,/undef.*write/d bit. 
 ed per-file-changes/i915_drv.c << EOF
 /module_init/
 .
