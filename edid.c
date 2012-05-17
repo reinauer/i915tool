@@ -33,8 +33,10 @@ int main(int argc, char *argv[])
 	if (dp->int_edp_connector) {
 		if (verbose)
 			fprintf(stderr, "We have an edp: \n");
-		dumpeld("EDP Raw: ", 
-			dp->int_lvds_connector->display_info.raw_edid);
+		if (dp->int_lvds_connector) {
+			dumpeld("EDP Raw: ", 
+				dp->int_lvds_connector->display_info.raw_edid);
+		} else printf("NO EDP connector\n");
 		//dumpeld("EDP:", dp->int_lvds_connector->eld);
 	}
 

@@ -119,7 +119,10 @@ hexdump(u32 *base, int size)
 }
 void udelay(int i)
 {
-	fprintf(stderr, "UDELAY %d!\n", i);
+	if (verbose > 2)
+		fprintf(stderr, "UDELAY %d!\n", i);
+	/* write to a bad fd. That should be a microsecond. */
+	(void)write(0x1048576, &i, 1);
 }
 
 unsigned long I915_READ(unsigned long addr)
@@ -263,7 +266,7 @@ devinit()
 	} else {
 		I915_WRITE(0xa180, 1 << 5);
 		I915_WRITE(0xa188, 0xffff0001);
-		if (!gtt_poll_interval(0x130090, (1 << 0), (1 << 0), 100000))
+		if (!gtt_poll_interval(0x130040, (1 << 0), (1 << 0), 100000))
 			return;
 	}
 }
@@ -291,8 +294,10 @@ void init(int *ac, char ***av)
 		filename = argv[0];
 	}
 
+	argc--; argv++;
 	*ac = argc;
 	*av = argv;
+
 
 	i915 = calloc(1, sizeof(*i915));
 	i915->dev_private = calloc(1, sizeof(*i915->dev_private));

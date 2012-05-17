@@ -115,9 +115,6 @@ identifier g4 =~ ".*g4.*";
 - intel_dp_detect_audio(...){...}
 @@
 @@
-- intel_dp_dpms(...){...}
-@@
-@@
 - intel_dp_encoder_destroy(...){...}
 @@
 @@

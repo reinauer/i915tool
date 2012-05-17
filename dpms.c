@@ -7,6 +7,8 @@ int cangencode = 0;
 int main(int argc, char *argv[])
 {
 	struct drm_i915_private *dp;
+	struct drm_connector *connector = NULL;
+	int level = 0;
 
 	init(&argc, &argv);
 	devinit();
@@ -25,21 +27,21 @@ int main(int argc, char *argv[])
 		if (verbose){
 			fprintf(stderr, "We have an lvds: \n");
 		}
+		connector = dp->int_lvds_connector;
 	}
 	
 	if (dp->int_edp_connector) {
 		if (verbose)
 			fprintf(stderr, "We have an edp: \n");
+		connector = dp->int_edp_connector;
 	}
-
-	u32 pwm = intel_panel_get_backlight(i915);
-	printf("pwm %d\n", pwm);
-
+	if (! connector)
+		errx(1, "No connector, all done here");
 	if (argc)
-		pwm = strtol(argv[0], 0, 0);
-	printf("new pwm %d\n", pwm);
-	intel_panel_enable_backlight(i915);
-	intel_panel_set_backlight(i915, pwm);
-	pwm = intel_panel_get_backlight(i915);
-	printf("pwm at end is %d\n", pwm);
+		level = strtol(argv[0], 0, 0);
+	printf("dpms: current level is %d\n", connector->dpms);
+	printf("dpms: going to level %d\n", level);
+
+	drm_helper_connector_dpms(connector, level);
+
 }
