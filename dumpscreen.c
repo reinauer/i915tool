@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
 	int i, j, k;
 
-	init(argc, argv);
+	init(&argc, &argv);
 
 	print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, gfx, 256);
 

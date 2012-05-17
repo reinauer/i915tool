@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 	int i;
 	int num = 32768;
 
-	init(argc, argv);
+	init(&argc, &argv);
 
 	for(i = 0; i < 32; i += 4){
 		u32 word = io_I915_READ32(i|1);

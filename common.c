@@ -166,16 +166,17 @@ void I915_WRITE16(unsigned long addr, u16 val)
 		fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
 }
 
-#define GTT_RETRY 1000
-static int gtt_poll(u32 reg, u32 mask, u32 value)
+static int gtt_poll_interval(u32 reg, u32 mask, u32 value, int trytry)
 {
-        unsigned try = GTT_RETRY;
+	int try = trytry;
         u32 data;
 
         while (try--) {
                 data = I915_READ(reg);
+		if (verbose > 4)
+			fprintf(stderr, "gtt_poll: %#x <- %#x\n", data, reg);
                 if ((data & mask) == value){
-			fprintf(stderr, "succeeds after %d tries\n", GTT_RETRY-try);
+			fprintf(stderr, "succeeds after %d tries\n", trytry-try);
                         return 1;
 		}
                 udelay(10);
@@ -183,6 +184,12 @@ static int gtt_poll(u32 reg, u32 mask, u32 value)
 
         fprintf(stderr, "GT init timeout\n");
         return 0;
+}
+
+#define GTT_RETRY 1000
+static int gtt_poll(u32 reg, u32 mask, u32 value)
+{
+	return gtt_poll_interval(reg, mask, value, GTT_RETRY);
 }
 void *pci_map_rom(struct pci_dev *dev, size_t *size)
 {
@@ -256,13 +263,16 @@ devinit()
 	} else {
 		I915_WRITE(0xa180, 1 << 5);
 		I915_WRITE(0xa188, 0xffff0001);
-		if (!gtt_poll(0x130090, (1 << 0), (1 << 0)))
+		if (!gtt_poll_interval(0x130090, (1 << 0), (1 << 0), 100000))
 			return;
 	}
 }
 
-void init(int argc, char *argv[])
+void init(int *ac, char ***av)
 {
+	int argc; char **argv;
+	char *filename = NULL;
+	argc = *ac; argv = *av;
 	for(argc--, argv++; argc; argc--, argv++) {
 		if (argv[0][0] != '-')
 			break;
@@ -276,6 +286,13 @@ void init(int argc, char *argv[])
 			else
 				errx(1, "You asked for gencode but this program doesn't do that");
 	}
+
+	if (argc) {
+		filename = argv[0];
+	}
+
+	*ac = argc;
+	*av = argv;
 
 	i915 = calloc(1, sizeof(*i915));
 	i915->dev_private = calloc(1, sizeof(*i915->dev_private));
@@ -291,12 +308,12 @@ void init(int argc, char *argv[])
 			errx(1, "No VGA device of any kind found\n");
 	}
 
-	if (argc) {
+	if (filename) {
 		FILE *fd;
 		int amt;
 		/* size it later */
 		bios_image = malloc(8*1048576);
-		fd = fopen(argv[0], "r");
+		fd = fopen(filename, "r");
 		amt = fread(bios_image, 65536, 128, fd);
 		if (amt < 1) {
 			free(bios_image);

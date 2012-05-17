@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 	struct drm_i915_private *dp;
 	bool dpd_is_edp = false;
 
-	init(argc, argv);
+	init(&argc, &argv);
 	devinit();
 	intel_setup_bios(i915);
 	if (i915->bios_bin)

@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 {
 	struct pci_dev *pci_dev_find(struct drm_device *dev);
 
-	init(argc, argv);
+	init(&argc, &argv);
 	devinit();
 	
 	intel_setup_bios(i915);

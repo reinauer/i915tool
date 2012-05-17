@@ -20,7 +20,7 @@ and set the mode to 0, and hope we're not already in that mode.
 int main(int argc, char *argv[])
 {
 	struct drm_i915_private *dp;
-	init(argc, argv);
+	init(&argc, &argv);
 	devinit();
 	//hexdump(mmiobase, mmiosize);
 	intel_setup_bios(i915);

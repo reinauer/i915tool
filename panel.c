@@ -25,18 +25,13 @@ int main(int argc, char *argv[])
 		if (verbose){
 			fprintf(stderr, "We have an lvds: \n");
 		}
-		dumpeld("LVDS Raw: ", 
-			dp->int_lvds_connector->display_info.raw_edid);
-		//dumpeld("LVDS:", dp->int_lvds_connector->eld);
 	}
 	
 	if (dp->int_edp_connector) {
 		if (verbose)
 			fprintf(stderr, "We have an edp: \n");
-		dumpeld("EDP Raw: ", 
-			dp->int_lvds_connector->display_info.raw_edid);
-		//dumpeld("EDP:", dp->int_lvds_connector->eld);
 	}
 
-	
+	u32 pwm = intel_panel_get_backlight(i915);
+	printf("pwm %d\n", pwm);
 }

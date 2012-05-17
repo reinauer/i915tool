@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	unsigned long long start, end;
 	struct timeval mstart, mend;
 
-	init(argc, argv);
+	init(&argc, &argv);
 
 	start = rdtsc();
 	for(gettimeofday(&mstart,NULL), gettimeofday(&mend, NULL); 
