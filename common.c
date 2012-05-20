@@ -271,14 +271,30 @@ devinit()
 	}
 }
 
+char *commandname = NULL;
+void usage(void)
+{
+	printf("Usage: %s [-b biosfile] [-f (fake hardware)]"
+			"[-C (gen code if applicable)"
+			"[-v (increase verbosity for each -v)]", commandname);
+	exit(1);
+}
+
 void init(int *ac, char ***av)
 {
 	int argc; char **argv;
 	char *filename = NULL;
 	argc = *ac; argv = *av;
+	commandname = argv[0];
 	for(argc--, argv++; argc; argc--, argv++) {
 		if (argv[0][0] != '-')
 			break;
+		if (!strcmp(argv[0], "-b")) {
+			filename = argv[1];
+			if (! filename)
+				usage();
+			argc--, argv++;
+		}
 		if (!strcmp(argv[0], "-f"))
 			dofake++;
 		if (!strcmp(argv[0], "-v"))
@@ -290,11 +306,6 @@ void init(int *ac, char ***av)
 				errx(1, "You asked for gencode but this program doesn't do that");
 	}
 
-	if (argc) {
-		filename = argv[0];
-	}
-
-	argc--; argv++;
 	*ac = argc;
 	*av = argv;
 

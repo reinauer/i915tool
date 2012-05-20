@@ -37,11 +37,15 @@ int main(int argc, char *argv[])
 	}
 	if (! connector)
 		errx(1, "No connector, all done here");
-	if (argc)
-		level = strtol(argv[0], 0, 0);
 	printf("dpms: current level is %d\n", connector->dpms);
-	printf("dpms: going to level %d\n", level);
 
-	drm_helper_connector_dpms(connector, level);
+	printf("%d levels to set\n", argc);
+	while(argc) {
+		level = strtol(argv[0], 0, 0);
+		printf("dpms: going to level %d\n", level);
+		drm_helper_connector_dpms(connector, level);
+		argc--;
+		argv++;
+	}
 
 }
