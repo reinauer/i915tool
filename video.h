@@ -55,6 +55,7 @@ enum {
 #define __always_unused
 #define module_param_named(a, b, c, d)
 #define MODULE_PARM_DESC(a, b)
+#define module_param(a, b, c)
 #define DRM_DEBUG_KMS printf
 #define CONFIG_DRM_I915_KMS 1
 #define module_init(x);
@@ -432,6 +433,9 @@ void *dmi_check_system(unsigned long);
 #include "final/drm_crtc.h"
 #include "final/intel_drv.h"
 #include "final/i2c-algo-bit.h"
+/* another coccinelle issue :-( */
+static int i2c_add_adapter(struct i2c_adapter *u) { return 0;}
+
 #include "final/drm_edid_modes.h"
 /* yuck */
 #define I915_READ_NOTRACE(x) I915_READ((x))

@@ -168,9 +168,6 @@ identifier d;
 - intel_alloc_context_page(...){...}
 @@
 @@
-- intel_best_encoder(...){...}
-@@
-@@
 - intel_calculate_wm(...){...}
 @@
 @@

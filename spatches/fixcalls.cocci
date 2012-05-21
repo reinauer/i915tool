@@ -11,7 +11,7 @@ identifier f;
 type T;
 @@
 T f(...){<...
-- i2c_bit_add_bus(...)
+- add_adapter(...)
 +0
 ...>}
 @@
@@ -310,6 +310,17 @@ T f(...){<...
 @@
 expression E1;
 @@
+-dev_err(E1, 
++fprintf(stderr, 
+...);
+@@
+@@
+-pr_info(
++fprintf(stderr, 
+...);
+@@
+expression E1;
+@@
 -dev_warn(E1, 
 +fprintf(stderr, 
 ...);
@@ -379,4 +390,10 @@ idr_pre_get(E1
 @@
 @@
 -usleep_range(...)
+@@
+@@
+-cond_resched(...)
+@@
+@@
+-yield(...)
 
