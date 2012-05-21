@@ -63,7 +63,7 @@ cp $LINUX/drivers/gpu/drm/drm_modes.c inputs
 cp $LINUX//include/drm/drm_crtc_helper.h inputs
 #
 # disappointing. We needed the bit-banging stuff.
-cp $LINUX/drivers/i2c/algos/algos/i2c-algo-bit.c inputs
+cp $LINUX/drivers/i2c/algos/i2c-algo-bit.c inputs
 
 # sigh .. gtt is in agp ...
 #cp $LINUX/drivers/char/agp/intel-gtt.c inputs
