@@ -177,9 +177,6 @@ identifier d;
 - intel_clear_scanline_wait(...){...}
 @@
 @@
-- intel_cpt_verify_modeset(...){...}
-@@
-@@
 - intel_crtc_cursor_move(...){...}
 @@
 @@

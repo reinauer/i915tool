@@ -70,6 +70,11 @@ identifier g4 =~ ".*g4.*";
 @@
 - g4 (...) {...}
 @@
+expression E1;
+@@
+-g4x_dp_detect(E1)
++connector_status_disconnected
+@@
 @@
 - g4x_dp_detect(...){...}
 @@
