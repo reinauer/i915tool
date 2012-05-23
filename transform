@@ -42,6 +42,7 @@ cp $LINUX/drivers/gpu/drm/i915/intel_bios.c inputs
 cp $LINUX/drivers/gpu/drm/i915/intel_bios.h inputs 
 cp $LINUX/drivers/gpu/drm/i915/intel_drv.h inputs 
 cp $LINUX/drivers/gpu/drm/i915/intel_ringbuffer.h inputs 
+cp $LINUX/drivers/gpu/drm/i915/intel_crt.c inputs 
 cp $LINUX/drivers/gpu/drm/i915/i915_dma.c inputs 
 cp $LINUX/drivers/gpu/drm/i915/intel_lvds.c inputs 
 cp $LINUX/drivers/gpu/drm/i915/intel_hdmi.c inputs 
@@ -167,6 +168,7 @@ spatch --in-place -sp_file spatches/intel_display.c.cocci per-file-changes/intel
 spatch --in-place -sp_file spatches/intel_dp.c.cocci per-file-changes/intel_dp.c > /dev/null
 spatch --in-place -sp_file spatches/intel_lvds.c.cocci per-file-changes/intel_lvds.c > /dev/null
 spatch --in-place -sp_file spatches/intel_modes.c.cocci per-file-changes/intel_modes.c > /dev/null
+spatch --in-place -sp_file spatches/intel_crt.c.cocci per-file-changes/intel_crt.c > /dev/null
 spatch --in-place -sp_file spatches/intel_drv.h.cocci per-file-changes/intel_drv.h > /dev/null
 spatch --in-place -sp_file spatches/drm_modes.c.cocci per-file-changes/drm_modes.c > /dev/null
 spatch --in-place -sp_file spatches/drm_crtc.c.cocci per-file-changes/drm_crtc.c > /dev/null
@@ -202,11 +204,11 @@ EOF
 # we tried the 'do the whole directory' switch but it did not work well for us.
 cp per-file-changes/* final
 spatch --in-place -sp_file spatches/ringbuffer.cocci final/intel_ringbuffer.h >/dev/null
-spatch --in-place -sp_file spatches/removeinclude.cocci final/intel_display.c final/drm_dp_i2c_helper.c final/intel_i2c.c final/i915_drv.c final/drm_crtc_helper.c final/i2c-algo-bit.c final/intel_modes.c > /dev/null
+spatch --in-place -sp_file spatches/removeinclude.cocci final/intel_display.c final/drm_dp_i2c_helper.c final/intel_i2c.c final/i915_drv.c final/drm_crtc_helper.c final/i2c-algo-bit.c final/intel_modes.c final/intel_crt.c > /dev/null
 spatch --in-place -sp_file spatches/removeinclude.cocci final/drm_dp_helper.h final/intel_hdmi.c final/intel_lvds.c final/intel_dp.c final/intel_drv.h final/drm_modes.c final/i915_dma.c ./final/drm_edid_modes.h ./final/drm_edid.h ./final/drm_edid.c final/drm_crtc.c final/drm_crtc_helper.h>/dev/null
 spatch --in-place -sp_file spatches/i915_drv.cocci final/intel_ringbuffer.h final/intel_drv.h final/intel_panel.c>/dev/null
 spatch --in-place -sp_file spatches/deldev.cocci final/intel_bios.c final/intel_bios.h final/i915_drv.h final/intel_ringbuffer.h final/intel_dp.c final/i915_dma.c final/intel_i2c.c  final/drm_crtc.c final/drm_crtc_helper.c final/drm_crtc_helper.h final/intel_lvds.c>/dev/null
-spatch --in-place -sp_file spatches/fixcalls.cocci final/intel_bios.c final/intel_dp.c final/intel_display.c  final/intel_panel.c final/i915_dma.c final/drm_dp_i2c_helper.c final/i915_dma.c final/intel_i2c.c final/intel_lvds.c final/i915_drv.c final/drm_edid.c final/drm_modes.c final/drm_crtc.c final/intel_lvds.c final/drm_crtc_helper.c final/drm_crtc_helper.h final/intel_drv.h final/i2c-algo-bit.c final/intel_modes.c >/dev/null
+spatch --in-place -sp_file spatches/fixcalls.cocci final/intel_bios.c final/intel_crt.c final/intel_dp.c final/intel_display.c  final/intel_panel.c final/i915_dma.c final/drm_dp_i2c_helper.c final/i915_dma.c final/intel_i2c.c final/intel_lvds.c final/i915_drv.c final/drm_edid.c final/drm_modes.c final/drm_crtc.c final/intel_lvds.c final/drm_crtc_helper.c final/drm_crtc_helper.h final/intel_drv.h final/i2c-algo-bit.c final/intel_modes.c >/dev/null
 spatch --in-place -sp_file spatches/drm_crtc.cocci final/drm_crtc.h final/intel_dp.c final/i915_dma.c >/dev/null
 
 # post processing for things coccinelle can't always get yet

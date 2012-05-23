@@ -20,3 +20,5 @@ identifier s;
 type T;
 @@
 -T intel_no_crt_dmi_callback(...){...}
+=======
+-struct dmi_system_id s[] = {...};
