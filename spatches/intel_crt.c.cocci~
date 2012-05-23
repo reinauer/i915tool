@@ -1,8 +1,0 @@
-@@
-identifier s;
-expression E;
-@@
-struct drm_connector_funcs s = {
--.destroy = E,
-};
-
