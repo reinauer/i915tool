@@ -132,7 +132,7 @@ type T;
 @@
 T f(...){<...
 -kfree(
-+free(
++freez(
 ...);
 ...>}
 @ rulekz @
@@ -150,7 +150,7 @@ expression E1, E2;
 @@
 
 - kzalloc(E1
-+ calloc(1, E1
++ allocz(E1
 -  ,E2
    )
 @@
@@ -211,7 +211,7 @@ identifier rulekc.f;
 expression E1, E2, E3;
 @@
 - kcalloc(E1, E2
-+ calloc(E1, E2
++ allocz(E1 * E1
 -  ,E3
    )
 @ rulekr @
@@ -396,4 +396,13 @@ idr_pre_get(E1
 @@
 @@
 -yield(...)
-
+@@
+type T;
+identifier f;
+@@
+T f(...){<...
+(
+-dmi_check_system(...)
++ 0
+)
+...>}

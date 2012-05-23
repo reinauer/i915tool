@@ -169,6 +169,28 @@ void I915_WRITE16(unsigned long addr, u16 val)
 		fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
 }
 
+u8 I915_READ8(unsigned long addr)
+{
+	volatile u8 *ptr = (u8 *)(mmiobase + addr);
+	u8 val;
+	if (dofake)
+		return 0xba;
+	val = *ptr;
+	if (verbose > 1)
+		fprintf(stderr, "%s: %x <- %x\n", __func__, val, addr);
+	return val;
+}
+
+void I915_WRITE8(unsigned long addr, u8 val)
+{
+	volatile u8 *ptr = (u8 *)(mmiobase + addr);
+	if (dofake)
+		return;
+	*ptr = val;
+	if (verbose > 1)
+		fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
+}
+
 static int gtt_poll_interval(u32 reg, u32 mask, u32 value, int trytry)
 {
 	int try = trytry;
@@ -373,4 +395,45 @@ void
 dumpeld(char *name, u8 *eld)
 {
   print_hex_dump_bytes(name, DUMP_PREFIX_OFFSET, eld, MAX_ELD_BYTES);
+}
+
+void
+dumpmodeconfig(void)
+{
+	extern struct drm_device *i915;
+	struct drm_device *dev = i915;
+
+	struct drm_connector *connector;
+	struct drm_encoder *tmp_encoder;
+	struct drm_crtc *crtc;
+	printf("num_fb %d\n", i915->mode_config.num_fb);
+
+        list_for_each_entry(connector, &dev->mode_config.connector_list, head)
+		printf("connector %p\n", connector);
+
+	printf("num_crtc %d\n", i915->mode_config.num_crtc);
+	list_for_each_entry(crtc, &dev->mode_config.crtc_list, head) {
+		printf("crtc %p enabled %d, x %d y %d\n", crtc, crtc->enabled, crtc->x, crtc->y);
+	}
+	printf("num_encoder %d\n", i915->mode_config.num_encoder);
+	list_for_each_entry(tmp_encoder, &dev->mode_config.encoder_list, head) {
+		printf("encoder %p crtc %p\n", tmp_encoder, tmp_encoder->crtc);
+	}
+}
+
+void *allocz(int size)
+{
+	u8 *cp = malloc(size);
+	if (! cp)
+		errx(1, "%d bytes\n", size);
+	memset(cp, 0, size);
+	if (verbose > 2)
+		printf("allocz %d bytes\n", size);
+	return cp;
+}
+
+void freez(void *p)
+{
+	if (verbose > 2)
+		printf("Free %p\n", p);
 }

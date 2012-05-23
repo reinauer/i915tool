@@ -12,6 +12,12 @@ identifier d;
 - struct intel_quirk d[] = {...};
 @@
 @@
+-intel_release_load_detect_pipe(...){...}
+@@
+@@
+-intel_get_load_detect_pipe(...){...}
+@@
+@@
 - adpa_pipe_enabled(...){...}
 @@
 @@
@@ -252,13 +258,7 @@ identifier d;
 - intel_enable_pll(...){...}
 @@
 @@
-- intel_encoder_commit(...){...}
-@@
-@@
 - intel_encoder_destroy(...){...}
-@@
-@@
-- intel_encoder_prepare(...){...}
 @@
 @@
 - intel_fbc_work_fn(...){...}
@@ -309,9 +309,6 @@ identifier d;
 - intel_get_cxsr_latency(...){...}
 @@
 @@
-- intel_get_load_detect_pipe(...){...}
-@@
-@@
 - intel_get_pipe_from_crtc_id(...){...}
 @@
 @@
@@ -343,9 +340,6 @@ identifier d;
 @@
 @@
 - intel_prepare_page_flip(...){...}
-@@
-@@
-- intel_release_load_detect_pipe(...){...}
 @@
 @@
 - intel_unpin_work_fn(...){...}
@@ -509,14 +503,6 @@ identifier f;
 @@
 T f(...)
 {<...
-- drm_mode_connector_attach_encoder(...);
-...>}
-@@
-type T;
-identifier f;
-@@
-T f(...)
-{<...
 - ironlake_crtc_disable(...);
 ...>}
 @@
@@ -527,6 +513,13 @@ T f(...)
 {<...
 - drm_crtc_helper_add(...);
 ...>}
+@@
+identifier s;
+expression E;
+@@
+struct drm_crtc_funcs s = {
+-.destroy = E,
+};
 @@
 identifier s;
 expression E;

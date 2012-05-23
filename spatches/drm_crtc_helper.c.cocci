@@ -1,5 +1,8 @@
 @@
 @@
+-drm_helper_probe_single_connector_modes(...){...}
+@@
+@@
 -drm_crtc_helper_disable(...){...}
 @@
 @@
@@ -19,9 +22,6 @@
 @@
 @@
 -drm_helper_mode_fill_fb_struct(...){...}
-@@
-@@
--drm_helper_probe_single_connector_modes(...){...}
 @@
 @@
 -drm_helper_resume_force_mode(...){...}

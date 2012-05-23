@@ -27,18 +27,28 @@ int main(int argc, char *argv[])
 		}
 		dumpeld("LVDS Raw: ", 
 			dp->int_lvds_connector->display_info.raw_edid);
-		//dumpeld("LVDS:", dp->int_lvds_connector->eld);
+		if (dp->int_lvds_connector->eld)
+			dumpeld("LVDS:", dp->int_lvds_connector->eld);
 	}
 	
 	if (dp->int_edp_connector) {
 		if (verbose)
 			fprintf(stderr, "We have an edp: \n");
-		if (dp->int_lvds_connector) {
+		if (dp->int_edp_connector->display_info.raw_edid) {
 			dumpeld("EDP Raw: ", 
-				dp->int_lvds_connector->display_info.raw_edid);
+				dp->int_edp_connector->display_info.raw_edid);
 		} else printf("NO EDP connector\n");
-		//dumpeld("EDP:", dp->int_lvds_connector->eld);
+		if (dp->int_edp_connector->eld)
+			dumpeld("EDP:", dp->int_edp_connector->eld);
 	}
 
-	
+
+	struct drm_connector *connector;
+        list_for_each_entry(connector, &i915->mode_config.connector_list, head){
+		printf("connector %p\n", connector);
+		printf("EDID blob is %p\n", connector->edid_blob_ptr);
+		printf("EDID-like-data (ELD):\n");
+		dumpeld("", connector->eld);
+	}
+
 }
