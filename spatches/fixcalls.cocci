@@ -396,4 +396,13 @@ idr_pre_get(E1
 @@
 @@
 -yield(...)
-
+@@
+type T;
+identifier f;
+@@
+T f(...){<...
+(
+-dmi_check_system(...)
++ 0
+)
+...>}

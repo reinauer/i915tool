@@ -45,9 +45,6 @@
 -drm_mode_config_reset(...){...}
 @@
 @@
--drm_mode_connector_attach_encoder(...){...}
-@@
-@@
 -drm_mode_connector_detach_encoder(...){...}
 @@
 @@

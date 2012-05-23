@@ -474,4 +474,5 @@ void *mapit(u32 phys, u32 size);
 void devinit(void);
 void init(int *argc, char ***argv);
 void dumpeld(char *name, u8 *eld);
+void dumpmodeconfig(void);
 #endif /* VIDEO_H */

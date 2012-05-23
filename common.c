@@ -374,3 +374,27 @@ dumpeld(char *name, u8 *eld)
 {
   print_hex_dump_bytes(name, DUMP_PREFIX_OFFSET, eld, MAX_ELD_BYTES);
 }
+
+void
+dumpmodeconfig(void)
+{
+	extern struct drm_device *i915;
+	struct drm_device *dev = i915;
+
+	struct drm_connector *connector;
+	struct drm_encoder *tmp_encoder;
+	struct drm_crtc *crtc;
+	printf("num_fb %d\n", i915->mode_config.num_fb);
+
+        list_for_each_entry(connector, &dev->mode_config.connector_list, head)
+		printf("connector %p\n", connector);
+
+	printf("num_crtc %d\n", i915->mode_config.num_crtc);
+	list_for_each_entry(crtc, &dev->mode_config.crtc_list, head) {
+		printf("crtc %p enabled %d, x %d y %d\n", crtc, crtc->enabled, crtc->x, crtc->y);
+	}
+	printf("num_encoder %d\n", i915->mode_config.num_encoder);
+	list_for_each_entry(tmp_encoder, &dev->mode_config.encoder_list, head) {
+		printf("encoder %p crtc %p\n", tmp_encoder, tmp_encoder->crtc);
+	}
+}

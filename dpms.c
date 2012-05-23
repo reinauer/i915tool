@@ -9,6 +9,8 @@ int main(int argc, char *argv[])
 	struct drm_i915_private *dp;
 	struct drm_connector *connector = NULL;
 	int level = 0;
+	struct drm_encoder *encoder;
+	struct drm_crtc *crtc;
 
 	init(&argc, &argv);
 	devinit();
@@ -39,7 +41,10 @@ int main(int argc, char *argv[])
 		errx(1, "No connector, all done here");
 	printf("dpms: current level is %d\n", connector->dpms);
 
+	dumpmodeconfig();
 	printf("%d levels to set\n", argc);
+	connector->encoder = list_first_entry(&i915->mode_config.encoder_list, struct drm_encoder , head);
+	connector->encoder->crtc = list_first_entry(&i915->mode_config.crtc_list, struct drm_crtc , head);
 	while(argc) {
 		level = strtol(argv[0], 0, 0);
 		printf("dpms: going to level %d\n", level);

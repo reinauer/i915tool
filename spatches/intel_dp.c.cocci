@@ -62,9 +62,6 @@ struct s {...
 -struct delayed_work d;
 ...
 };
-@@
-@@ 
-- intel_connector_attach_encoder(...){...}
 @g4@
 identifier g4 =~ ".*g4.*";
 @@

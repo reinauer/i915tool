@@ -252,13 +252,7 @@ identifier d;
 - intel_enable_pll(...){...}
 @@
 @@
-- intel_encoder_commit(...){...}
-@@
-@@
 - intel_encoder_destroy(...){...}
-@@
-@@
-- intel_encoder_prepare(...){...}
 @@
 @@
 - intel_fbc_work_fn(...){...}
@@ -509,14 +503,6 @@ identifier f;
 @@
 T f(...)
 {<...
-- drm_mode_connector_attach_encoder(...);
-...>}
-@@
-type T;
-identifier f;
-@@
-T f(...)
-{<...
 - ironlake_crtc_disable(...);
 ...>}
 @@
@@ -527,6 +513,13 @@ T f(...)
 {<...
 - drm_crtc_helper_add(...);
 ...>}
+@@
+identifier s;
+expression E;
+@@
+struct drm_crtc_funcs s = {
+-.destroy = E,
+};
 @@
 identifier s;
 expression E;
