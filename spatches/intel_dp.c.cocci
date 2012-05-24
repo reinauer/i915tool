@@ -113,3 +113,7 @@ T f(...)
 {<...
 -intel_dp_add_properties(...);
 ...>}
+@@
+@@
+-static
+intel_dp_dpms(...){...}

@@ -68,7 +68,7 @@ unsigned long io_I915_READ32(unsigned long addr)
                return 0xcafebabe;
        outl(addr, addrport);
        val = inl(dataport);
-       if (verbose > 1)
+       if (verbose > 4)
                fprintf(stderr, "%s: %x <- %x\n", __func__, val, addr);
        return val;
 }
@@ -79,7 +79,7 @@ void io_I915_WRITE32(unsigned long addr, unsigned long val)
                return;
        outl(addr, addrport);
        outl(val, dataport);
-       if (verbose > 1)
+       if (verbose > 4)
                fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
 }
 
@@ -119,7 +119,7 @@ hexdump(u32 *base, int size)
 }
 void udelay(int i)
 {
-	if (verbose > 2)
+	if (verbose > 3)
 		fprintf(stderr, "UDELAY %d!\n", i);
 	/* write to a bad fd. That should be a microsecond. */
 	(void)write(0x1048576, &i, 1);
@@ -132,7 +132,7 @@ unsigned long I915_READ(unsigned long addr)
 	if (dofake)
 		return 0xcafebabe;
 	val = *ptr;
-	if (verbose > 1)
+	if (verbose > 4)
 		fprintf(stderr, "%s: %x <- %x\n", __func__, val, addr);
 	return val;
 }
@@ -143,7 +143,7 @@ void I915_WRITE(unsigned long addr, unsigned long val)
 	if (dofake)
 		return;
 	*ptr = val;
-	if (verbose > 1)
+	if (verbose > 4)
 		fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
 }
 
@@ -154,7 +154,7 @@ u16 I915_READ16(unsigned long addr)
 	if (dofake)
 		return 0xbabe;
 	val = *ptr;
-	if (verbose > 1)
+	if (verbose > 4)
 		fprintf(stderr, "%s: %x <- %x\n", __func__, val, addr);
 	return val;
 }
@@ -165,7 +165,7 @@ void I915_WRITE16(unsigned long addr, u16 val)
 	if (dofake)
 		return;
 	*ptr = val;
-	if (verbose > 1)
+	if (verbose > 4)
 		fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
 }
 
@@ -176,7 +176,7 @@ u8 I915_READ8(unsigned long addr)
 	if (dofake)
 		return 0xba;
 	val = *ptr;
-	if (verbose > 1)
+	if (verbose > 4)
 		fprintf(stderr, "%s: %x <- %x\n", __func__, val, addr);
 	return val;
 }
@@ -187,7 +187,7 @@ void I915_WRITE8(unsigned long addr, u8 val)
 	if (dofake)
 		return;
 	*ptr = val;
-	if (verbose > 1)
+	if (verbose > 4)
 		fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
 }
 
@@ -427,13 +427,13 @@ void *allocz(int size)
 	if (! cp)
 		errx(1, "%d bytes\n", size);
 	memset(cp, 0, size);
-	if (verbose > 2)
+	if (verbose > 4)
 		printf("allocz %d bytes\n", size);
 	return cp;
 }
 
 void freez(void *p)
 {
-	if (verbose > 2)
+	if (verbose > 4)
 		printf("Free %p\n", p);
 }

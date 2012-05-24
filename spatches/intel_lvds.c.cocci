@@ -76,3 +76,7 @@ T f(...){<...
 @@
 @@
 -intel_lvds_disable(...);
+@@
+@@
+-static
+intel_lvds_dpms(...){...}

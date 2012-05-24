@@ -5,7 +5,7 @@ int i2c_transfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 	int try, ret;
 
 		for (ret = 0; ret < num; ret++) {
-			if (verbose > 2) fprintf(stderr, "master_xfer[%d] %c, addr=0x%02x, "
+			if (verbose > 1) fprintf(stderr, "master_xfer[%d] %c, addr=0x%02x, "
 				"len=%d%s\n", ret, (msgs[ret].flags & I2C_M_RD)
 				? 'R' : 'W', msgs[ret].addr, msgs[ret].len,
 				(msgs[ret].flags & I2C_M_RECV_LEN) ? "+" : "");
@@ -16,7 +16,7 @@ int i2c_transfer(struct i2c_adapter *adap, struct i2c_msg *msgs, int num)
 			if (ret != -EAGAIN)
 				break;
 		}
-		if (verbose > 2) fprintf(stderr, 
+		if (verbose > 1) fprintf(stderr, 
 			"i2c transfer returns %d\n", ret);
 		return ret;
 }

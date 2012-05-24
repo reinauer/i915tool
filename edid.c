@@ -47,8 +47,10 @@ int main(int argc, char *argv[])
         list_for_each_entry(connector, &i915->mode_config.connector_list, head){
 		printf("connector %p\n", connector);
 		printf("EDID blob is %p\n", connector->edid_blob_ptr);
+		if (connector->edid_blob_ptr && connector->edid_blob_ptr->data)
+			dumpeld("EDID:", connector->edid_blob_ptr->data);
 		printf("EDID-like-data (ELD):\n");
-		dumpeld("", connector->eld);
+		dumpeld("ELD:", connector->eld);
 	}
 
 }

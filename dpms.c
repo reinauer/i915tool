@@ -6,10 +6,14 @@ int cangencode = 0;
 
 int main(int argc, char *argv[])
 {
+	void intel_dp_dpms(struct drm_encoder *encoder, int mode);
+	void intel_lvds_dpms(struct drm_encoder *encoder, int mode);
+	int lvds = 0;
+	struct drm_encoder *encoder;
+	struct intel_connector *ic;
 	struct drm_i915_private *dp;
 	struct drm_connector *connector = NULL;
 	int level = 0;
-	struct drm_encoder *encoder;
 	struct drm_crtc *crtc;
 
 	init(&argc, &argv);
@@ -26,6 +30,8 @@ int main(int argc, char *argv[])
 	dp = i915->dev_private;
 
 	if (dp->int_lvds_connector) {
+		lvds = 1;
+		encoder = dp->int_lvds_connector->encoder;
 		if (verbose){
 			fprintf(stderr, "We have an lvds: \n");
 		}
@@ -33,24 +39,38 @@ int main(int argc, char *argv[])
 	}
 	
 	if (dp->int_edp_connector) {
-		if (verbose)
+		encoder = dp->int_edp_connector->encoder;
+		if (verbose){
 			fprintf(stderr, "We have an edp: \n");
+		}
 		connector = dp->int_edp_connector;
 	}
+
 	if (! connector)
 		errx(1, "No connector, all done here");
 	printf("dpms: current level is %d\n", connector->dpms);
-
-	dumpmodeconfig();
-	printf("%d levels to set\n", argc);
-	connector->encoder = list_first_entry(&i915->mode_config.encoder_list, struct drm_encoder , head);
-	connector->encoder->crtc = list_first_entry(&i915->mode_config.crtc_list, struct drm_crtc , head);
-	while(argc) {
+	
+	if (connector)
+	  ic = to_intel_connector(connector);
+	
+	if (verbose)
+		fprintf(stderr, "We have connector:%p intel connector %p, ice %p\n", connector, ic, 
+			ic ? ic->encoder : NULL);
+	if (ic->encoder) 
+		encoder = (struct drm_encoder *)(ic->encoder);
+	if (verbose)
+		fprintf(stderr, "Encoder is %p\n", encoder);
+	while(argc && encoder) {
 		level = strtol(argv[0], 0, 0);
 		printf("dpms: going to level %d\n", level);
-		drm_helper_connector_dpms(connector, level);
+		if (lvds)
+			intel_lvds_dpms(encoder, level);
+		else
+			intel_dp_dpms(encoder, level);
 		argc--;
 		argv++;
 	}
+
+	dumpmodeconfig();
 
 }

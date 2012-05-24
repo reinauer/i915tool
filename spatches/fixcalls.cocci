@@ -395,6 +395,9 @@ idr_pre_get(E1
 -cond_resched(...)
 @@
 @@
+-intel_crt_init(...)
+@@
+@@
 -yield(...)
 @@
 type T;
