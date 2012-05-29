@@ -43,3 +43,7 @@
 @@
 @@
 -drm_calc_timestamping_constants(...);
+@@
+struct drm_crtc_helper_funcs *cf;
+@@
+- cf->prepare(...);

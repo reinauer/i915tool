@@ -9,9 +9,6 @@
 - intel_lid_notify(...){...}
 @@
 @@
-- intel_lvds_commit(...){...}
-@@
-@@
 -intel_lvds_destroy(...){...}
 @@
 identifier d;
@@ -41,14 +38,6 @@ identifier d;
 @@
 -struct dmi_system_id d [] = {...};
 @@
-identifier d;
-@@
-- struct drm_encoder_helper_funcs d = {...};
-@@
-identifier d;
-@@
-- struct drm_connector_helper_funcs d = {...};
-@@
 type T;
 identifier f;
 @@
@@ -61,12 +50,6 @@ T f(...){<...
 + 0
 )
 ...>}
-@@
-@@
--drm_encoder_helper_add(...);
-@@
-@@
--drm_connector_helper_add(...);
 @@
 @@
 -drm_mode_create_scaling_mode_property(...);

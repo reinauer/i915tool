@@ -213,12 +213,6 @@ identifier d;
 - intel_crtc_idle_timer(...){...}
 @@
 @@
-- intel_crtc_mode_fixup(...){...}
-@@
-@@
-- intel_crtc_mode_set(...){...}
-@@
-@@
 - intel_crtc_page_flip(...){...}
 @@
 @@
@@ -375,7 +369,7 @@ identifier d;
 - ironlake_enable_rc6(...){...}
 @@
 @@
-- intel_pipe_set_base(...){...}
+-intel_pipe_set_base(...){...}
 @@
 @@
 - ironlake_setup_rc6(...){...}
@@ -444,6 +438,7 @@ identifier f, d;
 T f(...)
 {<...
 - d = intel_pipe_set_base(...);
++ d = 1; fprintf(stderr, "FIX CALL TO pipe set base\n");
 ...>}
 @@
 type T;
@@ -492,14 +487,6 @@ identifier f;
 T f(...)
 {<...
 - ironlake_crtc_disable(...);
-...>}
-@@
-type T;
-identifier f;
-@@
-T f(...)
-{<...
-- drm_crtc_helper_add(...);
 ...>}
 @@
 identifier s;
@@ -556,48 +543,6 @@ expression E;
 @@
 struct drm_crtc_funcs s = {
 -.set_config = E,
-};
-@@
-identifier s;
-expression E;
-@@
-struct drm_crtc_helper_funcs s = {
--	.mode_fixup = E,
-};
-@@
-identifier s;
-expression E;
-@@
-struct drm_crtc_helper_funcs s = {
--	.mode_set = E,
-};
-@@
-identifier s;
-expression E;
-@@
-struct drm_crtc_helper_funcs s = {
--	.mode_set_base = E,
-};
-@@
-identifier s;
-expression E;
-@@
-struct drm_crtc_helper_funcs s = {
--	.mode_set_base_atomic = E,
-};
-@@
-identifier s;
-expression E;
-@@
-struct drm_crtc_helper_funcs s = {
--	.load_lut = E,
-};
-@@
-identifier s;
-expression E;
-@@
-struct drm_crtc_helper_funcs s = {
--	.disable = E,
 };
 @@
 identifier f;

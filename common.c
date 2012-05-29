@@ -87,13 +87,16 @@ void io_I915_WRITE32(unsigned long addr, unsigned long val)
 /* to make it easy, we start at zero and assume 250 hz. */
 unsigned long msecs(void)
 {
-	struct timeval start, now;
+	static struct timeval start;
+	struct timeval now;
 	static int first = 0;
 	unsigned long j;
 	if (! first++)
 		gettimeofday(&start, NULL);
 	gettimeofday(&now, NULL);
 	j = (now.tv_sec - start.tv_sec)*1000 + (now.tv_usec-start.tv_usec)/1000;
+	if (verbose > 5)
+		fprintf(stderr, "MS: %d\n", j);
 	return j;
 }
 

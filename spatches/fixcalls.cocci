@@ -409,3 +409,24 @@ T f(...){<...
 + 0
 )
 ...>}
+@@
+identifier d;
+expression E;
+@@
+struct drm_crtc_helper_funcs d = {
+-.mode_set_base = E
+};
+@@
+identifier d;
+expression E;
+@@
+struct drm_crtc_helper_funcs d = {
+-.mode_set_base_atomic = E
+};
+@@
+identifier d;
+expression E;
+@@
+struct drm_crtc_helper_funcs d = {
+-.disable = E
+};
