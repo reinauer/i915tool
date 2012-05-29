@@ -24,9 +24,6 @@
 -drm_framebuffer_cleanup(...){...}
 @@
 @@
--drm_framebuffer_init(...){...}
-@@
-@@
 -drm_mode_addfb(...){...}
 @@
 @@

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 # This script has been honed over quite a few iterations. The trick is to make
 # it easy for you to see what transformations occur without burying you in files. 
 # Also, coccinelle is not perfect, so we have to help her at times. As she

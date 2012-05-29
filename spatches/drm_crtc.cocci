@@ -6,7 +6,10 @@
 (
 -struct drm_mode_config_funcs{...};
 |
--struct drm_framebuffer_funcs{...};
+struct drm_framebuffer_funcs{
+-...
++int nothing;
+};
 )
 @@
 identifier d, e;
@@ -31,3 +34,8 @@ type T;
 identifier d, e;
 @@
 -T d(...,struct drm_file *e, ...);
+@@
+type T;
+@@
+-T drm_framebuffer_init(...);
+

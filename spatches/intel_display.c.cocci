@@ -1,7 +1,10 @@
 @@
 identifier d;
 @@
-- struct drm_framebuffer_funcs d = {...};
+struct drm_framebuffer_funcs d = {
+-...
++0
+};
 @@
 identifier d;
 @@
@@ -12,10 +15,10 @@ identifier d;
 - struct intel_quirk d[] = {...};
 @@
 @@
+-mode_fits_in_fbdev(...){...}
+@@
+@@
 -intel_release_load_detect_pipe(...){...}
-@@
-@@
--intel_get_load_detect_pipe(...){...}
 @@
 @@
 - adpa_pipe_enabled(...){...}
@@ -270,21 +273,6 @@ identifier d;
 - intel_finish_page_flip_plane(...){...}
 @@
 @@
-- intel_framebuffer_create(...){...}
-@@
-@@
-- intel_framebuffer_create_for_mode(...){...}
-@@
-@@
-- intel_framebuffer_init(...){...}
-@@
-@@
-- intel_framebuffer_pitch_for_width(...){...}
-@@
-@@
-- intel_framebuffer_size_for_mode(...){...}
-@@
-@@
 - intel_g4x_limit(...){...}
 @@
 @@
@@ -405,9 +393,6 @@ identifier d;
 - lvds_pipe_enabled(...){...}
 @@
 @@
-- mode_fits_in_fbdev(...){...}
-@@
-@@
 - pineview_clock(...){...}
 @@
 @@
@@ -441,6 +426,9 @@ intel_setup_outputs(...){...}
 @@
 - static
 has_edp_a(...){...}
+@@
+@@
+-drm_gem_object_unreference_unlocked(...);
 @@
 type T;
 identifier f;
@@ -843,3 +831,17 @@ identifier m;
 statement S;
 @@
 -if (!m->primary->master) S
+@@
+identifier m;
+statement S;
+@@
+-if (m->release_fb) S
+@@
+identifier f;
+type T;
+@@
+T f(...){<...
+- mode_fits_in_fbdev(...)
++NULL
+...>}
+

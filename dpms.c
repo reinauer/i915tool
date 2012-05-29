@@ -13,8 +13,10 @@ int main(int argc, char *argv[])
 	struct intel_connector *ic;
 	struct drm_i915_private *dp;
 	struct drm_connector *connector = NULL;
+	struct drm_display_mode *mode;
 	int level = 0;
 	struct drm_crtc *crtc;
+	struct intel_load_detect_pipe pipe;
 
 	init(&argc, &argv);
 	devinit();
@@ -36,6 +38,7 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "We have an lvds: \n");
 		}
 		connector = dp->int_lvds_connector;
+		mode = dp->lfp_lvds_vbt_mode;
 	}
 	
 	if (dp->int_edp_connector) {
@@ -70,6 +73,9 @@ int main(int argc, char *argv[])
 		argc--;
 		argv++;
 	}
+
+	/* at this point backpanel is lit or should be. Get a pipe. */
+	intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
 
 	dumpmodeconfig();
 

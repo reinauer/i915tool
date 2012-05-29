@@ -21,9 +21,6 @@
 -drm_helper_hpd_irq_event(...){...}
 @@
 @@
--drm_helper_mode_fill_fb_struct(...){...}
-@@
-@@
 -drm_helper_resume_force_mode(...){...}
 @@
 @@

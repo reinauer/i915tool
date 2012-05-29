@@ -117,6 +117,7 @@ static inline void INIT_LIST_HEAD(struct list_head *list)
 #define list_entry(ptr, type, member) \
         container_of(ptr, type, member)
 /* and other kernel stuff wrapped heavily in ifdefs */
+#define PAGE_SIZE 4096
 #define list_for_each_entry(pos, head, member)				\
 	for (pos = list_entry((head)->next, typeof(*pos), member);	\
 	     &pos->member != (head); 	\
@@ -384,6 +385,26 @@ struct pci_device_id {
 #define KERN_WARNING "warning: "
 #define KERN_ERR "Error: "
 #define DUMP_PREFIX_NONE ""
+
+/* err.h, which we can't include in coreboot anyway */
+#define IS_ERR_VALUE(x) ((x) >= (unsigned long)-4096)
+
+static inline void * ERR_PTR(long error)
+{
+        return (void *) error;
+}
+
+static inline long PTR_ERR(const void *ptr)
+{
+        return (long) ptr;
+}
+
+static inline long IS_ERR(const void *ptr)
+{
+        return IS_ERR_VALUE((unsigned long)ptr);
+}
+
+
 
 /* coccinelle can't get this yet. */
 #define uninitialized_var(x) x
