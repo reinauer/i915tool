@@ -76,6 +76,12 @@ int main(int argc, char *argv[])
 
 	/* at this point backpanel is lit or should be. Get a pipe. */
 	intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
+	enum drm_connector_status intel_crt_load_detect(struct intel_crt *crt);
+	crtc = encoder->crtc;
+	if (crtc)
+		intel_crt_load_detect(to_intel_crtc(crtc));
+	else
+		fprintf(stderr, "NO crtc on encoder\n");
 
 	dumpmodeconfig();
 

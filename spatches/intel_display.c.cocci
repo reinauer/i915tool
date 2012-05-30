@@ -300,9 +300,6 @@ identifier d;
 - intel_idle_update(...){...}
 @@
 @@
-- intel_increase_pllclock(...){...}
-@@
-@@
 - intel_init_quirks(...){...}
 @@
 @@
@@ -348,9 +345,6 @@ identifier d;
 - ironlake_compute_srwm(...){...}
 @@
 @@
-- ironlake_crtc_commit(...){...}
-@@
-@@
 - ironlake_crtc_disable(...){...}
 @@
 @@
@@ -367,9 +361,6 @@ identifier d;
 @@
 @@
 - ironlake_enable_rc6(...){...}
-@@
-@@
--intel_pipe_set_base(...){...}
 @@
 @@
 - ironlake_setup_rc6(...){...}
@@ -430,15 +421,6 @@ identifier f;
 T f(...)
 {<...
 - intel_update_watermarks(...);
-...>}
-@@
-type T;
-identifier f, d;
-@@
-T f(...)
-{<...
-- d = intel_pipe_set_base(...);
-+ d = 1; fprintf(stderr, "FIX CALL TO pipe set base\n");
 ...>}
 @@
 type T;
@@ -716,11 +698,6 @@ expression E;
 @@
 -d.prepare = E;
 @@
-identifier d;
-expression E;
-@@
--d.commit = E;
-@@
 @@
 -intel_limit_t  intel_limits_g4x_sdvo = {...};
 @@
@@ -746,6 +723,15 @@ identifier dev, d, f;
 @@
 @@
 -drm_vblank_post_modeset(...);
+@@
+identifier e;
+@@
+e = 
+-intel_pin_and_fence_fb_obj(...);
++0;
+@@
+@@
+-i915_gem_object_unpin(...);
 @@
 @@
 -drm_vblank_pre_modeset(...);
@@ -789,4 +775,21 @@ T f(...){<...
 - mode_fits_in_fbdev(...)
 +NULL
 ...>}
-
+@@
+@@
+intel_pipe_set_base(...)
+{<...
+-if (old_fb){...}
+...>}
+@@
+@@
+-mod_timer(...);
++fprintf(stderr, "Warning: not scheduling mod_timer\n");
+@@
+@@
+-i9xx_crtc_enable(...);
++fprintf(stderr, "Warning: somebody tried to call i9xx_crtc_enable\n");
+@@
+@@
+-i9xx_crtc_disable(...);
++fprintf(stderr, "Warning: somebody tried to call i9xx_crtc_disable\n");

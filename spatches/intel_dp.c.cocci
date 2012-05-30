@@ -117,3 +117,6 @@ T f(...)
 @@
 -static
 intel_dp_dpms(...){...}
+@@
+@@
+-intel_dp_check_link_status(...){...}

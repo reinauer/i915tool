@@ -1,0 +1,17 @@
+as of may 31, we can light up the panel and attach a pipe. 
+
+63		I915_WRITE(ctl_reg, I915_READ(ctl_reg) | POWER_TARGET_ON);
+64		POSTING_READ(lvds_reg);
+(gdb) where
+#0  intel_lvds_enable (intel_lvds=0x75c210) at final/intel_lvds.c:64
+#1  0x000000000041d3cb in intel_lvds_dpms (encoder=0x75c210, mode=0)
+    at final/intel_lvds.c:76
+#2  0x0000000000401732 in main (argc=1, argv=0x7fffffffe760) at dpms.c:70
+
+this powers on the panel.
+
+OK so in dpms we have only really enabled panel power and backlight. 
+
+Next step is to try the actual loading, which should make the screen
+at least flicker.
+

@@ -88,6 +88,12 @@ w
 q
 EOF
 
+ed per-file-changes/intel_crt.c << EOF
+g/const/s///
+w
+q
+EOF
+
 ed per-file-changes/intel_display.c << EOF
 g/mode_config.funcs  *=/d
 g/fb_base/d

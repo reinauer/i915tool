@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 		u32 word = io_I915_READ32(i|1);
 		u32 base = word & (~0xfff);
 		u8 lowbits = word;
-		fprintf(stderr, "%d: [%#x]%#x, %s, %s, %s, %s\n", i, word, base, 
+		printf("%d: [%#x]%#x, %s, %s, %s, %s\n", i, word, base, 
 			lowbits & 8 ? "GFDT": "~GFDT", 
 			lowbits & 4 ? ";Cached in LLC": ";from gttentry", 
 			lowbits & 2 ? ";cacheable L3": ";~cacheable in L3", 
