@@ -15,3 +15,6 @@ OK so in dpms we have only really enabled panel power and backlight.
 Next step is to try the actual loading, which should make the screen
 at least flicker.
 
+
+we're not doing link training correctly for some reason. Actually we're not
+doing it at all.

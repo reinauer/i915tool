@@ -76,13 +76,33 @@ int main(int argc, char *argv[])
 
 	/* at this point backpanel is lit or should be. Get a pipe. */
 	intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
+#if 0
 	enum drm_connector_status intel_crt_load_detect(struct intel_crt *crt);
 	crtc = encoder->crtc;
 	if (crtc)
 		intel_crt_load_detect(to_intel_crtc(crtc));
 	else
 		fprintf(stderr, "NO crtc on encoder\n");
-
+#endif
 	dumpmodeconfig();
+	uint32_t bclrpat_reg;
+	bclrpat_reg = BCLRPAT(PIPE_A);
+	I915_WRITE(bclrpat_reg, 0x500050);
+
+	uint32_t vsync_reg;
+	uint32_t vsync = I915_READ(vsync_reg);
+	uint32_t vsync_start = (vsync & 0xffff) + 1;
+	uint32_t vblank, vblank_start, vblank_end;
+	uint32_t vblank_reg;
+	vblank_reg = VBLANK(PIPE_A);
+	vblank = I915_READ(vblank_reg);
+	vblank_start = (vblank & 0xfff) + 1;
+	vblank_end = ((vblank >> 16) & 0xfff) + 1;
+	vsync_reg = VSYNC(PIPE_A);	
+	vblank_start = vsync_start;
+	I915_WRITE(vblank_reg,
+		   (vblank_start - 1) |
+		   ((vblank_end - 1) << 16));
+	
 
 }

@@ -9,7 +9,8 @@
 -__gen6_gt_wait_for_fifo(...){...}
 @@
 @@
--gen6_do_reset(...){...}
+-static
+gen6_do_reset(...){...}
 @@
 @@
 -gen6_gt_force_wake_get(...){...}
