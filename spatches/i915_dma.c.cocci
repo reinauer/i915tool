@@ -206,6 +206,9 @@ T f(...){<...
 |
 -drm_irq_install(...)
 + 0
+|
+-intel_fbdev_init(...)
++ 0
 )
 ...>}
 @@

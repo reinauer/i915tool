@@ -21,21 +21,6 @@ identifier d;
 -intel_release_load_detect_pipe(...){...}
 @@
 @@
-- adpa_pipe_enabled(...){...}
-@@
-@@
-- assert_pch_dp_disabled(...){...}
-@@
-@@
-- assert_pch_hdmi_disabled(...){...}
-@@
-@@
-- assert_pch_ports_disabled(...){...}
-@@
-@@
-- assert_transcoder_disabled(...){...}
-@@
-@@
 - broadwater_init_clock_gating(...){...}
 @@
 @@
@@ -45,13 +30,16 @@ identifier d;
 - disable_pch_dp(...){...}
 @@
 @@
+- disable_pch_dp(...);
+@@
+@@
 - disable_pch_hdmi(...){...}
 @@
 @@
+- disable_pch_hdmi(...);
+@@
+@@
 - do_intel_finish_page_flip(...){...}
-@@
-@@
-- dp_pipe_enabled(...){...}
 @@
 @@
 - g4x_check_srwm(...){...}
@@ -87,7 +75,8 @@ identifier d;
 - gen6_enable_rps(...){...}
 @@
 @@
-- hdmi_pipe_enabled(...){...}
+-static
+gen6_fdi_link_train(...){...}
 @@
 @@
 - i830_get_display_clock_speed(...){...}
@@ -180,10 +169,16 @@ identifier d;
 - intel_calculate_wm(...){...}
 @@
 @@
+- intel_clear_scanline_wait(...){...}
+@@
+@@
+- intel_clear_scanline_wait(...);
+@@
+@@
 - intel_cancel_fbc_work(...){...}
 @@
 @@
-- intel_clear_scanline_wait(...){...}
+-intel_cancel_fbc_work(...);
 @@
 @@
 - intel_crtc_cursor_move(...){...}
@@ -213,25 +208,13 @@ identifier d;
 - intel_crtc_wait_for_pending_flips(...){...}
 @@
 @@
+- intel_crtc_wait_for_pending_flips(...);
+@@
+@@
 - intel_decrease_pllclock(...){...}
 @@
 @@
 - intel_default_queue_flip(...){...}
-@@
-@@
-- intel_disable_fbc(...){...}
-@@
-@@
-- intel_disable_pch_pll(...){...}
-@@
-@@
-- intel_disable_pch_ports(...){...}
-@@
-@@
-- intel_disable_pll(...){...}
-@@
-@@
-- intel_disable_transcoder(...){...}
 @@
 @@
 - intel_display_capture_error_state(...){...}
@@ -336,9 +319,6 @@ identifier d;
 - ironlake_compute_srwm(...){...}
 @@
 @@
-- ironlake_crtc_prepare(...){...}
-@@
-@@
 - ironlake_disable_drps(...){...}
 @@
 @@
@@ -361,9 +341,6 @@ identifier d;
 @@
 @@
 - ivb_update_cursor(...){...}
-@@
-@@
-- lvds_pipe_enabled(...){...}
 @@
 @@
 - pineview_clock(...){...}
@@ -673,11 +650,6 @@ identifier dev, d;
 @@
 -dev->d.get_display_clock_speed = i830_get_display_clock_speed;
 @@
-identifier d;
-expression E;
-@@
--d.prepare = E;
-@@
 @@
 -intel_limit_t  intel_limits_g4x_sdvo = {...};
 @@
@@ -715,6 +687,12 @@ e =
 @@
 @@
 -drm_vblank_pre_modeset(...);
+@@
+@@
+-drm_vblank_off(...);
+@@
+@@
+intel_crtc_update_cursor(...);
 @@
 identifier m, d;
 @@

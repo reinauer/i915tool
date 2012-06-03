@@ -6,8 +6,10 @@ int cangencode = 0;
 
 int main(int argc, char *argv[])
 {
-	void intel_dp_dpms(struct drm_encoder *encoder, int mode);
-	void intel_lvds_dpms(struct drm_encoder *encoder, int mode);
+	bool drm_crtc_helper_set_mode(struct drm_crtc *crtc,
+                              struct drm_display_mode *mode,
+                              int x, int y,
+                              struct drm_framebuffer *old_fb);
 	int lvds = 0;
 	struct drm_encoder *encoder;
 	struct intel_connector *ic;
@@ -63,6 +65,16 @@ int main(int argc, char *argv[])
 		encoder = (struct drm_encoder *)(ic->encoder);
 	if (verbose)
 		fprintf(stderr, "Encoder is %p\n", encoder);
+	/* at this point backpanel is lit or should be. Get a pipe. */
+	intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
+	mode = drm_mode_create(i915);
+	if (! mode)
+		fprintf(stderr, "FUCK! no mode\n");
+	crtc = encoder->crtc;
+	if (crtc)
+        	drm_crtc_helper_set_mode(crtc,
+                              mode,  0, 0, NULL);
+#if NONONO
 	while(argc && encoder) {
 		level = strtol(argv[0], 0, 0);
 		printf("dpms: going to level %d\n", level);
@@ -73,6 +85,7 @@ int main(int argc, char *argv[])
 		argc--;
 		argv++;
 	}
+*/
 
 	/* at this point backpanel is lit or should be. Get a pipe. */
 	intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
@@ -82,12 +95,11 @@ int main(int argc, char *argv[])
 		intel_crt_load_detect(to_intel_crtc(crtc));
 	else
 		fprintf(stderr, "NO crtc on encoder\n");
-	if (crtc)
-		gen6_fdi_link_train(crtc);
+	//	if (crtc)
+	//		gen6_fdi_link_train(crtc);
 	/* now we have a framebuffer. Let's try to enable it. */
 	//intel_fbdev_init(i915);
 
-#if 0
 	enum drm_connector_status intel_crt_load_detect(struct intel_crt *crt);
 	crtc = encoder->crtc;
 	if (crtc)

@@ -48,9 +48,6 @@
 -drm_mode_connector_property_set_ioctl(...){...}
 @@
 @@
--drm_mode_create(...){...}
-@@
-@@
 -drm_mode_create_dirty_info_property(...){...}
 @@
 @@

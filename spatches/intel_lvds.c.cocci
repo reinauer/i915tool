@@ -19,9 +19,6 @@ intel_lvds_detect(...){...
 ...}
 @@
 @@
-- intel_lvds_disable(...){...}
-@@
-@@
 - intel_no_lvds_dmi_callback(...){...}
 @@
 @@
