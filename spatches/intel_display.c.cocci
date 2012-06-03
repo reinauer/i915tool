@@ -336,9 +336,6 @@ identifier d;
 - ironlake_compute_srwm(...){...}
 @@
 @@
-- ironlake_crtc_disable(...){...}
-@@
-@@
 - ironlake_crtc_prepare(...){...}
 @@
 @@
@@ -452,14 +449,6 @@ identifier f;
 T f(...)
 {<...
 - drm_mode_crtc_set_gamma_size(...);
-...>}
-@@
-type T;
-identifier f;
-@@
-T f(...)
-{<...
-- ironlake_crtc_disable(...);
 ...>}
 @@
 identifier s;

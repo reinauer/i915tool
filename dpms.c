@@ -82,7 +82,8 @@ int main(int argc, char *argv[])
 		intel_crt_load_detect(to_intel_crtc(crtc));
 	else
 		fprintf(stderr, "NO crtc on encoder\n");
-	gen6_fdi_link_train(crtc);
+	if (crtc)
+		gen6_fdi_link_train(crtc);
 	/* now we have a framebuffer. Let's try to enable it. */
 	//intel_fbdev_init(i915);
 

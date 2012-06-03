@@ -18,3 +18,43 @@ at least flicker.
 
 we're not doing link training correctly for some reason. Actually we're not
 doing it at all.
+
+Can't just call the gen6 link train. There is setup that has
+to happen first. oh well. 
+
+NOTE: This is called: drm_helper_probe_single_connector_modes but it's 
+really all about copying from filled-in structs to user mode. We don't need
+it.
+
+v[    0.733227] [drm:drm_enable_connectors], connector 5 enabled? yes
+[    0.733233] [drm:drm_enable_connectors], connector 12 enabled? no
+[    0.733239] [drm:drm_enable_connectors], connector 15 enabled? no
+[    0.733253] [drm:drm_enable_connectors], connector 18 enabled? no
+does not real hardware stuff. Again, polling for user
+
+
+4. If enabling port on PCH: (Must be done before enabling CPU pipe or FDI)
+a. Enable PCH FDI Receiver PLL, wait for warmup plus DMI latency
+b. Switch from Rawclk to PCDclk in FDI Receiver (FDI A OR FDI B)
+c. [DevSNB] Enable CPU FDI Transmitter PLL, wait for warmup
+d. [DevILK] CPU FDI PLL is always on and does not need to be enabled
+5. Enable CPU panel fitter if needed for hires, required for VGA (Can be done anytime before enabling CPU pipe)
+6. Configure CPU pipe timings, M/N/TU, and other pipe settings (Can be done anytime before enabling CPU pipe)
+7. Enable CPU pipe
+8. Configure and enable CPU planes (VGA or hires)
+9. If enabling port on PCH:
+a. Program PCH FDI Receiver TU size same as Transmitter TU size for TU error checking
+b. Train FDI
+i. Set pre-emphasis and voltage (iterate if training steps fail)
+ii. Enable CPU FDI Transmitter and PCH FDI Receiver with Training Pattern 1 enabled.
+8
+Doc Ref #: IHD-OS-V3 Pt2 – 05 11
+￼
+￼
+iii. Wait for FDI training pattern 1 time
+iv. Read PCH FDI Receiver ISR ([DevIBX-B+] IIR) for bit lock in bit 8 (retry at least once if no lock)
+v. Enable training pattern 2 on CPU FDI Transmitter and PCH FDI Receiver
+vi. Wait for FDI training pattern 2 time
+vii. Read PCH FDI Receiver ISR ([DevIBX-B+] IIR) for symbol lock in bit 9 (retry at least once if no lock)
+viii. Enable normal pixel output on CPU FDI Transmitter and PCH FDI Receiver
+ix. Wait for FDI idle pattern time for link to become active
