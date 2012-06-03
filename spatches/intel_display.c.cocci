@@ -201,15 +201,6 @@ identifier d;
 - intel_crtc_dpms_overlay(...){...}
 @@
 @@
-- intel_crtc_fb_gamma_get(...){...}
-@@
-@@
-- intel_crtc_fb_gamma_set(...){...}
-@@
-@@
-- intel_crtc_gamma_set(...){...}
-@@
-@@
 - intel_crtc_idle_timer(...){...}
 @@
 @@

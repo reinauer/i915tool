@@ -206,9 +206,6 @@ T f(...){<...
 |
 -drm_irq_install(...)
 + 0
-|
--intel_fbdev_init(...)
-+ 0
 )
 ...>}
 @@
@@ -246,8 +243,6 @@ T f(...){<...
 -intel_modeset_gem_init(...);
 |
 -drm_irq_install(...);
-|
--intel_fbdev_init(...);
 |
 -drm_kms_helper_poll_init(...);
 )

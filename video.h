@@ -338,9 +338,36 @@ struct drm_i915_gem_object {
 	unsigned int tiling_mode : 2;
 };
 
+
 #include "final/drm_mode.h"
 #include "final/drm_edid.h"
 #include "final/drm_crtc.h"
+
+/* WE MAY NOT REALLY WANT THIS */
+/* mode specified on the command line */
+struct drm_cmdline_mode {
+        bool specified;
+        bool refresh_specified;
+        bool bpp_specified;
+        int xres, yres;
+        int bpp;
+        int refresh;
+        bool rb;
+        bool interlace;
+        bool cvt;
+        bool margins;
+        enum drm_connector_force force;
+};
+
+/* OR THIS */
+struct fb_cmap {
+        __u32 start;                    /* First entry  */
+        __u32 len;                      /* Number of entries */
+        __u16 *red;                     /* Red values   */
+        __u16 *green;
+        __u16 *blue;
+        __u16 *transp;                  /* transparency, can be NULL */
+};
 
 /* For now, we define a shim layer of drm devices. The long term 
  * goal is to use coccinelle to gather up all this crap into 
@@ -452,6 +479,7 @@ void *dmi_check_system(unsigned long);
 #include "final/drm_crtc_helper.h"
 #include "final/drm_mode.h"
 #include "final/drm_crtc.h"
+#include "final/drm_fb_helper.h"
 #include "final/intel_drv.h"
 #include "final/i2c-algo-bit.h"
 /* another coccinelle issue :-( */

@@ -52,6 +52,10 @@ struct s {...
 ...
 };
 @@
+identifier d;
+@@
+-struct notifier_block d = {...};
+@@
 identifier s;
 identifier d;
 @@
@@ -200,6 +204,11 @@ identifier d, m;
 type T;
 @@
 -T d(..., struct drm_i915_gem_request *m, ...);
+@@
+identifier d, m;
+type T;
+@@
+-T d(..., struct fb_var_screeninfo *m, ...);
 @@
 identifier d, m;
 type T;

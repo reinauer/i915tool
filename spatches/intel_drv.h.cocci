@@ -1,8 +1,5 @@
 @@
 @@
--struct intel_fbdev{...};
-@@
-@@
 -struct intel_unpin_work{...};
 @@
 @@

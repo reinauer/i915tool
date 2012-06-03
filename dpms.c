@@ -76,6 +76,16 @@ int main(int argc, char *argv[])
 
 	/* at this point backpanel is lit or should be. Get a pipe. */
 	intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
+	void gen6_fdi_link_train(struct drm_crtc *crtc) ;
+	crtc = encoder->crtc;
+	if (crtc)
+		intel_crt_load_detect(to_intel_crtc(crtc));
+	else
+		fprintf(stderr, "NO crtc on encoder\n");
+	gen6_fdi_link_train(crtc);
+	/* now we have a framebuffer. Let's try to enable it. */
+	//intel_fbdev_init(i915);
+
 #if 0
 	enum drm_connector_status intel_crt_load_detect(struct intel_crt *crt);
 	crtc = encoder->crtc;
@@ -83,7 +93,6 @@ int main(int argc, char *argv[])
 		intel_crt_load_detect(to_intel_crtc(crtc));
 	else
 		fprintf(stderr, "NO crtc on encoder\n");
-#endif
 	dumpmodeconfig();
 	uint32_t bclrpat_reg;
 	bclrpat_reg = BCLRPAT(PIPE_A);
@@ -103,6 +112,7 @@ int main(int argc, char *argv[])
 	I915_WRITE(vblank_reg,
 		   (vblank_start - 1) |
 		   ((vblank_end - 1) << 16));
+#endif
 	
 
 }

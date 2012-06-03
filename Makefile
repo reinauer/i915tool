@@ -1,9 +1,29 @@
-# habit from go: I just recompile everything always. 
+# habit from go: I just recompile everything always.
 # And at some point want to experiment with combining anyway.
 
-goodsource=pci.c final/intel_bios.c final/drm_modes.c final/i915_drv.c  final/intel_i2c.c common.c hack.c hexdump.c fake.c  final/i2c-algo-bit.c
-brokensource=final/intel_display.c final/intel_dp.c final/intel_panel.c final/drm_dp_i2c_helper.c final/i915_dma.c final/intel_lvds.c final/drm_edid.c final/drm_crtc.c final/drm_crtc_helper.c final/intel_modes.c final/intel_crt.c\
-	  i2c.c 
+goodsource=pci.c \
+	final/intel_bios.c \
+	final/drm_modes.c \
+	final/i915_drv.c  \
+	final/intel_i2c.c common.c hack.c hexdump.c fake.c  \
+	final/i2c-algo-bit.c
+
+#	final/drm_fb_helper.c\
+#	final/intel_fb.c\
+
+brokensource=\
+	final/intel_display.c \
+	final/intel_dp.c \
+	final/intel_panel.c \
+	final/drm_dp_i2c_helper.c \
+	final/i915_dma.c \
+	final/intel_lvds.c \
+	final/drm_edid.c \
+	final/drm_crtc.c \
+	final/drm_crtc_helper.c \
+	final/intel_modes.c \
+	final/intel_crt.c\
+	  i2c.c
 
 OBJ=ptrace.o
 
@@ -19,8 +39,8 @@ timegttsetup: timegttsetup.c $(goodsource) $(brokensource) video.h $(OBJ)
 g6reset: g6reset.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o g6reset g6reset.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
 
-dpms: dpms.c $(goodsource) $(brokensource) video.h $(OBJ)
-	cc $(CFLAGS) -g -include video.h -static -g -o dpms dpms.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
+dpms: dpms.c $(brokensource) $(goodsource) video.h $(OBJ)
+	cc $(CFLAGS) -g -include video.h -static -g -o dpms dpms.c $(brokensource) $(goodsource)  $(OBJ) -lpci  -lrt
 
 edid: edid.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o edid edid.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
