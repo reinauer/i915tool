@@ -294,20 +294,6 @@ T f(...){<...
 -if (IS_I865G(...)) S;
 ...>}
 @@
-identifier f;
-type T;
-@@
-T f(...){<...
--__gen6_gt_force_wake_get(...);
-...>}
-@@
-identifier f;
-type T;
-@@
-T f(...){<...
--__gen6_gt_force_wake_put(...);
-...>}
-@@
 expression E1;
 @@
 -dev_err(E1, 
@@ -416,3 +402,15 @@ expression E;
 struct drm_crtc_helper_funcs d = {
 -.disable = E
 };
+@@
+@@
+-spin_lock_irqsave(...);
+@@
+@@
+-spin_lock_irqrestore(...);
+@@
+@@
+-spin_lock_init(...);
+@@
+@@
+-spin_unlock_irqrestore(...);

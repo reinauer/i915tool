@@ -31,7 +31,7 @@ CFLAGS=
 #CFLAGS+=-O2
 CFLAGS+=-finstrument-functions 
 
-all: probe gttdump dumpscreen gttbreak gttset edid video timegttsetup ports panel dpms g6reset
+all: probe gttdump dumpscreen gttbreak gttset cli edid video timegttsetup ports panel dpms g6reset
 
 timegttsetup: timegttsetup.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o timegttsetup timegttsetup.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
@@ -41,6 +41,9 @@ g6reset: g6reset.c $(goodsource) $(brokensource) video.h $(OBJ)
 
 dpms: dpms.c $(brokensource) $(goodsource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o dpms dpms.c $(brokensource) $(goodsource)  $(OBJ) -lpci  -lrt
+
+cli: cli.c $(goodsource) $(brokensource) video.h $(OBJ)
+	cc $(CFLAGS) -g -include video.h -static -g -o cli cli.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
 
 edid: edid.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o edid edid.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt

@@ -665,14 +665,6 @@ identifier dev, d;
 @@
 - intel_limit_t intel_limits_g4x_display_port = {...};
 @@
-identifier dev, d, f;
-@@
--dev->d.force_wake_get = f;
-@@
-identifier dev, d, f;
-@@
--dev->d.force_wake_put = f;
-@@
 @@
 -drm_vblank_post_modeset(...);
 @@
