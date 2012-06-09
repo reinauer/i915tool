@@ -151,3 +151,15 @@
 @@
 @@
 -drm_property_destroy_blob(...);
+@@
+@@
+-drm_mode_getplane_res(...){...}
+@@
+@@
+-drm_mode_getplane(...){...}
+@@
+@@
+-drm_mode_setplane(...){...}
+@@
+@@
+-drm_mode_addfb2(...){...}

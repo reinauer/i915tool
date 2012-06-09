@@ -66,6 +66,7 @@ cp $LINUX/include/drm/drm_dp_helper.h inputs
 cp $LINUX/drivers/gpu/drm/drm_dp_i2c_helper.c inputs
 cp $LINUX/drivers/gpu/drm/drm_modes.c inputs
 cp $LINUX//include/drm/drm_crtc_helper.h inputs
+cp $LINUX/include/drm/drm_fourcc.h inputs
 #
 # disappointing. We needed the bit-banging stuff.
 cp $LINUX/drivers/i2c/algos/i2c-algo-bit.c inputs
@@ -123,11 +124,12 @@ EOF
 
 # if you use the instrument-functions option,
 # it really screws up on inlines. Who needs inlines anyway ...
-for i in per-file-changes/drm_crtc_helper.h per-file-changes/i915_drv.h per-file-changes/intel_drv.h
+for i in per-file-changes/drm_crtc_helper.h per-file-changes/i915_drv.h per-file-changes/intel_drv.h per-file-changes/drm_crtc.c
 do
 ed $i << EOF
 g/static *inline/s//static/p
 g/extern *inline/s//static/p
+g/__user/s///p
 w
 q
 EOF

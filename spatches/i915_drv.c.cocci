@@ -62,6 +62,10 @@ gen6_do_reset(...){...}
 @@
 identifier d;
 @@
+-struct file_operations d = {...};
+@@
+identifier d;
+@@
 -struct dev_pm_ops d = {...};
 @@
 identifier d;

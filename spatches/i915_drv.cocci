@@ -6,6 +6,8 @@ identifier d;
 |
 -struct drm_i915_error_state{...};
 |
+-struct i915_hw_ppgtt{...};
+|
 -struct drm_i915_gem_object{...};
 |
 -struct drm_i915_gem_phys_object{...};
@@ -235,6 +237,11 @@ type T;
 @@
 -T d(..., struct intel_ring_buffer *m, ...);
 @@
+identifier d, m;
+type T;
+@@
+-T d(..., struct i915_hw_ppgtt *ppgtt, ...);
+@@
 identifier d;
 @@
 -struct drm_ioctl_desc d[];
@@ -246,4 +253,9 @@ type T;
 @@
 @@
 -intel_gmbus_is_forced_bit(...){...}
-
+@@
+@@
+-i915_gem_object_pin_fence(...){...}
+@@
+@@
+-i915_gem_object_unpin_fence(...){...}

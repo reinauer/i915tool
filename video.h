@@ -43,6 +43,16 @@
 /* something we're not ready to totally remove yet */
 #define BUG_ON(x) assert(!(x))
 
+/* horrible stuff that should not be allowed to live */
+#ifndef WARN
+#define WARN(condition, format...) ({                                           \
+        int __ret_warn_on = !!(condition);                              \
+        if (__ret_warn_on)                                    \
+                fprintf(stderr, format);                                  \
+        (__ret_warn_on);                                        \
+})
+#endif
+
 enum {
 	DUMP_PREFIX_OFFSET, 
 	DUMP_PREFIX_ADDRESS, 
@@ -473,6 +483,7 @@ static inline long IS_ERR(const void *ptr)
 /* temporary. */
 void *dmi_check_system(unsigned long);
 
+#include "final/i2c-algo-bit.h"
 #include "final/i915_reg.h"
 #include "final/i915_drv.h"
 #include "final/drm_dp_helper.h"
@@ -481,11 +492,11 @@ void *dmi_check_system(unsigned long);
 #include "final/drm_crtc.h"
 #include "final/drm_fb_helper.h"
 #include "final/intel_drv.h"
-#include "final/i2c-algo-bit.h"
 /* another coccinelle issue :-( */
 static int i2c_add_adapter(struct i2c_adapter *u) { return 0;}
 
 #include "final/drm_edid_modes.h"
+#include "final/drm_fourcc.h"
 /* yuck */
 #define I915_READ_NOTRACE(x) I915_READ((x))
 #define I915_READ16_NOTRACE(x) I915_READ16((x))

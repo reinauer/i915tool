@@ -196,7 +196,7 @@ E2)
 @@
 -msleep(
 +mdelay(
-...);
+...)
 @ rulekc @
 identifier t;
 identifier f;
@@ -414,3 +414,25 @@ struct drm_crtc_helper_funcs d = {
 @@
 @@
 -spin_unlock_irqrestore(...);
+@@
+@@
+-i915_gem_object_pin_fence(...);
+@@
+@@
+-i915_gem_object_pin_fence(...){...}
+@@
+@@
+-i915_gem_object_pin_unfence(...);
+@@
+@@
+-i915_gem_object_pin_unfence(...){...}
+@@
+@@
+-cpu_relax(...);
+@@
+@@
+-i915_gem_object_unpin_fence(...);
+@@
+@@
+-pci_set_master(...);
++fprintf(stderr, "Warning: somebody tried to call pci_set_master\n");

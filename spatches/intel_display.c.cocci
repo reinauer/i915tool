@@ -638,6 +638,16 @@ identifier dev, d;
 @@
 -dev->d.get_display_clock_speed = i915_get_display_clock_speed;
 @@
+type T;
+identifier f;
+@@
+T f(...){<...
+(
+-intel_plane_init(...)
++ 0
+)
+...>}
+@@
 identifier dev, d;
 @@
 -dev->d.get_display_clock_speed = i915gm_get_display_clock_speed;
@@ -743,3 +753,10 @@ intel_pipe_set_base(...)
 @@
 -i9xx_crtc_disable(...);
 +fprintf(stderr, "Warning: somebody tried to call i9xx_crtc_disable\n");
+@@
+@@
+-intel_finish_fb(...);
++fprintf(stderr, "Warning: somebody tried to call i9xx_crtc_disable\n");
+@@
+@@
+-intel_finish_fb(...){...}
