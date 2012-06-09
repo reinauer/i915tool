@@ -163,3 +163,12 @@
 @@
 @@
 -drm_mode_addfb2(...){...}
+@@
+@@
+-drm_connector_unplug_all(...){...}
+@@
+@@
+-drm_plane_init(...){...}
+@@
+@@
+-drm_plane_cleanup(...){...}

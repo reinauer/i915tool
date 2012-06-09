@@ -95,6 +95,15 @@ identifier f;
 type T;
 @@
 T f(...){<...
+-printk_once(
++fprintf(stderr, 
+...);
+...>}
+@@
+identifier f;
+type T;
+@@
+T f(...){<...
 -DRM_INFO(
 + fprintf(stderr, 
 ...);
@@ -436,3 +445,6 @@ struct drm_crtc_helper_funcs d = {
 @@
 -pci_set_master(...);
 +fprintf(stderr, "Warning: somebody tried to call pci_set_master\n");
+@@
+@@
+-drm_property_destroy(...);
