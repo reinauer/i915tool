@@ -220,7 +220,7 @@ identifier rulekc.f;
 expression E1, E2, E3;
 @@
 - kcalloc(E1, E2
-+ allocz(E1 * E1
++ allocz(E1 * E2
 -  ,E3
    )
 @ rulekr @
