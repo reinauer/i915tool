@@ -31,8 +31,12 @@ int main(int argc, char *argv[])
 					intel_parse_bios(i915);
 				break;
 			case 'l':
-				if (cmd[1] == 'o')
+				if (cmd[1] == 'O')
 					intel_panel_enable_backlight(i915);
+				else if (cmd[1] == 'o')
+					intel_panel_disable_backlight(i915);
+				else fprintf(stderr,
+						"Usage: l<o|O> (off or On)\n");
 				break;
 			case 'm': 
 				i915_driver_load(i915, (unsigned long)i915->dev_private->info);
@@ -63,29 +67,42 @@ int main(int argc, char *argv[])
 				}
 			
 				if (! connector)
-					warnx(1, "No connector, all done here");
+					warnx(1, "No connector, maybe do a b, l0, m commands?");
 				break;
 
 			case 'd':
 				if (connector)
 				  ic = to_intel_connector(connector);
+				else {
+					fprintf(stderr, "no connector! Did you do a 'c' command?\n");
+					break;
+				}
 				
 				if (verbose)
 					fprintf(stderr, "We have connector:%p intel connector %p, ice %p\n", connector, ic, 
 						ic ? ic->encoder : NULL);
 				if (ic->encoder) 
 					encoder = (struct drm_encoder *)(ic->encoder);
+				else {
+					fprintf(stderr, "no encoder!\n");
+					break;
+				}
 				if (verbose)
 					fprintf(stderr, "Encoder is %p\n", encoder);
 				/* at this point backpanel is lit or should be. Get a pipe. */
 				intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
 				mode = drm_mode_create(i915);
-				if (! mode)
+				if (! mode){
 					fprintf(stderr, "FUCK! no mode\n");
+					break;
+				}
 				crtc = encoder->crtc;
 				if (crtc)
 			        	drm_crtc_helper_set_mode(crtc,
 			                              mode,  0, 0, NULL);
+				else {
+					fprintf(stderr, "no crtc!\n");
+				}
 				break;
 				/* at this point backpanel is lit or should be. Get a pipe. */
 				intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
@@ -100,6 +117,10 @@ int main(int argc, char *argv[])
 				fprintf(stderr, "NOT YET!\n");
 				//intel_fbdev_init(i915);
 				break;
+			default: 
+				fprintf(stderr, "This program sucks too much to tell you the commands you can do\n");
+				break;
+
 			}
 		}
 }
