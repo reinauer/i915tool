@@ -1,0 +1,3 @@
+#!/bin/bash
+grep '0x[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][ \t]*$' final/*h | awk '{print   "[" $3 "] \"" $2 "\","}' | grep  '^\[0x' >names.c
+

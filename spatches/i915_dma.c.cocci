@@ -180,7 +180,7 @@ i915_driver_load(...){<...
 @@
 i915_driver_load(...){<...
 -pci_enable_msi(...)
-+fprintf(stderr, "NOT setting enable MSI; fix me later\n");
++if (verbose) fprintf(stderr, "NOT setting enable MSI; fix me later\n");
 ...>}
 @@
 @@

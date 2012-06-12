@@ -17,6 +17,40 @@ size_t bios_image_size;
 int gencode = 0;
 extern int cangencode;
 
+char *names[] = {
+#include "names.c"
+};
+
+int nnames = sizeof(names)/sizeof(names[0]);
+
+char *regname(unsigned long addr)
+{
+	static char name[128];
+	int i;
+	int offset;
+	unsigned long truncaddr;
+
+	if (addr > nnames){
+		sprintf(name, "0x%ux", addr);
+		return name;
+	}
+	if (names[addr])
+		return names[addr];
+	/* for now we'll take up to 6 bits of offset */
+	for(i = 1, truncaddr = addr; i < 0x80; i = (i << 1) | 1){
+		offset = addr & i;
+		truncaddr = addr & (~i);
+		if (names[truncaddr]){
+			sprintf(name,"%s+%x", names[truncaddr], offset);
+			return name;
+		}
+	}
+	/* oh well ... */
+	sprintf(name, "0x%ux", addr);
+	return name;
+}
+
+	/* owie. Just be crude about it. */
 bool intel_choose_pipe_bpp_dither(struct drm_crtc *crtc,
 					 unsigned int *pipe_bpp)
 {
@@ -69,7 +103,8 @@ unsigned long io_I915_READ32(unsigned long addr)
        outl(addr, addrport);
        val = inl(dataport);
        if (verbose > 4)
-               fprintf(stderr, "%s: %x <- %x\n", __func__, val, addr);
+               fprintf(stderr, "%s: %x <- %x(%s)\n", __func__, val, addr,
+			regname(addr));
        return val;
 }
 
@@ -80,7 +115,8 @@ void io_I915_WRITE32(unsigned long addr, unsigned long val)
        outl(addr, addrport);
        outl(val, dataport);
        if (verbose > 4)
-               fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
+               fprintf(stderr, "%s: %x -> %x(%s)\n", __func__, val, addr,
+			regname(addr));
 }
 
 /* not sure how we want to do this so let's guess */
@@ -109,6 +145,21 @@ mdelay(unsigned long ms)
 		;
 }
 
+static unsigned long tickspermicrosecond = 1000;
+
+void
+calibratetsc(void)
+{
+	unsigned long long start, end;
+	fprintf(stderr, "Delay for 10 seconds to calibrate tsc...");
+	start = rdtsc();
+	mdelay(10000);
+	end = rdtsc();
+	/* convert to ticks per microsecond -- 10M microseconds */
+	tickspermicrosecond = (end - start) / 10000000;
+	fprintf(stderr, "Done: tickspermicrosecond = %ld\n", tickspermicrosecond);
+}
+
 void
 hexdump(u32 *base, int size)
 {
@@ -117,15 +168,27 @@ hexdump(u32 *base, int size)
 		fprintf(stderr, "%#x: ", i);
 		for(j = 0; j < 8; j++)
 			fprintf(stderr, "%08x", base[i+j]);
-		fprintf(stderr, "\n");
+		fprintf(stderr,"\n");
 	}
 }
+
+unsigned long
+microseconds(unsigned long long start, unsigned long long end)
+{
+	unsigned long ret;
+	ret = ((end - start)/tickspermicrosecond);
+	return ret;
+}
+
 void udelay(int i)
 {
+	unsigned long long end;
+
 	if (verbose > 3)
 		fprintf(stderr, "UDELAY %d!\n", i);
-	/* write to a bad fd. That should be a microsecond. */
-	(void)write(0x1048576, &i, 1);
+	end = rdtsc() + i * tickspermicrosecond;
+	while (rdtsc() < end)
+		;
 }
 
 unsigned long I915_READ(unsigned long addr)
@@ -136,7 +199,8 @@ unsigned long I915_READ(unsigned long addr)
 		return 0xcafebabe;
 	val = *ptr;
 	if (verbose > 4)
-		fprintf(stderr, "%s: %x <- %x\n", __func__, val, addr);
+		fprintf(stderr, "%s: %x <- %x(%s)\n", __func__, val, addr, 
+			regname(addr));
 	return val;
 }
 
@@ -147,7 +211,8 @@ void I915_WRITE(unsigned long addr, unsigned long val)
 		return;
 	*ptr = val;
 	if (verbose > 4)
-		fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
+		fprintf(stderr, "%s: %x -> %x(%s)\n", __func__, val, addr, 
+			regname(addr));
 }
 
 u16 I915_READ16(unsigned long addr)
@@ -158,7 +223,7 @@ u16 I915_READ16(unsigned long addr)
 		return 0xbabe;
 	val = *ptr;
 	if (verbose > 4)
-		fprintf(stderr, "%s: %x <- %x\n", __func__, val, addr);
+		fprintf(stderr, "%s: %x <- %x(%s)\n", __func__, val, addr, regname(addr));
 	return val;
 }
 
@@ -169,7 +234,7 @@ void I915_WRITE16(unsigned long addr, u16 val)
 		return;
 	*ptr = val;
 	if (verbose > 4)
-		fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
+		fprintf(stderr, "%s: %x -> %x(%s)\n", __func__, val, addr, regname(addr));
 }
 
 u8 I915_READ8(unsigned long addr)
@@ -180,7 +245,7 @@ u8 I915_READ8(unsigned long addr)
 		return 0xba;
 	val = *ptr;
 	if (verbose > 4)
-		fprintf(stderr, "%s: %x <- %x\n", __func__, val, addr);
+		fprintf(stderr, "%s: %x <- %x(%s)\n", __func__, val, addr, regname(addr));
 	return val;
 }
 
@@ -191,7 +256,7 @@ void I915_WRITE8(unsigned long addr, u8 val)
 		return;
 	*ptr = val;
 	if (verbose > 4)
-		fprintf(stderr, "%s: %x -> %x\n", __func__, val, addr);
+		fprintf(stderr, "%s: %x -> %x(%s)\n", __func__, val, addr, regname(addr));
 }
 
 static int gtt_poll_interval(u32 reg, u32 mask, u32 value, int trytry)
@@ -399,6 +464,18 @@ dumpeld(char *name, u8 *eld)
 {
   print_hex_dump_bytes(name, DUMP_PREFIX_OFFSET, eld, MAX_ELD_BYTES);
 }
+void
+geneld(char *name, u8 *eld)
+{
+  printf("unsigned char %s[MAX_ELD_BYTES] = {\n", name);
+  int i, j;
+  for(i = j = 0; i + j < MAX_ELD_BYTES; i += 16, j = 0) {
+	  for(j = 0; i + j < MAX_ELD_BYTES && j < 16; j++)
+		  printf("0x%02x, ", eld[i+j]);
+	  printf("\n");
+  }
+  printf("};\n");
+}
 
 void
 dumpmodeconfig(void)
@@ -440,3 +517,23 @@ void freez(void *p)
 	if (verbose > 4)
 		printf("Free %p\n", p);
 }
+/*
+LVDS Raw: 00000000: 00 ff ff ff ff ff ff 00 4c a3 42 31 00 00 00 00  ........L.B1....
+LVDS Raw: 00000010: 00 15 01 03 80 1a 10 78 0a d3 e5 95 5c 60 90 27  .......x....\`.'
+LVDS Raw: 00000020: 19 50 54 00 00 00 01 01 01 01 01 01 01 01 01 01  .PT.............
+LVDS Raw: 00000030: 01 01 01 01 01 01 9e 1b 00 a0 50 20 12 30 10 30  ..........P .0.0
+LVDS Raw: 00000040: 13 00 05 a3 10 00 00 19 00 00 00 0f 00 00 00 00  ................
+LVDS Raw: 00000050: 00 00 00 00 00 23 87 02 64 00 00 00 00 fe 00 53  .....#..d......S
+LVDS Raw: 00000060: 41 4d 53 55 4e 47 0a 20 20 20 20 20 00 00 00 fe  AMSUNG.     ....
+LVDS Raw: 00000070: 00 31 32 31 41 54 31 31 2d 38 30 31 0a 20 00 45  .121AT11-801. .E
+*/
+unsigned char lumpyedid[MAX_ELD_BYTES] = {
+0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x4c, 0xa3, 0x42, 0x31, 0x00, 0x00, 0x00, 0x00, 
+0x00, 0x15, 0x01, 0x03, 0x80, 0x1a, 0x10, 0x78, 0x0a, 0xd3, 0xe5, 0x95, 0x5c, 0x60, 0x90, 0x27, 
+0x19, 0x50, 0x54, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 
+0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x9e, 0x1b, 0x00, 0xa0, 0x50, 0x20, 0x12, 0x30, 0x10, 0x30, 
+0x13, 0x00, 0x05, 0xa3, 0x10, 0x00, 0x00, 0x19, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 
+0x00, 0x00, 0x00, 0x00, 0x00, 0x23, 0x87, 0x02, 0x64, 0x00, 0x00, 0x00, 0x00, 0xfe, 0x00, 0x53, 
+0x41, 0x4d, 0x53, 0x55, 0x4e, 0x47, 0x0a, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00, 0x00, 0x00, 0xfe, 
+0x00, 0x31, 0x32, 0x31, 0x41, 0x54, 0x31, 0x31, 0x2d, 0x38, 0x30, 0x31, 0x0a, 0x20, 0x00, 0x45, 
+};

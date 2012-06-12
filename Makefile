@@ -6,7 +6,7 @@ goodsource=pci.c \
 	final/drm_modes.c \
 	final/i915_drv.c  \
 	final/intel_i2c.c common.c hack.c hexdump.c fake.c  \
-	final/i2c-algo-bit.c
+	final/i2c-algo-bit.c \
 
 #	final/drm_fb_helper.c\
 #	final/intel_fb.c\
@@ -43,7 +43,7 @@ dpms: dpms.c $(brokensource) $(goodsource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o dpms dpms.c $(brokensource) $(goodsource)  $(OBJ) -lpci  -lrt
 
 cli: cli.c $(goodsource) $(brokensource) video.h $(OBJ)
-	cc $(CFLAGS) -g -include video.h -static -g -o cli cli.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
+	cc $(CFLAGS) -g -include video.h -static -g -o cli cli.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt -lreadline -lncurses
 
 edid: edid.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o edid edid.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
