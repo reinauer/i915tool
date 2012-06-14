@@ -153,6 +153,9 @@
 -drm_property_destroy_blob(...);
 @@
 @@
+-drm_kms_helper_poll_enable(...);
+@@
+@@
 -drm_mode_getplane_res(...){...}
 @@
 @@

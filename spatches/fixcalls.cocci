@@ -448,3 +448,9 @@ struct drm_crtc_helper_funcs d = {
 @@
 @@
 -drm_property_destroy(...);
+@@
+@@
+-drm_mode_sort(...);
+@@
+@@
+-drm_kms_helper_poll_enable(...);

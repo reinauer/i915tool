@@ -55,8 +55,5 @@ T f(...){<...
 -drm_connector_attach_property(...);
 @@
 @@
--intel_lvds_disable(...);
-@@
-@@
 -static
 intel_lvds_dpms(...){...}

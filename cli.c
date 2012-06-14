@@ -144,6 +144,13 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "NOT YET!\n");
 			//intel_fbdev_init(i915);
 			break;
+		case 'p':
+			if (! connector){
+				fprintf(stderr, "NO connector? 'c' command?\n");
+				break;
+			}
+			drm_helper_probe_single_connector_modes(connector, 8192, 8192);
+			break;
 		case 'v':
 			verbose = strtoul(&cmd[1], 0, 0);
 			break;

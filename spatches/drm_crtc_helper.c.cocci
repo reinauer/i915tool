@@ -1,8 +1,5 @@
 @@
 @@
--drm_helper_probe_single_connector_modes(...){...}
-@@
-@@
 -drm_crtc_helper_disable(...){...}
 @@
 @@
@@ -34,9 +31,6 @@
 @@
 @@
 -drm_kms_helper_poll_init(...){...}
-@@
-@@
--drm_mode_validate_flag(...){...}
 @@
 @@
 -output_poll_execute(...){...}
