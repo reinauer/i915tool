@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	printf("Start of graphics pages would be %#p\n", gsmphys + 2*1024*1024);
 	for(i = 0; i < aperturesize/1024; i += 4){
 		u32 word = gsmphys + 2*1024*1024 + i*4096;
-		io_I915_WRITE32(i|1,word);
+		io_I915_WRITE32(i,word|1);
 	}
 
 	

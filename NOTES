@@ -58,3 +58,16 @@ vi. Wait for FDI training pattern 2 time
 vii. Read PCH FDI Receiver ISR ([DevIBX-B+] IIR) for symbol lock in bit 9 (retry at least once if no lock)
 viii. Enable normal pixel output on CPU FDI Transmitter and PCH FDI Receiver
 ix. Wait for FDI idle pattern time for link to become active
+
+OK, with 
+
+And this call stack
+drm_crtc_helper_set_mode 321
+intel_get_load_detect_pipe 3946
+cli.c: 115
+
+we get the backlight.
+
+So, time for some IO logging.
+
+

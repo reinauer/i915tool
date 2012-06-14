@@ -31,7 +31,7 @@ CFLAGS=
 #CFLAGS+=-O2
 CFLAGS+=-finstrument-functions 
 
-all: probe gttdump dumpscreen gttbreak gttset cli edid video timegttsetup ports panel dpms g6reset
+all: testlight probe gttdump dumpscreen gttbreak gttset cli edid video timegttsetup ports panel dpms g6reset testlfp
 
 timegttsetup: timegttsetup.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o timegttsetup timegttsetup.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
@@ -44,6 +44,9 @@ dpms: dpms.c $(brokensource) $(goodsource) video.h $(OBJ)
 
 cli: cli.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o cli cli.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt -lreadline -lncurses
+
+testlfp: testlfp.c $(goodsource) $(brokensource) video.h $(OBJ)
+	cc $(CFLAGS) -g -include video.h -static -g -o testlfp testlfp.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt -lreadline -lncurses
 
 edid: edid.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o edid edid.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
@@ -59,6 +62,9 @@ video: video.c $(goodsource) $(brokensource) video.h $(OBJ)
 
 probe: probe.c $(goodsource) video.h $(OBJ)
 	cc $(CFLAGS) -include video.h -static -g -o probe probe.c $(goodsource)  $(OBJ) -lpci -lrt
+
+testlight: testlight.c $(goodsource) video.h $(OBJ)
+	cc $(CFLAGS) -include video.h -static -g -o testlight testlight.c $(goodsource)  $(OBJ) -lpci -lrt
 
 gttdump: gttdump.c $(goodsource) video.h $(OBJ)
 	cc $(CFLAGS) -include video.h -static -g -o gttdump gttdump.c $(goodsource)  $(OBJ) -lpci -lrt
