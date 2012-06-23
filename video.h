@@ -1,6 +1,30 @@
 /* cocci issues ;-( */
 #ifndef VIDEO_H
 #define VIDEO_H 1
+/* stuff from linux. We don't want to carry linux kernels around
+ * in the coreboot tree.
+ */
+#define PAGE_SIZE (4096)
+/*
+ * These are non-NULL pointers that will result in page faults
+ * under normal circumstances, used to verify that nobody uses
+ * non-initialized list entries.
+ */
+#define LIST_POISON1  ((void *) 0xDEADDEADBEEF)
+#define LIST_POISON2  ((void *) 0xCAFEBEEFBEEF)
+
+struct list_head {
+        struct list_head *next, *prev;
+};
+struct hlist_head {
+        struct hlist_node *first;
+};
+
+struct hlist_node {
+        struct hlist_node *next, **pprev;
+};
+
+#include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -107,129 +131,6 @@ enum {false = 0, true};
 struct idr {
 	int val;
 };
-
-struct list_head {
-	struct list_head *next, *prev;
-};
-#define LIST_HEAD_INIT(name) { &(name), &(name) }
-
-#define LIST_HEAD(name) \
-	struct list_head name = LIST_HEAD_INIT(name)
-
-static inline void INIT_LIST_HEAD(struct list_head *list)
-{
-        list->next = list;
-        list->prev = list;
-}
-
-#define list_first_entry(ptr, type, member) \
-        list_entry((ptr)->next, type, member)
-#define list_entry(ptr, type, member) \
-        container_of(ptr, type, member)
-/* and other kernel stuff wrapped heavily in ifdefs */
-#define PAGE_SIZE 4096
-#define list_for_each_entry(pos, head, member)				\
-	for (pos = list_entry((head)->next, typeof(*pos), member);	\
-	     &pos->member != (head); 	\
-	     pos = list_entry(pos->member.next, typeof(*pos), member))
-#define list_for_each_entry_safe(a,ignore, b,c) list_for_each_entry(a,b,c)
-
-static inline int list_empty(const struct list_head *head)
-{
-	return head->next == head;
-}
-
-/*
- * Insert a new entry between two known consecutive entries.
- *
- * This is only for internal list manipulation where we know
- * the prev/next entries already!
- */
-#ifndef CONFIG_DEBUG_LIST
-static inline void __list_add(struct list_head *new,
-			      struct list_head *prev,
-			      struct list_head *next)
-{
-	next->prev = new;
-	new->next = next;
-	new->prev = prev;
-	prev->next = new;
-}
-#else
-extern void __list_add(struct list_head *new,
-			      struct list_head *prev,
-			      struct list_head *next);
-#endif
-
-/**
- * list_add - add a new entry
- * @new: new entry to be added
- * @head: list head to add it after
- *
- * Insert a new entry after the specified head.
- * This is good for implementing stacks.
- */
-static inline void list_add(struct list_head *new, struct list_head *head)
-{
-	__list_add(new, head, head->next);
-}
-
-
-/**
- * list_add_tail - add a new entry
- * @new: new entry to be added
- * @head: list head to add it before
- *
- * Insert a new entry before the specified head.
- * This is useful for implementing queues.
- */
-static inline void list_add_tail(struct list_head *new, struct list_head *head)
-{
-	__list_add(new, head->prev, head);
-}
-
-/*
- * Delete a list entry by making the prev/next entries
- * point to each other.
- *
- * This is only for internal list manipulation where we know
- * the prev/next entries already!
- */
-static inline void __list_del(struct list_head * prev, struct list_head * next)
-{
-	next->prev = prev;
-	prev->next = next;
-}
-
-/**
- * list_del - deletes entry from list.
- * @entry: the element to delete from the list.
- * Note: list_empty() on entry does not return true after this, the entry is
- * in an undefined state.
- */
-
-static inline void __list_del_entry(struct list_head *entry)
-{
-	__list_del(entry->prev, entry->next);
-}
-
-static inline void list_del(struct list_head *entry)
-{
-	__list_del(entry->prev, entry->next);
-	entry->next = (void *)0xDEADBEEF;
-	entry->prev = (void *)0xFEEDFACE;
-}
-/**
- * list_move_tail - delete from one list and add as another's tail
- * @list: the entry to move
- * @head: the head that will follow our entry
- */
-static inline void list_move_tail(struct list_head *list,
-				  struct list_head *head)
-{
-	__list_del_entry(list);
-	list_add_tail(list, head);
-}
 
 /* we're going to have to have a hook for this somehow. It will vary between 
  * user mode and coreboot

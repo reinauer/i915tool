@@ -143,7 +143,7 @@ unsigned long msecs(void)
 		gettimeofday(&start, NULL);
 	gettimeofday(&now, NULL);
 	j = (now.tv_sec - start.tv_sec)*1000 + (now.tv_usec-start.tv_usec)/1000;
-	if (verbose > 5)
+	if (verbose > 10)
 		fprintf(stderr, "MS: %d\n", j);
 	return j;
 }
