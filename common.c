@@ -513,7 +513,8 @@ dumpmodeconfig(void)
 
 void *allocz(int size)
 {
-	u8 *cp = malloc(size);
+	/* obsolete or not, it's convenient */
+	u8 *cp = valloc(size);
 	if (! cp)
 		errx(1, "%d bytes\n", size);
 	memset(cp, 0, size);

@@ -39,9 +39,6 @@
 -drm_fb_helper_init(...){...}
 @@
 @@
--drm_fb_helper_initial_config(...){...}
-@@
-@@
 -drm_fb_helper_modinit(...){...}
 @@
 @@

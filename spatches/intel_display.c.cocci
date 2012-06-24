@@ -42,15 +42,6 @@ identifier d;
 - do_intel_finish_page_flip(...){...}
 @@
 @@
-- g4x_check_srwm(...){...}
-@@
-@@
-- g4x_compute_srwm(...){...}
-@@
-@@
-- g4x_compute_wm0(...){...}
-@@
-@@
 - g4x_disable_fbc(...){...}
 @@
 @@
@@ -61,9 +52,6 @@ identifier d;
 @@
 @@
 - g4x_init_clock_gating(...){...}
-@@
-@@
-- g4x_update_wm(...){...}
 @@
 @@
 - gen3_init_clock_gating(...){...}
@@ -164,9 +152,6 @@ gen6_fdi_link_train(...){...}
 @@
 @@
 - intel_alloc_context_page(...){...}
-@@
-@@
-- intel_calculate_wm(...){...}
 @@
 @@
 - intel_clear_scanline_wait(...){...}
@@ -313,12 +298,6 @@ gen6_fdi_link_train(...){...}
 - intel_user_framebuffer_destroy(...){...}
 @@
 @@
-- ironlake_check_srwm(...){...}
-@@
-@@
-- ironlake_compute_srwm(...){...}
-@@
-@@
 - ironlake_disable_drps(...){...}
 @@
 @@
@@ -335,9 +314,6 @@ gen6_fdi_link_train(...){...}
 @@
 @@
 - ironlake_teardown_rc6(...){...}
-@@
-@@
-- ironlake_update_wm(...){...}
 @@
 @@
 - ivb_update_cursor(...){...}
@@ -359,9 +335,6 @@ gen6_fdi_link_train(...){...}
 @@
 @@
 - sandybridge_blit_fbc_update(...){...}
-@@
-@@
-- sandybridge_update_wm(...){...}
 @@
 @@
 - single_enabled_crtc(...){...}

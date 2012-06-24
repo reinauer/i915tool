@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 	char *cmd;
 	void geneld(char *, u8 *);
 	init(&argc, &argv);
+	printf("suggest b,i,m,c,p, then d0 (lo off and lO on)\n");
 	while ((cmd = readline(">")) != NULL){
 		start = rdtsc();
 		switch(cmd[0]) {
@@ -111,14 +112,18 @@ int main(int argc, char *argv[])
 			}
 			if (verbose)
 				fprintf(stderr, "Encoder is %p\n", encoder);
-			/* at this point backpanel is lit or should be. Get a pipe. */
-			intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
-			if (! mode)
+        		list_for_each_entry(mode, &connector->modes, head) {
+                		if (mode->status == MODE_OK)
+                        		break;
+			}
+			if (! mode || mode->status != MODE_OK)
 			  mode = drm_mode_create(i915);
 			if (! mode){
 				fprintf(stderr, "FUCK! no mode\n");
 				break;
 			}
+			/* at this point backpanel is lit or should be. Get a pipe. */
+			intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
 			crtc = encoder->crtc;
 			if (crtc)
 				drm_crtc_helper_set_mode(crtc,
