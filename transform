@@ -35,10 +35,11 @@ set -e
 
 # Step 1
 rm -f per-file-changes/* final/* tmp/*
+mkdir -p per-file-changes final tmp
 if [ "$LINUX" != "" ]
 then
-	rm -f inputs/* per-file-changes/* final/* tmp/*
-	mkdir -p inputs per-file-changes final tmp
+	rm -f inputs/* 
+	mkdir -p inputs 
 	cp $LINUX/drivers/gpu/drm/i915/i915_reg.h inputs
 	cp $LINUX/drivers/gpu/drm/i915/i915_drv.? inputs
 	cp $LINUX/drivers/gpu/drm/i915/intel_display.c inputs
