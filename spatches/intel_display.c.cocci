@@ -286,9 +286,6 @@ gen6_fdi_link_train(...){...}
 - intel_update_fbc(...){...}
 @@
 @@
-- intel_update_watermarks(...){...}
-@@
-@@
 - intel_user_framebuffer_create(...){...}
 @@
 @@
@@ -352,14 +349,6 @@ has_edp_a(...){...}
 @@
 @@
 -drm_gem_object_unreference_unlocked(...);
-@@
-type T;
-identifier f;
-@@
-T f(...)
-{<...
-- intel_update_watermarks(...);
-...>}
 @@
 type T;
 identifier f;
@@ -518,10 +507,6 @@ statement S;
 statement S;
 @@
 -if (IS_CRESTLINE(...)) S 
-@@
-statement S1, S2;
-@@
--if (SNB_READ_WM0_LATENCY()) S1 else S2
 @@
 statement S1, S2;
 @@

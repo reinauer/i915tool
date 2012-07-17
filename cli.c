@@ -135,7 +135,6 @@ int main(int argc, char *argv[])
 				intel_lvds_dpms(encoder, level);
 			else
 				intel_dp_dpms(encoder, level);
-			break;
 			/* at this point backpanel is lit or should be. Get a pipe. */
 			intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
 			void gen6_fdi_link_train(struct drm_crtc *crtc) ;
