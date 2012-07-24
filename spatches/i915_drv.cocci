@@ -259,3 +259,6 @@ type T;
 @@
 @@
 -i915_gem_object_unpin_fence(...){...}
+@@
+@@
+-alloc_apertures(...){...}

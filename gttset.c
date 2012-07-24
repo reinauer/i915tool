@@ -7,7 +7,8 @@ extern u32 aperture, aperturesize;
 int main(int argc, char *argv[])
 {
 	int i;
-	int num = 32768;
+	int num;
+	unsigned long baseM;
 
 	init(&argc, &argv);
 
@@ -22,11 +23,15 @@ int main(int argc, char *argv[])
 			lowbits & 1 ? ";V": ";~V");
 	}
 
-	printf("# PTEs is %d\n", aperturesize / 4096);
-	printf("Start of graphics pages would be %#p\n", gsmphys + 2*1024*1024);
-	for(i = 0; i < aperturesize/1024; i += 4){
-		u32 word = gsmphys + 2*1024*1024 + i*4096;
-		io_I915_WRITE32(i|1,word|1);
+	num = aperturesize/1024;
+	baseM = gsmphys + 2*1024*1024;
+	if (argc)
+		baseM = 1048576*strtoul(argv[0], 0, 0);
+	printf("# PTEs is %d\n", num);
+	printf("Start of graphics pages would be %#p\n", baseM);
+	for(i = 0; i < 4*num; i += 4){
+		u32 word = baseM + i*4096;
+		io_I915_WRITE32(i|1,word|3);
 	}
 
 	

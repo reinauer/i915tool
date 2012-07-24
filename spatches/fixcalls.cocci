@@ -454,3 +454,6 @@ struct drm_crtc_helper_funcs d = {
 @@
 @@
 -drm_kms_helper_poll_enable(...);
+@@
+@@
+-unlock_fb_info(...){...}

@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 			break;
 		case 'f':
 			fprintf(stderr, "NOT YET!\n");
-			//intel_fbdev_init(i915);
+			intel_fbdev_init(i915);
 			break;
 		case 'p':
 			if (! connector){

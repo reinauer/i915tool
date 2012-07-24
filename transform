@@ -66,6 +66,7 @@ then
 	cp $LINUX/include/drm/drm_edid.h inputs
 	cp $LINUX/include/drm/drm_mode.h inputs
 	cp $LINUX/include/linux/i2c-algo-bit.h inputs
+	cp $LINUX/include/linux/fb.h inputs
 	cp $LINUX/include/drm/drm_dp_helper.h inputs
 	cp $LINUX/drivers/gpu/drm/drm_dp_i2c_helper.c inputs
 	cp $LINUX/drivers/gpu/drm/drm_modes.c inputs
@@ -93,6 +94,18 @@ g/notifier_block/d
 g/struct  *completion  *[a-z].*;/d
 g/__must_check/s///g
 g/define  *I915_[RW]/d
+w
+q
+EOF
+
+ed per-file-changes/fb.h << EOF
+g/ifdef.*KERNEL/s/ifdef/ifndef/
+g/__user/s///p
+g/const/s///g
+g/gfp_t/d
+g/int *fb.register.client/d
+g/int *fb.unregister.client/d
+g/int *fb.notifier.call.chain/d
 w
 q
 EOF
@@ -254,6 +267,7 @@ spatch --in-place -sp_file spatches/i915_drv.cocci \
 	final/intel_drv.h \
 	final/drm_fb_helper.h \
 	final/drm_fb_helper.c \
+	final/fb.h \
 	final/intel_panel.c>/dev/null
 
 spatch --in-place -sp_file spatches/deldev.cocci \
@@ -269,6 +283,7 @@ spatch --in-place -sp_file spatches/deldev.cocci \
 	final/drm_fb_helper.c \
 	final/drm_crtc_helper.h \
 	final/intel_lvds.c \
+	final/fb.h \
 	final/intel_fb.c >/dev/null
 
 spatch --in-place -sp_file spatches/fixcalls.cocci \
@@ -332,4 +347,5 @@ w
 q
 EOF
 
+spatch --sp-file spatches/printf.cocci --no-includes --in-place --dir final
 make clean

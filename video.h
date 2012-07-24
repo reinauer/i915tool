@@ -320,16 +320,6 @@ struct drm_cmdline_mode {
         enum drm_connector_force force;
 };
 
-/* OR THIS */
-struct fb_cmap {
-        __u32 start;                    /* First entry  */
-        __u32 len;                      /* Number of entries */
-        __u16 *red;                     /* Red values   */
-        __u16 *green;
-        __u16 *blue;
-        __u16 *transp;                  /* transparency, can be NULL */
-};
-
 /* For now, we define a shim layer of drm devices. The long term 
  * goal is to use coccinelle to gather up all this crap into 
  * one struct because we don't need this layer of indirection. 
@@ -441,6 +431,7 @@ void *dmi_check_system(unsigned long);
 #include "final/drm_crtc_helper.h"
 #include "final/drm_mode.h"
 #include "final/drm_crtc.h"
+#include "final/fb.h"
 #include "final/drm_fb_helper.h"
 #include "final/intel_drv.h"
 /* another coccinelle issue :-( */

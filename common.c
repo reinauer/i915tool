@@ -458,9 +458,11 @@ void init(int *ac, char ***av)
 	aperture = i915->pdev->base_addr[2] & ~0xf;
 	aperturesize = i915->pdev->size[2];
 	if (verbose > 2)
-		fprintf(stderr, "aperture base is %#x, size %d\n", 
+		fprintf(stderr, "aperture base is %#x, size %d: ", 
 			aperture, aperturesize);
 	gfx = mapit(aperture, aperturesize);
+	if (verbose > 2)
+		fprintf(stderr, "mapped at %#x\n", gfx);
 	dev0 = pci_get_bus_and_slot(0,0);
 	gsmphys = pci_read_long(dev0, 0xb8);
 	/* adjust for TSEG */
