@@ -108,6 +108,8 @@ enum {
 #define MODULE_DESCRIPTION(x)
 #define MODULE_LICENSE(a)
 #define MODULE_DEVICE_TABLE(a, b)
+#define GFP_KERNEL 0
+void *kcalloc(int num, int size, int ignore);
 struct drm_file {};
 
 /* constants that will never change from linux/vga.h */

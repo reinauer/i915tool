@@ -11,6 +11,7 @@ goodsource=pci.c \
 #	final/drm_fb_helper.c\
 
 brokensource=\
+	final/drm_fb_helper.c \
 	final/intel_fb.c\
 	final/intel_display.c \
 	final/intel_dp.c \

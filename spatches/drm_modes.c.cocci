@@ -6,9 +6,6 @@
 -drm_mode_create_from_cmdline_mode(...){...}
 @@
 @@
--drm_mode_height(...){...}
-@@
-@@
 -drm_mode_list_concat(...){...}
 @@
 @@
@@ -19,6 +16,3 @@
 @@
 @@
 -drm_mode_validate_clocks(...){...}
-@@
-@@
--drm_mode_width(...){...}

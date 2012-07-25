@@ -89,6 +89,14 @@ cp inputs/* per-file-changes
 # also there are bugs spatches/in coccinelle it seems :-(
 # the literal deletes below suck and we need to figure
 # out wtf went wrong.
+
+ed per-file-changes/drm_fb_helper.c << EOF
+g/= *drm_pick_cmdline_mode/s/drm_pick_cmdline_mode.*/NULL;/
+g/KERN_INFO/s///
+w
+q
+EOF
+
 ed per-file-changes/i915_drv.h << EOF
 g/notifier_block/d
 g/struct  *completion  *[a-z].*;/d
@@ -309,6 +317,7 @@ spatch --in-place -sp_file spatches/fixcalls.cocci \
 	final/intel_drv.h \
 	final/i2c-algo-bit.c \
 	final/intel_modes.c \
+	final/fb.h \
 	final/intel_fb.c >/dev/null
 
 spatch --in-place -sp_file spatches/drm_crtc.cocci \

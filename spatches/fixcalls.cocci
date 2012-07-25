@@ -457,3 +457,11 @@ struct drm_crtc_helper_funcs d = {
 @@
 @@
 -unlock_fb_info(...){...}
+@@
+@@
+-register_framebuffer(...)
++0
+@@
+@@
+-unregister_framebuffer(...)
++0
