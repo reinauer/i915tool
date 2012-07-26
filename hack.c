@@ -1,5 +1,3 @@
-
-/* this crap needs to go away */
 struct drm_i915_gem_object *i915_gem_alloc_object(struct drm_device *dev,
 						  size_t size)
 {
@@ -10,4 +8,3 @@ struct drm_i915_gem_object *i915_gem_alloc_object(struct drm_device *dev,
 	obj = allocz(sizeof(*obj));
 	return obj;
 }
-

@@ -72,6 +72,7 @@ then
 	cp $LINUX/drivers/gpu/drm/drm_modes.c inputs
 	cp $LINUX//include/drm/drm_crtc_helper.h inputs
 	cp $LINUX/include/drm/drm_fourcc.h inputs
+	cp $LINUX/drivers/video/fbcmap.c inputs
 	#
 	# disappointing. We needed the bit-banging stuff.
 	cp $LINUX/drivers/i2c/algos/i2c-algo-bit.c inputs
@@ -128,6 +129,12 @@ ed per-file-changes/intel_display.c << EOF
 g/mode_config.funcs  *=/d
 g/fb_base/d
 g/const/s///
+w
+q
+EOF
+
+ed per-file-changes/intel_fb.c << EOF
+/info->screen_base/s/=.*/= gfx;/p
 w
 q
 EOF
@@ -203,6 +210,7 @@ spatch -sp_file spatches/getfn.cocci inputs/intel_bios.c -U 0 > tmp/res
 # Finally, a basic spatch sequence!
 
 spatch --in-place -sp_file spatches/intel_display.c.cocci per-file-changes/intel_display.c > /dev/null
+spatch --in-place -sp_file spatches/fbcmap.c.cocci per-file-changes/fbcmap.c # > /dev/null
 spatch --in-place -sp_file spatches/intel_dp.c.cocci per-file-changes/intel_dp.c > /dev/null
 spatch --in-place -sp_file spatches/intel_lvds.c.cocci per-file-changes/intel_lvds.c > /dev/null
 spatch --in-place -sp_file spatches/intel_modes.c.cocci per-file-changes/intel_modes.c > /dev/null
@@ -223,6 +231,12 @@ spatch --in-place -sp_file spatches/intel_fb.c.cocci per-file-changes/intel_fb.c
 
 # and another thing ...
 # cocinnelle needs to fix this.
+ed per-file-changes/fbcmap.c << EOF
+g/const/s///g
+w
+q
+EOF
+
 ed per-file-changes/intel_display.c << EOF
 g/const/s///g
 w
@@ -246,6 +260,7 @@ cp per-file-changes/* final
 spatch --in-place -sp_file spatches/ringbuffer.cocci final/intel_ringbuffer.h >/dev/null
 # spatch --in-place -sp_file spatches/removeinclude.cocci final/*
 spatch --in-place -sp_file spatches/removeinclude.cocci \
+	final/fbcmap.c \
 	final/intel_display.c \
 	final/drm_dp_i2c_helper.c \
 	final/intel_i2c.c \
@@ -318,6 +333,7 @@ spatch --in-place -sp_file spatches/fixcalls.cocci \
 	final/i2c-algo-bit.c \
 	final/intel_modes.c \
 	final/fb.h \
+	final/fbcmap.c \
 	final/intel_fb.c >/dev/null
 
 spatch --in-place -sp_file spatches/drm_crtc.cocci \

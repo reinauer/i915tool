@@ -15,12 +15,6 @@
 -drm_fb_helper_debug_leave(...){...}
 @@
 @@
--drm_fb_helper_fill_fix(...){...}
-@@
-@@
--drm_fb_helper_fill_var(...){...}
-@@
-@@
 -drm_fb_helper_fini(...){...}
 @@
 @@

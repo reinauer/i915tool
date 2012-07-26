@@ -11,7 +11,7 @@ void *mmiobase;
 u32 mmiophys;
 u32 gsmphys;
 u32 aperture, aperturesize;
-void *gfx;
+u8 *gfx;
 int mmiosize;
 size_t bios_image_size;
 int gencode = 0;

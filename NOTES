@@ -71,3 +71,5 @@ we get the backlight.
 So, time for some IO logging.
 
 
+OK, we added the framebuffer and set i915_panel_ignore_lid 1 , i.e. always on.
+

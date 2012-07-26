@@ -51,12 +51,6 @@ struct s {...
 identifier d, f;
 @@
 struct drm_connector_funcs d = {
--.fill_modes = f,
-};
-@@
-identifier d, f;
-@@
-struct drm_connector_funcs d = {
 -.destroy = f,
 };
 @@

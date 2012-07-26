@@ -11,6 +11,10 @@ int is_power_of_2(unsigned long n)
 {
 	return (n != 0 && ((n & (n - 1)) == 0));
 }
+/* stuff that's just not worth fixing -- the coccinelle rules are more than we care to write at present */
+typedef int gfp_t;
+#define GFP_ATOMIC 0
+
 
 /*
  * These are non-NULL pointers that will result in page faults
@@ -425,6 +429,35 @@ static inline long IS_ERR(const void *ptr)
 
 /* temporary. */
 void *dmi_check_system(unsigned long);
+/* common.c */
+void BUG(void);
+void getrawmonotonic(struct timespec *t);
+void idr_init(void *v);
+int idr_pre_get(void *x);
+int idr_get_new_above(void *v, void *o, int unused, int *new_id);
+unsigned long io_I915_READ(unsigned long addr);
+void io_I915_WRITE(unsigned long addr, unsigned long val);
+unsigned long msecs(void);
+void mdelay(unsigned long ms);
+void udelay(int i);
+unsigned long I915_READ(unsigned long addr);
+void I915_WRITE(unsigned long addr, unsigned long val);
+void *pci_unmap_rom(struct pci_dev *dev, void *bios);
+void *dmi_check_system(unsigned long ignore);
+void *mapit(u32 phys, u32 size);
+void devinit(void);
+void init(int *argc, char ***argv);
+void dumpeld(char *name, u8 *eld);
+void dumpmodeconfig(void);
+void *allocz(int size);
+void freez(void *p);
+
+extern u8 *gfx;
+extern u32 aperture, aperturesize;
+
+extern char *names[];
+unsigned long microseconds(unsigned long long start, unsigned long long end);
+
 
 #include "final/i2c-algo-bit.h"
 #include "final/i915_reg.h"
@@ -459,31 +492,10 @@ extern int i915_vbt_sdvo_panel_type;
 unsigned long lvds_do_not_use_alternate_frequency;
 extern int i915_panel_ignore_lid;
 
-/* common.c */
-void BUG(void);
-void getrawmonotonic(struct timespec *t);
-void idr_init(void *v);
-int idr_pre_get(void *x);
-int idr_get_new_above(void *v, void *o, int unused, int *new_id);
-unsigned long io_I915_READ(unsigned long addr);
-void io_I915_WRITE(unsigned long addr, unsigned long val);
-unsigned long msecs(void);
-void mdelay(unsigned long ms);
-void udelay(int i);
-unsigned long I915_READ(unsigned long addr);
-void I915_WRITE(unsigned long addr, unsigned long val);
-void *pci_unmap_rom(struct pci_dev *dev, void *bios);
-void *dmi_check_system(unsigned long ignore);
-void *mapit(u32 phys, u32 size);
-void devinit(void);
-void init(int *argc, char ***argv);
-void dumpeld(char *name, u8 *eld);
-void dumpmodeconfig(void);
-void *allocz(int size);
-void freez(void *p);
+/* hack.c */
+int intelfb_create(struct intel_fbdev *ifbdev,
+		struct drm_fb_helper_surface_size *sizes);
 
-extern char *names[];
-unsigned long microseconds(unsigned long long start, unsigned long long end);
 
 static __inline__ unsigned long long rdtsc(void)
 {
@@ -493,4 +505,5 @@ static __inline__ unsigned long long rdtsc(void)
 }
 
 #define KHZ2PICOS(a) (1000000000UL/(a))
+
 #endif /* VIDEO_H */

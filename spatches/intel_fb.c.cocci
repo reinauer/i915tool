@@ -1,6 +1,6 @@
 @@
 @@
--intel_fb_find_or_create_single(...){...}
+-intelfb_create(...){...}
 @@
 @@
 -intel_fbdev_destroy(...){...}
@@ -9,19 +9,10 @@
 -intel_fb_restore_mode(...){...}
 @@
 @@
--intelfb_create(...){...}
-@@
-@@
 -intel_fbdev_fini(...){...}
 @@
 @@
 -intel_fbdev_set_suspend(...){...}
-@@
-identifier d, e;
-@@
-struct drm_fb_helper_funcs d = {
--	.fb_probe = e,
-};
 @@
 identifier d;
 expression e;
@@ -83,3 +74,8 @@ identifier d,e;
 struct fb_ops d = {
 -.fb_debug_leave = e,
 };
+@@
+identifier d;
+@@
+-static
+struct fb_ops d = {...};

@@ -11,6 +11,7 @@ goodsource=pci.c \
 #	final/drm_fb_helper.c\
 
 brokensource=\
+	final/fbcmap.c \
 	final/drm_fb_helper.c \
 	final/intel_fb.c\
 	final/intel_display.c \
@@ -24,6 +25,7 @@ brokensource=\
 	final/drm_crtc_helper.c \
 	final/intel_modes.c \
 	final/intel_crt.c\
+	fb.c \
 	  i2c.c
 
 OBJ=ptrace.o
