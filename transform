@@ -73,6 +73,8 @@ then
 	cp $LINUX//include/drm/drm_crtc_helper.h inputs
 	cp $LINUX/include/drm/drm_fourcc.h inputs
 	cp $LINUX/drivers/video/fbcmap.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_ddi.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_pm.c inputs
 	#
 	# disappointing. We needed the bit-banging stuff.
 	cp $LINUX/drivers/i2c/algos/i2c-algo-bit.c inputs
@@ -129,6 +131,7 @@ ed per-file-changes/intel_display.c << EOF
 g/mode_config.funcs  *=/d
 g/fb_base/d
 g/const/s///
+g/out_unlock:/s//& {}/p
 w
 q
 EOF
@@ -143,6 +146,20 @@ ed per-file-changes/intel_lvds.c << EOF
 g/const/s///
 g/__init/s///
 g/dev_priv->lid_notifier.*=/d
+w
+q
+EOF
+
+ed per-file-changes/intel_ddi.c << EOF
+g/const/s///
+w
+q
+EOF
+
+ed per-file-changes/intel_pm.c << EOF
+g/DEFINE_SPINLOCK/d
+g/EXPORT_SYMBOL_GPL/d
+g/const/s///
 w
 q
 EOF
@@ -170,7 +187,9 @@ done
 
 # yucky stuff in the driver. It is invalid C code so coccinelle can't deal with it.
 # the #if 0 thing is for a coccinelle bug
+# sheeeeit. Can't get it to match this if. This is going to bite us sooner or later.
 ed per-file-changes/i915_dma.c << EOF
+g/dev->pdev->msi_enabled/.,+d
 w
 q
 EOF
@@ -203,7 +222,8 @@ spatch -sp_file spatches/getfn.cocci inputs/intel_bios.c -U 0 > tmp/res
 
 # Finally, a basic spatch sequence!
 
-spatch --in-place -sp_file spatches/intel_display.c.cocci per-file-changes/intel_display.c > /dev/null
+spatch --in-place -sp_file spatches/intel_display.c.cocci per-file-changes/intel_display.c per-file-changes/intel_pm.c > /dev/null
+spatch --in-place -sp_file spatches/intel_pm.c.cocci per-file-changes/intel_pm.c > /dev/null
 spatch --in-place -sp_file spatches/fbcmap.c.cocci per-file-changes/fbcmap.c # > /dev/null
 spatch --in-place -sp_file spatches/intel_dp.c.cocci per-file-changes/intel_dp.c > /dev/null
 spatch --in-place -sp_file spatches/intel_lvds.c.cocci per-file-changes/intel_lvds.c > /dev/null
@@ -231,6 +251,7 @@ w
 q
 EOF
 
+# until I can understand coccinelle this is the simplest way to get around a stupid problem.
 ed per-file-changes/intel_display.c << EOF
 g/const/s///g
 w
@@ -256,6 +277,8 @@ spatch --in-place -sp_file spatches/ringbuffer.cocci final/intel_ringbuffer.h >/
 spatch --in-place -sp_file spatches/removeinclude.cocci \
 	final/fbcmap.c \
 	final/intel_display.c \
+	final/intel_ddi.c \
+	final/intel_pm.c \
 	final/drm_dp_i2c_helper.c \
 	final/intel_i2c.c \
 	final/i915_drv.c \
@@ -308,7 +331,9 @@ spatch --in-place -sp_file spatches/fixcalls.cocci \
 	final/intel_bios.c \
 	final/intel_crt.c \
 	final/intel_dp.c \
+	final/intel_ddi.c \
 	final/intel_display.c  \
+	final/intel_pm.c \
 	final/intel_panel.c \
 	final/i915_dma.c \
 	final/drm_fb_helper.c \
@@ -336,17 +361,19 @@ spatch --in-place -sp_file spatches/drm_crtc.cocci \
 	final/i915_dma.c \
 	final/intel_fb.c >/dev/null
 
+# weirdly, it needs a final pass. 
+spatch --in-place -sp_file spatches/i915_dma.c.cocci final/i915_dma.c >/dev/null
 # post processing for things coccinelle can't always get yet
 # or we can't figure out how to make it get
 ed final/i915_dma.c << EOF
 g/dev->types/d
+1
 /i915 workqueue/
 .,/}/d
 .
 g/intel_irq_init/d
 g/spin_lock/d
-/intel_gtt_get/
-.,/}/d
+1
 g/setup_mchbar/d
 g/opregion_setup/d
 g/gem_load/d
@@ -364,4 +391,5 @@ EOF
 
 
 spatch --sp-file spatches/printf.cocci --no-includes --in-place --dir final
+spatch --sp-file spatches/unusedlabels.cocci --no-includes --in-place --dir final
 make clean

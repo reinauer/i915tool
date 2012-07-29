@@ -8,9 +8,11 @@ goodsource=pci.c \
 	final/intel_i2c.c common.c hack.c hexdump.c fake.c  \
 	final/i2c-algo-bit.c \
 
+#	final/intel_ddi.c \
 #	final/drm_fb_helper.c\
 
 brokensource=\
+	final/intel_pm.c \
 	final/fbcmap.c \
 	final/drm_fb_helper.c \
 	final/intel_fb.c\

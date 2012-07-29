@@ -293,3 +293,42 @@ T f(...){<...
 @@
 @@
 -i915_setup_sysfs(...);
+@@
+expression E;
+@@
+-aperture_size = E;
+@@
+identifier def, d;
+expression E;
+@@
+-dev_priv->mm.d = E;
+@@
+identifier dev, d;
+expression E;
+@@
+-if (dev->mm.d == E) {...}
+@@
+identifier dev, d;
+expression E;
+@@
+-if (dev->mm.d >= E) {...}
+@@
+identifier dev, d, e;
+expression E;
+@@
+-if (dev->mm.d.e) {...}
+@@
+identifier dev;
+statement S;
+@@
+-if (dev->pdev->msi_enabled) S;
+@@
+identifier dev, d;
+@@
+-if (!dev->mm.d) {...}
+@@
+identifier dev, d, e;
+statement S;
+@@
+-if (dev->mm.d.e) S;
+

@@ -510,6 +510,11 @@ statement S;
 @@
 statement S1, S2;
 @@
+-if (IS_HASWELL(...)) S1 else
+S2 
+@@
+statement S1, S2;
+@@
 -if (IS_I865G(...)) S1 else
 S2 
 @@
@@ -560,8 +565,23 @@ S2
 @@
 statement S1, S2;
 @@
+-if (IS_I85X(...)) S1  else
+S2
+@@
+statement S1, S2;
+@@
+-if (IS_845G(...)) S1  else
+S2
+@@
+statement S1, S2;
+@@
 -if (HAS_PCH_IBX(...)) S1  else
 S2
+@@
+statement S1, S2;
+@@
+if (HAS_PCH_SPLIT(...)) S1  
+- else S2
 @@
 identifier a;
 identifier d;
