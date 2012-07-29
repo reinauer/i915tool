@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	char *cmd;
 	void geneld(char *, u8 *);
 	init(&argc, &argv);
-	printf("suggest b,i,m,c,p, then d0 (lo off and lO on)\n");
+	printf("suggest b,i,m,c,p,d8,f, then d0 (lo off and lO on)\n");
 	while ((cmd = readline(">")) != NULL){
 		start = rdtsc();
 		switch(cmd[0]) {
@@ -123,7 +123,10 @@ int main(int argc, char *argv[])
 				break;
 			}
 			/* at this point backpanel is lit or should be. Get a pipe. */
-			intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
+			/* too soon? Consider not doing this yet. */
+			/* we need to do this or a dpms(0) hangs. */
+			if (! level)
+				intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
 			crtc = encoder->crtc;
 			if (crtc)
 				drm_crtc_helper_set_mode(crtc,
@@ -136,16 +139,17 @@ int main(int argc, char *argv[])
 			else
 				intel_dp_dpms(encoder, level);
 			/* at this point backpanel is lit or should be. Get a pipe. */
-			intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
-			void gen6_fdi_link_train(struct drm_crtc *crtc) ;
+			//intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
+			//void gen6_fdi_link_train(struct drm_crtc *crtc) ;
 			crtc = encoder->crtc;
+			break;
 			if (crtc)
 				intel_crt_load_detect(to_intel_crtc(crtc));
 			else
 				fprintf(stderr, "NO crtc on encoder\n");
 			break;
 		case 'f':
-			fprintf(stderr, "NOT YET!\n");
+			drm_helper_resume_force_mode(i915);
 			intel_fbdev_init(i915);
 			break;
 		case 'p':
