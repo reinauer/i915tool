@@ -175,3 +175,9 @@
 @@
 @@
 -drm_plane_cleanup(...){...}
+@@
+@@
+-drm_mode_obj_get_properties_ioctl(...){...}
+@@
+@@
+-drm_mode_obj_get_property_ioctl(...){...}

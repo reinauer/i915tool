@@ -718,3 +718,10 @@ intel_pipe_set_base(...)
 @@
 @@
 -intel_finish_fb(...){...}
+@@
+@@
+-intel_dual_link_lvds_callback(...){...}
+@@
+identifier d;
+@@
+-struct dmi_system_id d[] = {...};

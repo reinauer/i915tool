@@ -48,6 +48,9 @@
 - get_lvds_dvo_timing(...){...}
 @@
 @@
+- get_lvds_fp_timing(...){...}
+@@
+@@
 - intel_bios_ssc_frequency(...){...}
 @@
 identifier d;

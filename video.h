@@ -15,7 +15,6 @@ int is_power_of_2(unsigned long n)
 typedef int gfp_t;
 #define GFP_ATOMIC 0
 
-
 /*
  * These are non-NULL pointers that will result in page faults
  * under normal circumstances, used to verify that nobody uses
@@ -86,6 +85,8 @@ struct hlist_node {
                 fprintf(stderr, format);                                  \
         (__ret_warn_on);                                        \
 })
+
+#define WARN_ON(x) WARN(x, #x)
 #endif
 
 enum {
@@ -237,6 +238,7 @@ struct i2c_msg {
 #define I2C_FUNC_10BIT_ADDR		0x00000002
 #define I2C_FUNC_PROTOCOL_MANGLING	0x00000004 /* I2C_M_NOSTART etc. */
 #define I2C_FUNC_SMBUS_PEC		0x00000008
+#define I2C_FUNC_NOSTART		0x00000010 /* I2C_M_NOSTART */
 #define I2C_FUNC_SMBUS_BLOCK_PROC_CALL	0x00008000 /* SMBus 2.0 */
 #define I2C_FUNC_SMBUS_QUICK		0x00010000
 #define I2C_FUNC_SMBUS_READ_BYTE	0x00020000
@@ -338,6 +340,7 @@ struct drm_device {
 	struct drm_i915_private *dev_private;
 	struct drm_mode_config mode_config;
 	int vblank_disable_allowed;
+	int counters;
 };
 
 

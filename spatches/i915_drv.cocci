@@ -230,6 +230,16 @@ type T;
 identifier d, m;
 type T;
 @@
+-T d(..., struct dma_buf *m, ...);
+@@
+identifier d, m;
+type T;
+@@
+-T d(..., struct kref *m, ...);
+@@
+identifier d, m;
+type T;
+@@
 -T d(..., struct file *m, ...);
 @@
 identifier d, m;

@@ -159,6 +159,10 @@ identifier d;
 @@
 -struct drm_ioctl_desc d[] = {...};
 @@
+identifier d;
+@@
+-struct vga_switcheroo_client_ops d = {...};
+@@
 expression E;
 @@
 -int i915_max_ioctl = E;
@@ -247,3 +251,45 @@ T f(...){<...
 -drm_kms_helper_poll_init(...);
 )
 ...>}
+@@
+@@
+-intel_read_legacy_status_page(...)
+@@
+@@
+-i915_update_dri1_breadcrumb(...)
+@@
+@@
+-i915_emit_irq(...){...}
+@@
+@@
+-i915_wait_irq(...){...}
+@@
+@@
+-i915_irq_wait(...){...}
+@@
+@@
+-i915_mtrr_setup(...){...}
+@@
+@@
+-i915_mtrr_setup(...);
+@@
+@@
+-intel_read_legacy_status_page(...){...}
+@@
+@@
+-i915_update_dri1_breadcrumb(...){...}
+@@
+@@
+-i915_irq_emit(...){...}
+@@
+@@
+-i915_vblank_pipe_get(...){...}
+@@
+@@
+-i915_kick_out_firmware_fb(...){...}
+@@
+@@
+-i915_kick_out_firmware_fb(...);
+@@
+@@
+-i915_setup_sysfs(...);

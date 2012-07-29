@@ -10,6 +10,10 @@ gen6_do_reset(...){...}
 -i8xx_do_reset(...){...}
 @@
 @@
+-i8xx_do_reset(...)
++ 0
+@@
+@@
 -i915_drm_freeze(...){...}
 @@
 @@
@@ -55,10 +59,11 @@ gen6_do_reset(...){...}
 -i965_do_reset(...){...}
 @@
 @@
+-i965_do_reset(...)
++ 0
+@@
+@@
 -i965_reset_complete(...){...}
-@@
-@@
--ironlake_do_reset(...){...}
 @@
 identifier d;
 @@

@@ -465,3 +465,26 @@ struct drm_crtc_helper_funcs d = {
 @@
 -unregister_framebuffer(...)
 +0
+@@
+@@
+-io_mapping_free(...);
+@@
+@@
+-pci_iounmap(...);
+@@
+@@
+-intel_gmch_remove(...);
+@@
+@@
+-mtrr_del(...);
+@@
+@@
+-unregister_shrinker(...);
+@@
+@@
+-register_shrinker(...);
+@@
+identifier d;
+@@
+-drm_core_check_feature(d, DRIVER_MODESET)
++ 1
