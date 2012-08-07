@@ -488,3 +488,8 @@ identifier d;
 @@
 -drm_core_check_feature(d, DRIVER_MODESET)
 + 1
+@@
+@@
+-pr_warn_once(
++fprintf(stderr, 
+...);

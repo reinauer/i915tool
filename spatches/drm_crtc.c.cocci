@@ -181,3 +181,6 @@
 @@
 @@
 -drm_mode_obj_get_property_ioctl(...){...}
+@@
+@@
+-drm_mode_obj_set_property_ioctl(...){...}

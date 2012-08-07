@@ -498,6 +498,10 @@ statement S;
 @@
 statement S;
 @@
+-if (IS_GEN5(...)) S 
+@@
+statement S;
+@@
 -if (IS_GEN4(...)) S 
 @@
 statement S;
@@ -745,3 +749,18 @@ intel_pipe_set_base(...)
 identifier d;
 @@
 -struct dmi_system_id d[] = {...};
+@@
+@@
+-intel_init_power_wells(...);
+@@
+@@
+-intel_prepare_ddi(...);
+@@
+@@
+-intel_enable_gt_powersave(...);
+@@
+@@
+-intel_disable_fbc(...);
+@@
+@@
+-intel_update_linetime_watermarks(...);

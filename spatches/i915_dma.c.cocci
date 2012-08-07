@@ -331,4 +331,22 @@ identifier dev, d, e;
 statement S;
 @@
 -if (dev->mm.d.e) S;
-
+@@
+@@
+-i915_init_phys_hws(...)
++0
+@@
+@@
+-i915_gem_init_stolen(...)
++0
+@@
+@@
+-i915_gem_init(...)
++0
+@@
+@@
+-drm_vblank_init(...)
++0
+@@
+@@
+-intel_gpu_ips_init(...)
