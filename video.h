@@ -34,7 +34,6 @@ struct hlist_node {
         struct hlist_node *next, **pprev;
 };
 
-#include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -50,6 +49,8 @@ struct hlist_node {
 #include <sys/time.h>
 #include <linux/types.h>
 #include <errno.h>
+
+#include "list.h"
 
 /* constants from coreboot */
 /* Chipset types */
