@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	intel_setup_bios(i915);
 	if (i915->bios_bin)
 		intel_parse_bios(i915);
-	intel_panel_enable_backlight(i915);
+	intel_panel_enable_backlight(i915, 0);
 	i915_driver_load(i915, (unsigned long)i915->dev_private->info);
 
 	gen6_do_reset(i915, 0);

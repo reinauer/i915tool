@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Encoder is %p\n", encoder);
 	/* at this point backpanel is lit or should be. Get a pipe. */
 	intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
-	intel_panel_enable_backlight(i915);
+	intel_panel_enable_backlight(i915, 0);
 	intel_panel_set_backlight(i915, 4882);
 	end = rdtsc();
 	usec = microseconds(start, end);

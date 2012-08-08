@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	pin = GMBUS_PORT_PANEL;
 	printf("lvds_is_present_in_vbt returns %d\n", 
 		lvds_is_present_in_vbt(i915, &pin));
-	intel_panel_enable_backlight(i915);
+	intel_panel_enable_backlight(i915, 0);
 	i915_driver_load(i915, (unsigned long)i915->dev_private->info);
 	hexdump(mmiobase, 128);
 	dp = i915->dev_private;

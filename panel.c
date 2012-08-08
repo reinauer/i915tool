@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	intel_setup_bios(i915);
 	if (i915->bios_bin)
 		intel_parse_bios(i915);
-	intel_panel_enable_backlight(i915);
+	intel_panel_enable_backlight(i915, 0);
 	i915_driver_load(i915, (unsigned long)i915->dev_private->info);
 
 	/* now walk the connector list, dumping connector type 
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	if (argc)
 		pwm = strtol(argv[0], 0, 0);
 	printf("new pwm %d\n", pwm);
-	intel_panel_enable_backlight(i915);
+	intel_panel_enable_backlight(i915, 0);
 	intel_panel_set_backlight(i915, pwm);
 	pwm = intel_panel_get_backlight(i915);
 	printf("pwm at end is %d\n", pwm);

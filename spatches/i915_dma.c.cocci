@@ -345,6 +345,10 @@ statement S;
 +0
 @@
 @@
+-intel_gmch_probe(...)
++1
+@@
+@@
 -drm_vblank_init(...)
 +0
 @@
