@@ -24,6 +24,12 @@
 -i915_dma_cleanup(...){...}
 @@
 @@
+-i915_dump_device_info(...){...}
+@@
+@@
+-i915_dump_device_info(...);
+@@
+@@
 -i915_dma_init(...){...}
 @@
 @@

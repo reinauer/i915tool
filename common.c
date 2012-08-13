@@ -95,18 +95,21 @@ idr_get_new_above(void *v, void *o, int unused, int *new_id)
 	*new_id = idr++;
 }
 
-
 void
-printio(const char *func, unsigned long addr, unsigned long val, int write)
+printio(bool write, u32 reg, u64 val, u32 size)
 {
-	printf("\t%s(%s /*0x%x*/", func, regname(addr), addr);
-	if (write) {
-		printf(", 0x%x);", val);
-	} else {
-		printf(");");
-		printf("// returns 0x%x", val);
-	}
-	printf("\n");
+        unsigned int small = (unsigned int) val;
+        fprintf(stderr, "%s %s: ", write ? "W" : "R", regname(reg));
+        switch(size){
+	case 1: fprintf(stderr, "%02x\n", small);
+		break;
+	case 2: fprintf(stderr, "%04x\n", small);
+		break;
+	case 4: fprintf(stderr, "%08x\n", small);
+		break;
+	case 8: fprintf(stderr, "%016llx\n", (unsigned long long) val);
+		break;
+        }
 }
 
 unsigned long io_I915_READ32(unsigned long addr)
@@ -117,7 +120,7 @@ unsigned long io_I915_READ32(unsigned long addr)
        outl(addr, addrport);
        val = inl(dataport);
        if (verbose > 4)
-               printio( __func__, val, addr,  0);
+               printio(0, addr, val, 4);
        return val;
 }
 
@@ -128,7 +131,7 @@ void io_I915_WRITE32(unsigned long addr, unsigned long val)
        outl(addr, addrport);
        outl(val, dataport);
        if (verbose > 4)
-               printio( __func__, val, addr,  1);
+               printio(1, addr, val, 4);
 }
 
 /* not sure how we want to do this so let's guess */
@@ -211,7 +214,7 @@ unsigned long I915_READ(unsigned long addr)
 		return 0xcafebabe;
 	val = *ptr;
 	if (verbose > 4)
-		printio( __func__, addr, val,  0);
+		printio(0, addr, val, 4);
 	return val;
 }
 
@@ -222,7 +225,7 @@ void I915_WRITE(unsigned long addr, unsigned long val)
 		return;
 	*ptr = val;
 	if (verbose > 4)
-		printio( __func__, addr, val,  1);
+		printio(1, addr, val, 4);
 }
 
 u16 I915_READ16(unsigned long addr)
@@ -233,7 +236,7 @@ u16 I915_READ16(unsigned long addr)
 		return 0xbabe;
 	val = *ptr;
 	if (verbose > 4)
-		printio( __func__, addr, val,  0);
+		printio(0, addr, val, 2);
 	return val;
 }
 
@@ -244,7 +247,7 @@ void I915_WRITE16(unsigned long addr, u16 val)
 		return;
 	*ptr = val;
 	if (verbose > 4)
-		printio( __func__, addr, val,  1);
+		printio(1, addr, val, 2);
 }
 
 u8 I915_READ8(unsigned long addr)
@@ -255,7 +258,7 @@ u8 I915_READ8(unsigned long addr)
 		return 0xba;
 	val = *ptr;
 	if (verbose > 4)
-		printio( __func__, addr, val,  0);
+		printio(0, addr, val, 1);
 	return val;
 }
 
@@ -266,7 +269,7 @@ void I915_WRITE8(unsigned long addr, u8 val)
 		return;
 	*ptr = val;
 	if (verbose > 4)
-		printio( __func__, addr, val,  1);
+		printio(1, addr, val, 1);
 }
 
 static int gtt_poll_interval(u32 reg, u32 mask, u32 value, int trytry)

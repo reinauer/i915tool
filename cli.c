@@ -90,6 +90,7 @@ int main(int argc, char *argv[])
 				geneld("edid", connector->display_info.raw_edid);
 			break;
 			
+#if 0
 		case 'd':
 			level = strtoul(&cmd[1], 0, 0);
 			if (connector)
@@ -148,6 +149,7 @@ int main(int argc, char *argv[])
 			else
 				fprintf(stderr, "NO crtc on encoder\n");
 			break;
+#endif
 		case 'f':
 			drm_helper_resume_force_mode(i915);
 			intel_fbdev_init(i915);

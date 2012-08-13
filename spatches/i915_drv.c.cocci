@@ -1,5 +1,8 @@
 @@
 @@
+-i915_reg_read_ioctl(...){...}
+@@
+@@
 -__gen6_gt_wait_for_fifo(...){...}
 @@
 @@

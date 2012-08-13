@@ -18,9 +18,6 @@ identifier d;
 -mode_fits_in_fbdev(...){...}
 @@
 @@
--intel_release_load_detect_pipe(...){...}
-@@
-@@
 - broadwater_init_clock_gating(...){...}
 @@
 @@
@@ -764,3 +761,12 @@ identifier d;
 @@
 @@
 -intel_update_linetime_watermarks(...);
+@@
+@@
+-intel_mark_fb_busy(...){...}
+@@
+@@
+-intel_mark_fb_idle(...){...}
+@@
+@@
+-drm_calc_timestamping_ants(...);

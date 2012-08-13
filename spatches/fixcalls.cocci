@@ -493,3 +493,10 @@ identifier d;
 -pr_warn_once(
 +fprintf(stderr, 
 ...);
+@@
+expression E;
+@@
+-assert_spin_locked(E);
+@@
+@@
+-destroy_workqueue(...);

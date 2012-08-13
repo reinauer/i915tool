@@ -229,3 +229,7 @@
 @@
 @@
 -vlv_update_drain_latency(...){...}
+@@
+@@
+-__i915_update_gfx_val(...){...}
+

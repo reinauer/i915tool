@@ -100,11 +100,14 @@ w
 q
 EOF
 
+# coccinnelle can't handle struct {...} s; 
 ed per-file-changes/i915_drv.h << EOF
 g/notifier_block/d
 g/struct  *completion  *[a-z].*;/d
 g/__must_check/s///g
 g/define  *I915_[RW]/d
+g/struct *work_struct.*;/d
+g/spinlock_t/d
 w
 q
 EOF

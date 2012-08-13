@@ -269,3 +269,21 @@ type T;
 @@
 @@
 -i915_gem_object_unpin_fence(...){...}
+@@
+identifier d, s;
+@@
+struct s {...
+-struct intel_fbc_work *d;
+...
+};
+@@
+identifier d, s;
+@@
+struct s {...
+-struct workqueue_struct *d;
+...
+};
+@@
+identifier d;
+@@
+-spinlock_t d;
