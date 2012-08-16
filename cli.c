@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 				break;
 			case 'l':
 				if (cmd[1] == 'O')
-					intel_panel_enable_backlight(i915, 0);
+					intel_panel_enable_backlight(i915);
 				else if (cmd[1] == 'o')
 					intel_panel_disable_backlight(i915);
 				else fprintf(stderr,

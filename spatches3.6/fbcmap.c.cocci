@@ -1,0 +1,9 @@
+@@
+@@
+-fb_cmap_to_user(...){...}
+@@
+@@
+-fb_invert_cmaps(...){...}
+@@
+@@
+-fb_set_user_cmap(...){...}

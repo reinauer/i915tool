@@ -14,7 +14,11 @@ int main(int argc, char *argv[])
 	intel_setup_bios(i915);
 	if (i915->bios_bin)
 		intel_parse_bios(i915);
+#if defined(VERSION) && VERSION == 36
 	intel_panel_enable_backlight(i915, 0);
+#else
+	intel_panel_enable_backlight(i915);
+#endif
 	i915_driver_load(i915, (unsigned long)i915->dev_private->info);
 
 	dp = i915->dev_private;

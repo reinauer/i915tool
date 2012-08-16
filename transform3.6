@@ -89,7 +89,7 @@ cp inputs/* per-file-changes
 # We tried sed but it had some issues that ed did not
 # coccinelle can't handle anonymous structs
 # also some stuff is easier with ed.
-# also there are bugs spatches/in coccinelle it seems :-(
+# also there are bugs spatches3.6/in coccinelle it seems :-(
 # the literal deletes below suck and we need to figure
 # out wtf went wrong.
 
@@ -219,32 +219,32 @@ EOF
 
 # Reverse patches. We hope these will go away someday.
 >per-file-changes/intel_bios.c
-spatch -sp_file spatches/getfn.cocci inputs/intel_bios.c -U 0 > tmp/res
+spatch -sp_file spatches3.6/getfn.cocci inputs/intel_bios.c -U 0 > tmp/res
 ./plusplusplus tmp/res per-file-changes/intel_bios.c
 (cd per-file-changes/; patch -p1 -R ) < tmp/res.pat
 
 # Finally, a basic spatch sequence!
 
-spatch --in-place -sp_file spatches/intel_display.c.cocci per-file-changes/intel_display.c per-file-changes/intel_pm.c > /dev/null
-spatch --in-place -sp_file spatches/intel_pm.c.cocci per-file-changes/intel_pm.c > /dev/null
-spatch --in-place -sp_file spatches/fbcmap.c.cocci per-file-changes/fbcmap.c # > /dev/null
-spatch --in-place -sp_file spatches/intel_dp.c.cocci per-file-changes/intel_dp.c > /dev/null
-spatch --in-place -sp_file spatches/intel_lvds.c.cocci per-file-changes/intel_lvds.c > /dev/null
-spatch --in-place -sp_file spatches/intel_modes.c.cocci per-file-changes/intel_modes.c > /dev/null
-spatch --in-place -sp_file spatches/intel_crt.c.cocci per-file-changes/intel_crt.c > /dev/null
-spatch --in-place -sp_file spatches/intel_drv.h.cocci per-file-changes/intel_drv.h > /dev/null
-spatch --in-place -sp_file spatches/drm_modes.c.cocci per-file-changes/drm_modes.c > /dev/null
-spatch --in-place -sp_file spatches/drm_crtc.c.cocci per-file-changes/drm_crtc.c > /dev/null
-spatch --in-place -sp_file spatches/drm_crtc_helper.c.cocci per-file-changes/drm_crtc_helper.c > /dev/null
-spatch --in-place -sp_file spatches/drm_fb_helper.c.cocci per-file-changes/drm_fb_helper.c > /dev/null
+spatch --in-place -sp_file spatches3.6/intel_display.c.cocci per-file-changes/intel_display.c per-file-changes/intel_pm.c > /dev/null
+spatch --in-place -sp_file spatches3.6/intel_pm.c.cocci per-file-changes/intel_pm.c > /dev/null
+spatch --in-place -sp_file spatches3.6/fbcmap.c.cocci per-file-changes/fbcmap.c # > /dev/null
+spatch --in-place -sp_file spatches3.6/intel_dp.c.cocci per-file-changes/intel_dp.c > /dev/null
+spatch --in-place -sp_file spatches3.6/intel_lvds.c.cocci per-file-changes/intel_lvds.c > /dev/null
+spatch --in-place -sp_file spatches3.6/intel_modes.c.cocci per-file-changes/intel_modes.c > /dev/null
+spatch --in-place -sp_file spatches3.6/intel_crt.c.cocci per-file-changes/intel_crt.c > /dev/null
+spatch --in-place -sp_file spatches3.6/intel_drv.h.cocci per-file-changes/intel_drv.h > /dev/null
+spatch --in-place -sp_file spatches3.6/drm_modes.c.cocci per-file-changes/drm_modes.c > /dev/null
+spatch --in-place -sp_file spatches3.6/drm_crtc.c.cocci per-file-changes/drm_crtc.c > /dev/null
+spatch --in-place -sp_file spatches3.6/drm_crtc_helper.c.cocci per-file-changes/drm_crtc_helper.c > /dev/null
+spatch --in-place -sp_file spatches3.6/drm_fb_helper.c.cocci per-file-changes/drm_fb_helper.c > /dev/null
 
-spatch --in-place -sp_file spatches/i915_drv.cocci per-file-changes/i915_drv.h >/dev/null
-spatch --in-place -sp_file spatches/i915_dma.c.cocci per-file-changes/i915_dma.c >/dev/null
-spatch --in-place -sp_file spatches/intel_i2c.c.cocci per-file-changes/intel_i2c.c >/dev/null
-spatch --in-place -sp_file spatches/i915_drv.c.cocci per-file-changes/i915_drv.c >/dev/null
-spatch --in-place -sp_file spatches/i2c-algo-bit.c.cocci per-file-changes/i2c-algo-bit.c >/dev/null
-spatch --in-place -sp_file spatches/intel_fb.c.cocci per-file-changes/intel_fb.c >/dev/null
-#spatch --in-place -sp_file spatches/intel-gtt.c.cocci per-file-changes/intel-gtt.c >/dev/null
+spatch --in-place -sp_file spatches3.6/i915_drv.cocci per-file-changes/i915_drv.h >/dev/null
+spatch --in-place -sp_file spatches3.6/i915_dma.c.cocci per-file-changes/i915_dma.c >/dev/null
+spatch --in-place -sp_file spatches3.6/intel_i2c.c.cocci per-file-changes/intel_i2c.c >/dev/null
+spatch --in-place -sp_file spatches3.6/i915_drv.c.cocci per-file-changes/i915_drv.c >/dev/null
+spatch --in-place -sp_file spatches3.6/i2c-algo-bit.c.cocci per-file-changes/i2c-algo-bit.c >/dev/null
+spatch --in-place -sp_file spatches3.6/intel_fb.c.cocci per-file-changes/intel_fb.c >/dev/null
+#spatch --in-place -sp_file spatches3.6/intel-gtt.c.cocci per-file-changes/intel-gtt.c >/dev/null
 
 # and another thing ...
 # cocinnelle needs to fix this.
@@ -281,9 +281,9 @@ EOF
 # Now do the common changes to all files.
 # we tried the 'do the whole directory' switch but it did not work well for us.
 cp per-file-changes/* final
-spatch --in-place -sp_file spatches/ringbuffer.cocci final/intel_ringbuffer.h >/dev/null
-# spatch --in-place -sp_file spatches/removeinclude.cocci final/*
-spatch --in-place -sp_file spatches/removeinclude.cocci \
+spatch --in-place -sp_file spatches3.6/ringbuffer.cocci final/intel_ringbuffer.h >/dev/null
+# spatch --in-place -sp_file spatches3.6/removeinclude.cocci final/*
+spatch --in-place -sp_file spatches3.6/removeinclude.cocci \
 	final/fbcmap.c \
 	final/intel_display.c \
 	final/intel_ddi.c \
@@ -311,7 +311,7 @@ spatch --in-place -sp_file spatches/removeinclude.cocci \
 	final/drm_crtc.c \
 	final/drm_crtc_helper.h>/dev/null
 
-spatch --in-place -sp_file spatches/i915_drv.cocci \
+spatch --in-place -sp_file spatches3.6/i915_drv.cocci \
 	final/intel_ringbuffer.h \
 	final/intel_drv.h \
 	final/drm_fb_helper.h \
@@ -319,7 +319,7 @@ spatch --in-place -sp_file spatches/i915_drv.cocci \
 	final/fb.h \
 	final/intel_panel.c>/dev/null
 
-spatch --in-place -sp_file spatches/deldev.cocci \
+spatch --in-place -sp_file spatches3.6/deldev.cocci \
 	final/intel_bios.c \
 	final/intel_bios.h \
 	final/i915_drv.h \
@@ -335,7 +335,7 @@ spatch --in-place -sp_file spatches/deldev.cocci \
 	final/fb.h \
 	final/intel_fb.c >/dev/null
 
-spatch --in-place -sp_file spatches/fixcalls.cocci \
+spatch --in-place -sp_file spatches3.6/fixcalls.cocci \
 	final/drm_fb_helper.c \
 	final/intel_bios.c \
 	final/intel_crt.c \
@@ -364,14 +364,14 @@ spatch --in-place -sp_file spatches/fixcalls.cocci \
 	final/fbcmap.c \
 	final/intel_fb.c >/dev/null
 
-spatch --in-place -sp_file spatches/drm_crtc.cocci \
+spatch --in-place -sp_file spatches3.6/drm_crtc.cocci \
 	final/drm_crtc.h \
 	final/intel_dp.c \
 	final/i915_dma.c \
 	final/intel_fb.c >/dev/null
 
 # weirdly, it needs a final pass. 
-spatch --in-place -sp_file spatches/i915_dma.c.cocci final/i915_dma.c >/dev/null
+spatch --in-place -sp_file spatches3.6/i915_dma.c.cocci final/i915_dma.c >/dev/null
 # post processing for things coccinelle can't always get yet
 # or we can't figure out how to make it get
 ed final/i915_dma.c << EOF
@@ -399,6 +399,6 @@ q
 EOF
 
 
-spatch --sp-file spatches/printf.cocci --no-includes --in-place --dir final
-spatch --sp-file spatches/unusedlabels.cocci --no-includes --in-place --dir final
-make clean
+spatch --sp-file spatches3.6/printf.cocci --no-includes --in-place --dir final
+spatch --sp-file spatches3.6/unusedlabels.cocci --no-includes --in-place --dir final
+make -f Makefile3.6 clean

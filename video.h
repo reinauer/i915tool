@@ -418,6 +418,7 @@ static inline long IS_ERR(const void *ptr)
 
 /* the EXPORT_SYMBOL syntax is invalid C, hence coccinelle can't parse it. Just rename the macro */
 #define EXPORT_SYMBOL(x) 
+#define EXPORT_SYMBOL_GPL(x) 
 
 /**
  * container_of - cast a member of a structure out to the containing structure
