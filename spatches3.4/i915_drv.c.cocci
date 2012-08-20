@@ -109,3 +109,8 @@ pch->
 -device
 +device_id
 
+@@
+identifier d;
+@@
+-static
+struct intel_device_info d = {...};

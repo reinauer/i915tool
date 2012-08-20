@@ -511,4 +511,8 @@ static __inline__ unsigned long long rdtsc(void)
 
 #define KHZ2PICOS(a) (1000000000UL/(a))
 
+/* useful externs */
+extern struct intel_device_info intel_ivybridge_m_info;
+
+
 #endif /* VIDEO_H */
