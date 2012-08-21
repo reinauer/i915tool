@@ -1,0 +1,191 @@
+graphic opregion physical addr: 0x0
+ACPI OpRegion not supported!
+[    0.282374] [drm] Supports vblank timestamp caching Rev 1 (10.10.2010).
+[    0.282376] [drm] Driver supports precise vblank timestamp query.
+Found PatherPoint PCH
+VBT signature missing
+[    0.282390] [drm] failed to find VBIOS tables
+no _DSM method for intel device
+Using MT version of forcewake
+3 display pipes available.
+GMBUS [i915 gmbus panel] NAK for addr: 0050 r(1)
+drm: skipping non-existent adapter i915 gmbus panel
+No LVDS modes found, disabling.
+cur t1_t3 2000 t8 2000 t9 0 t10 0 t11_t12 6000
+vbt t1_t3 0 t8 0 t9 0 t10 0 t11_t12 0
+panel power up delay 200, power down delay 0, power cycle delay 600
+backlight on delay 200, off delay 0
+Turn eDP VDD on
+PCH_PP_STATUS: 0x80000008 PCH_PP_CONTROL: 0xabcd000f
+Turn eDP VDD off 1
+i2c_init DPDDC-A
+Turn eDP VDD on
+eDP VDD already on
+Turn eDP VDD off 1
+get backlight PWM = 4302
+max backlight PWM = 4882
+get backlight PWM = 4302
+pch crt adpa set to 0xf40000
+i2c_init DPDDC-D
+dp_aux_ch timeout status 0x5145003f
+aux_ch failed -110
+dp_aux_ch timeout status 0x5145003f
+aux_ch failed -110
+
+Turn eDP power off
+Wait for panel power off time
+mask b000000f value 00000000 status 80000008 control abcd0000
+Turn eDP VDD on
+Wait for panel power cycle
+mask b800000f value 00000000 status 00000000 control abcd0000
+PCH_PP_STATUS: 0x00000000 PCH_PP_CONTROL: 0xabcd0008
+eDP was not running
+Turn eDP VDD off 1
+crtc 0/0 dpms off
+trying to get vblank count for disabled pipe A
+crtc 0 is disabled
+trying to get vblank count for disabled pipe A
+
+crtc 1/1 dpms off
+trying to get vblank count for disabled pipe B
+crtc 1 is disabled
+trying to get vblank count for disabled pipe B
+
+crtc 2/2 dpms off
+trying to get vblank count for disabled pipe C
+crtc 2 is disabled
+trying to get vblank count for disabled pipe C
+
+has_panel 1 has_lvds 0 has_pch_edp 0 has_cpu_edp 1 has_ck505 0
+Using SSC on panel
+Using SSC on eDP
+[    1.084813] [drm] Enabling RC6 states: RC6 off, RC6p off, RC6pp off
+render ring hws offset: 0x00000000
+gen6 bsd ring hws offset: 0x00022000
+blt ring hws offset: 0x00043000
+
+Turn eDP power off
+Wait for panel power off time
+mask b000000f value 00000000 status 00000000 control abcd0000
+Turn eDP VDD on
+Wait for panel power cycle
+mask b800000f value 00000000 status 00000000 control abcd0000
+PCH_PP_STATUS: 0x00000000 PCH_PP_CONTROL: 0xabcd0008
+eDP was not running
+Turn eDP VDD off 1
+[CONNECTOR:9:eDP-1]
+DPCD: 110a8441000001c0
+Turn eDP VDD on
+eDP VDD already on
+dp_aux_xfer return 2
+dp_aux_xfer return 2
+Turn eDP VDD off 1
+Turn eDP VDD on
+eDP VDD already on
+dp_aux_xfer return 2
+dp_aux_xfer return 2
+ELD: no CEA Extension found
+Turn eDP VDD off 1
+[CONNECTOR:9:eDP-1] probed modes :
+Modeline 21:"2560x1700" 60 285250 2560 2608 2640 2720 1700 1703 1713 1749 0x48 0xa
+[CONNECTOR:14:VGA-1]
+trigger hotplug detect cycle: adpa=0xf40000
+ironlake hotplug adpa=0xf40000, result 0
+CRT not detected via hotplug
+[CONNECTOR:14:VGA-1] disconnected
+[CONNECTOR:17:HDMI-A-1]
+GMBUS [i915 gmbus dpd] NAK for addr: 0050 r(1)
+drm: skipping non-existent adapter i915 gmbus dpd
+[CONNECTOR:17:HDMI-A-1] disconnected
+[CONNECTOR:18:DP-1]
+dp_aux_ch timeout status 0x5145003f
+dp_aux_ch timeout status 0x5145003f
+dp_aux_ch timeout status 0x5145003f
+DPCD: 0000000000000000
+[CONNECTOR:18:DP-1] disconnected
+
+connector 9 enabled? yes
+connector 14 enabled? no
+connector 17 enabled? no
+connector 18 enabled? no
+looking for cmdline mode on connector 9
+looking for preferred mode on connector 9
+found mode 2560x1700
+picking CRTCs for 8192x8192 config
+desired mode 2560x1700 set on crtc 3
+allocated 2560x1700 fb: 0x00064000, bo ffff880148ddb600
+[    1.446315] fbcon: inteldrmfb (fb0) is primary device
+
+[CRTC:3] [FB:24] #connectors=1 (x y) (0 0)
+crtc has no fb, full mode set
+modes are different, full mode set
+Modeline 0:"" 0 0 0 0 0 0 0 0 0 0 0x0 0x0
+Modeline 23:"2560x1700" 60 285250 2560 2608 2640 2720 1700 1703 1713 1749 0x48 0xa
+encoder changed, full mode switch
+crtc changed, full mode switch
+[CONNECTOR:9:eDP-1] to [CRTC:3]
+attempting to set mode from userspace
+Modeline 23:"2560x1700" 60 285250 2560 2608 2640 2720 1700 1703 1713 1749 0x48 0xa
+Display port link bw 0a lane count 4 clock 270000
+[CRTC:3]
+
+Turn eDP power off
+Wait for panel power off time
+mask b000000f value 00000000 status 00000000 control abcd0000
+Turn eDP VDD on
+Wait for panel power cycle
+mask b800000f value 00000000 status 00000000 control abcd0000
+PCH_PP_STATUS: 0x00000000 PCH_PP_CONTROL: 0xabcd0008
+eDP was not running
+Turn eDP VDD off 1
+clamping display bpc (was -1) to eDP (6)
+setting pipe bpc to 8 (max display bpc 6)
+Mode for pipe 0:
+Modeline 23:"2560x1700" 60 285250 2560 2608 2640 2720 1700 1703 1713 1749 0x48 0xa
+eDP PLL enable for clock 270000
+vblank wait timed out
+Writing base 00064000 00000000 0 0 10240
+
+FIFO watermarks For pipe A - plane 24, cursor: 6
+watermark 1: display plane 38, fbc lines 3, cursor 6
+watermark 2: display plane 145, fbc lines 3, cursor 6
+watermark 3: display plane 288, fbc lines 4, cursor 10
+[ENCODER:10:TMDS-10] set [MODE:23:2560x1700]
+
+FIFO watermarks For pipe A - plane 24, cursor: 6
+watermark 1: display plane 38, fbc lines 3, cursor 6
+watermark 2: display plane 145, fbc lines 3, cursor 6
+watermark 3: display plane 288, fbc lines 4, cursor 10
+vblank wait timed out
+vblank wait timed out
+
+Turn eDP VDD on
+eDP VDD already on
+too many full retries, give up
+Turn eDP power on
+Wait for panel power cycle
+mask b800000f value 00000000 status 00000000 control abcd0008
+Wait for panel power on
+mask b000000f value 80000008 status 0000000a control abcd000b
+Turn eDP VDD off 1
+PCH_PP_STATUS: 0x80000008 PCH_PP_CONTROL: 0xabcd0003
+
+clock recovery OK
+preparing flip with no unpin work?
+
+Setting connector DPMS state to on
+	[CONNECTOR:9:eDP-1] set DPMS on
+
+[CRTC:5] [NOFB]
+
+[CRTC:7] [NOFB]
+
+[CRTC:3] [FB:24] #connectors=1 (x y) (0 0)
+[CONNECTOR:9:eDP-1] to [CRTC:3]
+
+[CRTC:3] [FB:24] #connectors=1 (x y) (0 0)
+[CONNECTOR:9:eDP-1] to [CRTC:3]
+[    2.478164] fb0: inteldrmfb frame buffer device
+[    2.478166] drm: registered panic notifier
+[    2.478178] [drm] Initialized i915 1.6.0 20080730 for 0000:00:02.0 on minor 0
+GMBUS [i915 gmbus panel] NAK for addr: 0026 w(0)

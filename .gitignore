@@ -16,5 +16,11 @@ tags
 timegttsetup
 tmp
 video
+cli
+g6reset
+light
+testlfp
+testlight
 *~
 *.o
+*.swp

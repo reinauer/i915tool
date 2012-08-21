@@ -10,3 +10,12 @@ ctags -x *.c | grep function | sed 's/(.*//' | sed 's/.* //' | sed 's/.*/@@\n@@\
 - Go for subtraction (i.e. -x(...){...}) instead of the rev-patch approach, the latter is not reliable. 
 - When bringing in a .c, use ctags to extract functions and write a .cocci that removes them all. It's actually easier to start that way.
 - sometimes, due to  coccinelle issues, there is no avoiding an ed/sed script. Accept it.
+
+run cli
+i
+m
+c
+p
+f
+d0
+

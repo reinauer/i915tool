@@ -1,0 +1,1020 @@
+Command line: console=tty2 init=/sbin/init boot=local rootwai |	[drm:i915_driver_load], Warning: somebody tried to call pci_s
+Kernel command line: console=tty2 init=/sbin/init boot=local  |	[drm:i915_driver_load], NOT setting enable MSI; fix me later
+[drm] Initialized drm 1.1.0 20060810			      <
+[drm:intel_opregion_setup], graphic opregion physical addr: 0 <
+[drm:intel_opregion_setup], ACPI OpRegion not supported!      <
+[drm] Supports vblank timestamp caching Rev 1 (10.10.2010).   <
+[drm] Driver supports precise vblank timestamp query.	      <
+[drm:intel_detect_pch], Found PatherPoint PCH			[drm:intel_detect_pch], Found PatherPoint PCH
+[drm:parse_general_features], BDB_GENERAL_FEATURES int_tv_sup |	[drm:init_vbt_defaults], Set default to SSC at 100MHz
+[drm:parse_general_definitions], crt_ddc_bus_pin: 2	      |	[drm:i915_load_modeset_init], failed to find VBIOS tables
+[drm:parse_lfp_panel_data], Found panel mode in BIOS VBT tabl <
+[drm:drm_mode_debug_printmodeline], Modeline 0:"2560x1700" 0  <
+[drm:parse_sdvo_panel_data], Found SDVO panel mode in BIOS VB <
+[drm:drm_mode_debug_printmodeline], Modeline 0:"1600x1200" 0  <
+[drm:parse_sdvo_device_mapping], No SDVO device info is found <
+[drm:intel_dsm_pci_probe], no _DSM method for intel device    <
+[drm:intel_init_display], Using MT version of forcewake		[drm:intel_init_display], Using MT version of forcewake
+[drm:intel_modeset_init], 3 display pipes available.		[drm:intel_modeset_init], 3 display pipes available.
+[drm:intel_lvds_init], LVDS is not present in VBT	      |	[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt
+[drm:intel_dp_init], cur t1_t3 2000 t8 10 t9 2000 t10 500 t11 |	[drm:intel_lvds_init], No LVDS modes found, disabling.
+[drm:intel_dp_init], vbt t1_t3 2000 t8 10 t9 2000 t10 500 t11 |	[drm:intel_dp_init], cur t1_t3 2000 t8 2000 t9 2000 t10 500 t
+[drm:intel_dp_init], panel power up delay 200, power down del |	[drm:intel_dp_init], vbt t1_t3 0 t8 0 t9 0 t10 0 t11_t12 0
+[drm:intel_dp_init], backlight on delay 1, off delay 200      |	[drm:intel_dp_init], panel power up delay 200, power down del
+							      >	[drm:intel_dp_init], backlight on delay 200, off delay 200
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on		[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x80000008 PC	[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x80000008 PC
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1		[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:intel_dp_i2c_init], i2c_init DPDDC-A			[drm:intel_dp_i2c_init], i2c_init DPDDC-A
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on		[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on		[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1		[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:intel_panel_get_backlight], get backlight PWM = 4882	[drm:intel_panel_get_backlight], get backlight PWM = 4882
+[drm:intel_panel_get_max_backlight], max backlight PWM = 4882 <
+[drm:intel_panel_get_backlight], get backlight PWM = 4882     <
+[drm:intel_crt_init], pch crt adpa set to 0xf40000	      <
+[drm:intel_dp_i2c_init], i2c_init DPDDC-D			[drm:intel_dp_i2c_init], i2c_init DPDDC-D
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f	[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f
+[drm:intel_dp_i2c_aux_ch], aux_ch failed -110			[drm:intel_dp_i2c_aux_ch], aux_ch failed -110
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f	[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f
+[drm:intel_dp_i2c_aux_ch], aux_ch failed -110			[drm:intel_dp_i2c_aux_ch], aux_ch failed -110
+[drm:ironlake_edp_backlight_off], 			      |	[drm:ironlake_init_pch_refclk], has_panel 1 has_lvds 1 has_pc
+[drm:ironlake_edp_panel_off], Turn eDP power off	      |	[drm:ironlake_init_pch_refclk], Using SSC on panel
+[drm:ironlake_wait_panel_off], Wait for panel power off time  |	[drm:ironlake_init_pch_refclk], Using SSC on eDP
+[drm:ironlake_wait_panel_status], mask b000000f value 0000000 |	[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:8:e
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_wait_panel_power_cycle], Wait for panel power c <
+[drm:ironlake_wait_panel_status], mask b800000f value 0000000 <
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x00000000 PC <
+[drm:ironlake_edp_panel_vdd_on], eDP was not running	      <
+[drm:intel_dp_link_down], 				      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_crtc_dpms], crtc 0/0 dpms off		      <
+[drm:i915_get_vblank_timestamp], crtc 0 is disabled	      <
+[drm:intel_wait_for_pipe_off], pipe_off wait timed out	      <
+[drm:intel_update_fbc], 				      <
+[drm:ironlake_crtc_dpms], crtc 1/1 dpms off		      <
+[drm:gm45_get_vblank_counter], trying to get vblank count for <
+[drm:i915_get_vblank_timestamp], crtc 1 is disabled	      <
+[drm:gm45_get_vblank_counter], trying to get vblank count for <
+[drm:intel_update_fbc], 				      <
+[drm:ironlake_crtc_dpms], crtc 2/2 dpms off		      <
+[drm:gm45_get_vblank_counter], trying to get vblank count for <
+[drm:i915_get_vblank_timestamp], crtc 2 is disabled	      <
+[drm:gm45_get_vblank_counter], trying to get vblank count for <
+[drm:intel_update_fbc], 				      <
+[drm:ironlake_init_pch_refclk], has_panel 1 has_lvds 0 has_pc <
+[drm] Enabling RC6 states: RC6 off, RC6p off, RC6pp off	      <
+[drm:init_status_page], render ring hws offset: 0x00000000    <
+[drm:init_status_page], gen6 bsd ring hws offset: 0x00022000  <
+[drm:init_status_page], blt ring hws offset: 0x00043000	      <
+[drm:ironlake_edp_backlight_off], 			      <
+[drm:ironlake_edp_panel_off], Turn eDP power off	      <
+[drm:ironlake_wait_panel_off], Wait for panel power off time  <
+[drm:ironlake_wait_panel_status], mask b000000f value 0000000 <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_wait_panel_power_cycle], Wait for panel power c <
+[drm:ironlake_wait_panel_status], mask b800000f value 0000000 <
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x00000000 PC <
+[drm:ironlake_edp_panel_vdd_on], eDP was not running	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0			[drm:intel_dp_detect], DPCD: 110a8441000001c0
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on		[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on		[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2		[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2		[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1		[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on		[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on		[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2		[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2		[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2
+[drm:drm_edid_to_eld], ELD: no CEA Extension found		[drm:drm_edid_to_eld], ELD: no CEA Extension found
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1		[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e |	[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:8:e
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 |	[drm:drm_mode_debug_printmodeline], Modeline 16988912:"2560x1
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: |	[drm:intel_get_load_detect_pipe], [CONNECTOR:8:eDP-1], [ENCOD
+[drm:intel_ironlake_crt_detect_hotplug], trigger hotplug dete |	[drm:intel_get_load_detect_pipe], creating tmp fb for load-de
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_setup_crtcs], 					      <
+[drm:drm_enable_connectors], connector 9 enabled? yes	      <
+[drm:drm_enable_connectors], connector 13 enabled? no	      <
+[drm:drm_enable_connectors], connector 16 enabled? no	      <
+[drm:drm_enable_connectors], connector 17 enabled? no	      <
+[drm:drm_target_preferred], looking for cmdline mode on conne <
+[drm:drm_target_preferred], looking for preferred mode on con <
+[drm:drm_target_preferred], found mode 2560x1700	      <
+[drm:drm_setup_crtcs], picking CRTCs for 8192x8192 config     <
+[drm:drm_setup_crtcs], desired mode 2560x1700 set on crtc 3   <
+[drm:intelfb_create], allocated 2560x1700 fb: 0x00064000, bo  <
+fbcon: inteldrmfb (fb0) is primary device		      <
+[drm:drm_crtc_helper_set_config], 			      <
+[drm:drm_crtc_helper_set_config], [CRTC:3] [FB:23] #connector <
+[drm:drm_crtc_helper_set_config], crtc has no fb, full mode s <
+[drm:drm_crtc_helper_set_config], modes are different, full m <
+[drm:drm_mode_debug_printmodeline], Modeline 0:"" 0 0 0 0 0 0 <
+[drm:drm_mode_debug_printmodeline], Modeline 22:"2560x1700" 6 <
+[drm:drm_crtc_helper_set_config], encoder changed, full mode  <
+[drm:drm_crtc_helper_set_config], crtc changed, full mode swi <
+[drm:drm_crtc_helper_set_config], [CONNECTOR:9:eDP-1] to [CRT <
+[drm:drm_crtc_helper_set_config], attempting to set mode from <
+[drm:drm_mode_debug_printmodeline], Modeline 22:"2560x1700" 6 <
+[drm:intel_dp_mode_fixup], Display port link bw 0a lane count	[drm:intel_dp_mode_fixup], Display port link bw 0a lane count
+[drm:drm_crtc_helper_set_mode], [CRTC:3]			[drm:drm_crtc_helper_set_mode], [CRTC:3]
+							      >	[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+							      >	[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:ironlake_edp_backlight_off], 				[drm:ironlake_edp_backlight_off], 
+[drm:ironlake_edp_panel_off], Turn eDP power off		[drm:ironlake_edp_panel_off], Turn eDP power off
+[drm:ironlake_wait_panel_off], Wait for panel power off time	[drm:ironlake_wait_panel_off], Wait for panel power off time
+[drm:ironlake_wait_panel_status], mask b000000f value 0000000 |	[drm:ironlake_wait_panel_status], mask b000000f value 0000000
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      |	[drm:intel_dp_link_down], 
+[drm:ironlake_wait_panel_power_cycle], Wait for panel power c <
+[drm:ironlake_wait_panel_status], mask b800000f value 0000000 <
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x00000000 PC <
+[drm:ironlake_edp_panel_vdd_on], eDP was not running	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1		[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:intel_choose_pipe_bpp_dither], clamping display bpc (was |	[drm:intel_panel_actually_set_backlight], set backlight PWM =
+[drm:intel_choose_pipe_bpp_dither], setting pipe bpc to 8 (ma <
+[drm:ironlake_crtc_mode_set], Mode for pipe 0:			[drm:ironlake_crtc_mode_set], Mode for pipe 0:
+[drm:drm_mode_debug_printmodeline], Modeline 22:"2560x1700" 6 |	[drm:drm_mode_debug_printmodeline], Modeline 16988912:"2560x1
+[drm:ironlake_set_pll_edp], eDP PLL enable for clock 270000	[drm:ironlake_set_pll_edp], eDP PLL enable for clock 270000
+[drm:intel_wait_for_vblank], vblank wait timed out		[drm:intel_wait_for_vblank], vblank wait timed out
+[drm:ironlake_update_plane], Writing base 00064000 00000000 0 |	[drm:ironlake_update_plane], Writing base 00000000 00000000 0
+[drm:intel_update_fbc], 				      <
+[drm:sandybridge_update_wm], FIFO watermarks For pipe A - pla	[drm:sandybridge_update_wm], FIFO watermarks For pipe A - pla
+[drm:ironlake_check_srwm], watermark 1: display plane 38, fbc	[drm:ironlake_check_srwm], watermark 1: display plane 38, fbc
+[drm:ironlake_check_srwm], watermark 2: display plane 145, fb	[drm:ironlake_check_srwm], watermark 2: display plane 145, fb
+[drm:ironlake_check_srwm], watermark 3: display plane 288, fb	[drm:ironlake_check_srwm], watermark 3: display plane 288, fb
+[drm:drm_crtc_helper_set_mode], [ENCODER:10:TMDS-10] set [MOD |	[drm:drm_crtc_helper_set_mode], [ENCODER:9:TMDS-9] set [MODE:
+[drm:ironlake_edp_pll_on], 					[drm:ironlake_edp_pll_on], 
+[drm:sandybridge_update_wm], FIFO watermarks For pipe A - pla <
+[drm:ironlake_check_srwm], watermark 1: display plane 38, fbc <
+[drm:ironlake_check_srwm], watermark 2: display plane 145, fb <
+[drm:ironlake_check_srwm], watermark 3: display plane 288, fb <
+[drm:intel_wait_for_vblank], vblank wait timed out	      <
+[drm:intel_wait_for_vblank], vblank wait timed out	      <
+[drm:intel_update_fbc], 				      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on		[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on		[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:intel_dp_start_link_train], too many full retries, give 	[drm:intel_dp_start_link_train], too many full retries, give 
+[drm:ironlake_edp_panel_on], Turn eDP power on			[drm:ironlake_edp_panel_on], Turn eDP power on
+[drm:ironlake_wait_panel_power_cycle], Wait for panel power c	[drm:ironlake_wait_panel_power_cycle], Wait for panel power c
+[drm:ironlake_wait_panel_status], mask b800000f value 0000000	[drm:ironlake_wait_panel_status], mask b800000f value 0000000
+[drm:ironlake_wait_panel_on], Wait for panel power on		[drm:ironlake_wait_panel_on], Wait for panel power on
+[drm:ironlake_wait_panel_status], mask b000000f value 8000000	[drm:ironlake_wait_panel_status], mask b000000f value 8000000
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1		[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_panel_vdd_off_sync], PCH_PP_STATUS: 0x80000008 	[drm:ironlake_panel_vdd_off_sync], PCH_PP_STATUS: 0x80000008 
+[drm:intel_dp_link_down], 					[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], clock recovery OK		[drm:intel_dp_start_link_train], clock recovery OK
+[drm:ironlake_edp_backlight_on], 				[drm:ironlake_edp_backlight_on], 
+[drm:drm_crtc_helper_set_config], Setting connector DPMS stat <
+[drm:drm_crtc_helper_set_config], 	[CONNECTOR:9:eDP-1] s <
+[drm:drm_crtc_helper_set_config], 			      <
+[drm:drm_crtc_helper_set_config], [CRTC:5] [NOFB]	      <
+[drm:drm_crtc_helper_set_config], 			      <
+[drm:drm_crtc_helper_set_config], [CRTC:7] [NOFB]	      <
+[drm:drm_crtc_helper_set_config], 			      <
+[drm:drm_crtc_helper_set_config], [CRTC:3] [FB:23] #connector <
+[drm:drm_crtc_helper_set_config], [CONNECTOR:9:eDP-1] to [CRT <
+[drm:intel_prepare_page_flip], preparing flip with no unpin w <
+[drm:drm_crtc_helper_set_config], 			      <
+[drm:drm_crtc_helper_set_config], [CRTC:3] [FB:23] #connector <
+[drm:drm_crtc_helper_set_config], [CONNECTOR:9:eDP-1] to [CRT <
+[drm:drm_crtc_helper_set_config], 			      <
+[drm:drm_crtc_helper_set_config], [CRTC:3] [FB:23] #connector <
+[drm:drm_crtc_helper_set_config], [CONNECTOR:9:eDP-1] to [CRT <
+fb0: inteldrmfb frame buffer device			      <
+drm: registered panic notifier				      <
+[drm] Initialized i915 1.6.0 20080730 for 0000:00:02.0 on min <
+[drm:gmbus_xfer], GMBUS [i915 gmbus vga] NAK for addr: 0067 r <
+[drm:gmbus_xfer], GMBUS [i915 gmbus vga] NAK for addr: 0067 r <
+[drm:gmbus_xfer], GMBUS [i915 gmbus vga] NAK for addr: 0067 r <
+[drm:i915_driver_open], 				      <
+[drm:drm_crtc_helper_set_config], 			      <
+[drm:drm_crtc_helper_set_config], [CRTC:3] [FB:23] #connector <
+[drm:drm_crtc_helper_set_config], [CONNECTOR:9:eDP-1] to [CRT <
+[drm:i915_driver_open], 				      <
+[drm:drm_mode_getresources], CRTC[3] CONNECTORS[4] ENCODERS[4 <
+[drm:drm_mode_getresources], CRTC[3] CONNECTORS[4] ENCODERS[4 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x80000008 PC <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:drm_mode_setcrtc], [CRTC:3]			      <
+[drm:drm_mode_setcrtc], [CONNECTOR:9:eDP-1]		      <
+[drm:drm_crtc_helper_set_config], 			      <
+[drm:drm_crtc_helper_set_config], [CRTC:3] [FB:24] #connector <
+[drm:drm_crtc_helper_set_config], [CONNECTOR:9:eDP-1] to [CRT <
+[drm:ironlake_update_plane], Writing base 01102000 00000000 0 <
+[drm:intel_update_fbc], 				      <
+[drm:intel_prepare_page_flip], preparing flip with no unpin w <
+[drm:intel_wait_for_vblank], vblank wait timed out		[drm:intel_wait_for_vblank], vblank wait timed out
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      |	[drm:intel_dp_mode_fixup], Display port link bw 0a lane count
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      |	[drm:drm_crtc_helper_set_mode], [CRTC:3]
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:output_poll_execute], [CONNECTOR:9:eDP-1] status updated <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:output_poll_execute], [CONNECTOR:13:VGA-1] status update <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:output_poll_execute], [CONNECTOR:16:HDMI-A-1] status upd <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:output_poll_execute], [CONNECTOR:17:DP-1] status updated <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:ironlake_panel_vdd_off_sync], PCH_PP_STATUS: 0x80000008  <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on		[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x80000008 PC	[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x80000008 PC
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:i915_driver_open], 				      <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:ironlake_edp_backlight_off], 				[drm:ironlake_edp_backlight_off], 
+[drm:ironlake_edp_panel_off], Turn eDP power off		[drm:ironlake_edp_panel_off], Turn eDP power off
+[drm:ironlake_wait_panel_off], Wait for panel power off time	[drm:ironlake_wait_panel_off], Wait for panel power off time
+[drm:ironlake_wait_panel_status], mask b000000f value 0000000 |	[drm:ironlake_wait_panel_status], mask b000000f value 0000000
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_wait_panel_power_cycle], Wait for panel power c <
+[drm:ironlake_wait_panel_status], mask b800000f value 0000000 <
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x00000000 PC <
+[drm:ironlake_edp_panel_vdd_on], eDP was not running	      <
+[drm:intel_dp_link_down], 					[drm:intel_dp_link_down], 
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1		[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_crtc_dpms], crtc 0/0 dpms off		      |	[drm:intel_panel_actually_set_backlight], set backlight PWM =
+							      >	[drm:ironlake_crtc_mode_set], Mode for pipe 0:
+							      >	[drm:drm_mode_debug_printmodeline], Modeline 16988912:"2560x1
+							      >	[drm:ironlake_set_pll_edp], eDP PLL enable for clock 270000
+[drm:intel_wait_for_vblank], vblank wait timed out		[drm:intel_wait_for_vblank], vblank wait timed out
+[drm:intel_wait_for_pipe_off], pipe_off wait timed out	      |	[drm:ironlake_update_plane], Writing base 00000000 00000000 0
+[drm:sandybridge_update_wm], FIFO watermarks For pipe A - pla <
+[drm:ironlake_check_srwm], watermark 1: display plane 38, fbc <
+[drm:ironlake_check_srwm], watermark 2: display plane 145, fb <
+[drm:ironlake_check_srwm], watermark 3: display plane 288, fb <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_setcrtc], [CRTC:3]			      <
+[drm:drm_mode_setcrtc], [CONNECTOR:9:eDP-1]		      <
+[drm:drm_crtc_helper_set_config], 			      <
+[drm:drm_crtc_helper_set_config], [CRTC:3] [FB:24] #connector <
+[drm:drm_crtc_helper_set_config], [CONNECTOR:9:eDP-1] to [CRT <
+[drm:ironlake_crtc_dpms], crtc 0/0 dpms on		      <
+[drm:sandybridge_update_wm], FIFO watermarks For pipe A - pla	[drm:sandybridge_update_wm], FIFO watermarks For pipe A - pla
+[drm:ironlake_check_srwm], watermark 1: display plane 38, fbc	[drm:ironlake_check_srwm], watermark 1: display plane 38, fbc
+[drm:ironlake_check_srwm], watermark 2: display plane 145, fb	[drm:ironlake_check_srwm], watermark 2: display plane 145, fb
+[drm:ironlake_check_srwm], watermark 3: display plane 288, fb	[drm:ironlake_check_srwm], watermark 3: display plane 288, fb
+[drm:intel_wait_for_vblank], vblank wait timed out	      |	[drm:drm_crtc_helper_set_mode], [ENCODER:9:TMDS-9] set [MODE:
+[drm:intel_wait_for_vblank], vblank wait timed out	      <
+[drm:intel_update_fbc], 				      <
+[drm:ironlake_edp_pll_on], 					[drm:ironlake_edp_pll_on], 
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on		[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on		[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:intel_dp_start_link_train], too many full retries, give 	[drm:intel_dp_start_link_train], too many full retries, give 
+[drm:ironlake_edp_panel_on], Turn eDP power on			[drm:ironlake_edp_panel_on], Turn eDP power on
+[drm:ironlake_wait_panel_power_cycle], Wait for panel power c	[drm:ironlake_wait_panel_power_cycle], Wait for panel power c
+[drm:ironlake_wait_panel_status], mask b800000f value 0000000	[drm:ironlake_wait_panel_status], mask b800000f value 0000000
+[drm:ironlake_wait_panel_on], Wait for panel power on		[drm:ironlake_wait_panel_on], Wait for panel power on
+[drm:ironlake_wait_panel_status], mask b000000f value 8000000	[drm:ironlake_wait_panel_status], mask b000000f value 8000000
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1		[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_panel_vdd_off_sync], PCH_PP_STATUS: 0x80000008 	[drm:ironlake_panel_vdd_off_sync], PCH_PP_STATUS: 0x80000008 
+[drm:intel_dp_link_down], 					[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], clock recovery OK		[drm:intel_dp_start_link_train], clock recovery OK
+[drm:ironlake_edp_backlight_on], 				[drm:ironlake_edp_backlight_on], 
+[drm:intel_prepare_page_flip], preparing flip with no unpin w |	[drm:ironlake_edp_pll_on], 
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on		[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x80000008 PC	[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x80000008 PC
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1		[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      |	[drm:ironlake_edp_backlight_on], 
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      |	[drm:intel_get_load_detect_pipe], [CONNECTOR:8:eDP-1], [ENCOD
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      |	[drm:intel_crt_load_detect], starting load-detect on CRT
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      |	[drm:intel_wait_for_vblank], vblank wait timed out
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:drm_edid_to_eld], ELD: no CEA Extension found	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:9:e <
+[drm:drm_mode_debug_printmodeline], Modeline 20:"2560x1700" 6 <
+[drm:drm_mode_getconnector], [CONNECTOR:9:?]		      <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:13:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:13: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:16:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:16: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_getconnector], [CONNECTOR:17:?]		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:17: <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_dp_detect], DPCD: 110a8441000001c0		      <
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on	      <
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2	      <
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1	      <
+[drm:output_poll_execute], [CONNECTOR:9:eDP-1] status updated <
+[drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adp <
+[drm:intel_crt_detect], CRT not detected via hotplug	      <
+[drm:output_poll_execute], [CONNECTOR:13:VGA-1] status update <
+[drm:intel_update_fbc], 				      <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 r <
+[drm:drm_do_probe_ddc_edid], drm: skipping non-existent adapt <
+[drm:output_poll_execute], [CONNECTOR:16:HDMI-A-1] status upd <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_detect], DPCD: 0000000000000000		      <
+[drm:output_poll_execute], [CONNECTOR:17:DP-1] status updated <
+[drm:gmbus_xfer], GMBUS [i915 gmbus panel] NAK for addr: 0026 <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:ironlake_panel_vdd_off_sync], PCH_PP_STATUS: 0x80000008  <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_i2c_aux_ch], aux_ch failed -110		      <
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f    <
+[drm:intel_dp_i2c_aux_ch], aux_ch failed -110		      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return -110	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:gmbus_xfer], GMBUS [i915 gmbus dpd] NAK for addr: 0050 w <
+[drm] GMBUS [i915 gmbus dpb] timed out, falling back to bit b <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm] GMBUS [i915 gmbus dpc] timed out, falling back to bit b <
+[drm:gmbus_xfer], GMBUS [i915 gmbus panel] NAK for addr: 0050 <
+[drm:gmbus_xfer], GMBUS [i915 gmbus vga] NAK for addr: 0050 w <
+[drm:gmbus_xfer], GMBUS [i915 gmbus ssc] NAK for addr: 0050 w <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 1	      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:drm_mode_addfb], [FB:24]				      <
+[drm:intel_update_fbc], 				      <
+[drm:drm_mode_addfb], [FB:25]				      <
+[drm:intel_update_fbc], 				      <
+[drm:intel_update_fbc], 				      <
