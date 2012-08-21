@@ -157,8 +157,10 @@ int main(int argc, char *argv[])
 				fprintf(stderr, "NO crtc on encoder\n");
 			break;
 #endif
-		case 'f':
+		case 'F':
 			drm_helper_resume_force_mode(i915);
+			break;
+		case 'f':
 			intel_fbdev_init(i915);
 			break;
 		case 'p':

@@ -31,7 +31,7 @@ char *regname(unsigned long addr)
 	unsigned long truncaddr;
 
 	if (addr > nnames){
-		sprintf(name, "0x%u", addr);
+		sprintf(name, "0x%x", addr);
 		return name;
 	}
 	if (names[addr])
@@ -46,7 +46,7 @@ char *regname(unsigned long addr)
 		}
 	}
 	/* oh well ... */
-	sprintf(name, "0x%u", addr);
+	sprintf(name, "0x%x", addr);
 	return name;
 }
 
