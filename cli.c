@@ -170,6 +170,9 @@ int main(int argc, char *argv[])
 			}
 			drm_helper_probe_single_connector_modes(connector, 8192, 8192);
 			break;
+		case 'r':
+			hackattack();
+			break;
 		case 'v':
 			verbose = strtoul(&cmd[1], 0, 0);
 			break;
