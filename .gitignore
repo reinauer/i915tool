@@ -13,6 +13,7 @@ panel
 per-file-changes
 ports
 probe
+screenfromstdin
 tags
 timegttsetup
 tmp

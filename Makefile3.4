@@ -29,13 +29,14 @@ brokensource=\
 	fb.c \
 	  i2c.c
 
-OBJ=ptrace.o
+#OBJ=ptrace.o
 
 CFLAGS=
+# fucking optimization causes segvs. Crap.
 #CFLAGS+=-O2
-CFLAGS+=-finstrument-functions 
+#CFLAGS+=-finstrument-functions 
 
-all: testlight probe gttdump dumpscreen fillscreen gttbreak gttset cli edid video timegttsetup ports panel dpms g6reset testlfp
+all: testlight probe gttdump dumpscreen fillscreen screenfromstdin gttbreak gttset cli edid video timegttsetup ports panel dpms g6reset testlfp
 
 timegttsetup: timegttsetup.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o timegttsetup timegttsetup.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
@@ -79,6 +80,9 @@ gttset: gttset.c $(goodsource) video.h $(OBJ)
 dumpscreen: dumpscreen.c $(goodsource) video.h $(OBJ)
 	cc $(CFLAGS) -include video.h -static -g -o dumpscreen dumpscreen.c $(goodsource)  $(OBJ) -lpci -lrt
 
+screenfromstdin: screenfromstdin.c $(goodsource) video.h $(OBJ)
+	cc $(CFLAGS) -include video.h -static -g -o screenfromstdin screenfromstdin.c $(goodsource)  $(OBJ) -lpci -lrt
+
 fillscreen: fillscreen.c $(goodsource) video.h $(OBJ)
 	cc $(CFLAGS) -include video.h -static -g -o fillscreen fillscreen.c $(goodsource)  $(OBJ) -lpci -lrt
 
@@ -92,7 +96,7 @@ alltags:
 clean:
 	rm -f *.o video probe gttdump dumpscreen gttbreak gttset
 	rm -f edid timegttsetup ports panel dpms
-	rm -f g6reset cli
+	rm -f g6reset cli screenfromstdin
 
 moreclean:  clean
 	rm -f final/* per-file-changes/* tmp/* tags
