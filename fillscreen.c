@@ -13,22 +13,23 @@ int main(int argc, char *argv[])
 		0x3e};
 	unsigned char cycle = 0;
 	unsigned int shift = 8;
+	unsigned long fill = 0xaa559900;
 
 	init(&argc, &argv);
 
 	if (argc)
 		size = strtoul(argv[0], 0, 0);
+	if (argc > 0)
+		fill = strtoul(argv[1], 0, 0);
 
 	print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, gfx, 256);
 
 	/* we do 32M in coreboot */
 	unsigned long *x = (unsigned long *)gfx;
 	loopcount = size*1024/sizeof(*x);
-	printf("Change %d chars\n", loopcount);
+	printf("Change %d things\n", loopcount);
 	for(i = 0; i < loopcount; i++){
-		if (i == 2048*1024) shift += 8;
-		if (i == 4099*1024) shift += 8;
-		x[i] = cycle++<<shift;
+		x[i] = fill;
 	}
 	print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, gfx, 256);
 

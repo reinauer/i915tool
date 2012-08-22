@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	char *cmd;
 	void geneld(char *, u8 *);
 	init(&argc, &argv);
-	printf("suggest b,i,m,c,p,d8,f, then d0 (lo off and lO on)\n");
+	printf("known to work: i,m,c,p,f, then d0 \n");
 	while ((cmd = readline(">")) != NULL){
 		start = rdtsc();
 		switch(cmd[0]) {

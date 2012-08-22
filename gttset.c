@@ -23,15 +23,15 @@ int main(int argc, char *argv[])
 			lowbits & 1 ? ";V": ";~V");
 	}
 
-	num = aperturesize/1024;
+	num = aperturesize/4096;
 	baseM = gsmphys + 2*1024*1024;
 	if (argc)
 		baseM = 1048576*strtoul(argv[0], 0, 0);
 	printf("# PTEs is %d\n", num);
 	printf("Start of graphics pages would be %#p\n", baseM);
-	for(i = 0; i < 4*num; i += 4){
+	for(i = 0; i < num; i++){
 		u32 word = baseM + i*4096;
-		io_I915_WRITE32(i|1,word|1);
+		io_I915_WRITE32((i*4)|1,word|1);
 	}
 
 	

@@ -72054,4 +72054,61 @@ Start of graphics pages would be 0x800000
 4: [0x804003]0x804003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
 8: [0x808003]0x808003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
 12: [0x80c003]0x80c003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
-16: [0x810003]0x810003, ~GFDT, ;from gttentry, ;cac
+16: [0x810003]0x810003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+20: [0x814003]0x814003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+24: [0x818003]0x818003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+28: [0x81c003]0x81c003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+# PTEs is 262144
+Start of graphics pages would be (nil)
+]0;root@localhost:/usr/local/i915tool[01;31mlocalhost[01;34m i915tool #[00m                                                           [01;31mlocalhost[01;34m i915tool #[00m ./gg ttset 16
+0: [0x3]0x3, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+4: [0x4003]0x4003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+8: [0x8003]0x8003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+12: [0xc003]0xc003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+16: [0x10003]0x10003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+20: [0x14003]0x14003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+24: [0x18003]0x18003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+28: [0x1c003]0x1c003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+# PTEs is 262144
+Start of graphics pages would be 0x1000000
+]0;root@localhost:/usr/local/i915tool[01;31mlocalhost[01;34m i915tool #[00m                                                           [01;31mlocalhost[01;34m i915tool #[00m ./gttset 16  1024
+0: [0x1000003]0x1000003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+4: [0x1004003]0x1004003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+8: [0x1008003]0x1008003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+12: [0x100c003]0x100c003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+16: [0x1010003]0x1010003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+20: [0x1014003]0x1014003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+24: [0x1018003]0x1018003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+28: [0x101c003]0x101c003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+# PTEs is 262144
+Start of graphics pages would be 0x40000000
+]0;root@localhost:/usr/local/i915tool[01;31mlocalhost[01;34m i915tool #[00m                                                           [01;31mlocalhost[01;34m i915tool #[00m ./gttset 1024    2048
+0: [0x40000003]0x40000003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+4: [0x40004003]0x40004003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+8: [0x40008003]0x40008003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+12: [0x4000c003]0x4000c003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+16: [0x40010003]0x40010003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+20: [0x40014003]0x40014003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+24: [0x40018003]0x40018003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+28: [0x4001c003]0x4001c003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+# PTEs is 262144
+Start of graphics pages would be 0x80000000
+]0;root@localhost:/usr/local/i915tool[01;31mlocalhost[01;34m i915tool #[00m                                                           [01;31mlocalhost[01;34m i915tool #[00m ./gttset 2048
+0: [0x80000003]0x80000003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+4: [0x80004003]0x80004003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+8: [0x80008003]0x80008003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+12: [0x8000c003]0x8000c003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+16: [0x80010003]0x80010003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+20: [0x80014003]0x80014003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+24: [0x80018003]0x80018003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+28: [0x8001c003]0x8001c003, ~GFDT, ;from gttentry, ;cacheable L3, ;V
+# PTEs is 262144
+Start of graphics pages would be 0x80000000
+
+]0;root@localhost:/usr/local/i915tool[01;31mlocalhost[01;34m i915tool #[00m                                                           [01;31mlocalhost[01;34m i915tool #[00m 
+]0;root@localhost:/usr/local/i915tool[01;31mlocalhost[01;34m i915tool #[00m ./gttset 2048    0xu            
+]0;root@localhost:/usr/local/i915tool[01;31mlocalhost[01;34m i915tool #[00m 
+]0;root@localhost:/usr/local/i915tool[01;31mlocalhost[01;34m i915tool #[00m lspci -xxx -s               Write failed: Broken pipe
+]0;rminnich@myhost:~/i915tool[rminnich@myhost i915tool]$ exit
+
+Script done on Tue 21 Aug 2012 09:37:25 PM PDT
