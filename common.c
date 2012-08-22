@@ -443,7 +443,7 @@ void init(int *ac, char ***av)
 			fclose(fd);
 		}
 	}
-	/* get the base address for the mmio indirection registers -- BAR 2 */
+	/* get the base address for the mmio indirection registers -- BAR 4 */
 	addrport = i915->pdev->base_addr[4] & ~3;
 	dataport = addrport + 4;
 	iopl(3);
