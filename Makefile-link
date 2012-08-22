@@ -1,8 +1,19 @@
-link-coreboot/intel_bios.c: final/intel_bios.c spatches-link/intel_bios.c.cocci
+KERNELFILES=\
+	link-coreboot/intel_bios.c \
+	link-coreboot/i915_dma.c \
+
+# pass 1: copy the files over that we want
+pass1: 
 	cp final/intel_bios.c link-coreboot/intel_bios.c
+
+#pass2: individual changes
+pass2:
 	spatch --in-place --sp-file spatches-link/intel_bios.c.cocci link-coreboot/intel_bios.c
-	spatch --no-includes --sp-file spatches-link/printf.cocci --in-place $@
-	spatch --no-includes --in-place --sp-file spatches-link/fixcalls.cocci $@
+
+#pass3: collective changes
+pass3:
+	spatch --no-includes --sp-file spatches-link/printf.cocci --in-place $(KERNELFILES)
+	spatch --no-includes --in-place --sp-file spatches-link/fixcalls.cocci $(KERNELFILES)
 
 clean:
 	rm -f link-coreboot/intel_bios.c
