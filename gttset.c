@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	printf("Start of graphics pages would be %#p\n", baseM);
 	for(i = 0; i < 4*num; i += 4){
 		u32 word = baseM + i*4096;
-		io_I915_WRITE32(i|1,word|3);
+		io_I915_WRITE32(i|1,word|1);
 	}
 
 	
