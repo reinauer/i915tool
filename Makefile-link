@@ -1,0 +1,8 @@
+link-coreboot/intel_bios.c: final/intel_bios.c spatches-link/intel_bios.c.cocci
+	cp final/intel_bios.c link-coreboot/intel_bios.c
+	spatch --in-place --sp-file spatches-link/intel_bios.c.cocci link-coreboot/intel_bios.c
+	spatch --no-includes --sp-file spatches-link/printf.cocci --in-place $@
+	spatch --no-includes --in-place --sp-file spatches-link/fixcalls.cocci $@
+
+clean:
+	rm -f link-coreboot/intel_bios.c
