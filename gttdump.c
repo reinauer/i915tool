@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
 
 	init(&argc, &argv);
 
-	for(i = 0; i < num; i += 4){
-		u32 word = io_I915_READ32(i|1);
+	for(i = 0; i < gfxpages; i++){
+		u32 word = io_I915_READ32((i*4)|1);
 		u32 base = word & (~0xfff);
 		u16 low12bits = word & 0xfff;
 		printf("%d: [%#x]%#x, %s, %s, %s, %s\n", i, word, base, 

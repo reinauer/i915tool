@@ -12,7 +12,7 @@ alltags:
 clean:
 	rm -f *.o video probe gttdump dumpscreen gttbreak gttset
 	rm -f edid timegttsetup ports panel dpms
-	rm -f g6reset cli
+	rm -f g6reset cli fillscreen
 
 moreclean:  clean
 	rm -f final/* per-file-changes/* tmp/* tags

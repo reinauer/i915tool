@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 	char *cmd;
 	void geneld(char *, u8 *);
 	init(&argc, &argv);
+	unsigned long *plp = malloc(gfxsize);
 	printf("known to work: i,m,c,p,f, then d0 \n");
 	while ((cmd = readline(">")) != NULL){
 		start = rdtsc();
@@ -176,6 +177,34 @@ int main(int argc, char *argv[])
 		case 'v':
 			verbose = strtoul(&cmd[1], 0, 0);
 			break;
+		case 'R':
+			/* fill red but only use one page */
+		{
+			volatile unsigned long *lp = (unsigned long *)gfx;
+			int i;
+			setgtt(gsmgfx, 0);
+			for(i = 0; i < 1024; i++)
+				lp[i] = 0xff0000;
+		}
+		break;
+		case 'G':
+		{
+			volatile unsigned long *lp = (unsigned long *)gfx;
+			int i;
+			setgtt(gsmgfx, 4096);
+			for(i = 0; i < gfxsize; i++)
+				lp[i] = 0x00ff00;
+		}
+		break;
+		case 'B':
+		{
+			int i;
+			setgtt(0x80000000, 4096);
+			for(i = 0; i < gfxsize; i++)
+				plp[i] = 0x00ff;
+		}
+		break;
+			
 			
 		default: 
 			fprintf(stderr, "This program sucks too much to tell you the commands you can do\n");

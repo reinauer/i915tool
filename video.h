@@ -458,6 +458,9 @@ void *allocz(int size);
 void freez(void *p);
 
 extern u8 *gfx;
+extern u32 gsmphys;
+extern u32 gsmgfx;
+extern int gfxsize, gfxpages;
 extern u32 aperture, aperturesize;
 
 extern char *names[];

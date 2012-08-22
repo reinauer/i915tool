@@ -10,6 +10,7 @@ u8 *bios_image = NULL;
 void *mmiobase;
 u32 mmiophys;
 u32 gsmphys;
+u32 gsmgfx;
 u32 aperture, aperturesize;
 u8 *gfx;
 int mmiosize;
@@ -17,6 +18,8 @@ size_t bios_image_size;
 int gencode = 0;
 extern int cangencode;
 
+int gfxsize = (2560 * 1700);
+int gfxpages = ((2560 * 1700 * 4) + 4095)/* bytes */ / 4096 /* bytes per gtt */;
 char *names[] = {
 #include "names.c"
 };
@@ -467,9 +470,11 @@ void init(int *ac, char ***av)
 	if (verbose > 2)
 		fprintf(stderr, "mapped at %#x\n", gfx);
 	dev0 = pci_get_bus_and_slot(0,0);
-	gsmphys = pci_read_long(dev0, 0xb8);
+	printf("WARNING: using ivy specific read of for gsm: reg 0x5c\n");
+	gsmphys = pci_read_long(dev0, 0x5c);
 	/* adjust for TSEG */
 	gsmphys += 8*1024*1024;
+	gsmgfx = gsmphys + 2 * 1024 * 1024;
 	if (verbose > 2)
 		fprintf(stderr, "gsmphys is %#x\n", gsmphys);
 }
@@ -589,4 +594,21 @@ void hackattack(void)
 	I915_WRITE(0x100078,  0x0000000000000000);
 	v = I915_READ(0x145004);
 	v = I915_READ(0x145008);
+}
+
+void
+setgtt(unsigned long base, int inc)
+{
+  	int i;
+
+/*
+	printf("# PTEs is %d\n", num);
+	printf("Start of graphics pages would be %#p\n", base);
+ */
+	for(i = 0; i < gfxpages; i++){
+		u32 word = base + i*inc;
+		io_I915_WRITE32((i*4)|1,word|1);
+	}
+
+
 }
