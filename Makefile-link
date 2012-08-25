@@ -1,19 +1,37 @@
 KERNELFILES=\
 	link-coreboot/intel_bios.c \
 	link-coreboot/i915_dma.c \
+	link-coreboot/intel_i2c.c \
+	link-coreboot/intel_display.c \
+	link-coreboot/intel_dp.c \
 
 # pass 1: copy the files over that we want
+# show me how to use subst to do this, all my attempts failed.
 pass1: 
-	cp final/intel_bios.c link-coreboot/intel_bios.c
+	cp final/intel_bios.c  link-coreboot
+	cp final/i915_dma.c link-coreboot
+	cp final/intel_i2c.c link-coreboot
+	cp final/intel_display.c link-coreboot
+	cp final/intel_dp.c link-coreboot
+	cp common.c link-coreboot
+	cp i2c.c link-coreboot
+	cp names.c link-coreboot
+	
 
 #pass2: individual changes
 pass2:
 	spatch --in-place --sp-file spatches-link/intel_bios.c.cocci link-coreboot/intel_bios.c
+	spatch --in-place --sp-file spatches-link/intel_display.c.cocci link-coreboot/intel_display.c
 
 #pass3: collective changes
 pass3:
 	spatch --no-includes --sp-file spatches-link/printf.cocci --in-place $(KERNELFILES)
 	spatch --no-includes --in-place --sp-file spatches-link/fixcalls.cocci $(KERNELFILES)
+	spatch --no-includes --in-place --sp-file spatches-link/removeemptytests.cocci $(KERNELFILES)
+	spatch --no-includes --in-place --sp-file spatches-link/nostatic.cocci $(KERNELFILES)
+
+# things coccinnelle can not do for some reason. 
+pass4:
 
 clean:
-	rm -f link-coreboot/intel_bios.c
+	rm -f $(KERNELFILES)

@@ -1,0 +1,6 @@
+@@
+identifier f;
+@@
+-static
+f(...){...}
+

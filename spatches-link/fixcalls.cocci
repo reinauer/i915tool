@@ -7,15 +7,6 @@ S1
 -else
 -S2
 @@
-function f;
-@@
--static
-f(...){...}
-
-@@
-@@
--validate_cmd(...){...}
-@@
 @@
 -i915_warn_stolen(...){...}
 @@
