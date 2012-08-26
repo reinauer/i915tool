@@ -47,8 +47,8 @@ g6reset: g6reset.c $(goodsource) $(brokensource) video.h $(OBJ)
 dpms: dpms.c $(brokensource) $(goodsource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o dpms dpms.c $(brokensource) $(goodsource)  $(OBJ) -lpci  -lrt
 
-cli: cli.c $(goodsource) $(brokensource) video.h $(OBJ)
-	cc $(CFLAGS) -g -include video.h -static -g -o cli cli.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt -lreadline -lncurses
+cli: cli.c $(goodsource) $(brokensource) video.h $(OBJ) gencode.c
+	cc $(CFLAGS) -g -include video.h -static -g -o cli cli.c gencode.c $(goodsource) $(brokensource)  $(OBJ)  -lpci  -lrt -lreadline -lncurses
 
 testlfp: testlfp.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o testlfp testlfp.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt -lreadline -lncurses

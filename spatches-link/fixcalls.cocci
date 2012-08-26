@@ -7,6 +7,15 @@ S1
 -else
 -S2
 @@
+expression E;
+statement S1, S2;
+identifier out_reg;
+@@
+-if (out_reg == PCH_DP_D && ...)
+-S1
+-else
+S2
+@@
 @@
 -i915_warn_stolen(...){...}
 @@
@@ -46,4 +55,6 @@ S1;
 @@
 @@
 -freez(...);
-
+@@
+@@
+-intel_dp_i2c_init(...);

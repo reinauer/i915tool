@@ -516,6 +516,6 @@ static __inline__ unsigned long long rdtsc(void)
 
 /* useful externs */
 extern struct intel_device_info intel_ivybridge_m_info;
-
+extern FILE *gf;
 
 #endif /* VIDEO_H */

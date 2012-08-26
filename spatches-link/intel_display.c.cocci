@@ -22,6 +22,26 @@ type T;
 @@
 -T intel_limits_pineview_lvds  = {...};
 @@
+type T;
+@@
+-T intel_limits_ironlake_dac = {...};
+@@
+type T;
+@@
+-T intel_limits_ironlake_single_lvds = {...};
+@@
+type T;
+@@
+-T intel_limits_ironlake_dual_lvds = {...};
+@@
+type T;
+@@
+-T intel_limits_ironlake_dual_lvds_100m = {...};
+@@
+type T;
+@@
+-T intel_limits_ironlake_display_port = {...};
+@@
 @@
 -adpa_pipe_enabled(...){...}
 @@
@@ -167,9 +187,6 @@ type T;
 -intel_crtc_gamma_set(...){...}
 @@
 @@
--intel_crtc_init(...){...}
-@@
-@@
 -intel_crtc_load_lut(...){...}
 @@
 @@
@@ -177,9 +194,6 @@ type T;
 @@
 @@
 -intel_crtc_mode_get(...){...}
-@@
-@@
--intel_crtc_mode_set(...){...}
 @@
 @@
 -intel_crtc_reset(...){...}
@@ -272,16 +286,10 @@ type T;
 -intel_g4x_find_best_PLL(...){...}
 @@
 @@
--intel_get_load_detect_pipe(...){...}
-@@
-@@
 -intel_increase_pllclock(...){...}
 @@
 @@
 -intel_init_clock_gating(...){...}
-@@
-@@
--intel_init_display(...){...}
 @@
 @@
 -intel_init_emon(...){...}
@@ -389,9 +397,6 @@ type T;
 -ironlake_init_clock_gating(...){...}
 @@
 @@
--ironlake_init_pch_refclk(...){...}
-@@
-@@
 -ironlake_pch_enable(...){...}
 @@
 @@
@@ -432,3 +437,10 @@ type T;
 @@
 @@
 -state_string(...){...}
+@@
+identifier d;
+expresssion E1, E2;
+@@
+d = 
+-intel_limit(E1, E2);
++&intel_limits_ironlake_dual_lvds;

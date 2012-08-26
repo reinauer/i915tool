@@ -28,7 +28,8 @@ int main(int argc, char *argv[])
 	void geneld(char *, u8 *);
 	init(&argc, &argv);
 	unsigned long *plp = malloc(gfxsize);
-	printf("known to work: i,m,c,p,f, then d0 \n");
+	gf = stdout;
+	printf("known to work: m,c,p,f, then d0 \n");
 	while ((cmd = readline(">")) != NULL){
 		start = rdtsc();
 		switch(cmd[0]) {
@@ -55,6 +56,9 @@ int main(int argc, char *argv[])
 			break;
 		case 'm': 
 			i915_driver_load(i915, (unsigned long)i915->dev_private->info);
+			if (cangencode){
+				gendrmdevice(i915);
+			}
 			break;
 		case 'c':
 			
