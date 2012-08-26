@@ -17,6 +17,7 @@ int mmiosize;
 size_t bios_image_size;
 int gencode = 0;
 extern int cangencode;
+FILE *gf = NULL;
 
 int gfxsize = (2560 * 1700);
 int gfxpages = ((2560 * 1700 * 4) + 4095)/* bytes */ / 4096 /* bytes per gtt */;
@@ -406,9 +407,11 @@ void init(int *ac, char ***av)
 		if (!strcmp(argv[0], "-v"))
 			verbose++;
 		if (!strcmp(argv[0], "-C"))
-			if (cangencode)
+			if (cangencode){
 				gencode++;
-			else
+				gf = fopen("generated.c", "w");
+				fwrite("#include \"video.h\"\n", 1, 8, gf);
+			} else
 				errx(1, "You asked for gencode but this program doesn't do that");
 	}
 

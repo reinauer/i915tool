@@ -4,8 +4,9 @@
 #include <readline/history.h>
 
 extern int verbose;
+extern int gencode;
 extern struct drm_device *i915;
-int cangencode = 0;
+int cangencode = 1;
 
 int main(int argc, char *argv[])
 {
@@ -26,9 +27,9 @@ int main(int argc, char *argv[])
 	struct intel_load_detect_pipe pipe;
 	char *cmd;
 	void geneld(char *, u8 *);
+	gf = stdout;
 	init(&argc, &argv);
 	unsigned long *plp = malloc(gfxsize);
-	gf = stdout;
 	printf("known to work: m,c,p,f, then d0 \n");
 	while ((cmd = readline(">")) != NULL){
 		start = rdtsc();
@@ -56,8 +57,8 @@ int main(int argc, char *argv[])
 			break;
 		case 'm': 
 			i915_driver_load(i915, (unsigned long)i915->dev_private->info);
-			if (cangencode){
-				gendrmdevice(i915);
+			if (gencode){
+				//gendrmdevice(i915);
 			}
 			break;
 		case 'c':
@@ -155,6 +156,12 @@ int main(int argc, char *argv[])
 			//intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
 			//void gen6_fdi_link_train(struct drm_crtc *crtc) ;
 			crtc = encoder->crtc;
+			if (gencode){
+				/* the intel code does not seem to use
+				 * the connector
+				 */
+				genencoder(encoder, "encoder", "root");
+			}
 			break;
 			if (crtc)
 				intel_crt_load_detect(to_intel_crtc(crtc));
