@@ -1,6 +1,6 @@
 @@
 identifier d;
-function f;
+identifier f;
 expression E;
 @@
 f(...){<...

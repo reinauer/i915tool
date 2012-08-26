@@ -283,9 +283,6 @@ type T;
 -intel_framebuffer_size_for_mode(...){...}
 @@
 @@
--intel_g4x_find_best_PLL(...){...}
-@@
-@@
 -intel_increase_pllclock(...){...}
 @@
 @@

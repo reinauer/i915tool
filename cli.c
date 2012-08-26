@@ -148,6 +148,12 @@ int main(int argc, char *argv[])
 			else {
 				fprintf(stderr, "no crtc!\n");
 			}
+			if (gencode){
+				/* the intel code does not seem to use
+				 * the connector
+				 */
+				genencoder(encoder, "encoder", "NULL");
+			}
 			if (lvds)
 				intel_lvds_dpms(encoder, level);
 			else
@@ -156,12 +162,6 @@ int main(int argc, char *argv[])
 			//intel_get_load_detect_pipe(to_intel_encoder(encoder), connector, mode,&pipe);
 			//void gen6_fdi_link_train(struct drm_crtc *crtc) ;
 			crtc = encoder->crtc;
-			if (gencode){
-				/* the intel code does not seem to use
-				 * the connector
-				 */
-				genencoder(encoder, "encoder", "root");
-			}
 			break;
 			if (crtc)
 				intel_crt_load_detect(to_intel_crtc(crtc));
@@ -174,6 +174,10 @@ int main(int argc, char *argv[])
 			break;
 		case 'f':
 			intel_fbdev_init(i915);
+			if (gencode){
+				genframebuffer(&i915->dev_private->fbdev->ifb, 
+					"struct drm_framebuffer framebuffer = {", "non");
+			}
 			break;
 		case 'p':
 			if (! connector){

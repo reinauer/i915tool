@@ -29,6 +29,10 @@ brokensource=\
 	fb.c \
 	  i2c.c
 
+link-corebootsource=\
+	common.c \
+	link-coreboot/intel_display.c \
+
 #OBJ=ptrace.o
 
 CFLAGS=
@@ -36,7 +40,7 @@ CFLAGS=
 #CFLAGS+=-O2
 #CFLAGS+=-finstrument-functions 
 
-all: testlight probe gttdump dumpscreen fillscreen screenfromstdin gttbreak gttset cli edid video timegttsetup ports panel dpms g6reset testlfp
+all: testlight probe gttdump dumpscreen fillscreen screenfromstdin gttbreak gttset cli coreboot edid video timegttsetup ports panel dpms g6reset testlfp
 
 timegttsetup: timegttsetup.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o timegttsetup timegttsetup.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt
@@ -49,6 +53,9 @@ dpms: dpms.c $(brokensource) $(goodsource) video.h $(OBJ)
 
 cli: cli.c $(goodsource) $(brokensource) video.h $(OBJ) gencode.c
 	cc $(CFLAGS) -g -include video.h -static -g -o cli cli.c gencode.c $(goodsource) $(brokensource)  $(OBJ)  -lpci  -lrt -lreadline -lncurses
+
+coreboot: coreboot.c $(link-corebootsource)  video.h generated.c
+	cc $(CFLAGS) -g -include video.h -static -g -o coreboot coreboot.c $(linke-corebootsource)   -lpci  -lrt -lreadline -lncurses
 
 testlfp: testlfp.c $(goodsource) $(brokensource) video.h $(OBJ)
 	cc $(CFLAGS) -g -include video.h -static -g -o testlfp testlfp.c $(goodsource) $(brokensource)  $(OBJ) -lpci  -lrt -lreadline -lncurses

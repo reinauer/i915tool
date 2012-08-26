@@ -408,9 +408,10 @@ void init(int *ac, char ***av)
 			verbose++;
 		if (!strcmp(argv[0], "-C"))
 			if (cangencode){
+				char *include = "#include \"video.h\"\n";
 				gencode++;
 				gf = fopen("generated.c", "w");
-				fwrite("#include \"video.h\"\n", 1, 8, gf);
+				fwrite(include, 1, strlen(include), gf);
 			} else
 				errx(1, "You asked for gencode but this program doesn't do that");
 	}

@@ -500,3 +500,8 @@ expression E;
 @@
 @@
 -destroy_workqueue(...);
+@@
+identifer f;
+@@
+-static
+f(...){...}

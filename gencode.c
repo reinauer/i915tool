@@ -4,31 +4,31 @@
 void genintelcrtc(struct intel_crtc *c, char *decl, char *container)
 {
   if (! c){
-	  fprintf(gf, "%s = {};\n", decl);
+	  fprintf(gf, "};\n", decl);
 	  return;
   }
-  fprintf(gf, "%s = {\n", decl);
-	fprintf(gf, "\t.pipe = %d\n", c->pipe);
-	fprintf(gf, "\t.plane = %d\n", c->plane);
+  fprintf(gf, "%s\n", decl);
+	fprintf(gf, "\t.pipe = %d,\n", c->pipe);
+	fprintf(gf, "\t.plane = %d,\n", c->plane);
 	/* skip for now 
 	u8 lut_r[256], lut_g[256], lut_b[256];
 	*/
-	fprintf(gf, "\t.dpms_mode = %d\n", c->dpms_mode);
+	fprintf(gf, "\t.dpms_mode = %d,\n", c->dpms_mode);
 	/* never active ... */
 	
-	fprintf(gf, "\t.active = %d\n", c->active);
-	fprintf(gf, "\t.busy = %d\n", c->busy);
-	fprintf(gf, "\t.lowfreq_avail = %d\n", c->lowfreq_avail);
-	fprintf(gf, "\t.fdi_lanes = %d\n", c->fdi_lanes);
+	fprintf(gf, "\t.active = %d,\n", c->active);
+	fprintf(gf, "\t.busy = %d,\n", c->busy);
+	fprintf(gf, "\t.lowfreq_avail = %d,\n", c->lowfreq_avail);
+	fprintf(gf, "\t.fdi_lanes = %d,\n", c->fdi_lanes);
 	/* matters not
 	uint32_t cursor_addr;
 	int16_t cursor_x, cursor_y;
 	int16_t cursor_width, cursor_height;
 	bool cursor_visible;
 	*/
-	fprintf(gf, "\t.bpp = %d\n", c->bpp);
-	fprintf(gf, "\t.no_pll = %d\n", c->no_pll);
-	fprintf(gf, "\t.use_pll_a = %d\n", c->use_pll_a);
+	fprintf(gf, "\t.bpp = %d,\n", c->bpp);
+	fprintf(gf, "\t.no_pll = %d,\n", c->no_pll);
+	fprintf(gf, "\t.use_pll_a = %d,\n", c->use_pll_a);
 	fprintf(gf, "};\n");
 
 }
@@ -131,12 +131,12 @@ static void gencrtc(struct drm_crtc *c, char *decl, char *container)
 		fprintf(gf, "%s = {};\n", decl);
 		return;
 	}
-	genintelcrtc(to_intel_crtc(c), "intelcrtc", container);
+	genintelcrtc(to_intel_crtc(c), "struct intel_crtc intelcrtc={\n", 
+			container);
 	fprintf(gf, "%s ", decl);
 	genmodeconfig(&c->mode, ".mode = {",  NULL);
 	genmodeconfig(&c->hwmode, ".hwmode = {", NULL);
 	fprintf(gf, "\t.x=%d,.y=%d\n", c->x, c->y);
-	fprintf(gf, "\t.fb = &framebuffer\n");
 	fprintf(gf, "};\n");
 	
 }
@@ -147,24 +147,47 @@ void genintelencoder(struct intel_encoder *i, char *decl, char *container)
 		fprintf(gf, "%s };\n", decl);
 		return;
 	}
-	fprintf(gf, "%s .base = %s\n", decl, container);
-	fprintf(gf, "\t.type=%d\n", i->type);
-	fprintf(gf, "\t.needs_tv_clock=%d\n", i->needs_tv_clock);
-	fprintf(gf, "\t.crtc_mask=%d\n", i->needs_tv_clock);
-	fprintf(gf, "\t.clone_mask=%d\n", i->needs_tv_clock);
+	fprintf(gf, "\t.type=%d,\n", i->type);
+	fprintf(gf, "\t.needs_tv_clock=%d,\n", i->needs_tv_clock);
+	fprintf(gf, "\t.crtc_mask=%d,\n", i->needs_tv_clock);
+	fprintf(gf, "\t.clone_mask=%d,\n", i->needs_tv_clock);
 	fprintf(gf, "};\n");
 }
 void genencoder(struct drm_encoder *e, char *myname, char *container)
 {
 	if (! e)
 		return;
-	genintelencoder(to_intel_encoder(e), "struct intel_encoder intel_encoder = {", myname);
 	gencrtc(e->crtc, "struct drm_crtc crtc = {", container);
-	fprintf(gf, "struct drm_encoder %s = {.dev = %s\n", myname, container);
-	fprintf(gf, "\t.encoder_type = %d\n", e->encoder_type);
-	fprintf(gf, "\t.crtc = crtc\n");
-	fprintf(gf, "\t.possible_crtcs=%ld, .possible_clones=%d\n",
+	fprintf(gf, "struct intel_encoder intelencoder = {");
+	fprintf(gf, ".base = {.dev = %s,\n", container);
+	fprintf(gf, "\t.encoder_type = %d,\n", e->encoder_type);
+	fprintf(gf, "\t.crtc = &crtc,\n");
+	fprintf(gf, "\t.possible_crtcs=%ld, .possible_clones=%d,\n",
 		e->possible_crtcs, e->possible_clones);
-	fprintf(gf, "};\n");
+	fprintf(gf, "},\n");
+	genintelencoder(to_intel_encoder(e), "", myname);
 	/* no idea now to do the functions yet */
+}
+
+void genframebuffer(struct drm_framebuffer *f, char *decl, char *container)
+{
+	if (! f){
+		fprintf(gf, "%s };\n", decl);
+		return;
+	}
+	fprintf(gf, "%s \n", decl);
+	//gprintf{gf, ".dev = \"%s\",\n", container);
+	//struct drm_mode_object base;
+	//const struct drm_framebuffer_funcs *funcs;
+	fprintf(gf, "\t.pitches = {%d, %d, %d, %d},\n", 
+		f->pitches[0], f->pitches[2], f->pitches[2], f->pitches[3]);
+
+	fprintf(gf, "\t.offsets = {%d, %d, %d, %d},\n", 
+		f->offsets[0], f->offsets[2], f->offsets[2], f->offsets[3]);
+	fprintf(gf, "\t.width=%u, .height=%u, .depth=%u,\n", 
+		f->width, f->height, f->depth);
+	fprintf(gf, "\t.bits_per_pixel=%d, .flags=%d,\n", f->bits_per_pixel,
+		f->flags);
+	fprintf(gf, "\t.pixel_format=0x%x,\n", f->pixel_format);
+	fprintf(gf, "};\n");
 }

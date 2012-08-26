@@ -1,9 +1,18 @@
+link-corebootsource=\
+	common.c \
+	link-coreboot/intel_display.c \
+
 KERNELFILES=\
 	link-coreboot/intel_bios.c \
 	link-coreboot/i915_dma.c \
 	link-coreboot/intel_i2c.c \
 	link-coreboot/intel_display.c \
 	link-coreboot/intel_dp.c \
+
+all: coreboot
+
+coreboot: coreboot.c $(link-corebootsource)  video.h generated.c
+	cc $(CFLAGS) -g -include video.h -static -g -o coreboot coreboot.c $(link-corebootsource)   -lpci  -lrt -lreadline -lncurses
 
 # pass 1: copy the files over that we want
 # show me how to use subst to do this, all my attempts failed.
