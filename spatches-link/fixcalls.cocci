@@ -58,3 +58,12 @@ S1;
 @@
 @@
 -intel_dp_i2c_init(...);
+@@
+identifier f;
+identifier s;
+type T;
+@@
+-T f(...,struct drm_connector *s,...){...}
+@@
+@@
+-drm_mode_debug_printmodeline(...);

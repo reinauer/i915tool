@@ -1,13 +1,23 @@
 link-corebootsource=\
 	common.c \
+	pci.c i2c.c hexdump.c\
 	link-coreboot/intel_display.c \
+	link-coreboot/intel_dp.c \
+	link-coreboot/i915_drv.c \
+	link-coreboot/drm_modes.c \
+	link-coreboot/intel_panel.c\
+	link-coreboot/drm_dp_i2c_helper.c\
 
 KERNELFILES=\
 	link-coreboot/intel_bios.c \
 	link-coreboot/i915_dma.c \
+	link-coreboot/i915_drv.c \
 	link-coreboot/intel_i2c.c \
 	link-coreboot/intel_display.c \
 	link-coreboot/intel_dp.c \
+	link-coreboot/drm_modes.c \
+	link-coreboot/intel_panel.c\
+	link-coreboot/drm_dp_i2c_helper.c\
 
 all: coreboot
 
@@ -18,10 +28,14 @@ coreboot: coreboot.c $(link-corebootsource)  video.h generated.c
 # show me how to use subst to do this, all my attempts failed.
 pass1: 
 	cp final/intel_bios.c  link-coreboot
-	cp final/i915_dma.c link-coreboot
-	cp final/intel_i2c.c link-coreboot
-	cp final/intel_display.c link-coreboot
-	cp final/intel_dp.c link-coreboot
+	cp final/i915_dma.c  link-coreboot
+	cp final/i915_drv.c  link-coreboot
+	cp final/intel_i2c.c  link-coreboot
+	cp final/intel_display.c  link-coreboot
+	cp final/intel_dp.c  link-coreboot
+	cp final/drm_modes.c  link-coreboot
+	cp final/intel_panel.c link-coreboot
+	cp final/drm_dp_i2c_helper.c link-coreboot
 	cp common.c link-coreboot
 	cp i2c.c link-coreboot
 	cp names.c link-coreboot
@@ -31,13 +45,15 @@ pass1:
 pass2:
 	spatch --in-place --sp-file spatches-link/intel_bios.c.cocci link-coreboot/intel_bios.c
 	spatch --in-place --sp-file spatches-link/intel_display.c.cocci link-coreboot/intel_display.c
+	spatch --in-place --sp-file spatches-link/intel_dp.c.cocci link-coreboot/intel_dp.c
 
 #pass3: collective changes
+# not now
+#	spatch --no-includes --sp-file spatches-link/printf.cocci --in-place $(KERNELFILES)
 pass3:
-	spatch --no-includes --sp-file spatches-link/printf.cocci --in-place $(KERNELFILES)
 	spatch --no-includes --in-place --sp-file spatches-link/fixcalls.cocci $(KERNELFILES)
-	spatch --no-includes --in-place --sp-file spatches-link/removeemptytests.cocci $(KERNELFILES)
 	spatch --no-includes --in-place --sp-file spatches-link/nostatic.cocci $(KERNELFILES)
+#	spatch --no-includes --in-place --sp-file spatches-link/removeemptytests.cocci $(KERNELFILES)
 
 # things coccinnelle can not do for some reason. 
 pass4:
