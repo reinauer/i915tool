@@ -5233,6 +5233,7 @@
 {M, 1, "[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on"},
 {R, 1, "", PCH_PP_CONTROL, 0xabcd0008, },
 //{V, 7,},
+#if 0
 {M, 1, "[drm:ironlake_edp_panel_vdd_on], eDP VDD already on"},
 {R, 1, "", PCH_PP_STATUS, 0x00000000, },
 {R, 1, "", PCH_PP_CONTROL, 0xabcd0008, },
@@ -5851,6 +5852,7 @@
 {R, 1, "", DPA_AUX_CH_DATA1, 0x00000080, },
 {R, 1, "", DPA_AUX_CH_DATA2, 0x02222200, },
 {M, 1, "[drm:intel_dp_start_link_train], too many full retries, give up"},
+#endif
 {M, 1, "[drm:ironlake_edp_panel_on], Turn eDP power on"},
 {R, 1, "", PCH_PP_STATUS, 0x00000000, },
 {M, 1, "[drm:ironlake_wait_panel_power_cycle], Wait for panel power cycle"},

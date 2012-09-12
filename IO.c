@@ -2,6 +2,11 @@
 #include <sys/io.h>
 #include <time.h>
 #include <sys/time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+
 #include "final/i915_reg.h"
 
 int verbose = 0;
@@ -10,6 +15,22 @@ enum {
 	vmsg = 1, vio = 2, vspin = 4,
 };
 
+void *
+mapit(unsigned long phys, unsigned long size)
+{
+        void *virt;
+        int kfd;
+        kfd = open("/dev/mem", O_RDWR);
+        if (kfd < 0)
+                errx(1, "/dev/mem");
+        virt = mmap(NULL, size, PROT_WRITE|PROT_READ, MAP_SHARED, kfd, phys);
+        close(kfd);
+        if ((void *)-1 == virt)
+                errx(1, "mmap");
+        return virt;
+}
+
+unsigned char *membase = NULL;
 unsigned short addrport = 0x1000;
 unsigned short dataport = 0x1000 +4;
 char *names[] = {
@@ -182,6 +203,7 @@ int main(int argc, char *argv[])
 		if (*argv[0] == 'c') calibratetsc();
 		argc--,argv++;
 	}
+	membase = mapit(0xe0000000, 0x400000);
 	iopl(3);
 	globalstart = rdtsc();
 
@@ -213,7 +235,7 @@ int main(int argc, char *argv[])
 			if (verbose & vio)printf("%s: outl %08x\n", regname(id->addr), id->data);
 			io_i915_WRITE32(id->data, id->addr);
 			if (id->addr == PCH_PP_CONTROL)
-				udelay(200000);
+				udelay(100000);
 			break;
 		case V:
 			if (id->count < 8){
