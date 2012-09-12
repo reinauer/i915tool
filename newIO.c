@@ -104,6 +104,7 @@
 {M, 1, "[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1"},
 {R, 1, "", BLC_PWM_CPU_CTL, 0x000010ce, },
 {M, 1, "[drm:intel_panel_get_backlight], get backlight PWM = 4302"},
+#if 0
 {R, 1, "", HDMIB, 0x00000018, },
 {R, 1, "", HDMIC, 0x00000018, },
 {R, 1, "", HDMID, 0x0000001c, },
@@ -116,7 +117,6 @@
 {R, 6, "", PCH_DPD_AUX_CH_CTL, 0x8145003f,  100},
 {R, 1, "", PCH_DPD_AUX_CH_CTL, 0x5145003f, },
 /* we're up to here. It seems we need to beat on DPDDC-D just once. So we do. */
-#if 0
 {W, 1, "", PCH_DPD_AUX_CH_CTL, 0x5345003f, },
 {W, 1, "", PCH_DPD_AUX_CH_DATA1, 0x40000000, },
 {W, 1, "", PCH_DPD_AUX_CH_CTL, 0xd235003f, },
@@ -165,8 +165,8 @@
 {W, 1, "", PCH_DPD_AUX_CH_CTL, 0xd235003f, },
 {R, 6, "", PCH_DPD_AUX_CH_CTL, 0x8145003f,  100},
 {R, 1, "", PCH_DPD_AUX_CH_CTL, 0x5145003f, },
-#endif
 {W, 1, "", PCH_DPD_AUX_CH_CTL, 0x5345003f, },
+#endif
 {M, 1, "[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f"},
 {M, 1, "[drm:intel_dp_i2c_aux_ch], aux_ch failed -110"},
 {M, 1, "[drm:ironlake_init_pch_refclk], has_panel 1 has_lvds 0 has_pch_edp 0 has_cpu_edp 1 has_ck505 0"},
@@ -220,6 +220,7 @@
 {M, 1, "[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on"},
 {R, 1, "", PCH_PP_CONTROL, 0xabcd0008, },
 {M, 1, "[drm:ironlake_edp_panel_vdd_on], eDP VDD already on"},
+#if 0
 {R, 1, "", PCH_PP_STATUS, 0x00000000, },
 {R, 1, "", PCH_PP_CONTROL, 0xabcd0008, },
 {R, 1, "", PCH_PP_STATUS, 0x00000000, },
@@ -3246,11 +3247,13 @@
 {W, 1, "", DPA_AUX_CH_CTL, 0x521500c8, },
 {R, 1, "", DPA_AUX_CH_DATA1, 0x00000000, },
 {M, 1, "[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2"},
+#endif
 {M, 1, "[drm:drm_edid_to_eld], ELD:no CEA Extension found"},
 {M, 1, "[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1"},
 {M, 1, "[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:6:eDP-1] probed modes :"},
 {M, 1, "[drm:drm_mode_debug_printmodeline], Modeline 0:\"2560x1700\" 60 285250 2560 2608 2640 2720 1700 1703 1713 1749 0x48 0xa"},
 {M, 1, "[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:8:DP-1]"},
+#if 0
 {R, 1, "", PCH_DPD_AUX_CH_CTL, 0x0145003f, },
 {W, 1, "", PCH_DPD_AUX_CH_DATA1, 0x9000000e, },
 {W, 1, "", PCH_DPD_AUX_CH_CTL, 0xd245003f, },
@@ -3334,6 +3337,7 @@
 {M, 1, "[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f"},
 {M, 1, "[drm:intel_dp_detect], DPCD:0000000000000000"},
 {M, 1, "[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:8:DP-1] disconnected"},
+#endif
 //{V, 7,},
 {M, 1, "[drm:drm_setup_crtcs], "},
 {M, 1, "[drm:drm_enable_connectors], connector 6 enabled? yes"},
