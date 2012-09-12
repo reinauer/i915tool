@@ -4,9 +4,12 @@
 #include <sys/time.h>
 #include "final/i915_reg.h"
 
-int vmsg = 0;
-int vio = 0;
-int vspin = 0;
+int verbose = 0;
+
+enum {
+	vmsg = 1, vio = 2, vspin = 4,
+};
+
 unsigned short addrport = 0x1000;
 unsigned short dataport = 0x1000 +4;
 char *names[] = {
@@ -60,7 +63,7 @@ unsigned long msecs(void)
 		gettimeofday(&start, NULL);
 	gettimeofday(&now, NULL);
 	j = (now.tv_sec - start.tv_sec)*1000 + (now.tv_usec-start.tv_usec)/1000;
-	if (vio > 0)
+	if (verbose & vio)
 		fprintf(stderr, "MS: %ld\n", j);
 	return j;
 }
@@ -74,8 +77,8 @@ mdelay(unsigned long ms)
 		;
 }
 
-static unsigned long tickspermicrosecond = 1000;
-
+static unsigned long tickspermicrosecond = 1795;
+static unsigned long long globalstart;
 void
 calibratetsc(void)
 {
@@ -87,6 +90,7 @@ calibratetsc(void)
 	/* convert to ticks per microsecond -- 10M microseconds */
 	tickspermicrosecond = (end - start) / 10000000;
 	fprintf(stderr, "Done: tickspermicrosecond = %ld\n", tickspermicrosecond);
+	globalstart = rdtsc();
 }
 
 unsigned long
@@ -97,11 +101,16 @@ microseconds(unsigned long long start, unsigned long long end)
 	return ret;
 }
 
+unsigned long globalmicroseconds(void)
+{
+	return microseconds(globalstart, rdtsc());
+}
+
 void udelay(int i)
 {
 	unsigned long long end;
 
-	if (vio > 0)
+	if (verbose & vio)
 		fprintf(stderr, "UDELAY %d!\n", i);
 	end = rdtsc() + i * tickspermicrosecond;
 	while (rdtsc() < end)
@@ -125,6 +134,8 @@ void io_i915_WRITE32(unsigned long val, unsigned long addr)
 #define M 1
 #define R 2
 #define W 3
+#define V 4
+#define I 8
 
 struct iodef {
 	unsigned char op;
@@ -159,28 +170,30 @@ Edit ,s/\+ */+0x/g
 #endif
 int main(int argc, char *argv[])
 {
-	int i;
+	int i, prev = 0;
 	unsigned long lastreadindex;
 	struct iodef *id = iodefs, *lastidread;
 	unsigned long u, t;
 	argc--,argv++;
 	while (argc){
-		if (*argv[0] == 'm') vmsg++;
-		if (*argv[0] == 'i') vio++;
-		if (*argv[0] == 's') vspin++;
+		if (*argv[0] == 'm') verbose |= vmsg;
+		if (*argv[0] == 'i') verbose |= vio;
+		if (*argv[0] == 's') verbose |= vspin;
+		if (*argv[0] == 'c') calibratetsc();
 		argc--,argv++;
 	}
 	iopl(3);
+	globalstart = rdtsc();
 
 	/* state machine! */
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
 		switch(id->op){
 		case M:
-			if (vmsg) printf("%s\n", id->msg);
+			if (verbose & vmsg) printf("%d: %s\n", globalmicroseconds(), id->msg);
 			break;
 		case R:
 			u = io_i915_READ32(id->addr);
-			if (vio)printf("%s: Got %08x, expect %08x\n", 
+			if (verbose & vio)printf("%s: Got %08x, expect %08x\n", 
 				regname(id->addr), u, id->data);
 			/* we're looking for something. */
 			if (lastidread->addr == id->addr){
@@ -190,15 +203,27 @@ int main(int argc, char *argv[])
 				for(t = 0; t < 1000 && id->data != u; t++){
 					u = io_i915_READ32(id->addr);
 				}
-				if (vspin) printf("%s: # loops %d got %08x want %08x\n",	
+				if (verbose & vspin) printf("%s: # loops %d got %08x want %08x\n",	
 						regname(id->addr),
 						t, u, id->data);
 			}
 			lastidread = id;
 			break;
 		case W:
-			if (vio)printf("%s: outl %08x\n", regname(id->addr), id->data);
+			if (verbose & vio)printf("%s: outl %08x\n", regname(id->addr), id->data);
 			io_i915_WRITE32(id->data, id->addr);
+			if (id->addr == PCH_PP_CONTROL)
+				udelay(200000);
+			break;
+		case V:
+			if (id->count < 8){
+				prev = verbose;
+				verbose = id->count;
+			} else {
+				verbose = prev;
+			}
+			break;
+		case I:
 			break;
 		default:
 			printf("BAD TABLE, opcode %d @ %d\n", id->op, i);
@@ -207,4 +232,6 @@ int main(int argc, char *argv[])
 		if (id->udelay)
 			udelay(id->udelay);
 	}
+
+	printf("%d microseconds\n", globalmicroseconds());
 }

@@ -36,11 +36,8 @@ int main(int argc, char *argv[])
 		switch(cmd[0]) {
 		case 'd':
 			intel_dp_prepare(&encoder);
-			//intel_crtc_mode_set (&crtc, &crtc.mode, &crtc.hwmode,
-				//0, 0, NULL);
-			break;
-		case 'v':
-			verbose = strtoul(&cmd[1], 0, 0);
+			intel_crtc_mode_set (&crtc, &crtc.mode, &crtc.hwmode,
+				0, 0, NULL);
 			break;
 		case 'R':
 			/* fill red but only use one page */
