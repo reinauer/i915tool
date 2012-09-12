@@ -9411,7 +9411,7 @@
 {R, 1, "", DPA_AUX_CH_CTL, 0x401500c8, },
 {W, 1, "", DPA_AUX_CH_CTL, 0x521500c8, },
 {R, 1, "", DPA_AUX_CH_DATA1, 0x00000000, },
-{V, 7,},
+//{V, 7,},
 {M, 1, "[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2"},
 {M, 1, "[drm:drm_edid_to_eld], ELD:no CEA Extension found"},
 {M, 1, "[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1"},
@@ -9926,6 +9926,7 @@
 {M, 1, "[drm:intel_wait_for_vblank], vblank wait timed out"},
 {M, 1, "[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on"},
 {R, 1, "", PCH_PP_CONTROL, 0xabcd0008, },
+//{V, 7,},
 {M, 1, "[drm:ironlake_edp_panel_vdd_on], eDP VDD already on"},
 {R, 1, "", PCH_PP_STATUS, 0x00000000, },
 {R, 1, "", PCH_PP_CONTROL, 0xabcd0008, },
@@ -10558,6 +10559,7 @@
 {R, 16983, "", PCH_PP_STATUS, 0x9000000a, },
 {R, 17839, "", PCH_PP_STATUS, 0x90000009, },
 {R, 1, "", PCH_PP_STATUS, 0x80000008, },
+//{V, 7,},
 {M, 1, "[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1"},
 {R, 2, "", PCH_PP_CONTROL, 0xabcd000b, },
 {W, 1, "", PCH_PP_CONTROL, 0xabcd0003, },
@@ -10883,7 +10885,7 @@
 {M, 1, "[drm:intel_wait_for_vblank], vblank wait timed out"},
 {M, 1, "[drm:intel_dp_mode_fixup], Display port link bw 0a lane count 4 clock 270000"},
 {M, 1, "[drm:drm_crtc_helper_set_mode], [CRTC:3]"},
-
+#if 0
 {M, 1, "[drm:ironlake_edp_backlight_off], "},
 {R, 1, "", PCH_PP_CONTROL, 0xabcd0007, },
 {W, 1, "", PCH_PP_CONTROL, 0xabcd0003, },
@@ -12282,3 +12284,4 @@
 {W, 1, "", PCH_PP_CONTROL, 0xabcd000f, },
 {R, 1, "", PCH_PP_CONTROL, 0xabcd000f, },
 
+#endif
