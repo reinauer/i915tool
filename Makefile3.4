@@ -93,6 +93,9 @@ screenfromstdin: screenfromstdin.c $(goodsource) video.h $(OBJ)
 fillscreen: fillscreen.c $(goodsource) video.h $(OBJ)
 	cc $(CFLAGS) -include video.h -static -g -o fillscreen fillscreen.c $(goodsource)  $(OBJ) -lpci -lrt
 
+loadimage: loadimage.c $(goodsource) video.h $(OBJ)
+	cc $(CFLAGS) -include video.h -static -g -o loadimage loadimage.c $(goodsource)  $(OBJ) -lpci -lrt
+
 ptrace.o: etrace-2.1/src/ptrace.c
 	cc -c $<
 
