@@ -13,7 +13,7 @@
 #include <linux/types.h>
 #include <errno.h>
 
-unsigned long *gfx = NULL;
+unsigned int *gfx = NULL;
 unsigned long membase = 0xd0000000;
 unsigned long memsize = 32 * 1024 * 1024;
 unsigned long physbase;
@@ -66,37 +66,46 @@ void io_I915_WRITE32(unsigned long addr, unsigned long val)
 }
 
 /* the address is assumed to point to the start of the page */
-void onepage(unsigned long *address, unsigned long *data, int xsize)
+void onepage(unsigned int *address, unsigned int *data, int xsize)
 {
 	unsigned long offset;
 	unsigned long page;
 	unsigned long pageoffset;
 	int i, amt, size;
-	/* get an offset */
-	offset = address - gfx;
+
+	/* we need to remap this page. Figure out which page it is
+	 * and set it up
+	 */
+	/* get a BYTE offset */
+	offset = (unsigned long)address - (unsigned long)gfx;
 	/* this one thing has to be in units of bytes  -- so use byte pagesize*/
 	page = offset >> 12;
 	/* our target is pointing to the common page area. 
 	 * make it point to the separate page area
 	 */
-	io_I915_WRITE32((page)|1,(physbase + offset)|1);
+	io_I915_WRITE32((page*4)|1,(physbase + offset)|1);
 	/* OK, now, figure out how far we are into the page
 	 * and fill the space with white. 
 	 */
-	pageoffset = offset & (1024-1);
+	offset = ((unsigned long)address)&0xfff;
+	/* that's a byte offset. Make it a long index. */
+	pageoffset = offset >>2;
+	/* and make our address a page-aligned address */
+	address = (unsigned int *) (((unsigned long)address>>12)<<12);
 	for(i = 0; i < pageoffset; i++){
 		if (fakeit)
 			printf("%p = 0xffffff\n", &address[i]);
 		else
 			address[i] = 0xffffff;
 	}
-	for(size = 0; size < xsize; size++){
+	for(size = 0; size < xsize; size++, i++){
 		if (fakeit)
 			printf("%p = %08lx\n", &address[i], *data++);
 		else
 			address[i] = *data++;
 	}
-	for(;size < 1024; size++){
+	/* fill out the rest of the page with white */
+	for(;size < 1024; size++, i++){
 		if (fakeit)
 			printf("%p = 0xffffff\n", &address[i]);
 		else
@@ -104,7 +113,11 @@ void onepage(unsigned long *address, unsigned long *data, int xsize)
 	}
 }
 
-void oneline(unsigned long *address, unsigned long *data, int xsize)
+
+/* goal: grab bits of the image that we're almost always
+ * ripping off page-sized bits
+ */
+void oneline(unsigned int *address, unsigned int *data, int xsize)
 {
 	int size, amt;
 	unsigned long start, end;
@@ -112,21 +125,34 @@ void oneline(unsigned long *address, unsigned long *data, int xsize)
 		/* figure out how much remains */
 		start = (unsigned long) address;
 		/* set round to end of this page at most */
-		end = (((start + xsize)>>pagesize)<<pagesize);
+		/* end is a BYTE address */
+		/* end will have at most the value of the start of the
+		 * NEXT page
+		 */
+		end = (((start + 4095 + xsize*4)>>12)<<12);
+		/* compute amount in bytes */
 		amt = end - start;
+		/* convert to words */
+		amt >>= 2;
+		/* maybe it's too much */
+		amt = amt > xsize ? xsize : amt;
 		
 		onepage(address, data, amt);
+
+		/* the goal is that we've rounded up to a page 
+		 * and now tear off page-sized chunks
+		 */
 		size += amt;
 		address += amt;
 		data += amt;
 	}
 }
 	
-void image(unsigned long *address, unsigned long *data, int x, int y, int xsize, int ysize)
+void image(unsigned int *address, unsigned int *data, int x, int y, int xsize, int ysize)
 {
 	int yamt, xamt;
-	for(; yamt < ysize; yamt++){
-		oneline(&address[x], data, xsize);
+	for(yamt = 0; yamt < ysize; yamt++){
+		oneline(&address[y*2560 + x], data, xsize);
 		address += 2560;
 		data += xsize;
 	}
@@ -134,9 +160,9 @@ void image(unsigned long *address, unsigned long *data, int x, int y, int xsize,
 	
 int main(int argc, char *argv[])
 {
-	int i;
+	int i = 0;
 
-	static unsigned long black[1048576];
+	static unsigned int black[1048576];
 
 	if (argc > 1)
 		fakeit++;
@@ -151,5 +177,15 @@ int main(int argc, char *argv[])
 	printf("Start of graphics pages would be %#p\n", physbase);
 
 	/* The black rect. */
-	image(gfx, black, 512, 512, 512, 512);
+	printf("image(gfx, black, 511, 1024, 1, 1);\n");image(gfx, black, 511, 1024, 1, 1);
+	printf("NEXT %d\n", i++);
+	printf("image(gfx, black, 1024, 1024, 1, 1);\n");image(gfx, black, 1024, 1024, 1, 1);
+	printf("NEXT %d\n", i++);
+	printf("image(gfx, black, 1024, 1024, 3, 1);\n");image(gfx, black, 1024, 1024, 3, 1);
+	printf("NEXT %d\n", i++);
+	printf("image(gfx, black, 1027, 1024, 3, 1);\n");image(gfx, black, 1027, 1024, 3, 1);
+	printf("NEXT %d\n", i++);
+	printf("image(gfx, black, 1024, 1024, 2000, 1);\n");image(gfx, black, 1024, 1024, 2000, 1);
+	printf("NEXT %d\n", i++);
+	printf("image(gfx, black, 1024, 1024, 2000, 15);\n");image(gfx, black, 1024, 1024, 2000, 15);
 }
