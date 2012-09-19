@@ -20,6 +20,7 @@ unsigned long physbase;
 int gfxpages = 4250;
 /* pagesize in longs */
 int pagesize = 1024;
+int fakeit = 1;
 
 /* do everything -- page size computations, all that stuff --
  * in terms of longs. It's easier.
@@ -44,6 +45,11 @@ int dataport = 0x1004;
 unsigned long io_I915_READ32(unsigned long addr)
 {
        unsigned long val;
+	if (fakeit){
+		printf("READ %08lx\n", addr);
+		return;
+	}
+
        outl(addr, addrport);
        val = inl(dataport);
        return val;
@@ -51,6 +57,10 @@ unsigned long io_I915_READ32(unsigned long addr)
 
 void io_I915_WRITE32(unsigned long addr, unsigned long val)
 {
+	if (fakeit){
+		printf("WRITE %08lx, val %08lx\n", addr, val);
+		return;
+	}
        outl(addr, addrport);
        outl(val, dataport);
 }
@@ -74,23 +84,37 @@ void onepage(unsigned long *address, unsigned long *data, int xsize)
 	 * and fill the space with white. 
 	 */
 	pageoffset = offset & (1024-1);
-	for(i = 0; i < pageoffset; i++)
-		address[i] = 0xffffff;
-	for(size = 0; size < xsize; size++)
-		address[i] = *data++;
-	for(;size < 1024; size++)
-		address[i] = 0xffffff;
+	for(i = 0; i < pageoffset; i++){
+		if (fakeit)
+			printf("%p = 0xffffff\n", &address[i]);
+		else
+			address[i] = 0xffffff;
+	}
+	for(size = 0; size < xsize; size++){
+		if (fakeit)
+			printf("%p = %08lx\n", &address[i], *data++);
+		else
+			address[i] = *data++;
+	}
+	for(;size < 1024; size++){
+		if (fakeit)
+			printf("%p = 0xffffff\n", &address[i]);
+		else
+			address[i] = 0xffffff;
+	}
 }
 
 void oneline(unsigned long *address, unsigned long *data, int xsize)
 {
 	int size, amt;
+	unsigned long start, end;
 	for(size = 0; size < xsize;){
 		/* figure out how much remains */
-		if (xsize - size < pagesize)
-			amt = xsize - size;
-		else
-			amt = pagesize;
+		start = (unsigned long) address;
+		/* set round to end of this page at most */
+		end = (((start + xsize)>>pagesize)<<pagesize);
+		amt = end - start;
+		
 		onepage(address, data, amt);
 		size += amt;
 		address += amt;
@@ -113,7 +137,13 @@ int main(int argc, char *argv[])
 	int i;
 
 	static unsigned long black[1048576];
-	iopl(3);
+
+	if (argc > 1)
+		fakeit++;
+	if (! fakeit){
+		iopl(3);
+		gfx = mapit(membase, memsize);
+	} 
 	gfx = mapit(membase, memsize);
 
 	physbase = 0xada00000;
