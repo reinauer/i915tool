@@ -7,11 +7,13 @@
 #include <fcntl.h>
 #include <string.h>
 #include <time.h>
+#include <err.h>
 
 #include <sys/io.h>
 #include <sys/time.h>
 #include <linux/types.h>
 #include <errno.h>
+#include <unistd.h>
 
 unsigned int *gfx = NULL;
 unsigned long membase = 0xd0000000;
@@ -47,7 +49,7 @@ unsigned long io_I915_READ32(unsigned long addr)
        unsigned long val;
 	if (fakeit){
 		printf("READ %08lx\n", addr);
-		return;
+		return 0;
 	}
 
        outl(addr, addrport);
@@ -71,7 +73,7 @@ void onepage(unsigned int *address, unsigned int *data, int xsize)
 	unsigned long offset;
 	unsigned long page;
 	unsigned long pageoffset;
-	int i, amt, size;
+	int i, size;
 
 	/* we need to remap this page. Figure out which page it is
 	 * and set it up
@@ -100,7 +102,7 @@ void onepage(unsigned int *address, unsigned int *data, int xsize)
 	}
 	for(size = 0; size < xsize; size++, i++){
 		if (fakeit)
-			printf("%p = %08lx\n", &address[i], *data++);
+			printf("%p = %08x\n", &address[i], *data++);
 		else
 			address[i] = *data++;
 	}
@@ -116,6 +118,7 @@ void onepage(unsigned int *address, unsigned int *data, int xsize)
 
 /* goal: grab bits of the image that we're almost always
  * ripping off page-sized bits
+ * hint: we assume xsize is > 0. Don't be dumb. 
  */
 void oneline(unsigned int *address, unsigned int *data, int xsize)
 {
@@ -129,13 +132,13 @@ void oneline(unsigned int *address, unsigned int *data, int xsize)
 		/* end will have at most the value of the start of the
 		 * NEXT page
 		 */
-		end = (((start + 4095 + xsize*4)>>12)<<12);
+		end = (((start + 4096)>>12)<<12);
 		/* compute amount in bytes */
 		amt = end - start;
 		/* convert to words */
 		amt >>= 2;
 		/* maybe it's too much */
-		amt = amt > xsize ? xsize : amt;
+		amt = (xsize - size) < 1024 ? (xsize - size) : amt;
 		
 		onepage(address, data, amt);
 
@@ -150,7 +153,7 @@ void oneline(unsigned int *address, unsigned int *data, int xsize)
 	
 void image(unsigned int *address, unsigned int *data, int x, int y, int xsize, int ysize)
 {
-	int yamt, xamt;
+  int yamt;
 	for(yamt = 0; yamt < ysize; yamt++){
 		oneline(&address[y*2560 + x], data, xsize);
 		address += 2560;
@@ -174,10 +177,12 @@ int main(int argc, char *argv[])
 
 	physbase = 0xada00000;
 	printf("# PTEs is %d\n", gfxpages);
-	printf("Start of graphics pages would be %#p\n", physbase);
+	printf("Start of graphics pages would be %p\n", (void *)physbase);
 
 	/* The black rect. */
-	printf("image(gfx, black, 511, 1024, 1, 1);\n");image(gfx, black, 511, 1024, 1, 1);
+	printf("image(gfx, black, 1024, 1024, 1026, 1);\n");image(gfx, black, 1024, 1024, 1026, 1);
+	printf("NEXT %d\n", i++);
+	printf("image(gfx, black, 511, 1024, 1, 5);\n");image(gfx, black, 511, 1024, 1, 5);
 	printf("NEXT %d\n", i++);
 	printf("image(gfx, black, 1024, 1024, 1, 1);\n");image(gfx, black, 1024, 1024, 1, 1);
 	printf("NEXT %d\n", i++);
@@ -185,7 +190,6 @@ int main(int argc, char *argv[])
 	printf("NEXT %d\n", i++);
 	printf("image(gfx, black, 1027, 1024, 3, 1);\n");image(gfx, black, 1027, 1024, 3, 1);
 	printf("NEXT %d\n", i++);
-	printf("image(gfx, black, 1024, 1024, 2000, 1);\n");image(gfx, black, 1024, 1024, 2000, 1);
-	printf("NEXT %d\n", i++);
 	printf("image(gfx, black, 1024, 1024, 2000, 15);\n");image(gfx, black, 1024, 1024, 2000, 15);
+	return 0;
 }
