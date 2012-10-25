@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/io.h>
 #include <time.h>
 #include <sys/time.h>
@@ -30,9 +31,24 @@ mapit(unsigned long phys, unsigned long size)
         return virt;
 }
 
-unsigned char *membase = NULL;
+unsigned char *mmiobase = NULL;
 unsigned short addrport = 0x1000;
 unsigned short dataport = 0x1000 +4;
+
+unsigned long i915_READ32(unsigned long addr)
+{
+	volatile unsigned long *ptr = (unsigned long *)(mmiobase + addr);
+	unsigned long val;
+	val = *ptr;
+	return val;
+}
+
+void i915_WRITE32(unsigned long val, unsigned long addr)
+{
+	volatile unsigned long *ptr = (unsigned long *)(mmiobase + addr);
+	*ptr = val;
+}
+
 char *names[] = {
 #include "names.c"
 };
@@ -47,7 +63,7 @@ char *regname(unsigned long addr)
 	unsigned long truncaddr;
 
 	if (addr > nnames){
-		sprintf(name, "0x%x", addr);
+		sprintf(name, "0x%lx", addr);
 		return name;
 	}
 	if (names[addr])
@@ -62,7 +78,7 @@ char *regname(unsigned long addr)
 		}
 	}
 	/* oh well ... */
-	sprintf(name, "0x%x", addr);
+	sprintf(name, "0x%lx", addr);
 	return name;
 }
 /* not sure how we want to do this so let's guess */
@@ -203,7 +219,7 @@ int main(int argc, char *argv[])
 		if (*argv[0] == 'c') calibratetsc();
 		argc--,argv++;
 	}
-	membase = mapit(0xe0000000, 0x400000);
+	mmiobase = mapit(0xe0000000, 0x400000);
 	iopl(3);
 	globalstart = rdtsc();
 
@@ -211,11 +227,11 @@ int main(int argc, char *argv[])
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
 		switch(id->op){
 		case M:
-			if (verbose & vmsg) printf("%d: %s\n", globalmicroseconds(), id->msg);
+			if (verbose & vmsg) printf("%ld: %s\n", globalmicroseconds(), id->msg);
 			break;
 		case R:
-			u = io_i915_READ32(id->addr);
-			if (verbose & vio)printf("%s: Got %08x, expect %08x\n", 
+			u = i915_READ32(id->addr);
+			if (verbose & vio)printf("%s: Got %08lx, expect %08lx\n", 
 				regname(id->addr), u, id->data);
 			/* we're looking for something. */
 			if (lastidread->addr == id->addr){
@@ -225,14 +241,14 @@ int main(int argc, char *argv[])
 				for(t = 0; t < 1000 && id->data != u; t++){
 					u = io_i915_READ32(id->addr);
 				}
-				if (verbose & vspin) printf("%s: # loops %d got %08x want %08x\n",	
+				if (verbose & vspin) printf("%s: # loops %ld got %08lx want %08lx\n",	
 						regname(id->addr),
 						t, u, id->data);
 			}
 			lastidread = id;
 			break;
 		case W:
-			if (verbose & vio)printf("%s: outl %08x\n", regname(id->addr), id->data);
+			if (verbose & vio)printf("%s: outl %08lx\n", regname(id->addr), id->data);
 			io_i915_WRITE32(id->data, id->addr);
 			if (id->addr == PCH_PP_CONTROL)
 				udelay(100000);
@@ -255,5 +271,5 @@ int main(int argc, char *argv[])
 			udelay(id->udelay);
 	}
 
-	printf("%d microseconds\n", globalmicroseconds());
+	printf("%ld microseconds\n", globalmicroseconds());
 }

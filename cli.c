@@ -197,7 +197,7 @@ int main(int argc, char *argv[])
 		{
 			volatile unsigned long *lp = (unsigned long *)gfx;
 			int i;
-			setgtt(gsmgfx, 0);
+		//	setgtt(gsmgfx, 0);
 			for(i = 0; i < 1024; i++)
 				lp[i] = 0xff0000;
 		}

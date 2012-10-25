@@ -15,20 +15,21 @@
 #include <errno.h>
 #include <unistd.h>
 
+#include "google.c"
 unsigned int *gfx = NULL;
-unsigned long membase = 0xd0000000;
-unsigned long memsize = 32 * 1024 * 1024;
-unsigned long physbase;
+unsigned int membase = 0xd0000000;
+unsigned int memsize = 32 * 1024 * 1024;
+unsigned int physbase;
 int gfxpages = 4250;
 /* pagesize in longs */
 int pagesize = 1024;
-int fakeit = 1;
+int fakeit = 0;
 
 /* do everything -- page size computations, all that stuff --
  * in terms of longs. It's easier.
  */
 void *
-mapit(unsigned long phys, unsigned long size)
+mapit(unsigned int phys, unsigned int size)
 {
 	void *virt;
 	int kfd;
@@ -44,11 +45,11 @@ mapit(unsigned long phys, unsigned long size)
 
 int addrport = 0x1000;
 int dataport = 0x1004;
-unsigned long io_I915_READ32(unsigned long addr)
+unsigned int io_I915_READ32(unsigned int addr)
 {
-       unsigned long val;
+       unsigned int val;
 	if (fakeit){
-		printf("READ %08lx\n", addr);
+		printf("READ %08x\n", addr);
 		return 0;
 	}
 
@@ -57,10 +58,10 @@ unsigned long io_I915_READ32(unsigned long addr)
        return val;
 }
 
-void io_I915_WRITE32(unsigned long addr, unsigned long val)
+void io_I915_WRITE32(unsigned int addr, unsigned int val)
 {
 	if (fakeit){
-		printf("WRITE %08lx, val %08lx\n", addr, val);
+		printf("WRITE %08x, val %08x\n", addr, val);
 		return;
 	}
        outl(addr, addrport);
@@ -70,9 +71,9 @@ void io_I915_WRITE32(unsigned long addr, unsigned long val)
 /* the address is assumed to point to the start of the page */
 void onepage(unsigned int *address, unsigned int *data, int xsize)
 {
-	unsigned long offset;
-	unsigned long page;
-	unsigned long pageoffset;
+	unsigned int offset;
+	unsigned int page;
+	unsigned int pageoffset;
 	int i, size;
 
 	/* we need to remap this page. Figure out which page it is
@@ -123,7 +124,7 @@ void onepage(unsigned int *address, unsigned int *data, int xsize)
 void oneline(unsigned int *address, unsigned int *data, int xsize)
 {
 	int size, amt;
-	unsigned long start, end;
+	unsigned int start, end;
 	for(size = 0; size < xsize;){
 		/* figure out how much remains */
 		start = (unsigned long) address;
@@ -154,8 +155,9 @@ void oneline(unsigned int *address, unsigned int *data, int xsize)
 void image(unsigned int *address, unsigned int *data, int x, int y, int xsize, int ysize)
 {
   int yamt;
+	address = &address[y*2560];
 	for(yamt = 0; yamt < ysize; yamt++){
-		oneline(&address[y*2560 + x], data, xsize);
+		oneline(&address[x], data, xsize);
 		address += 2560;
 		data += xsize;
 	}
@@ -163,23 +165,34 @@ void image(unsigned int *address, unsigned int *data, int x, int y, int xsize, i
 	
 int main(int argc, char *argv[])
 {
-	int i = 0;
+	int x = imgx, y = imgy, xsize = imgxsize, ysize=imgysize;
 
-	static unsigned int black[1048576];
-
-	if (argc > 1)
+	if (argc == 1){} else 
+	if (argc == 2){
+		printf("=====================WARNING: FAKING IT\n");
 		fakeit++;
+	} else
+	if (argc == 5 || argc == 6){
+		x = strtoul(argv[1], 0, 0);
+		y = strtoul(argv[2], 0, 0);
+		xsize = strtoul(argv[3], 0, 0);
+		ysize = strtoul(argv[4], 0, 0);
+		if (argc == 6) fakeit++;
+	} else {printf("no args or one arg or 4 args\n");}
 	if (! fakeit){
 		iopl(3);
-		gfx = mapit(membase, memsize);
 	} 
 	gfx = mapit(membase, memsize);
 
 	physbase = 0xada00000;
-	printf("# PTEs is %d\n", gfxpages);
-	printf("Start of graphics pages would be %p\n", (void *)physbase);
+	printf(", gfx is %p, # PTEs is %d\n", gfx, gfxpages);
+	printf("Start of graphics pages would be %p\n", (void *)(unsigned long)physbase);
+	printf("Put it at [%d,%d]-[%d,%d]\n", x, y, xsize, ysize);
 
 	/* The black rect. */
+#if 0
+	printf("image(gfx, black, 0, 0, 512, 1);\n");image(gfx, black, 0, 0, 512, 1);
+	printf("NEXT %d\n", i++);
 	printf("image(gfx, black, 1024, 1024, 1026, 1);\n");image(gfx, black, 1024, 1024, 1026, 1);
 	printf("NEXT %d\n", i++);
 	printf("image(gfx, black, 511, 1024, 1, 5);\n");image(gfx, black, 511, 1024, 1, 5);
@@ -191,5 +204,7 @@ int main(int argc, char *argv[])
 	printf("image(gfx, black, 1027, 1024, 3, 1);\n");image(gfx, black, 1027, 1024, 3, 1);
 	printf("NEXT %d\n", i++);
 	printf("image(gfx, black, 1024, 1024, 2000, 15);\n");image(gfx, black, 1024, 1024, 2000, 15);
+#endif
+	image(gfx, img, x, y, xsize, ysize);
 	return 0;
 }
