@@ -1,4 +1,16 @@
+#include <stdio.h>
+#include <sys/io.h>
 #include "final/i915_reg.h"
+
+/* hmm */
+#define PRB0_TAIL	0x02030
+#define PRB0_HEAD	0x02034
+#define PRB0_START	0x02038
+#define PRB0_CTL	0x0203c
+#define PRB1_TAIL	0x02040 /* 915+ only */
+#define PRB1_HEAD	0x02044 /* 915+ only */
+#define PRB1_START	0x02048 /* 915+ only */
+#define PRB1_CTL	0x0204c /* 915+ only */
 
 int verbose = 0;
 
@@ -6,12 +18,13 @@ enum {
 	vmsg = 1, vio = 2, vspin = 4,
 };
 
-unsigned short addrport = 0x1000;
-unsigned short dataport = 0x1000 +4;
+unsigned short addrport = 0x3000;
+unsigned short dataport = 0x3000 +4;
+char name[128];
 
 char *regname(unsigned long addr)
 {
-	sprintk(BIOS_SPEW, name, "0x%lx", addr);
+	/*printk(BIOS_SPEW, */printf(name, "0x%lx", addr);
 	return name;
 }
 /* not sure how we want to do this so let's guess */
@@ -44,7 +57,7 @@ static void udelay(int i)
 	unsigned long long end;
 
 	if (verbose & vio)
-		fprintk(BIOS_SPEW, stderr, "UDELAY %d!\n", i);
+		/*printk(BIOS_SPEW, */fprintf(stderr, "UDELAY %d!\n", i);
 	end = rdtsc() + i * tickspermicrosecond;
 	while (rdtsc() < end)
 		;
@@ -81,40 +94,41 @@ struct iodef {
 #include "stoutgraphicsio.c"
 };
 
-int i915lightup(void)
+int main(void)
 {
 	int i, prev = 0;
 	unsigned long lastreadindex;
-	struct iodef *id = iodefs, *lastidread;
+	struct iodef *id = iodefs, *lastidread = NULL;
 	unsigned long u, t;
+	iopl(3);
 	globalstart = rdtsc();
 
 	/* state machine! */
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
 		switch(id->op){
 		case M:
-			if (verbose & vmsg) printk(BIOS_SPEW, "%ld: %s\n", globalmicroseconds(), id->msg);
+			if (verbose & vmsg) /*printk(BIOS_SPEW, */printf("%ld: %s\n", globalmicroseconds(), id->msg);
 			break;
 		case R:
-			u = i915_READ32(id->addr);
-			if (verbose & vio)printk(BIOS_SPEW, "%s: Got %08lx, expect %08lx\n", 
+			u = io_i915_READ32(id->addr);
+			if (verbose & vio)/*printk(BIOS_SPEW, */printf("%s: Got %08lx, expect %08lx\n", 
 				regname(id->addr), u, id->data);
 			/* we're looking for something. */
-			if (lastidread->addr == id->addr){
+			if (lastidread && lastidread->addr == id->addr){
 				/* they're going to be polling. 
 				 * just do it 1000 times
 				 */
 				for(t = 0; t < 1000 && id->data != u; t++){
 					u = io_i915_READ32(id->addr);
 				}
-				if (verbose & vspin) printk(BIOS_SPEW, "%s: # loops %ld got %08lx want %08lx\n",	
+				if (verbose & vspin) /*printk(BIOS_SPEW, */printf("%s: # loops %ld got %08lx want %08lx\n",	
 						regname(id->addr),
 						t, u, id->data);
 			}
 			lastidread = id;
 			break;
 		case W:
-			if (verbose & vio)printk(BIOS_SPEW, "%s: outl %08lx\n", regname(id->addr), id->data);
+			if (verbose & vio)/*printk(BIOS_SPEW, */printf("%s: outl %08lx\n", regname(id->addr), id->data);
 			io_i915_WRITE32(id->data, id->addr);
 			if (id->addr == PCH_PP_CONTROL)
 				udelay(100000);
@@ -130,12 +144,13 @@ int i915lightup(void)
 		case I:
 			break;
 		default:
-			printk(BIOS_SPEW, "BAD TABLE, opcode %d @ %d\n", id->op, i);
+			/*printk(BIOS_SPEW, */printf("BAD TABLE, opcode %d @ %d\n", id->op, i);
 			exit(1);
 		}
 		if (id->udelay)
 			udelay(id->udelay);
 	}
 
-	printk(BIOS_SPEW, "%ld microseconds\n", globalmicroseconds());
+	/*printk(BIOS_SPEW, */printf("%ld microseconds\n", globalmicroseconds());
 }
+/* cc -static -O2 stoutstartup.c */

@@ -12,3 +12,9 @@ There's still some duct tape here but it's getting there.
 
 There are coccinelle bugs so be careful about assuming that something
 that looks wrong is wrong. 
+
+To build pretty regs, I ran
+ awk -f buildregs.awk /usr/local/src/firmware/src/third_party/coreboot/src/mainboard/google/link/i915io.c > buildregs.c
+Did a little hand editing, and ran
+cc -g prettyregs.c
+and ran that
