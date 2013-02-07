@@ -1,0 +1,20 @@
+These are notes for the new edid-reading version of the link software. 
+
+The parts that we think depend on EDID are these:
+{W, 1, "", _TRANSA_DATA_M1, 0x00000000, 0},
+{W, 1, "", _TRANSA_DATA_N1, 0x00000000, 0},
+{W, 1, "", _TRANSA_DP_LINK_M1, 0x00000000, 0},
+{W, 1, "", _TRANSA_DP_LINK_N1, 0x00000000, 0},
+{W, 1, "", _PCH_FPA1, 0x00020e08, 0},
+{W, 1, "", _VSYNCSHIFT_A, 0x00000000, 0}, //no needed -- progressive
+{W, 1, "", _HTOTAL_A, 0x0a9f09ff, 0}, // from edid
+{W, 1, "", _HBLANK_A, 0x0a9f09ff, 0}, // from edid
+{W, 1, "", _HSYNC_A, 0x0a4f0a2f, 0}, // from edid
+{W, 1, "", _VTOTAL_A, 0x06d406a3, 0}, // from edid
+{W, 1, "", _VBLANK_A, 0x06d406a3, 0}, // from edid
+{W, 1, "", _VSYNC_A, 0x06b006a6, 0}, // from edid
+{W, 1, "", _PIPEASRC, 0x09ff06a3, 0}, // hmm. 
+{W, 1, "", _PIPEA_DATA_M1, 0x7e4e58a4, 0}, // from edid?
+{W, 1, "", _PIPEA_DATA_N1, 0x0083d600, 0}, // from edid?
+{W, 1, "", _PIPEA_LINK_M1, 0x00045a42, 0}, // from edid?
+{W, 1, "", _PIPEA_LINK_N1, 0x00041eb0, 0}, // from edid?

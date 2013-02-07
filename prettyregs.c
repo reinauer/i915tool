@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/mman.h>
-
+#include "video.h"
 #include "final/i915_reg.h"
 
 int verbose = 0;
@@ -70,6 +70,7 @@ struct iodef {
 	unsigned long data;
 	unsigned long udelay;
 } iodefs[] = {
+{R, 1, "", DPA_AUX_CH_CTL, 0x014300c8, },
 {V,0,},
 //{V, 7, },
 {W, 1, "", PCH_GMBUS0, 0x00000000, },
@@ -842,6 +843,17 @@ char *symname(struct iodef *id)
 		value &= ~r[i].value;
 	}
 
+	/* special cases! */
+	if ((id->addr & ~0x300) == DPA_AUX_CH_CTL){
+		cp+=sprintf(cp,"/*[%dbytes]*/",(id->data>>20)&0x1f);
+	}
+	if (((id->addr & ~0x300) == DPA_AUX_CH_DATA1) && (id->op == W)){
+		cp += sprintf(cp, "/*%04x:%s %s %s*/",
+			      id->data>>16,
+			      id->data&I2C_M_TEN ? "10 bits" : "",
+			      id->data&I2C_M_RD ? "Read":"Write",
+			      id->data&I2C_M_RECV_LEN ? "Recv len": "");
+	}
 	/* just print out hte original value. Useful for knowing what it was AND any bits we could not figure out. */
 	sprintf(cp, "0x%08lx", id->data);
 	return name;
