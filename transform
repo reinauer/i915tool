@@ -1,0 +1,404 @@
+#!/bin/bash
+set -e
+# This script has been honed over quite a few iterations. The trick is to make
+# it easy for you to see what transformations occur without burying you in files.
+# Also, coccinelle is not perfect, so we have to help her at times. As she
+# gets smarter, we can shrink thigns we do in here.
+# So we get input files, then do per-file changes, then do all-file changes
+# I've deliberately made this script simple. Please don't decide it needs to
+# be automagic. Just let it work in its simple way. Also, if you change even
+# one simple thing, ALWAYS rerun this script do make sure you did not make a
+# global test. NEVER test one little thing in isolation. That way
+# lies madness.
+# The only thing you need to set is
+# export LINUX=/path/to/your/linux/tree.
+# Order in which we do things.
+# 1. Get source files into inputs.
+# 2. cp them to per-file-changes
+#    Note that we even copy ones that might not currently need per-file changes
+#    Because they may in future and it keeps the script simple. We tried both
+#    ways and like this best.
+# 3. run 'ed' across a few files that need it
+# 4. run coccinelle with any per-file changes
+#    There is some ugliness here as we have to do a reverse patch step. Sorry.
+# 5. cp per-file-changes/* to final
+# 6. run coccinelle files that apply to more than one file
+#    it's best to run coccinelle on as many files as possible, she's pretty smart about
+#    certain transformations, e.g. if you remove a function definition she can remove
+#    all calls to that function (maybe)
+#
+# Now you can
+# make (will build all working tools)
+# or
+# make broken
+# for things that don't build yet.
+
+# Step 1
+rm -f per-file-changes/* final/* tmp/*
+mkdir -p per-file-changes final tmp
+if [ "$LINUX" != "" ]
+then
+	rm -f inputs/* 
+	mkdir -p inputs 
+	cp $LINUX/drivers/gpu/drm/i915/i915_reg.h inputs
+	cp $LINUX/drivers/gpu/drm/i915/i915_drv.? inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_display.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_bios.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_bios.h inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_drv.h inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_fb.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_ringbuffer.h inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_crt.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/i915_dma.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_lvds.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_hdmi.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_dp.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_panel.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_i2c.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_modes.c inputs
+	cp $LINUX/drivers/gpu/drm/drm_crtc.c inputs
+	cp $LINUX/drivers/gpu/drm/drm_crtc_helper.c inputs
+	cp $LINUX/drivers/gpu/drm/drm_fb_helper.c inputs
+	cp $LINUX/include/drm/drm_fb_helper.h inputs
+	cp $LINUX/drivers/gpu/drm/drm_edid.c inputs
+	cp $LINUX/drivers/gpu/drm/drm_edid_modes.h inputs
+	cp $LINUX/include/drm/drm_crtc.h inputs
+	cp $LINUX/include/drm/drm_edid.h inputs
+	cp $LINUX/include/drm/drm_mode.h inputs
+	cp $LINUX/include/linux/i2c-algo-bit.h inputs
+	cp $LINUX/include/linux/fb.h inputs
+	cp $LINUX/include/drm/drm_dp_helper.h inputs
+	cp $LINUX/drivers/gpu/drm/drm_dp_i2c_helper.c inputs
+	cp $LINUX/drivers/gpu/drm/drm_modes.c inputs
+	cp $LINUX//include/drm/drm_crtc_helper.h inputs
+	cp $LINUX/include/drm/drm_fourcc.h inputs
+	cp $LINUX/drivers/video/fbcmap.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_ddi.c inputs
+	cp $LINUX/drivers/gpu/drm/i915/intel_pm.c inputs
+	#
+	# disappointing. We needed the bit-banging stuff.
+	cp $LINUX/drivers/i2c/algos/i2c-algo-bit.c inputs
+	# sigh .. gtt is in agp ...
+	#cp $LINUX/drivers/char/agp/intel-gtt.c inputs
+fi
+
+# Step 2
+cp inputs/* per-file-changes
+
+# Step 3
+# We tried sed but it had some issues that ed did not
+# coccinelle can't handle anonymous structs
+# also some stuff is easier with ed.
+# also there are bugs spatches/in coccinelle it seems :-(
+# the literal deletes below suck and we need to figure
+# out wtf went wrong.
+
+ed per-file-changes/drm_fb_helper.c << EOF
+g/= *drm_pick_cmdline_mode/s/drm_pick_cmdline_mode.*/NULL;/
+g/KERN_INFO/s///
+w
+q
+EOF
+
+# coccinnelle can't handle struct {...} s; 
+ed per-file-changes/i915_drv.h << EOF
+g/notifier_block/d
+g/struct  *completion  *[a-z].*;/d
+g/__must_check/s///g
+g/define  *I915_[RW]/d
+g/struct *work_struct.*;/d
+g/spinlock_t/d
+w
+q
+EOF
+
+ed per-file-changes/fb.h << EOF
+g/ifdef.*KERNEL/s/ifdef/ifndef/
+g/__user/s///p
+g/const/s///g
+g/gfp_t/d
+g/int *fb.register.client/d
+g/int *fb.unregister.client/d
+g/int *fb.notifier.call.chain/d
+w
+q
+EOF
+
+ed per-file-changes/intel_crt.c << EOF
+g/const/s///
+w
+q
+EOF
+
+ed per-file-changes/intel_display.c << EOF
+g/mode_config.funcs  *=/d
+g/fb_base/d
+g/const/s///
+g/out_unlock:/s//& {}/p
+w
+q
+EOF
+
+ed per-file-changes/intel_fb.c << EOF
+/info->screen_base/s/=.*/= gfx;/p
+w
+q
+EOF
+
+ed per-file-changes/intel_lvds.c << EOF
+g/const/s///
+g/__init/s///
+g/dev_priv->lid_notifier.*=/d
+w
+q
+EOF
+
+ed per-file-changes/intel_ddi.c << EOF
+g/const/s///
+w
+q
+EOF
+
+ed per-file-changes/intel_pm.c << EOF
+g/DEFINE_SPINLOCK/d
+g/EXPORT_SYMBOL_GPL/d
+g/const/s///
+w
+q
+EOF
+
+ed per-file-changes/intel_i2c.c << EOF
+g/adapter.owner/d
+g/adapter.class/d
+g/adapter.dev.parent/d
+w
+q
+EOF
+
+# if you use the instrument-functions option,
+# it really screws up on inlines. Who needs inlines anyway ...
+for i in per-file-changes/drm_crtc_helper.h per-file-changes/i915_drv.h per-file-changes/intel_drv.h per-file-changes/drm_crtc.c
+do
+ed $i << EOF
+g/static *inline/s//static/p
+g/extern *inline/s//static/p
+g/__user/s///p
+w
+q
+EOF
+done
+
+# yucky stuff in the driver. It is invalid C code so coccinelle can't deal with it.
+# the #if 0 thing is for a coccinelle bug
+# sheeeeit. Can't get it to match this if. This is going to bite us sooner or later.
+ed per-file-changes/i915_dma.c << EOF
+g/dev->pdev->msi_enabled/.,+d
+w
+q
+EOF
+
+# This is done in 22 parts due to some weird ed bug.
+#need to manage this IO better.
+# yucky stuff in the driver=
+ed per-file-changes/i915_drv.c << EOF
+g/const/s///gp
+w
+q
+EOF
+
+# note that .,$d does not work below. F-ing weird.
+# so we have the .,/undef.*write/d bit.
+ed per-file-changes/i915_drv.c << EOF
+/module_init/
+.
+.,/undef.*write/d
+.
+w
+q
+EOF
+
+# Reverse patches. We hope these will go away someday.
+>per-file-changes/intel_bios.c
+spatch -sp_file spatches/getfn.cocci inputs/intel_bios.c -U 0 > tmp/res
+./plusplusplus tmp/res per-file-changes/intel_bios.c
+(cd per-file-changes/; patch -p1 -R ) < tmp/res.pat
+
+# Finally, a basic spatch sequence!
+
+spatch --in-place -sp_file spatches/intel_display.c.cocci per-file-changes/intel_display.c per-file-changes/intel_pm.c > /dev/null
+spatch --in-place -sp_file spatches/intel_pm.c.cocci per-file-changes/intel_pm.c > /dev/null
+spatch --in-place -sp_file spatches/fbcmap.c.cocci per-file-changes/fbcmap.c # > /dev/null
+spatch --in-place -sp_file spatches/intel_dp.c.cocci per-file-changes/intel_dp.c > /dev/null
+spatch --in-place -sp_file spatches/intel_lvds.c.cocci per-file-changes/intel_lvds.c > /dev/null
+spatch --in-place -sp_file spatches/intel_modes.c.cocci per-file-changes/intel_modes.c > /dev/null
+spatch --in-place -sp_file spatches/intel_crt.c.cocci per-file-changes/intel_crt.c > /dev/null
+spatch --in-place -sp_file spatches/intel_drv.h.cocci per-file-changes/intel_drv.h > /dev/null
+spatch --in-place -sp_file spatches/drm_modes.c.cocci per-file-changes/drm_modes.c > /dev/null
+spatch --in-place -sp_file spatches/drm_crtc.c.cocci per-file-changes/drm_crtc.c > /dev/null
+spatch --in-place -sp_file spatches/drm_crtc_helper.c.cocci per-file-changes/drm_crtc_helper.c > /dev/null
+spatch --in-place -sp_file spatches/drm_fb_helper.c.cocci per-file-changes/drm_fb_helper.c > /dev/null
+
+spatch --in-place -sp_file spatches/i915_drv.cocci per-file-changes/i915_drv.h >/dev/null
+spatch --in-place -sp_file spatches/i915_dma.c.cocci per-file-changes/i915_dma.c >/dev/null
+spatch --in-place -sp_file spatches/intel_i2c.c.cocci per-file-changes/intel_i2c.c >/dev/null
+spatch --in-place -sp_file spatches/i915_drv.c.cocci per-file-changes/i915_drv.c >/dev/null
+spatch --in-place -sp_file spatches/i2c-algo-bit.c.cocci per-file-changes/i2c-algo-bit.c >/dev/null
+spatch --in-place -sp_file spatches/intel_fb.c.cocci per-file-changes/intel_fb.c >/dev/null
+#spatch --in-place -sp_file spatches/intel-gtt.c.cocci per-file-changes/intel-gtt.c >/dev/null
+
+# and another thing ...
+# cocinnelle needs to fix this.
+ed per-file-changes/fbcmap.c << EOF
+g/const/s///g
+w
+q
+EOF
+
+# until I can understand coccinelle this is the simplest way to get around a stupid problem.
+ed per-file-changes/intel_display.c << EOF
+g/const/s///g
+w
+q
+EOF
+
+ed per-file-changes/intel_dp.c << EOF
+g/const/s///g
+g/adapter.owner/d
+g/adapter.class/d
+g/base.kdev/d
+g/EREMOTEIO/s//1/gp
+w
+q
+EOF
+
+ed per-file-changes//drm_crtc_helper.h <<EOF
+g/const.*struct.*drm_display_mode.*\*mode/s/const//
+w
+q
+EOF
+
+
+# Now do the common changes to all files.
+# we tried the 'do the whole directory' switch but it did not work well for us.
+cp per-file-changes/* final
+spatch --in-place -sp_file spatches/ringbuffer.cocci final/intel_ringbuffer.h >/dev/null
+# spatch --in-place -sp_file spatches/removeinclude.cocci final/*
+spatch --in-place -sp_file spatches/removeinclude.cocci \
+	final/fbcmap.c \
+	final/intel_display.c \
+	final/intel_ddi.c \
+	final/intel_pm.c \
+	final/drm_dp_i2c_helper.c \
+	final/intel_i2c.c \
+	final/i915_drv.c \
+	final/drm_crtc_helper.c \
+	final/i2c-algo-bit.c \
+	final/intel_modes.c \
+	final/intel_crt.c \
+	final/drm_dp_helper.h \
+	final/drm_fb_helper.h \
+	final/drm_fb_helper.c \
+	final/intel_hdmi.c \
+	final/intel_lvds.c \
+	final/intel_dp.c \
+	final/intel_drv.h \
+	final/drm_modes.c \
+	final/i915_dma.c \
+	final/intel_fb.c \
+	final/drm_edid_modes.h \
+	final/drm_edid.h \
+	final/drm_edid.c \
+	final/drm_crtc.c \
+	final/drm_crtc_helper.h>/dev/null
+
+spatch --in-place -sp_file spatches/i915_drv.cocci \
+	final/intel_ringbuffer.h \
+	final/intel_drv.h \
+	final/drm_fb_helper.h \
+	final/drm_fb_helper.c \
+	final/fb.h \
+	final/intel_panel.c>/dev/null
+
+spatch --in-place -sp_file spatches/deldev.cocci \
+	final/intel_bios.c \
+	final/intel_bios.h \
+	final/i915_drv.h \
+	final/intel_ringbuffer.h \
+	final/intel_dp.c \
+	final/i915_dma.c \
+	final/intel_i2c.c  \
+	final/drm_crtc.c \
+	final/drm_crtc_helper.c \
+	final/drm_fb_helper.c \
+	final/drm_crtc_helper.h \
+	final/intel_lvds.c \
+	final/fb.h \
+	final/intel_fb.c >/dev/null
+
+spatch --in-place -sp_file spatches/fixcalls.cocci \
+	final/drm_fb_helper.c \
+	final/intel_bios.c \
+	final/intel_crt.c \
+	final/intel_dp.c \
+	final/intel_ddi.c \
+	final/intel_display.c  \
+	final/intel_pm.c \
+	final/intel_panel.c \
+	final/i915_dma.c \
+	final/drm_fb_helper.c \
+	final/drm_dp_i2c_helper.c \
+	final/i915_dma.c \
+	final/intel_i2c.c \
+	final/intel_lvds.c \
+	final/i915_drv.c \
+	final/drm_edid.c \
+	final/drm_modes.c \
+	final/drm_crtc.c \
+	final/intel_lvds.c \
+	final/drm_crtc_helper.c \
+	final/drm_crtc_helper.h \
+	final/intel_drv.h \
+	final/i2c-algo-bit.c \
+	final/intel_modes.c \
+	final/fb.h \
+	final/fbcmap.c \
+	final/intel_fb.c >/dev/null
+
+spatch --in-place -sp_file spatches/drm_crtc.cocci \
+	final/drm_crtc.h \
+	final/intel_dp.c \
+	final/i915_dma.c \
+	final/intel_fb.c >/dev/null
+
+# weirdly, it needs a final pass. 
+spatch --in-place -sp_file spatches/i915_dma.c.cocci final/i915_dma.c >/dev/null
+# post processing for things coccinelle can't always get yet
+# or we can't figure out how to make it get
+ed final/i915_dma.c << EOF
+g/dev->types/d
+1
+/i915 workqueue/
+.,/}/d
+.
+g/intel_irq_init/d
+g/spin_lock/d
+1
+g/setup_mchbar/d
+g/opregion_setup/d
+g/gem_load/d
+g/suspended/d
+g/goto/s/goto.*/return -1;/
+w
+q
+EOF
+
+ed final/i915_drv.h << EOF
+g/uint32_t.*last_acthd.I915_NUM_RINGS.;/d
+w
+q
+EOF
+
+
+spatch --sp-file spatches/printf.cocci --no-includes --in-place --dir final
+spatch --sp-file spatches/unusedlabels.cocci --no-includes --in-place --dir final
+make clean

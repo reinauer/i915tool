@@ -1,0 +1,330 @@
+[    0.555368] [drm:intel_opregion_setup], graphic opregion physical addr: 0x0
+[    0.555373] [drm:intel_opregion_setup], ACPI OpRegion not supported!
+[    0.555424] [drm:intel_detect_pch], Found CougarPoint PCH
+[    0.555433] [drm:intel_parse_bios] *ERROR* VBT signature missing
+[    0.555444] [drm:intel_dsm_pci_probe], no _DSM method for intel device
+[    0.555464] [drm:intel_modeset_init], 2 display pipes available.
+[    0.619061] [drm:intel_find_lvds_downclock], LVDS downclock is found in EDID. Normal clock 70700Khz, downclock 56428Khz
+[    0.619106] [drm:intel_panel_get_backlight], get backlight PWM = 0
+[    0.619115] [drm:intel_panel_get_max_backlight], max backlight PWM = 4882
+[    0.619146] [drm:intel_panel_get_backlight], get backlight PWM = 0
+[    0.619182] [drm:intel_crt_init], pch crt adpa set to 0xf40000
+[    0.619268] [drm:intel_dp_i2c_init], i2c_init DPDDC-D
+[    0.619785] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    0.619789] [drm:intel_dp_i2c_aux_ch], aux_ch failed -110
+[    0.620305] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    0.620309] [drm:intel_dp_i2c_aux_ch], aux_ch failed -110
+[    0.620337] [drm:intel_panel_actually_set_backlight], set backlight PWM = 0
+[    0.620354] [drm:ironlake_crtc_dpms], crtc 0/0 dpms off
+[    0.620359] [drm:gm45_get_vblank_counter], trying to get vblank count for disabled pipe A
+[    0.620364] [drm:i915_get_vblank_timestamp], crtc 0 is disabled
+[    0.620369] [drm:gm45_get_vblank_counter], trying to get vblank count for disabled pipe A
+[    0.621012] [drm:intel_update_fbc], 
+[    0.621015] [drm:intel_update_fbc], no output, disabling
+[    0.621205] [drm:ironlake_crtc_dpms], crtc 1/1 dpms off
+[    0.621209] [drm:gm45_get_vblank_counter], trying to get vblank count for disabled pipe B
+[    0.621213] [drm:i915_get_vblank_timestamp], crtc 1 is disabled
+[    0.621218] [drm:gm45_get_vblank_counter], trying to get vblank count for disabled pipe B
+[    0.621860] [drm:intel_update_fbc], 
+[    0.621862] [drm:intel_update_fbc], no output, disabling
+[    0.705262] [drm:init_status_page], render ring hws offset: 0x00000000
+[    0.705623] [drm:init_status_page], gen6 bsd ring hws offset: 0x00021000
+[    0.705830] [drm:init_status_page], blt ring hws offset: 0x00042000
+[    0.706018] [drm:i915_setup_compression], FBC base 0xfe000000, ll base 0x00000000, size 28M
+[    0.706060] [drm:intel_panel_actually_set_backlight], set backlight PWM = 0
+[    0.706080] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:5:LVDS-1]
+[    0.706094] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:5:LVDS-1] probed modes :
+[    0.706099] [drm:drm_mode_debug_printmodeline], Modeline 20:"1280x800" 60 70700 1280 1296 1344 1440 800 801 804 818 0x48 0xa
+[    0.706106] [drm:drm_mode_debug_printmodeline], Modeline 21:"1280x800" 48 56428 1280 1296 1344 1440 800 801 804 818 0x40 0xa
+[    0.706113] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1]
+[    0.706119] [drm:intel_ironlake_crt_detect_hotplug], trigger hotplug detect cycle: adpa=0xf40000
+[    0.715221] [drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adpa=0xf40000, result 0
+[    0.715229] [drm:intel_crt_detect], CRT not detected via hotplug
+[    0.715235] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1] disconnected
+[    0.715243] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1]
+[    0.727075] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1] disconnected
+[    0.727080] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1]
+[    0.727596] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    0.729721] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    0.731720] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    0.733207] [drm:intel_dp_detect], DPCD: 0000000000000000
+[    0.733215] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1] disconnected
+[    0.733222] [drm:drm_setup_crtcs], 
+[    0.733227] [drm:drm_enable_connectors], connector 5 enabled? yes
+[    0.733233] [drm:drm_enable_connectors], connector 12 enabled? no
+[    0.733239] [drm:drm_enable_connectors], connector 15 enabled? no
+[    0.733253] [drm:drm_enable_connectors], connector 18 enabled? no
+[    0.733256] [drm:drm_target_preferred], looking for cmdline mode on connector 5
+[    0.733260] [drm:drm_target_preferred], looking for preferred mode on connector 5
+[    0.733264] [drm:drm_target_preferred], found mode 1280x800
+[    0.733268] [drm:drm_setup_crtcs], picking CRTCs for 8192x8192 config
+[    0.733273] [drm:drm_setup_crtcs], desired mode 1280x800 set on crtc 3
+[    0.739338] [drm:intelfb_create], allocated 1280x800 fb: 0x00063000, bo ffff88010003dc00
+[    0.739474] [drm:drm_crtc_helper_set_config], 
+[    0.739477] [drm:drm_crtc_helper_set_config], [CRTC:3] [FB:9] #connectors=1 (x y) (0 0)
+[    0.739485] [drm:drm_crtc_helper_set_config], crtc has no fb, full mode set
+[    0.739488] [drm:drm_crtc_helper_set_config], modes are different, full mode set
+[    0.739491] [drm:drm_mode_debug_printmodeline], Modeline 0:"" 0 0 0 0 0 0 0 0 0 0 0x0 0x0
+[    0.739497] [drm:drm_mode_debug_printmodeline], Modeline 8:"1280x800" 60 70700 1280 1296 1344 1440 800 801 804 818 0x48 0xa
+[    0.739503] [drm:drm_crtc_helper_set_config], encoder changed, full mode switch
+[    0.739506] [drm:drm_crtc_helper_set_config], crtc changed, full mode switch
+[    0.739509] [drm:drm_crtc_helper_set_config], [CONNECTOR:5:LVDS-1] to [CRTC:3]
+[    0.739513] [drm:drm_crtc_helper_set_config], attempting to set mode from userspace
+[    0.739516] [drm:drm_mode_debug_printmodeline], Modeline 8:"1280x800" 60 70700 1280 1296 1344 1440 800 801 804 818 0x48 0xa
+[    0.739524] [drm:drm_crtc_helper_set_mode], [CRTC:3]
+[    0.739539] [drm:ironlake_crtc_mode_set], using SSC reference clock of 120 MHz
+[    0.739607] [drm:intel_choose_pipe_bpp_dither], clamping display bpc (was -1) to LVDS (6)
+[    0.739611] [drm:intel_choose_pipe_bpp_dither], setting pipe bpc to 8 (max display bpc 6)
+[    0.740225] [drm:ironlake_crtc_mode_set], Mode for pipe A:
+[    0.740228] [drm:drm_mode_debug_printmodeline], Modeline 8:"1280x800" 60 70700 1280 1296 1344 1440 800 801 804 818 0x48 0xa
+[    0.792170] [drm:intel_wait_for_vblank], vblank wait timed out
+[    0.792177] [drm:ironlake_update_plane], Writing base 00063000 00000000 0 0 5120
+[    0.792185] [drm:intel_update_fbc], 
+[    0.792189] [drm:intel_update_fbc], framebuffer not tiled or fenced, disabling compression
+[    0.792196] [drm:sandybridge_update_wm], FIFO watermarks For pipe A - plane 6, cursor: 6
+[    0.792203] [drm:ironlake_check_srwm], watermark 1: display plane 9, fbc lines 3, cursor 6
+[    0.792218] [drm:ironlake_check_srwm], watermark 2: display plane 11, fbc lines 3, cursor 6
+[    0.792222] [drm:ironlake_check_srwm], watermark 3: display plane 51, fbc lines 3, cursor 6
+[    0.792227] [drm:drm_crtc_helper_set_mode], [ENCODER:6:LVDS-6] set [MODE:8:1280x800]
+[    0.792232] [drm:sandybridge_update_wm], FIFO watermarks For pipe A - plane 6, cursor: 6
+[    0.792236] [drm:ironlake_check_srwm], watermark 1: display plane 9, fbc lines 3, cursor 6
+[    0.792240] [drm:ironlake_check_srwm], watermark 2: display plane 11, fbc lines 3, cursor 6
+[    0.792244] [drm:ironlake_check_srwm], watermark 3: display plane 51, fbc lines 3, cursor 6
+[    0.844138] [drm:intel_wait_for_vblank], vblank wait timed out
+[    0.896107] [drm:intel_wait_for_vblank], vblank wait timed out
+[    0.896922] [drm:gen6_fdi_link_train], FDI_RX_IIR 0x100
+[    0.896926] [drm:gen6_fdi_link_train], FDI train 1 done.
+[    0.897584] [drm:gen6_fdi_link_train], FDI_RX_IIR 0x200
+[    0.897588] [drm:gen6_fdi_link_train], FDI train 2 done.
+[    0.897590] [drm:gen6_fdi_link_train], FDI train done.
+[    0.897844] [drm:intel_prepare_page_flip], preparing flip with no unpin work?
+[    0.898811] [drm:intel_update_fbc], 
+[    0.898813] [drm:intel_update_fbc], framebuffer not tiled or fenced, disabling compression
+[    0.900108] [drm:intel_panel_get_max_backlight], max backlight PWM = 4882
+[    0.900114] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4882
+[    0.900121] [drm:drm_crtc_helper_set_config], Setting connector DPMS state to on
+[    0.900127] [drm:drm_crtc_helper_set_config], 	[CONNECTOR:5:LVDS-1] set DPMS on
+[    0.900151] [drm:drm_crtc_helper_set_config], 
+[    0.900153] [drm:drm_crtc_helper_set_config], [CRTC:4] [NOFB]
+[    0.900159] [drm:drm_crtc_helper_set_config], [CONNECTOR:5:LVDS-1] to [CRTC:3]
+[    0.900175] [drm:drm_crtc_helper_set_config], 
+[    0.900177] [drm:drm_crtc_helper_set_config], [CRTC:3] [FB:9] #connectors=1 (x y) (0 0)
+[    0.900184] [drm:drm_crtc_helper_set_config], [CONNECTOR:5:LVDS-1] to [CRTC:3]
+[    0.906050] [drm:drm_crtc_helper_set_config], 
+[    0.906052] [drm:drm_crtc_helper_set_config], [CRTC:3] [FB:9] #connectors=1 (x y) (0 0)
+[    0.906058] [drm:drm_crtc_helper_set_config], [CONNECTOR:5:LVDS-1] to [CRTC:3]
+[    0.911938] drm: registered panic notifier
+[    2.392542] [drm:i915_driver_open], 
+[    2.392578] [drm:drm_crtc_helper_set_config], 
+[    2.392581] [drm:drm_crtc_helper_set_config], [CRTC:3] [FB:9] #connectors=1 (x y) (0 0)
+[    2.392594] [drm:drm_crtc_helper_set_config], [CONNECTOR:5:LVDS-1] to [CRTC:3]
+[    2.392630] [drm:i915_driver_open], 
+[    2.392935] [drm:drm_mode_getresources], CRTC[2] CONNECTORS[4] ENCODERS[4]
+[    2.392943] [drm:drm_mode_getresources], CRTC[2] CONNECTORS[4] ENCODERS[4]
+[    2.393017] [drm:drm_mode_getconnector], [CONNECTOR:5:?]
+[    2.393023] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:5:LVDS-1]
+[    2.393041] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:5:LVDS-1] probed modes :
+[    2.393046] [drm:drm_mode_debug_printmodeline], Modeline 20:"1280x800" 60 70700 1280 1296 1344 1440 800 801 804 818 0x48 0xa
+[    2.393054] [drm:drm_mode_debug_printmodeline], Modeline 21:"1280x800" 48 56428 1280 1296 1344 1440 800 801 804 818 0x40 0xa
+[    2.393063] [drm:drm_mode_getconnector], [CONNECTOR:5:?]
+[    2.393431] [drm:intel_panel_get_backlight], get backlight PWM = 4882
+[    2.393464] [drm:drm_mode_getconnector], [CONNECTOR:12:?]
+[    2.393469] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1]
+[    2.393475] [drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adpa=0xf40000, result 0
+[    2.393480] [drm:intel_crt_detect], CRT not detected via hotplug
+[    2.393484] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1] disconnected
+[    2.393491] [drm:drm_mode_getconnector], [CONNECTOR:12:?]
+[    2.393494] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1]
+[    2.393500] [drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adpa=0xf40000, result 0
+[    2.393504] [drm:intel_crt_detect], CRT not detected via hotplug
+[    2.393508] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1] disconnected
+[    2.393534] [drm:drm_mode_getconnector], [CONNECTOR:15:?]
+[    2.393538] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1]
+[    2.426497] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1] disconnected
+[    2.426514] [drm:drm_mode_getconnector], [CONNECTOR:15:?]
+[    2.426519] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1]
+[    2.456515] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1] disconnected
+[    2.456587] [drm:drm_mode_getconnector], [CONNECTOR:18:?]
+[    2.456593] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1]
+[    2.457109] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.459329] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.461691] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.463190] [drm:intel_dp_detect], DPCD: 0000000000000000
+[    2.463199] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1] disconnected
+[    2.463213] [drm:drm_mode_getconnector], [CONNECTOR:18:?]
+[    2.463218] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1]
+[    2.463734] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.465659] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.467670] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.469152] [drm:intel_dp_detect], DPCD: 0000000000000000
+[    2.469161] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1] disconnected
+[    2.469254] [drm:drm_mode_getconnector], [CONNECTOR:5:?]
+[    2.469260] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:5:LVDS-1]
+[    2.469278] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:5:LVDS-1] probed modes :
+[    2.469283] [drm:drm_mode_debug_printmodeline], Modeline 20:"1280x800" 60 70700 1280 1296 1344 1440 800 801 804 818 0x48 0xa
+[    2.469291] [drm:drm_mode_debug_printmodeline], Modeline 21:"1280x800" 48 56428 1280 1296 1344 1440 800 801 804 818 0x40 0xa
+[    2.469299] [drm:drm_mode_getconnector], [CONNECTOR:5:?]
+[    2.470211] [drm:drm_mode_getconnector], [CONNECTOR:12:?]
+[    2.470217] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1]
+[    2.470224] [drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adpa=0xf40000, result 0
+[    2.470229] [drm:intel_crt_detect], CRT not detected via hotplug
+[    2.470234] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1] disconnected
+[    2.470240] [drm:drm_mode_getconnector], [CONNECTOR:12:?]
+[    2.470244] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1]
+[    2.470249] [drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adpa=0xf40000, result 0
+[    2.470253] [drm:intel_crt_detect], CRT not detected via hotplug
+[    2.470257] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1] disconnected
+[    2.470281] [drm:drm_mode_getconnector], [CONNECTOR:15:?]
+[    2.470286] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1]
+[    2.488055] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1] disconnected
+[    2.488070] [drm:drm_mode_getconnector], [CONNECTOR:15:?]
+[    2.488076] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1]
+[    2.504343] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1] disconnected
+[    2.504422] [drm:drm_mode_getconnector], [CONNECTOR:18:?]
+[    2.504429] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1]
+[    2.504943] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.506705] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.508632] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.510140] [drm:intel_dp_detect], DPCD: 0000000000000000
+[    2.510150] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1] disconnected
+[    2.510163] [drm:drm_mode_getconnector], [CONNECTOR:18:?]
+[    2.510168] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1]
+[    2.510683] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.512636] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.514626] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.516131] [drm:intel_dp_detect], DPCD: 0000000000000000
+[    2.516141] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1] disconnected
+[    2.521089] [drm:drm_mode_addfb], [FB:22]
+[    2.521281] [drm:drm_mode_setcrtc], [CRTC:3]
+[    2.521289] [drm:drm_mode_setcrtc], [CONNECTOR:5:LVDS-1]
+[    2.521294] [drm:drm_crtc_helper_set_config], 
+[    2.521297] [drm:drm_crtc_helper_set_config], [CRTC:3] [FB:22] #connectors=1 (x y) (0 0)
+[    2.521308] [drm:drm_crtc_helper_set_config], [CONNECTOR:5:LVDS-1] to [CRTC:3]
+[    2.525559] [drm:ironlake_update_plane], Writing base 0044F000 00000000 0 0 5120
+[    2.525567] [drm:intel_update_fbc], 
+[    2.525646] [drm:intel_enable_fbc], scheduling delayed FBC enable
+[    2.534061] [drm:intel_prepare_page_flip], preparing flip with no unpin work?
+[    2.577077] [drm:intel_wait_for_vblank], vblank wait timed out
+[    2.577308] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4882
+[    2.577356] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4882
+[    2.580522] [drm:ironlake_enable_fbc], enabled fbc on plane 0
+[    2.713059] [drm:intel_panel_get_backlight], get backlight PWM = 4882
+[    2.717503] [drm:drm_mode_getconnector], [CONNECTOR:5:?]
+[    2.717511] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:5:LVDS-1]
+[    2.717530] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:5:LVDS-1] probed modes :
+[    2.717535] [drm:drm_mode_debug_printmodeline], Modeline 20:"1280x800" 60 70700 1280 1296 1344 1440 800 801 804 818 0x48 0xa
+[    2.717543] [drm:drm_mode_debug_printmodeline], Modeline 21:"1280x800" 48 56428 1280 1296 1344 1440 800 801 804 818 0x40 0xa
+[    2.717552] [drm:drm_mode_getconnector], [CONNECTOR:5:?]
+[    2.717799] [drm:drm_mode_getconnector], [CONNECTOR:12:?]
+[    2.717804] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1]
+[    2.717811] [drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adpa=0xf40000, result 0
+[    2.717816] [drm:intel_crt_detect], CRT not detected via hotplug
+[    2.717820] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1] disconnected
+[    2.717826] [drm:drm_mode_getconnector], [CONNECTOR:12:?]
+[    2.717830] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1]
+[    2.717834] [drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adpa=0xf40000, result 0
+[    2.717839] [drm:intel_crt_detect], CRT not detected via hotplug
+[    2.717843] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1] disconnected
+[    2.717850] [drm:drm_mode_getconnector], [CONNECTOR:15:?]
+[    2.717854] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1]
+[    2.737493] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1] disconnected
+[    2.737572] [drm:drm_mode_getconnector], [CONNECTOR:15:?]
+[    2.737578] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1]
+[    2.764985] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1] disconnected
+[    2.765020] [drm:drm_mode_getconnector], [CONNECTOR:18:?]
+[    2.765026] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1]
+[    2.765544] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.767575] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.769484] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.770964] [drm:intel_dp_detect], DPCD: 0000000000000000
+[    2.770973] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1] disconnected
+[    2.770987] [drm:drm_mode_getconnector], [CONNECTOR:18:?]
+[    2.770992] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1]
+[    2.771507] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.773488] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.775474] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.776958] [drm:intel_dp_detect], DPCD: 0000000000000000
+[    2.776968] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1] disconnected
+[    2.787163] [drm:drm_mode_getconnector], [CONNECTOR:5:?]
+[    2.787172] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:5:LVDS-1]
+[    2.787191] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:5:LVDS-1] probed modes :
+[    2.787196] [drm:drm_mode_debug_printmodeline], Modeline 20:"1280x800" 60 70700 1280 1296 1344 1440 800 801 804 818 0x48 0xa
+[    2.787203] [drm:drm_mode_debug_printmodeline], Modeline 21:"1280x800" 48 56428 1280 1296 1344 1440 800 801 804 818 0x40 0xa
+[    2.787213] [drm:drm_mode_getconnector], [CONNECTOR:5:?]
+[    2.787461] [drm:drm_mode_getconnector], [CONNECTOR:12:?]
+[    2.787467] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1]
+[    2.787473] [drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adpa=0xf40000, result 0
+[    2.787478] [drm:intel_crt_detect], CRT not detected via hotplug
+[    2.787482] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1] disconnected
+[    2.787488] [drm:drm_mode_getconnector], [CONNECTOR:12:?]
+[    2.787492] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1]
+[    2.787497] [drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adpa=0xf40000, result 0
+[    2.787501] [drm:intel_crt_detect], CRT not detected via hotplug
+[    2.787505] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:12:VGA-1] disconnected
+[    2.787513] [drm:drm_mode_getconnector], [CONNECTOR:15:?]
+[    2.787517] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1]
+[    2.813536] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1] disconnected
+[    2.813563] [drm:drm_mode_getconnector], [CONNECTOR:15:?]
+[    2.813568] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1]
+[    2.843121] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:15:HDMI-A-1] disconnected
+[    2.843169] [drm:drm_mode_getconnector], [CONNECTOR:18:?]
+[    2.843175] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1]
+[    2.843690] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.845427] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.847424] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.848928] [drm:intel_dp_detect], DPCD: 0000000000000000
+[    2.848937] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1] disconnected
+[    2.848961] [drm:drm_mode_getconnector], [CONNECTOR:18:?]
+[    2.848966] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1]
+[    2.849480] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.851427] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.853427] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    2.854908] [drm:intel_dp_detect], DPCD: 0000000000000000
+[    2.854916] [drm:drm_helper_probe_single_connector_modes], [CONNECTOR:18:DP-1] disconnected
+[    3.205809] [drm:i915_driver_open], 
+[    3.410370] [drm:intel_crtc_cursor_set], 
+[    4.880849] [drm:intel_panel_get_backlight], get backlight PWM = 4882
+[    4.881357] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4773
+[    4.911798] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4663
+[    4.942714] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4553
+[    4.971953] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4443
+[    5.001205] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4333
+[    5.031450] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4223
+[    5.061689] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4113
+[    5.091905] [drm:intel_panel_actually_set_backlight], set backlight PWM = 4003
+[    6.859512] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    6.859519] [drm:intel_dp_i2c_aux_ch], aux_ch failed -110
+[    6.860032] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[    6.860036] [drm:intel_dp_i2c_aux_ch], aux_ch failed -110
+[    6.860039] [drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return -110
+[   10.917986] [drm:intel_ironlake_crt_detect_hotplug], ironlake hotplug adpa=0xf40000, result 0
+[   10.917995] [drm:intel_crt_detect], CRT not detected via hotplug
+[   10.918000] [drm:output_poll_execute], [CONNECTOR:12:VGA-1] status updated from 2 to 2
+[   10.929623] [drm:output_poll_execute], [CONNECTOR:15:HDMI-A-1] status updated from 2 to 2
+[   10.930144] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[   10.933049] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[   10.936494] [drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5143003e
+[   10.937970] [drm:intel_dp_detect], DPCD: 0000000000000000
+[   10.937978] [drm:output_poll_execute], [CONNECTOR:18:DP-1] status updated from 2 to 2
+[   32.764059] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[   62.746236] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[   92.729361] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  122.711890] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  152.694525] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  182.677194] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  212.659923] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  242.642671] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  272.625077] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  302.607910] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  332.590443] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  362.572949] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  392.555713] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  422.531149] [drm:intel_panel_get_backlight], get backlight PWM = 4003
+[  422.532670] [drm:intel_panel_actually_set_backlight], set backlight PWM = 3564
+[  422.562088] [drm:intel_panel_actually_set_backlight], set backlight PWM = 3125
+[  422.592464] [drm:intel_panel_actually_set_backlight], set backlight PWM = 2685
+[  422.622343] [drm:intel_panel_actually_set_backlight], set backlight PWM = 2246
+[  422.651766] [drm:intel_panel_actually_set_backlight], set backlight PWM = 1807
+[  422.682232] [drm:intel_panel_actually_set_backlight], set backlight PWM = 1367
+[  422.711692] [drm:intel_panel_actually_set_backlight], set backlight PWM = 928
+[  422.742147] [drm:intel_panel_actually_set_backlight], set backlight PWM = 488

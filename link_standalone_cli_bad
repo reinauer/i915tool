@@ -1,0 +1,165 @@
+[drm:init_vbt_defaults], Set default to SSC at 100MHz
+[drm:parse_general_features], BDB_GENERAL_FEATURES int_tv_support 0 int_crt_support 1 lvds_use_ssc 0 lvds_ssc_freq 120 display_clock_mode 0
+[drm:parse_general_definitions], crt_ddc_bus_pin: 2
+[drm:parse_lfp_panel_data], Found panel mode in BIOS VBT tables:
+[drm:drm_mode_debug_printmodeline], Modeline 0:"1024x768" 0 65000 1024 1048 1184 1344 768 771 777 806 0x8 0xa
+[drm:parse_sdvo_panel_data], Found SDVO panel mode in BIOS VBT tables:
+[drm:drm_mode_debug_printmodeline], Modeline 0:"1600x1200" 0 162000 1600 1664 1856 2160 1200 1201 1204 1250 0x8 0xa
+[drm:parse_sdvo_device_mapping], No SDVO device info is found in VBT
+[drm:i915_driver_load], Warning: somebody tried to call pci_set_master
+[drm:i915_driver_load], NOT setting enable MSI; fix me later
+[drm:intel_detect_pch], Found PatherPoint PCH
+[drm:init_vbt_defaults], Set default to SSC at 100MHz
+[drm:parse_general_features], BDB_GENERAL_FEATURES int_tv_support 0 int_crt_support 1 lvds_use_ssc 0 lvds_ssc_freq 120 display_clock_mode 0
+[drm:parse_general_definitions], crt_ddc_bus_pin: 2
+[drm:parse_lfp_panel_data], Found panel mode in BIOS VBT tables:
+[drm:drm_mode_debug_printmodeline], Modeline 0:"1024x768" 0 65000 1024 1048 1184 1344 768 771 777 806 0x8 0xa
+[drm:parse_sdvo_panel_data], Found SDVO panel mode in BIOS VBT tables:
+[drm:drm_mode_debug_printmodeline], Modeline 0:"1600x1200" 0 162000 1600 1664 1856 2160 1200 1201 1204 1250 0x8 0xa
+[drm:parse_sdvo_device_mapping], No SDVO device info is found in VBT
+[drm:intel_init_display], Using MT version of forcewake
+[drm:intel_modeset_init], 3 display pipes available.
+[drm:intel_lvds_init], LVDS is not present in VBT
+[drm:intel_dp_init], cur t1_t3 2000 t8 2000 t9 2000 t10 500 t11_t12 6000
+[drm:intel_dp_init], vbt t1_t3 2000 t8 10 t9 2000 t10 500 t11_t12 5000
+[drm:intel_dp_init], panel power up delay 200, power down delay 50, power cycle delay 600
+[drm:intel_dp_init], backlight on delay 200, off delay 200
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_wait_panel_power_cycle], Wait for panel power cycle
+[drm:ironlake_wait_panel_status], mask b800000f value 00000000 status 00000000 control 00000000
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x00000000 PCH_PP_CONTROL: 0xabcd0008
+[drm:ironlake_edp_panel_vdd_on], eDP was not running
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:intel_dp_i2c_init], i2c_init DPDDC-A
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:intel_panel_get_backlight], get backlight PWM = 4302
+[drm:intel_dp_i2c_init], i2c_init DPDDC-D
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f
+[drm:intel_dp_i2c_aux_ch], aux_ch failed -110
+[drm:intel_dp_aux_ch], dp_aux_ch timeout status 0x5145003f
+[drm:intel_dp_i2c_aux_ch], aux_ch failed -110
+[drm:ironlake_init_pch_refclk], has_panel 1 has_lvds 0 has_pch_edp 0 has_cpu_edp 1 has_ck505 0
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:6:eDP-1]
+[drm:intel_dp_detect], DPCD: 110a8441000001c0
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2
+[drm:i2c_algo_dp_aux_xfer], dp_aux_xfer return 2
+[drm:drm_edid_to_eld], ELD: no CEA Extension found
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:drm_helper_probe_single_connector_modes], [CONNECTOR:6:eDP-1] probed modes :
+[drm:drm_mode_debug_printmodeline], Modeline 47580720:"2560x1700" 60 285250 2560 2608 2640 2720 1700 1703 1713 1749 0x48 0xa
+[drm:intel_get_load_detect_pipe], [CONNECTOR:6:eDP-1], [ENCODER:7:TMDS-7]
+[drm:intel_get_load_detect_pipe], creating tmp fb for load-detection
+[drm:intel_dp_mode_fixup], Display port link bw 0a lane count 4 clock 270000
+[drm:drm_crtc_helper_set_mode], [CRTC:3]
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:ironlake_edp_backlight_off], 
+[drm:ironlake_edp_panel_off], Turn eDP power off
+[drm:ironlake_wait_panel_off], Wait for panel power off time
+[drm:ironlake_wait_panel_status], mask b000000f value 00000000 status 00000000 control abcd0008
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_crtc_mode_set], Mode for pipe 0:
+[drm:drm_mode_debug_printmodeline], Modeline 47580720:"2560x1700" 60 285250 2560 2608 2640 2720 1700 1703 1713 1749 0x48 0xa
+[drm:ironlake_set_pll_edp], eDP PLL enable for clock 270000
+[drm:intel_wait_for_vblank], vblank wait timed out
+[drm:ironlake_update_plane], Writing base 00000000 00000000 0 0 10240
+[drm:sandybridge_update_wm], FIFO watermarks For pipe A - plane 24, cursor: 6
+[drm:ironlake_check_srwm], watermark 1: display plane 38, fbc lines 3, cursor 6
+[drm:ironlake_check_srwm], watermark 2: display plane 145, fbc lines 3, cursor 6
+[drm:ironlake_check_srwm], watermark 3: display plane 288, fbc lines 4, cursor 10
+[drm:drm_crtc_helper_set_mode], [ENCODER:7:TMDS-7] set [MODE:47580720:2560x1700]
+[drm:ironlake_edp_pll_on], 
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:ironlake_edp_panel_on], Turn eDP power on
+[drm:ironlake_wait_panel_power_cycle], Wait for panel power cycle
+[drm:ironlake_wait_panel_status], mask b800000f value 00000000 status 00000000 control abcd0008
+[drm:ironlake_wait_panel_on], Wait for panel power on
+[drm:ironlake_wait_panel_status], mask b000000f value 80000008 status 0000000a control abcd000b
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_panel_vdd_off_sync], PCH_PP_STATUS: 0x80000008 PCH_PP_CONTROL: 0xabcd0003
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_complete_link_train], failed to train DP, aborting
+[drm:intel_dp_link_down], 
+[drm:ironlake_edp_backlight_on], 
+[drm:intel_cpt_verify_modeset], mode set failed: pipe 0 stuck
+[drm:intel_wait_for_vblank], vblank wait timed out
+[drm:intel_dp_mode_fixup], Display port link bw 0a lane count 4 clock 270000
+[drm:drm_crtc_helper_set_mode], [CRTC:3]
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x80000008 PCH_PP_CONTROL: 0xabcd000f
+[drm:ironlake_edp_backlight_off], 
+[drm:ironlake_edp_panel_off], Turn eDP power off
+[drm:ironlake_wait_panel_off], Wait for panel power off time
+[drm:ironlake_wait_panel_status], mask b000000f value 00000000 status 80000008 control abcd0008
+[drm:intel_dp_link_down], 
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_crtc_mode_set], Mode for pipe 0:
+[drm:drm_mode_debug_printmodeline], Modeline 47580720:"2560x1700" 60 285250 2560 2608 2640 2720 1700 1703 1713 1749 0x48 0xa
+[drm:ironlake_set_pll_edp], eDP PLL enable for clock 270000
+[drm:intel_wait_for_vblank], vblank wait timed out
+[drm:ironlake_update_plane], Writing base 00000000 00000000 0 0 10240
+[drm:sandybridge_update_wm], FIFO watermarks For pipe A - plane 24, cursor: 6
+[drm:ironlake_check_srwm], watermark 1: display plane 38, fbc lines 3, cursor 6
+[drm:ironlake_check_srwm], watermark 2: display plane 145, fbc lines 3, cursor 6
+[drm:ironlake_check_srwm], watermark 3: display plane 288, fbc lines 4, cursor 10
+[drm:drm_crtc_helper_set_mode], [ENCODER:7:TMDS-7] set [MODE:47580720:2560x1700]
+[drm:ironlake_edp_pll_on], 
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], eDP VDD already on
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:ironlake_edp_panel_on], Turn eDP power on
+[drm:ironlake_wait_panel_power_cycle], Wait for panel power cycle
+[drm:ironlake_wait_panel_status], mask b800000f value 00000000 status 00000000 control abcd0008
+[drm:ironlake_wait_panel_on], Wait for panel power on
+[drm:ironlake_wait_panel_status], mask b000000f value 80000008 status 0000000a control abcd000b
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_panel_vdd_off_sync], PCH_PP_STATUS: 0x80000008 PCH_PP_CONTROL: 0xabcd0003
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_link_down], 
+[drm:intel_dp_start_link_train], too many full retries, give up
+[drm:intel_dp_complete_link_train], failed to train DP, aborting
+[drm:intel_dp_link_down], 
+[drm:ironlake_edp_backlight_on], 
+[drm:intel_cpt_verify_modeset], mode set failed: pipe 0 stuck
+[drm:ironlake_edp_pll_on], 
+[drm:ironlake_edp_panel_vdd_on], Turn eDP VDD on
+[drm:ironlake_edp_panel_vdd_on], PCH_PP_STATUS: 0x80000008 PCH_PP_CONTROL: 0xabcd000f
+[drm:ironlake_edp_panel_vdd_off], Turn eDP VDD off 1
+[drm:ironlake_edp_backlight_on], 
+[drm:intel_get_load_detect_pipe], [CONNECTOR:6:eDP-1], [ENCODER:7:TMDS-7]
+[drm:intel_crt_load_detect], starting load-detect on CRT
+[drm:intel_wait_for_vblank], vblank wait timed out
+[drm:intel_panel_actually_set_backlight], set backlight PWM = 4302
+[drm:intel_panel_actually_set_backlight], set backlight PWM = 0
+[drm:intel_panel_actually_set_backlight], set backlight PWM = 4302

@@ -1,0 +1,129 @@
+Script started on Tue Jun 26 14:43:55 2012
+]0;root@localhost:/usr/local/i915tool[01;31mlocalhost[01;34m i915tool #[00m ./cli -b s snm_2130_coreboot.bin 
+>b
+Set default to SSC at 100MHz
+BDB_GENERAL_FEATURES int_tv_support 0 int_crt_support 1 lvds_use_ssc 0 lvds_ssc_freq 120 display_clock_mode 0
+crt_ddc_bus_pin: 2
+Found panel mode in BIOS VBT tables:
+Modeline 0:"1024x768" 0 65000 1024 1048 1184 1344 768 771 777 806 0x8 0xa
+Found SDVO panel mode in BIOS VBT tables:
+Modeline 0:"1600x1200" 0 162000 1600 1664 1856 2160 1200 1201 1204 1250 0x8 0xa
+No SDVO device info is found in VBT
+Command took 6351 microseconds
+>i
+bridge revision 59
+succeeds after 1 tries
+Command took 7311 microseconds
+>m
+Warning: somebody tried to call pci_set_master
+NOT setting enable MSI; fix me later
+Found PatherPoint PCH
+Set default to SSC at 100MHz
+BDB_GENERAL_FEATURES int_tv_support 0 int_crt_support 1 lvds_use_ssc 0 lvds_ssc_freq 120 display_clock_mode 0
+crt_ddc_bus_pin: 2
+Found panel mode in BIOS VBT tables:
+Modeline 0:"1024x768" 0 65000 1024 1048 1184 1344 768 771 777 806 0x8 0xa
+Found SDVO panel mode in BIOS VBT tables:
+Modeline 0:"1600x1200" 0 162000 1600 1664 1856 2160 1200 1201 1204 1250 0x8 0xa
+No SDVO device info is found in VBT
+Using MT version of forcewake
+3 display pipes available.
+LVDS is not present in VBT
+cur t1_t3 2000 t8 2000 t9 0 t10 0 t11_t12 6000
+vbt t1_t3 2000 t8 10 t9 2000 t10 500 t11_t12 5000
+panel power up delay 200, power down delay 50, power cycle delay 600
+backlight on delay 200, off delay 200
+Turn eDP VDD on
+PCH_PP_STATUS: 0x80000008 PCH_PP_CONTROL: 0xabcd000f
+Turn eDP VDD off 1
+i2c_init DPDDC-A
+Turn eDP VDD on
+eDP VDD already on
+Turn eDP VDD off 1
+get backlight PWM = 4882
+has_panel 1 has_lvds 0 has_pch_edp 0 has_cpu_edp 1 has_ck505 0
+Command took 50882 microseconds
+>c
+We have an edp: 
+Command took 24 microseconds
+>p
+[CONNECTOR:6:eDP-1]
+DPCD: 110a8441000001c0
+Turn eDP VDD on
+eDP VDD already on
+i2c_transfer
+dp_aux_xfer return 2
+i2c_transfer
+dp_aux_xfer return 2
+Turn eDP VDD off 1
+Turn eDP VDD on
+eDP VDD already on
+i2c_transfer
+dp_aux_xfer return 2
+i2c_transfer
+dp_aux_xfer return 2
+ELD: no CEA Extension found
+Turn eDP VDD off 1
+pmode 0x1d58e60 pt 0x1d58a88
+[CONNECTOR:6:eDP-1] probed modes :
+Modeline 0:"2560x1700" 60 285250 2560 2608 2640 2720 1700 1703 1713 1749 0x48 0xa
+Command took 181363 microseconds
+>d0
+We have connector:0x1d58a40 intel connector 0x1d58a40, ice 0x1d58900
+Encoder is 0x1d58900
+[CONNECTOR:6:eDP-1], [ENCODER:7:TMDS-7]
+creating tmp fb for load-detection
+Display port link bw 0a lane count 4 clock 270000
+[CRTC:3]
+Turn eDP VDD on
+eDP VDD already on
+
+Turn eDP power off
+Wait for panel power off time
+mask b000000f value 00000000 status 80000008 control abcd0008
+
+Turn eDP VDD off 1
+(HARD-WIRED: setting pipe bpc to 6 (max display bpc 6)
+Mode for pipe 0:
+Modeline 0:"640x480" 0 285250 640 664 704 832 480 489 491 520 0x10 0xa
+eDP PLL enable for clock 270000
+vblank wait timed out
+Writing base 00000000 00000000 0 0 2560
+[ENCODER:7:TMDS-7] set [MODE:0:640x480]
+
+Turn eDP VDD on
+eDP VDD already on
+too many full retries, give up
+Turn eDP power on
+Wait for panel power cycle
+mask b800000f value 00000000 status 00000000 control abcd0008
+Wait for panel power on
+mask b000000f value 80000008 status 0000000a control abcd000b
+Turn eDP VDD off 1
+PCH_PP_STATUS: 0x80000008 PCH_PP_CONTROL: 0xabcd0003
+
+clock recovery OK
+
+vblank wait timed out
+Display port link bw 0a lane count 4 clock 270000
+[CRTC:3]
+Turn eDP VDD on
+PCH_PP_STATUS: 0x80000008 PCH_PP_CONTROL: 0xabcd000f
+
+Turn eDP power off
+Wait for panel power off time
+mask b000000f value 00000000 status 80000008 control abcd0008
+
+Turn eDP VDD off 1
+(HARD-WIRED: setting pipe bpc to 6 (max display bpc 6)
+Mode for pipe 0:
+Modeline 10:"" 0 285250 0 0 0 0 0 0 0 0 0x0 0x0
+eDP PLL enable for clock 270000
+vblank wait timed out
+Writing base 00000000 00000000 0 0 2560
+[ENCODER:7:TMDS-7] set [MODE:10:]
+
+Turn eDP VDD on
+eDP VDD already on
+too many full retries, give up
+Tu

@@ -24,7 +24,9 @@ char name[128];
 
 char *regname(unsigned long addr)
 {
-	/*printk(BIOS_SPEW, */printf(name, "0x%lx", addr);
+	name[0] = 0;
+	/*printk(BIOS_SPEW, */
+	sprintf(name, "0x%lx", addr);
 	return name;
 }
 /* not sure how we want to do this so let's guess */
@@ -91,7 +93,8 @@ struct iodef {
 	unsigned long data;
 	unsigned long udelay;
 } iodefs[] = {
-#include "stoutgraphicsio.c"
+//#include "stoutgraphicsio.c"
+#include "stoutRWsym.c"
 };
 
 int main(void)
@@ -153,4 +156,4 @@ int main(void)
 
 	/*printk(BIOS_SPEW, */printf("%ld microseconds\n", globalmicroseconds());
 }
-/* cc -static -O2 stoutstartup.c */
+/* cc -static -O2 -g stoutstartup.c */
