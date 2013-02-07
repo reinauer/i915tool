@@ -488,6 +488,13 @@ detailed_block(unsigned char *x, int in_extension)
 	  );
     /* XXX flag decode */
     
+/*
+{W, 1, "", _TRANSA_DATA_M1, 0x00000000, 0},
+{W, 1, "", _TRANSA_DATA_N1, 0x00000000, 0},
+{W, 1, "", _TRANSA_DP_LINK_M1, 0x00000000, 0},
+{W, 1, "", _TRANSA_DP_LINK_N1, 0x00000000, 0},
+ */
+        printf("I915_WRITE(VSYNC_SHIFTA, 0);\n");
         printf("I915_WRITE(HTOTAL(pipe), %08x)\n",
                    (ha - 1) |
                    ((ha + hbl- 1) << 16));
@@ -498,15 +505,17 @@ detailed_block(unsigned char *x, int in_extension)
                    (ha + hso  - 1) |
                    ((ha + hso + hspw- 1) << 16));
 
-        printf("I915_WRITE(HTOTAL(pipe), %08x)\n",
+        printf("I915_WRITE(VTOTAL(pipe), %08x)\n",
                    (va - 1) |
                    ((va + vbl- 1) << 16));
-        printf("I915_WRITE(HBLANK(pipe),0x%08x)\n",
+        printf("I915_WRITE(VBLANK(pipe),0x%08x)\n",
                    (va  - 1) |
                    ((va + vbl- 1) << 16));
-        printf("I915_WRITE(HSYNC(pipe),0x%08x)\n",
+        printf("I915_WRITE(VSYNC(pipe),0x%08x)\n",
                    (va + vso  - 1) |
                    ((va + vso + vspw- 1) << 16));
+	printf("I915_WRITE(PIPESRC(pipe), 0x%08x);\n", 
+                   ((ha - 1) << 16) | (va - 1));
     return 1;
 }
 
