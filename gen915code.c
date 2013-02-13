@@ -1033,17 +1033,40 @@ int aux(int index)
 	 * then call auxio with the pointer to the outarray. 
 	 * to make things easier, we take subsequent IOs into other arrays.
 	 */
-	int len;
+	int msglen = 0, senddatalen = 0;
+	int dp_or_i2c = 0,  mot = 0, dpcmd = 0, i2ccmd = 0;
+	int cmd = 0;
+	int rw = 0;
+	int dest = 0;
 	while (1){
 		id++, index++;
 		switch(id->addr){
 		case DPA_AUX_CH_CTL:
-			len = (id->data>>20)&0x1f;
+			msglen = (id->data>>20)&0x1f;
+			senddatalen = msglen -1;
 			/* actually, we don't care -- function gets it. */
 			break;
 		case DPA_AUX_CH_DATA1:
-		if (id->op == W)
-			emit("\tauxout[0] = 0x%08x;\n", id->data);
+		if (id->op == R)
+			break;
+			/* defined in the aux standard, e.g. 
+			 * http://hackipedia.org/Hardware/video/connectors/DisplayPort/VESA%20DisplayPort%20Standard%20v1.1a.pdf
+			 */
+			dp_or_i2c = id->data>>31;
+			emit("\tauxout[0] = %s",
+			     dp_or_i2c ? "1<<31 /* dp */" : "0<<31 /* i2c */");
+			if (dp_or_i2c) { /* dp */
+				cmd = (id->data>>28)&7;
+				rw = cmd == 0 ? 0 : 1;
+				dest = id->data & 0xffffff;
+				emit("|0x%x<<28|0x%x;\n", cmd, dest);
+			} else {
+				mot = (id->data>>30)&1;
+				i2ccmd = (id->data>>28)&3;
+				rw = i2ccmd == 0 ? 0 : 1;
+				dest = id->data & 0xffffff;
+				emit("%d<<30|0x%x<<28|0x%x;\n", mot, i2ccmd, dest);
+			}
 			break;
 		case DPA_AUX_CH_DATA2:
 		if (id->op == W)
@@ -1066,7 +1089,7 @@ int aux(int index)
 		}
 	}
 	done:
-	emit("\tauxio(DPA_AUX_CH_CTL, auxout, %d, auxin, %d);\n", len, len);
+	emit("\tauxio(DPA_AUX_CH_CTL, auxout, %d, auxin, %d);\n", msglen, msglen);
 	return index;
 }
 int main(int argc, char *argv[])
