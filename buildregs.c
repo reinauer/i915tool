@@ -3296,6 +3296,16 @@ struct registers struct_BLC_PWM_PCH_CTL2[]={
 };
 
 struct registers struct_PCH_PP_STATUS[]={
+	{ "PP_ON ", PP_ON},
+	{" PP_READY ",PP_READY },
+	{" PP_SEQUENCE_NONE ",PP_SEQUENCE_NONE },
+	{" PP_SEQUENCE_POWER_UP ",PP_SEQUENCE_POWER_UP },
+	{" PP_SEQUENCE_POWER_DOWN ",PP_SEQUENCE_POWER_DOWN },
+	{" PP_CYCLE_DELAY_ACTIVE ",PP_CYCLE_DELAY_ACTIVE },
+	{" undocbit3 ",8 },
+	{" undocbit2 ",4 },
+	{" undocbit1 ",2 },
+	{" undocbit0 ",1 },
 	{NULL, 0},
 };
 

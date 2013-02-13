@@ -165,6 +165,31 @@ extract_string(unsigned char *x, int *valid_termination, int len)
     return ret;
 }
 
+static void
+intel_reduce_ratio(unsigned long *num, unsigned long *den)
+{
+        while (*num > 0xffffff || *den > 0xffffff) {
+                *num >>= 1;
+                *den >>= 1;
+        }
+}
+
+unsigned long tu, gmch_m, gmch_n, link_m, link_n;
+static void
+intel_dp_compute_m_n( int pixel_clock)
+                     
+{
+	int bpp = 8;
+	int nlanes = 4;
+	unsigned long link_clock = 2700; //*100000000; 
+        tu = 64;
+        gmch_m = (pixel_clock * bpp) >> 3;
+        gmch_n = link_clock * nlanes;
+        intel_reduce_ratio(&gmch_m, &gmch_n);
+        link_m = pixel_clock;
+        link_n = link_clock;
+        intel_reduce_ratio(&link_m, &link_n);
+}
 /* 1 means valid data */
 static int
 detailed_block(unsigned char *x, int in_extension)
@@ -474,6 +499,8 @@ detailed_block(unsigned char *x, int in_extension)
 	break;
     }
 
+	unsigned int clock_in_10khz = (x[0] + (x[1] << 8));
+	printf("raw clock 24 bits is %d\n", clock_in_10khz);
     printf("Detailed mode (IN HEX): Clock %.3f MHz, %x mm x %x mm\n"
 	   "               %04x %04x %04x %04x hborder %x\n"
 	   "               %04x %04x %04x %04x vborder %x\n"
@@ -516,6 +543,14 @@ detailed_block(unsigned char *x, int in_extension)
                    ((va + vso + vspw- 1) << 16));
 	printf("I915_WRITE(PIPESRC(pipe), 0x%08x);\n", 
                    ((ha - 1) << 16) | (va - 1));
+	/*
+        drm_mode->clock = drm_mode->htotal * HV_FACTOR * 1000 / hperiod;
+        drm_mode->clock -= drm_mode->clock % CVT_CLOCK_STEP;
+	*/
+	intel_dp_compute_m_n( clock_in_10khz/100);
+	/* known to be true
+	 * Display port link bw 0a lane count 4 clock 270000
+	 */
     return 1;
 }
 
