@@ -1190,7 +1190,7 @@ int aux(int index)
 		}
 	}
 	done:
-	emit("\tauxio(DPA_AUX_CH_CTL, auxout, %d, auxin, %d);\n", rw == 0 ? msglen : 0, rw ? msglen : 0);
+	emit("\tauxio(DPA_AUX_CH_CTL, auxout, %d, auxin, %d);\n", rw == 0 ? len : 0, rw ? len : 0);
 	emit("\tindex = run(index);\n");
 	return index;
 }
