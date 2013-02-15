@@ -44,7 +44,7 @@ char *regname(unsigned long addr)
 		offset = addr & i;
 		truncaddr = addr & (~i);
 		if (names[truncaddr]){
-			sprintf(name,"%s+%x", names[truncaddr], offset);
+			sprintf(name,"%s+0x%x", names[truncaddr], offset);
 			return name;
 		}
 	}
@@ -58,12 +58,17 @@ char *regname(unsigned long addr)
 #define W 3
 #define V 4
 #define I 8
+#define X 16
+#define P 32
 char *opnames[] = {
 	[M] "M",
 	[R] "R",
 	[W] "W",
 	[V] "V",
 	[I] "I",
+	[X] "X",
+	[0] "X",
+	[P] "P",
 };
 
 struct iodef {
@@ -1161,7 +1166,7 @@ int aux(int index)
 				rw = i2ccmd == 0 ? 0 : 1;
 				dest = (id->data>>8) & 0xfffff;
 				len = id->data;
-				emit("%d<<30|0x%x<<28/*%s*/|0x%x<<8|0x%x;\n", mot, i2ccmd, rw ? "R" : "W",dest, len);
+				emit("|%d<<30|0x%x<<28/*%s*/|0x%x<<8|0x%x;\n", mot, i2ccmd, rw ? "R" : "W",dest, len);
 			}
 			break;
 		case DPA_AUX_CH_DATA2:
@@ -1185,20 +1190,66 @@ int aux(int index)
 		}
 	}
 	done:
-	emit("\tauxio(DPA_AUX_CH_CTL, auxout, %d, auxin, %d);\n", msglen, msglen);
+	emit("\tauxio(DPA_AUX_CH_CTL, auxout, %d, auxin, %d);\n", rw == 0 ? msglen : 0, rw ? msglen : 0);
 	emit("\tindex = run(index);\n");
 	return index;
+}
+char *prefix = 
+	"#include <stdio.h>\n"
+	"#include <stdlib.h>\n"
+	"#include <stdarg.h>\n"
+	"#include <sys/io.h>\n"
+	"#include <time.h>\n"
+	"#include <sys/time.h>\n"
+	"#include <sys/types.h>\n"
+	"#include <sys/stat.h>\n"
+	"#include <fcntl.h>\n"
+	"#include <sys/mman.h>\n"
+	"#include \"final/i915_reg.h\"\n"
+	"#include \"drmdefines.h\"\n"
+	"#define M 1\n"
+	"#define R 2\n"
+	"#define W 3\n"
+	"#define V 4\n"
+	"#define I 8\n"
+	"#define X 16\n"
+	"#define P 32\n"
+	"struct {"
+	"        int op, count;"
+	"        char *mesg;"
+	"        unsigned long reg, val;"
+	"        int delay;"
+	"} regs[] = {"
+;
+char *postfix = "};\n";
+
+char text[1024];
+char *msgtxt(char *msg)
+{
+	char *t = text;
+	*t = 0;
+	if (! msg)
+		return;
+	while (*msg){
+		if (*msg == '"')
+			*t++ = '\\';
+		*t++ = *msg++;
+	}
+	*t++ = 0;
+	return text;
 }
 int main(int argc, char *argv[])
 {
 	int i;
 	struct iodef *id = iodefs;
 	/* state machine! */
+	printf(prefix);
+	emit("int index, auxin[16], auxout[16];\n");
 	emit("\tindex = run(0);\n");
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
 		if ((id->op != W) && (id->op != R)){
 			printf("{%s, %d, \"%s\", %s, 0x%lx, %ld},\n", 
-			opnames[id->op], id->count, id->msg, regname(id->addr), id->data, id->udelay);
+			opnames[id->op], id->count, msgtxt(id->msg), regname(id->addr), id->data, id->udelay);
 		} else {
 			/* drive state machines, if nothing to do, then resume. */
 			if (id->op == R && id->addr == DPA_AUX_CH_CTL) {
@@ -1213,10 +1264,12 @@ int main(int argc, char *argv[])
 				}
 				printf("{P,},\n");
 			}
-			printf("{%s, %d, \"%s\", %s, %s, %ld},\n", 
-			       opnames[id->op], id->count, id->msg, regname(id->addr),symname(reglist, id), id->udelay);
+			if (i < sizeof(iodefs)/sizeof(iodefs[0]))
+				printf("{%s, %d, \"%s\", %s, %s, %ld},\n", 
+			       	opnames[id->op], id->count, msgtxt(id->msg), regname(id->addr),symname(reglist, id), id->udelay);
 		}
 	}
+	printf(postfix);
 	printf("void runio(void)\n{\n%s}\n", functions);
 }
 // cc -g prettyregs.c
