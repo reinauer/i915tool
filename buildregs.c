@@ -1,6 +1,7 @@
 /* generated don't edit */
 #include "final/i915_reg.h"
-struct registers { char *name; int value; };
+/* mask is unused. */
+struct registers { char *name; int value; unsigned long mask;};
 struct registers struct_PRB1_TAIL[]={
 	{NULL, 0},
 };

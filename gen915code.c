@@ -809,6 +809,7 @@ struct iodef {
 };
 
 #include "buildregs.c"
+#include "builddrmregs.c"
 
 int
 morethanonebit(unsigned long x)
@@ -816,7 +817,7 @@ morethanonebit(unsigned long x)
 	return x & (x-1);
 }
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0])) 
-char *symname(struct iodef *id)
+char *symname(struct registers *regs[], struct iodef *id)
 {
 	static char name[512];
 	char *cp;
@@ -825,8 +826,8 @@ char *symname(struct iodef *id)
 	int i;
 	name[0] = 0;
 	/* chew up the bits. Each time you find one that works, then suck it out and replace it with a symbol. */
-	if (id->addr < ARRAY_SIZE(reglist))
-		r = reglist[id->addr];
+	if (id->addr < ARRAY_SIZE(regs))
+		r = regs[id->addr];
 	if (!r){
 		sprintf(name, "0x%08lx", id->data);
 		return name;
@@ -836,7 +837,11 @@ char *symname(struct iodef *id)
 
 	/* walk the list. Rip the bits out of addr. If something is left, print it. */
 	for(i = 0, cp = name; r[i].name; i++){
-		if (! (r[i].value & value))
+		/* old school; no mask set. */
+		if (! r[i].mask && (! (r[i].value & value)))
+			continue;
+		/* new school. Mask non-zero, check for a match */
+		if (r[i].mask && ((r[i].mask & value) != r[i].value))
 			continue;
 		if (! morethanonebit(r[i].value)){
 			cp += sprintf(cp, "%s|", r[i].name);
@@ -846,7 +851,7 @@ char *symname(struct iodef *id)
 		value &= ~r[i].value;
 	}
 
-	/* special cases! */
+/* special cases! */
 	if ((id->addr & ~0x300) == DPA_AUX_CH_CTL){
 		cp+=sprintf(cp,"/*[%dbytes]*/",(id->data>>20)&0x1f);
 	}
@@ -1172,7 +1177,7 @@ int main(int argc, char *argv[])
 				printf("{P,},\n");
 			}
 			printf("{%s, %d, \"%s\", %s, %s, %ld},\n", 
-			opnames[id->op], id->count, id->msg, regname(id->addr),symname(id), id->udelay);
+			       opnames[id->op], id->count, id->msg, regname(id->addr),symname(reglist, id), id->udelay);
 		}
 	}
 	printf("void runio(void)\n{\n%s}\n", functions);

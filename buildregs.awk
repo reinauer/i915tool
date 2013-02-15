@@ -17,7 +17,7 @@ function structmember(line){
 }
 
 function structs(){
-	print "struct registers { char *name; int value; };"
+	print "struct registers { char *name; int value; unsigned long mask;};"
 }
 	
 BEGIN {print "/* generated don't edit */\n#include \"final/i915_reg.h\"";structs();instruct = 0; ix = 0; emitting = 0; }

@@ -1,5 +1,5 @@
 function emitar(){
-	print("struct registers *reglist[] = {\n")
+	print("struct registers *drmreglist[] = {\n")
 	for (el in names){
 		printf("\t[%s] = (struct registers *)struct_%s,\n", names[el], names[el])
 	}
@@ -11,13 +11,19 @@ function structstart(instruct, name) {
 	names[ix++] = name
 }
 
-function structmember(line){
+function structmember(line, mask){
 	split(line, els)
-	print "\t{\"", els[3], "\"," els[3], "},"
+	print "\t{\"", els[3], "\"," els[3], ", ", mask, "},"
+}
+
+function structmembermask(line){
+	split(line, els)
+	print "\t{\"\",", els[3], "},"
 }
 
 function structs(){
-	print "struct registers { char *name; int value; };"
+	# define in buildregs.awk
+	print "//struct registers { char *name; unsigned long value; unsigned long mask; };"
 }
 	
 BEGIN {print "/* generated don't edit */\n#include \"final/i915_reg.h\"";structs();instruct = 0; ix = 0; emitting = 0; }
@@ -29,7 +35,9 @@ END {if (instruct == 1) print "};"; emitar();}
 /^#define.*(x)/{next;}
 /^#define.*(n)/{next;}
 /^#define.*(bit)/{next;}
-/^# define/{if (emitting == 0) next; if (instruct == 0) next; structmember($0);next}
+/^# define.*MASK/{if (emitting == 0) next; if (instruct == 0) next; next}
+/^# define.*DP_TRAINING_PATTERN/{if (emitting == 0) next; if (instruct == 0) next; structmember($0, "DP_TRAINING_PATTERN_MASK");next}
+/^# define/{if (emitting == 0) next; if (instruct == 0) next; structmember($0, "0xffffffff");next}
 
 # This one is for the dp helper junk. It's a pattern of
 # define someting 0x three x digits
