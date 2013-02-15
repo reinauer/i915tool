@@ -1025,6 +1025,57 @@ intel_dp_aux_ch(struct intel_dp *intel_dp,
  * The data is read into an array of u8. 
  * After this, you get to modify it by hand. But at least it's a bit easier.
  */
+#if 0
+#define	DP_LINK_BW_SET		            0x100
+# define DP_LINK_BW_1_62		    0x06
+# define DP_LINK_BW_2_7			    0x0a
+# define DP_LINK_BW_5_4			    0x14
+
+#define DP_LANE_COUNT_SET	            0x101
+# define DP_LANE_COUNT_MASK		    0x0f
+# define DP_LANE_COUNT_ENHANCED_FRAME_EN    (1 << 7)
+
+#define DP_TRAINING_PATTERN_SET	            0x102
+# define DP_TRAINING_PATTERN_DISABLE	    0
+# define DP_TRAINING_PATTERN_1		    1
+# define DP_TRAINING_PATTERN_2		    2
+# define DP_TRAINING_PATTERN_3		    3
+# define DP_TRAINING_PATTERN_MASK	    0x3
+
+# define DP_LINK_QUAL_PATTERN_DISABLE	    (0 << 2)
+# define DP_LINK_QUAL_PATTERN_D10_2	    (1 << 2)
+# define DP_LINK_QUAL_PATTERN_ERROR_RATE    (2 << 2)
+# define DP_LINK_QUAL_PATTERN_PRBS7	    (3 << 2)
+# define DP_LINK_QUAL_PATTERN_MASK	    (3 << 2)
+
+# define DP_RECOVERED_CLOCK_OUT_EN	    (1 << 4)
+# define DP_LINK_SCRAMBLING_DISABLE	    (1 << 5)
+
+# define DP_SYMBOL_ERROR_COUNT_BOTH	    (0 << 6)
+# define DP_SYMBOL_ERROR_COUNT_DISPARITY    (1 << 6)
+# define DP_SYMBOL_ERROR_COUNT_SYMBOL	    (2 << 6)
+# define DP_SYMBOL_ERROR_COUNT_MASK	    (3 << 6)
+
+#define DP_TRAINING_LANE0_SET		    0x103
+#define DP_TRAINING_LANE1_SET		    0x104
+#define DP_TRAINING_LANE2_SET		    0x105
+#define DP_TRAINING_LANE3_SET		    0x106
+#define DP_SET_POWER                        0x600
+# define DP_SET_POWER_D0                    0x1
+# define DP_SET_POWER_D3                    0x2
+
+#endif
+
+char *auxdest[] = {
+[0x600] "DP_SET_POWER",
+	[0x202] "DP_LANE0_1_STATUS",
+	[0x203] "DP_LANE2_3_STATUS",
+	[0x204] "DP_LANE_ALIGN_STATUS_UPDATED",
+	[0x103] "DP_TRAINING_LANE0_SET",
+	[0x102] "DP_TRAINING_PATTERN_SET",
+	[0x101] "DP_LANE_COUNT_SET",
+	[0x100] "DP_LINK_BW_SET",
+};
 
 int aux(int index)
 {
@@ -1038,6 +1089,7 @@ int aux(int index)
 	int cmd = 0;
 	int rw = 0;
 	int dest = 0;
+	unsigned char len = 0;
 	while (1){
 		id++, index++;
 		switch(id->addr){
@@ -1058,14 +1110,16 @@ int aux(int index)
 			if (dp_or_i2c) { /* dp */
 				cmd = (id->data>>28)&7;
 				rw = cmd == 0 ? 0 : 1;
-				dest = id->data & 0xffffff;
-				emit("|0x%x<<28|0x%x;\n", cmd, dest);
+				dest = (id->data>>8) & 0xfffff;
+				len = id->data;
+				emit("|0x%x<<28/*%s*/|%s<<8|0x%x;\n", cmd, rw ? "R" : "W",auxdest[dest], len);
 			} else {
 				mot = (id->data>>30)&1;
 				i2ccmd = (id->data>>28)&3;
 				rw = i2ccmd == 0 ? 0 : 1;
-				dest = id->data & 0xffffff;
-				emit("%d<<30|0x%x<<28|0x%x;\n", mot, i2ccmd, dest);
+				dest = (id->data>>8) & 0xfffff;
+				len = id->data;
+				emit("%d<<30|0x%x<<28/*%s*/|0x%x<<8|0x%x;\n", mot, i2ccmd, rw ? "R" : "W",dest, len);
 			}
 			break;
 		case DPA_AUX_CH_DATA2:
@@ -1090,6 +1144,7 @@ int aux(int index)
 	}
 	done:
 	emit("\tauxio(DPA_AUX_CH_CTL, auxout, %d, auxin, %d);\n", msglen, msglen);
+	emit("\tindex = run(index);\n");
 	return index;
 }
 int main(int argc, char *argv[])
@@ -1097,6 +1152,7 @@ int main(int argc, char *argv[])
 	int i;
 	struct iodef *id = iodefs;
 	/* state machine! */
+	emit("\tindex = run(0);\n");
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
 		if ((id->op != W) && (id->op != R)){
 			printf("{%s, %d, \"%s\", %s, 0x%lx, %ld},\n", 
