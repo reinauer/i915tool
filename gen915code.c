@@ -1181,7 +1181,10 @@ int aux(int index)
 		if (id->op == R)
 			break;
 			emit("\tauxout[1] = 0x%08x;\n", id->data);
-			host = ntohl(id->data);
+			if (dp_or_i2c){
+				host = ntohl(id->data);
+				emit("\t/*%s*/\n", symname(drmreglist, sizeof(drmreglist), W, dest, host));
+			}
 			break;
 		case DPA_AUX_CH_DATA3:
 		if (id->op == R)
