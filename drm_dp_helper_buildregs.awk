@@ -37,6 +37,7 @@ END {if (instruct == 1) print "};"; emitar();}
 /^#define.*(bit)/{next;}
 /^# define.*MASK/{if (emitting == 0) next; if (instruct == 0) next; next}
 /^# define.*DP_TRAINING_PATTERN/{if (emitting == 0) next; if (instruct == 0) next; structmember($0, "DP_TRAINING_PATTERN_MASK");next}
+/^# define.*DP_LINK_BW_/{if (emitting == 0) next; if (instruct == 0) next; structmember($0, "0x1a");next}
 /^# define/{if (emitting == 0) next; if (instruct == 0) next; structmember($0, "0xffffffff");next}
 
 # This one is for the dp helper junk. It's a pattern of

@@ -61,9 +61,9 @@ struct registers struct_DP_PSR_CAPS[]={
 };
 
 struct registers struct_DP_LINK_BW_SET[]={
-	{" DP_LINK_BW_1_62 ",DP_LINK_BW_1_62 ,  0xffffffff },
-	{" DP_LINK_BW_2_7 ",DP_LINK_BW_2_7 ,  0xffffffff },
-	{" DP_LINK_BW_5_4 ",DP_LINK_BW_5_4 ,  0xffffffff },
+	{" DP_LINK_BW_1_62 ",DP_LINK_BW_1_62 ,  0x1a },
+	{" DP_LINK_BW_2_7 ",DP_LINK_BW_2_7 ,  0x1a },
+	{" DP_LINK_BW_5_4 ",DP_LINK_BW_5_4 ,  0x1a },
 	{NULL, 0},
 };
 
