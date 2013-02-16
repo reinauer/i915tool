@@ -146,6 +146,7 @@ struct iodef {
 {R, 1, "", PCH_PP_STATUS, 0x00000000, },
 {R, 1, "", PCH_PP_CONTROL, 0xabcd0008, },
 {R, 1, "", DPA_AUX_CH_CTL, 0x014300c8, },
+/* can probably get rid of everything up to here -- see what coreboot is doing. */
 {W, 1, "", DPA_AUX_CH_DATA1, 0x9000000e, },
 {W, 1, "", DPA_AUX_CH_CTL, 0xd24500c8, },
 {R, 2, "", DPA_AUX_CH_CTL, 0x814500c8,  100},
@@ -822,7 +823,7 @@ morethanonebit(unsigned long x)
 	return x & (x-1);
 }
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0])) 
-char *symname(struct registers *regs[], struct iodef *id)
+char *symname(struct registers *regs[], int nregs, int op, unsigned long addr, unsigned long data)
 {
 	static char name[512];
 	char *cp;
@@ -831,19 +832,19 @@ char *symname(struct registers *regs[], struct iodef *id)
 	int i;
 	name[0] = 0;
 	/* chew up the bits. Each time you find one that works, then suck it out and replace it with a symbol. */
-	if (id->addr < ARRAY_SIZE(regs))
-		r = regs[id->addr];
+	if (addr < nregs)
+		r = regs[addr];
 	if (!r){
-		sprintf(name, "0x%08lx", id->data);
+		sprintf(name, "0x%08lx", data);
 		return name;
 	}
 
-	value = id->data;
+	value = data;
 
 	/* walk the list. Rip the bits out of addr. If something is left, print it. */
 	for(i = 0, cp = name; r[i].name; i++){
 		/* old school; no mask set. */
-		if (! r[i].mask && (! (r[i].value & value)))
+		if ((! r[i].mask) && (! (r[i].value & value)))
 			continue;
 		/* new school. Mask non-zero, check for a match */
 		if (r[i].mask && ((r[i].mask & value) != r[i].value))
@@ -857,18 +858,18 @@ char *symname(struct registers *regs[], struct iodef *id)
 	}
 
 /* special cases! */
-	if ((id->addr & ~0x300) == DPA_AUX_CH_CTL){
-		cp+=sprintf(cp,"/*[%dbytes]*/",(id->data>>20)&0x1f);
+	if ((addr & ~0x300) == DPA_AUX_CH_CTL){
+		cp+=sprintf(cp,"/*[%dbytes]*/",(data>>20)&0x1f);
 	}
-	if (((id->addr & ~0x300) == DPA_AUX_CH_DATA1) && (id->op == W)){
+	if (((addr & ~0x300) == DPA_AUX_CH_DATA1) && (op == W)){
 		cp += sprintf(cp, "/*%04x:%s %s %s*/",
-			      id->data>>16,
-			      id->data&I2C_M_TEN ? "10 bits" : "",
-			      id->data&I2C_M_RD ? "Read":"Write",
-			      id->data&I2C_M_RECV_LEN ? "Recv len": "");
+			      data>>16,
+			      data&I2C_M_TEN ? "10 bits" : "",
+			      data&I2C_M_RD ? "Read":"Write",
+			      data&I2C_M_RECV_LEN ? "Recv len": "");
 	}
 	/* just print out hte original value. Useful for knowing what it was AND any bits we could not figure out. */
-	sprintf(cp, "0x%08lx", id->data);
+	sprintf(cp, "0x%08lx", data);
 	return name;
 	
 }
@@ -1137,10 +1138,17 @@ int aux(int index)
 	int rw = 0;
 	int dest = 0;
 	unsigned char len = 0;
+	int chwritecount = 0;
+	unsigned long host;
 	while (1){
 		id++, index++;
 		switch(id->addr){
 		case DPA_AUX_CH_CTL:
+			if (id->op == R)
+				break;
+			chwritecount++;
+			if (chwritecount  > 1)
+				break;
 			msglen = (id->data>>20)&0x1f;
 			senddatalen = msglen -1;
 			/* actually, we don't care -- function gets it. */
@@ -1170,19 +1178,24 @@ int aux(int index)
 			}
 			break;
 		case DPA_AUX_CH_DATA2:
-		if (id->op == W)
+		if (id->op == R)
+			break;
 			emit("\tauxout[1] = 0x%08x;\n", id->data);
+			host = ntohl(id->data);
 			break;
 		case DPA_AUX_CH_DATA3:
-		if (id->op == W)
+		if (id->op == R)
+			break;
 			emit("\tauxout[2] = 0x%08x;\n", id->data);
 			break;
 		case DPA_AUX_CH_DATA4:
-		if (id->op == W)
+		if (id->op == R)
+			break;
 			emit("\tauxout[3] = 0x%08x;\n", id->data);
 			break;
 		case DPA_AUX_CH_DATA5:
-		if (id->op == W)
+		if (id->op == R)
+			break;
 			emit("\tauxout[4] = 0x%08x;\n", id->data);
 			break;
 		default: goto done;
@@ -1190,7 +1203,8 @@ int aux(int index)
 		}
 	}
 	done:
-	emit("\tauxio(DPA_AUX_CH_CTL, auxout, %d, auxin, %d);\n", rw == 0 ? len : 0, rw ? len : 0);
+	/* note; Must always check that abcd0008 applies *i.e. aux dp chan is up */
+	emit("\tauxio(DPA_AUX_CH_CTL, auxout, %d, auxin, %d);\n", msglen, rw ? len : 0);
 	emit("\tindex = run(index);\n");
 	return index;
 }
@@ -1249,7 +1263,7 @@ int main(int argc, char *argv[])
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
 		if ((id->op != W) && (id->op != R)){
 			printf("{%s, %d, \"%s\", %s, 0x%lx, %ld},\n", 
-			opnames[id->op], id->count, msgtxt(id->msg), regname(id->addr), id->data, id->udelay);
+			opnames[id->op], id->count, msgtxt(id->msg), regname(id->addr), symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data), id->udelay);
 		} else {
 			/* drive state machines, if nothing to do, then resume. */
 			if (id->op == R && id->addr == DPA_AUX_CH_CTL) {
@@ -1266,7 +1280,7 @@ int main(int argc, char *argv[])
 			}
 			if (i < sizeof(iodefs)/sizeof(iodefs[0]))
 				printf("{%s, %d, \"%s\", %s, %s, %ld},\n", 
-			       	opnames[id->op], id->count, msgtxt(id->msg), regname(id->addr),symname(reglist, id), id->udelay);
+			       	opnames[id->op], id->count, msgtxt(id->msg), regname(id->addr),symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data), id->udelay);
 		}
 	}
 	printf(postfix);
