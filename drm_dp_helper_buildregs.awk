@@ -1,7 +1,11 @@
 function emitar(){
 	print("struct registers *drmreglist[] = {\n")
 	for (el in names){
+	    if (names[el] ~ /DP_TRAINING_LANE._SET/){
+		printf("\t[%s] = (struct registers *)struct_%s,\n", names[el], "DP_TRAINING_LANE3_SET")
+	    } else {
 		printf("\t[%s] = (struct registers *)struct_%s,\n", names[el], names[el])
+	    }
 	}
 	print("\t[0x100000] = NULL,\n};\n")
 }
@@ -36,7 +40,10 @@ END {if (instruct == 1) print "};"; emitar();}
 /^#define.*(n)/{next;}
 /^#define.*(bit)/{next;}
 /^# define.*MASK/{if (emitting == 0) next; if (instruct == 0) next; next}
+/^# define.*SHIFT/{if (emitting == 0) next; if (instruct == 0) next; next}
 /^# define.*DP_TRAINING_PATTERN/{if (emitting == 0) next; if (instruct == 0) next; structmember($0, "DP_TRAINING_PATTERN_MASK");next}
+/^# define.*DP_TRAIN.*SWING/{if (emitting == 0) next; if (instruct == 0) next; structmember($0, "DP_TRAIN_VOLTAGE_SWING_MASK");next}
+/^# define.*DP_TRAIN.*EMPHASIS.*/{if (emitting == 0) next; if (instruct == 0) next; structmember($0, "DP_TRAIN_PRE_EMPHASIS_MASK");next}
 /^# define.*DP_LINK_BW_/{if (emitting == 0) next; if (instruct == 0) next; structmember($0, "0x1a");next}
 /^# define/{if (emitting == 0) next; if (instruct == 0) next; structmember($0, "0xffffffff");next}
 
@@ -45,5 +52,6 @@ END {if (instruct == 1) print "};"; emitar();}
 # registers have no space between the # and the define; other things do. That tells you when to emit.
 # then patterns.
 # ending with an empty line. 
-#  awk -f buildregs.awk  < final/i915_reg.h |less > buildregs.c
+#  awk -f buildregs.awk  < final/drm_dp_helper.h |less > buildregs.c
 # you almost certainly need to massage it further. Sorry. 
+# and if you're smarter than me you'll get rid of other hackery ...

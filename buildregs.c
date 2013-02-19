@@ -1,4 +1,4 @@
-/* generated don't edit */
+/* NO LONGER GENERATED -- sorry -- go ahead and edit. I got lazy. Feel free to fix buildregs.awk */
 #include "final/i915_reg.h"
 /* mask is unused. */
 struct registers { char *name; int value; unsigned long mask;};
@@ -3570,8 +3570,15 @@ struct registers struct_CPT_AUD_CONFIG_A[]={
 	{" AUD_CONFIG_PIXEL_CLOCK_HDMI_SHIFT ",AUD_CONFIG_PIXEL_CLOCK_HDMI_SHIFT },
 	{" AUD_CONFIG_DISABLE_NCTS ",AUD_CONFIG_DISABLE_NCTS },
 };
-struct registers *reglist[] = {
 
+struct registers *reglist[] = {
+	/* by hand */
+	[DP_A] = (struct registers *)struct_DP_D,
+	[DP_B] = (struct registers *)struct_DP_D,
+	[DP_C] = (struct registers *)struct_DP_D,
+	[DP_D] = (struct registers *)struct_DP_D,
+	/* end by hand */
+	
 	[C0DRB3] = (struct registers *)struct_C0DRB3,
 	[C1DRB3] = (struct registers *)struct_C1DRB3,
 	[ECOSKPD] = (struct registers *)struct_ECOSKPD,

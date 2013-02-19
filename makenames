@@ -1,3 +1,7 @@
 #!/bin/bash
 grep '0x[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][ \t]*$' final/*h | awk '{print   "[" $3 "] \"" $2 "\","}' | grep  '^\[0x' >names.c
+grep '[[:space:]]DP_[ABCD][[:space:]]/' final/i915_reg.h | awk '{print   "[" $3 "] \"" $2 "\","}'  >>names.c
+# what's up with grep -- the final comment on DP_A is breaking it. 
+
+echo '[0x64000] "DP_A"' >> names.c
 
