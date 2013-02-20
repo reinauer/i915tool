@@ -843,6 +843,13 @@ char *symname(struct registers *regs[], int nregs, int op, unsigned long addr, u
 
 	/* walk the list. Rip the bits out of addr. If something is left, print it. */
 	for(i = 0, cp = name; r[i].name; i++){
+		/* very new. If it has an extract you're supposed to just take it. */
+		if (r[i].extract){
+			unsigned long printval = r[i].mask & value;
+			printval >>= r[i].shift;
+			cp += sprintf(cp, "(/*%s*/0x%x<<%d)|", r[i].name,printval, r[i].shift);
+			value &= ~r[i].value;
+		}
 		/* old school; no mask set. */
 		if ((! r[i].mask) && (! (r[i].value & value)))
 			continue;

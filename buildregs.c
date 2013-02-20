@@ -1,7 +1,7 @@
 /* NO LONGER GENERATED -- sorry -- go ahead and edit. I got lazy. Feel free to fix buildregs.awk */
 #include "final/i915_reg.h"
 /* mask is unused. */
-struct registers { char *name; int value; unsigned long mask;};
+struct registers { char *name; int value; unsigned long mask; unsigned long extract, shift;};
 struct registers struct_PRB1_TAIL[]={
 	{NULL, 0},
 };
@@ -1776,24 +1776,32 @@ struct registers struct_DSPFW3[]={
 };
 
 struct registers struct_WM0_PIPEA_ILK[]={
-	{" WM0_PIPE_PLANE_SHIFT ",WM0_PIPE_PLANE_SHIFT },
-	{" WM0_PIPE_SPRITE_SHIFT ",WM0_PIPE_SPRITE_SHIFT },
+	{" WM0_PIPE_PLANE",WM0_PIPE_PLANE_MASK, 0xffffffff},
+	{" WM0_PIPE_SPRITE ",WM0_PIPE_SPRITE_MASK, 0xffffffff},
+	{" WM0_PIPE_CURSOR", WM0_PIPE_CURSOR_MASK, 0xffffffff},
 	{NULL, 0},
 };
 
 struct registers struct_WM0_PIPEB_ILK[]={
+	{" WM0_PIPE_PLANE",WM0_PIPE_PLANE_MASK, 0xffffffff},
+	{" WM0_PIPE_SPRITE ",WM0_PIPE_SPRITE_MASK, 0xffffffff},
+	{" WM0_PIPE_CURSOR", WM0_PIPE_CURSOR_MASK, 0xffffffff},
 	{NULL, 0},
 };
 
 struct registers struct_WM0_PIPEC_IVB[]={
+	{" WM0_PIPE_PLANE",WM0_PIPE_PLANE_MASK, 0xffffffff},
+	{" WM0_PIPE_SPRITE ",WM0_PIPE_SPRITE_MASK, 0xffffffff},
+	{" WM0_PIPE_CURSOR", WM0_PIPE_CURSOR_MASK, 0xffffffff},
 	{NULL, 0},
 };
 
 struct registers struct_WM1_LP_ILK[]={
-	{" WM1_LP_SR_EN ",WM1_LP_SR_EN },
-	{" WM1_LP_LATENCY_SHIFT ",WM1_LP_LATENCY_SHIFT },
-	{" WM1_LP_FBC_SHIFT ",WM1_LP_FBC_SHIFT },
-	{" WM1_LP_SR_SHIFT ",WM1_LP_SR_SHIFT },
+	{" WMx_LP_SR_EN ",WM1_LP_SR_EN },
+	{" WMx_LP_LATENCY ",WM1_LP_LATENCY_MASK,WM1_LP_LATENCY_MASK,1,WM1_LP_LATENCY_SHIFT},
+	{" WMx_LP_FBC ",WM1_LP_FBC_MASK,WM1_LP_FBC_MASK, 1, WM1_LP_FBC_SHIFT},
+	{" WMx_LP_SR ",WM1_LP_SR_MASK,WM1_LP_SR_MASK, 1, WM1_LP_SR_SHIFT},
+	{" WMx_LP_CURSOR ",WM1_LP_CURSOR_MASK, WM1_LP_CURSOR_MASK, 1, 0 },
 	{NULL, 0},
 };
 
@@ -3793,10 +3801,10 @@ struct registers *reglist[] = {
 	[WM0_PIPEC_IVB] = (struct registers *)struct_WM0_PIPEC_IVB,
 	[WM1_LP_ILK] = (struct registers *)struct_WM1_LP_ILK,
 	[DPA_AUX_CH_DATA1] = (struct registers *)struct_DPA_AUX_CH_DATA1,
-	[WM2_LP_ILK] = (struct registers *)struct_WM2_LP_ILK,
+	[WM2_LP_ILK] = (struct registers *)struct_WM1_LP_ILK,
 	[DPA_AUX_CH_DATA2] = (struct registers *)struct_DPA_AUX_CH_DATA2,
 	[TV_CSC_Y2] = (struct registers *)struct_TV_CSC_Y2,
-	[WM3_LP_ILK] = (struct registers *)struct_WM3_LP_ILK,
+	[WM3_LP_ILK] = (struct registers *)struct_WM1_LP_ILK,
 	[DPA_AUX_CH_DATA3] = (struct registers *)struct_DPA_AUX_CH_DATA3,
 	[TV_CSC_U] = (struct registers *)struct_TV_CSC_U,
 	[WM1S_LP_ILK] = (struct registers *)struct_WM1S_LP_ILK,
