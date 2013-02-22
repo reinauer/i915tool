@@ -1211,10 +1211,14 @@ struct registers struct_PP_CONTROL[]={
 };
 
 struct registers struct_PP_ON_DELAYS[]={
+	{" T2 ", 0xffff0000, 0xffffffff, 1, 16},
+	{" T5 ", 0xffff, 0xffffffff, 1, 0},
 	{NULL, 0},
 };
 
 struct registers struct_PP_OFF_DELAYS[]={
+	{" T3 ", 0xffff0000, 0xffffffff, 1, 16},
+	{" Tx ", 0xffff, 0xffffffff, 1, 0},
 	{NULL, 0},
 };
 

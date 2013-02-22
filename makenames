@@ -5,5 +5,6 @@ grep '#define  FORCEWAKE' final/*h | awk '{print   "[" $3 "] \"" $2 "\","}' | gr
 grep '[[:space:]]DP_[ABCD][[:space:]]/' final/i915_reg.h | awk '{print   "[" $3 "] \"" $2 "\","}'  >>names.c
 # what's up with grep -- the final comment on DP_A is breaking it. 
 
-echo '[0x64000] "DP_A"' >> names.c
+echo '[0x64000] "DP_A",' >> names.c
 
+grep 'GEN7.*CHICKEN.*0x....$' final/i915_reg.h| awk '{print   "[" $3 "] \"" $2 "\","}'  >>names.c
