@@ -861,7 +861,10 @@ char *symname(struct registers *regs[], int nregs, int op, unsigned long addr, u
 		} else {
 			cp += sprintf(cp, "(%s&0x%lx)|", r[i].name, value & r[i].value);
 		}
-		value &= ~r[i].value;
+		if (!r[i].mask)
+			value &= ~r[i].value;
+		else
+			value &= ~r[i].mask;
 	}
 
 /* special cases! */
