@@ -1,0 +1,24 @@
+Edit ,|grep '^[WR] '
+15727  62908 471097 /tmp/WTM2IO
+Edit ,|grep '0000180[04]'
+63219  189657 1327599 /tmp/WTM2IO
+Edit ,s/^W 00001800:(.*)\n([WR]) 00001804: (.*)/\2 \1: \3/g
+ 31966  95898 702539 /tmp/WTM2IO
+Edit ,s/^(.)(.*:)(.*)\n(.) 00001804:(.*)/\1\2\3\n\4\2\5/g
+31966  95898 702539 /tmp/WTM2IO
+Edit ,| uniq -c
+  15727  62908 471810 /tmp/WTM2IO
+remove gtt
+Edit /^.*80200001/,/821fe001\n/s/.*\n//g
+  7536  30144 226080 /tmp/WTM2IO
+
+Edit ,s/:  */:/g
+Edit ,s/^ *//g
+Edit ,s/(^[0-9]+) ([MRW])/\2 \1/g
+Edit ,s/^([RW]) ([0-9]+) (.*):([0-9a-f]+)(.*)/{\1, \2, "", 0x\3, 0x\4, \5},/g
+Edit ,s/0x /0x/g
+Only above was needed
+
+Edit ,s/\+ */+0x/g
+7536  45216 286381 /tmp/WTM2IO
+prettyregs.c
