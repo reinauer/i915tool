@@ -36,7 +36,11 @@ main()
 			dev = ((unsigned short)data) >> 11;
 			fn = (data>>8)&7;
 			reg = ((unsigned char)data)>>2;
+			continue;
+		}
+		if ((address & (~3)) == 0xcfc){
 			printf("/* pci dev(0x%x,0x%x,0x%x,0x%x)*/\n", bus, dev, fn, reg);
+			printf("{PC, 0x%08lx, 0x%08lx, 0x%08lx},\n", _cf8, address, data);
 			continue;
 		}
 
