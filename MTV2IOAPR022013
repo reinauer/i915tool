@@ -70301,38 +70301,6 @@ Wb  0x11 0x03ce
 Wb  0x00 0x03d2
 Wb  0x04 0x03c4
 Wb  0x00 0x03c8
-current 7f762620
-coreboot memory table:
-coreboot table: 1036 bytes.
-coreboot-4.0.9999.a4c1f4c Tue Apr 2 13:15:02 PDT 2013 starting...
-coreboot-4.0.9999.a4c1f4c Tue Apr 2 13:15:02 PDT 2013 booting...
-constrain_resources: PCI_DOMAIN: 0000
-constrain_resources: PCI: 00:00.0
-constrain_resources: PCI: 00:02.0
-constrain_resources: PCI: 00:13.0
-constrain_resources: PCI: 00:15.0
-constrain_resources: PCI: 00:15.1
-constrain_resources: PCI: 00:15.2
-constrain_resources: PCI: 00:15.3
-constrain_resources: PCI: 00:15.4
-constrain_resources: PCI: 00:15.5
-constrain_resources: PCI: 00:15.6
-constrain_resources: PCI: 00:16.0
-constrain_resources: PCI: 00:17.0
-constrain_resources: PCI: 00:1b.0
-constrain_resources: PCI: 00:1c.0
-constrain_resources: PCI: 00:1c.1
-constrain_resources: PCI: 00:1c.2
-constrain_resources: PCI: 00:1c.3
-constrain_resources: PCI: 00:1c.4
-constrain_resources: PCI: 00:1c.5
-constrain_resources: PCI: 00:1d.0
-constrain_resources: PCI: 00:1f.0
-constrain_resources: PCI: 00:1f.2
-constrain_resources: PCI: 00:1f.3
-constrain_resources: PCI: 00:1f.6
-call enable_fixed_mtrr 
-call enable_var_mtrr 
 Wb  0x01 0x00e0
 Wl  0x80001020 0x0cf8
 Rw 0x1801 0x0cfc

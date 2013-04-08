@@ -40,7 +40,7 @@ char *regname(unsigned long addr)
 		offset = addr & i;
 		truncaddr = addr & (~i);
 		if (names[truncaddr]){
-			sprintf(name,"%s+%x", names[truncaddr], offset);
+			sprintf(name,"%s+0x%x", names[truncaddr], offset);
 			return name;
 		}
 	}

@@ -165,6 +165,7 @@ int main(int argc, char *argv[])
 			opnames[id->op], id->option, id->msg, regname(id->addr),symname(id), id->udelay);
 		}
 	}
-
+	fflush(stdout);
+	exit(0);
 }
 // cc -g -o prettywtm2regs prettywtm2regs.c

@@ -8,29 +8,24 @@ main()
 	int _1800removed = 0,_cf8removed = 0;
 	char cmd, size;
 	unsigned long data, address;
+	int lineno = 0;
 	char line[80];
 	while (gets(line)){
+		lineno++;
 		sscanf(line, "%c%c%lx%lx", &cmd, &size, &data, &address);
 		if (! compress) {
-			printf("{%c%c, 1, 0x%08lx, 0x%08lx, 0},\n", cmd, size, data, address);
+			printf("{%c%c, 1, \"\",0x%08lx, 0x%08lx, 0},\n", cmd, size, data, address);
 			continue;
 		}
 
 		if (address == 0x1800){
-			if (data == _1800){
-				_1800removed++;
-				continue;
-			}
-			printf("{%c%c, 1, 0x%08lx, 0x%08lx, 0},\n", cmd, size, address, data);
+			_1800removed++;
 			_1800 = data;
 			continue;
 		}
 
 		if (address == 0xcf8){
-			if (data == _cf8){
-				_cf8removed++;
-				continue;
-			}
+			_cf8removed++;
 			_cf8 = data;
 			bus = data >> 16;
 			dev = ((unsigned short)data) >> 11;
@@ -39,12 +34,18 @@ main()
 			continue;
 		}
 		if ((address & (~3)) == 0xcfc){
-			printf("/* pci dev(0x%x,0x%x,0x%x,0x%x)*/\n", bus, dev, fn, reg);
-			printf("{PC, 0x%08lx, 0x%08lx, 0x%08lx},\n", _cf8, address, data);
+			printf("{M, 1, \"pci dev(0x%x,0x%x,0x%x,0x%x)\"},\n", bus, dev, fn, reg);
+			printf("{%cPC, 0x%08lx, \"\", 0x%08lx, 0x%08lx},\n", cmd, _cf8, address, data);
 			continue;
 		}
 
-		printf("{%c%c, 1, 0x%08lx, 0x%08lx, 0},\n", cmd, size, address, data);
+		if (address == 0x1804) {
+			if (size != 'l')
+				fprintf(stderr, "BOTCH at line %d: 1804, but not 'l'\n", lineno);
+			printf("{G%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, _1800, data);
+			continue;
+		}
+		printf("{%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, address, data);
 			
 	}
 
@@ -56,3 +57,6 @@ main()
 // ./translatewtm2 <MTV2IOAPR022013  > MTV2IOAPR022013.c
 // wc MTV2IOAPR022013
 // wc MTV2IOAPR022013.c
+//140635  421913 2966609 MTV2IOAPR022013
+// 107453  537265 3868308 MTV2IOAPR022013.c
+// now, with compress enabled.  17808   89040  641088

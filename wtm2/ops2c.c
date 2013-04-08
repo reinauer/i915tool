@@ -51,6 +51,9 @@ main()
 
 	fprintf(stderr, "//Removed %d IOs to 1800\n", _1800removed);
 	fprintf(stderr, "//Removed %d IOs to cf8\n", _cf8removed);
+	/* never trust anything */
+	fflush(stdout);
+	exit(0);
 }
 // cc -g -o translatewtm2  translatewtm2.c 
 // ./translatewtm2 < MTV2IOAPR022013 | wc
