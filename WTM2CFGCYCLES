@@ -1,0 +1,54 @@
+/* io base for vga -- we do this already. */
+
+c000:6917 outl(0x80001020, 0x0cf8)
+c000:6920 inw(0x0cfc) = 0x1801
+
+/* unknown */
+c000:6917 outl(0x8000f840, 0x0cf8)
+c000:6920 inw(0x0cfc) = 0x1001
+
+/* unknown */
+c000:6917 outl(0x80001000, 0x0cf8)
+c000:6920 inw(0x0cfe) = 0x0a26
+
+/* unknown */
+c000:6917 outl(0x80001008, 0x0cf8)
+c000:6920 inw(0x0cfc) = 0x0009
+
+/* frame buffer compression? 
+c000:68b1 outl(0x00042020, 0x1800)
+c000:68b8 inl(0x1804) = 0x00000013
+
+/* 1f device. */
+/* unknown */
+c000:6917 outl(0x8000f800, 0x0cf8)
+c000:6920 inw(0x0cfe) = 0x9c43
+/* unknown */
+c000:6917 outl(0x8000f808, 0x0cf8)
+c000:6920 inw(0x0cfc) = 0x0003
+/* unknown */
+c000:63df inl(0x1008) = 0x00ae5cf9
+
+/* 42020 register */
+c000:68b1 outl(0x00130040, 0x1800)
+c000:68b8 inl(0x1804) = 0x40000006
+
+/* 45400 unknown */
+c000:68b1 outl(0x00045400, 0x1800)
+c000:68b8 inl(0x1804) = 0x00000000
+c000:6c20 outl(0x00045400, 0x1800)
+c000:6c58 inl(0x1804) = 0x00000000
+
+/* 0:0.0 */
+c000:6c66 outl(0x80000000, 0x1804)
+/* WTF? */
+c000:68b1 outl(0x00045400, 0x1800)
+c000:68b8 inl(0x1804) = 0xc0000000
+
+/* register 50? */
+c000:6917 outl(0x80000050, 0x0cf8)
+c000:6920 inw(0x0cfc) = 0x0209
+
+/* memory base */
+c000:6917 outl(0x8000105c, 0x0cf8)
+c000:6920 inw(0x0cfe) = 0x8020
