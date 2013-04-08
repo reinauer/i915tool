@@ -49,40 +49,7 @@ char *regname(unsigned long addr)
 	return name;
 }
 
-
-enum {
-  M,
-  RPC,
-  WPC,
-  V,
-  I,
-  P,
-  Rb,
-  Rw,
-  Rl,
-  Wb,
-  Ww,
-  Wl,
-  /* Graphics, i.e. using indirection registers */
-  GWl,
-  GRl,
-};
-const char *opnames[] = {
-  [M] "M",
-  [Rb] "Rb",
-  [Rw] "Rw",
-  [Rl] "Rl",
-  [Wb] "Wb",
-  [Ww] "Ww",
-  [Wl] "Wl",
-  [GWl] "GWl",
-  [GRl] "GRl",
-  [RPC] "RPC",
-  [WPC] "WPC",
-  [V] "V",
-  [P] "P",
-  [I] "I",
-};
+#include "opcodes.c"
 
 struct iodef {
 	unsigned char op;
@@ -92,8 +59,7 @@ struct iodef {
 	unsigned long data;
 	unsigned long udelay;
 } iodefs[] = {
-//#include "WTM2IO.c"
-#include "MTV2IOAPR022013.c"
+#include "wtm2io_step2.c"
 };
 
 #include "buildregs.c"
@@ -154,13 +120,33 @@ char *symname(struct iodef *id)
 int main(int argc, char *argv[])
 {
 	int i;
+	int pch_pp_control_seen = 0;
 	struct iodef *id = iodefs;
 	/* state machine! */
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
+		if (id->op < I)
+			continue;
 		if (id->op < GWl) {
 			printf("{%s, 0x%08lx, \"%s\", 0x%lx, 0x%lx, %ld},\n", 
 			opnames[id->op], id->option, id->msg, id->addr, id->data, id->udelay);
 		} else {
+			/* take the opportunity to do some cleanup */
+			/* skip the gtt. */
+			/*
+*/
+			if (id->addr < 0x7fff)
+				continue;
+			/* these *seem* to be scratch pad registers.
+			 * don't bother.
+			if (id->addr >= 0x4f040 && id->addr <= 0x4f050)
+				continue;
+			 */
+			if (id->addr < PCH_PP_CONTROL){
+				if (pch_pp_control_seen++ == 0){
+					/* Reset done. Emit 'I'.*/
+					//printf("{I,1},\n");
+				}
+			}
 			printf("{%s, %ld, \"%s\", %s, %s, %ld},\n", 
 			opnames[id->op], id->option, id->msg, regname(id->addr),symname(id), id->udelay);
 		}

@@ -20,4 +20,4 @@
 #include "i915io.h"
 
 const struct iodef iodefs[] = {
-  {V,7},
+  {V,0},
