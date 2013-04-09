@@ -258,23 +258,29 @@ int aux(int index)
 	unsigned char len = 0;
 	int chwritecount = 0;
 	unsigned long host;
-	while (1){
-		id++, index++;
+	/* loop until we hit the write to the CTL. Accumulate writes to the
+	 * data registers. Ignore reads. The VBIOS usage of the AUX is very different
+	 * from the kernel.
+	 */
+	for(;;id++, index++){
+		if (id->op == GRl)
+			continue;
+
 		switch(id->addr){
 		case DPA_AUX_CH_CTL:
-WRITE WITH WHATSSTEP SET ENDS IT SO BAIL HERE
-			if (id->op == GRl)
-				break;
 			chwritecount++;
-			if (chwritecount  > 1)
-				break;
+			if (chwritecount  > 1){
+				fprintf(stderr, "aux(): more than one write to ch\n");
+			}
 			msglen = (id->data>>20)&0x1f;
 			senddatalen = msglen -1;
 			/* actually, we don't care -- function gets it. */
+			if (id->data & DP_AUX_CH_CTL_SEND_BUSY){
+				index++;
+				goto done;
+			}
 			break;
 		case DPA_AUX_CH_DATA1:
-		if (id->op == GRl)
-			break;
 			/* defined in the aux standard, e.g. 
 			 * http://hackipedia.org/Hardware/video/connectors/DisplayPort/VESA%20DisplayPort%20Standard%20v1.1a.pdf
 			 */
@@ -306,21 +312,18 @@ WRITE WITH WHATSSTEP SET ENDS IT SO BAIL HERE
 			}
 			break;
 		case DPA_AUX_CH_DATA3:
-		if (id->op == GRl)
-			break;
 			emit("\tauxout[2] = 0x%08x;\n", id->data);
 			break;
 		case DPA_AUX_CH_DATA4:
-		if (id->op == GRl)
-			break;
 			emit("\tauxout[3] = 0x%08x;\n", id->data);
 			break;
 		case DPA_AUX_CH_DATA5:
-		if (id->op == GRl)
-			break;
 			emit("\tauxout[4] = 0x%08x;\n", id->data);
 			break;
-		default: goto done;
+		default:
+			fprintf(stderr, "unexpected in the middle of an AUX CH sequence@%d\n",
+				index);
+			goto done;
 			break;
 		}
 	}
@@ -393,10 +396,26 @@ int main(int argc, char *argv[])
 			opnames[id->op], id->count, msgtxt(id->msg),id->addr, id->data, id->udelay);
 		} else {
 			/* drive state machines, if nothing to do, then resume. */
-			if (id->op == GRl && 
-KEY ON A WRITE TO DATA 1
-				id->addr >= DPA_AUX_CH_CTL &&
-				id->addr <= DPA_AUX_CH_DATA5) {
+			/* if write to DPA_AUX_CH_CTL && DP_AUX_CH_CTL_SEND_BUSY is set,
+			 * that starts an aux cycle. If write to DPA_AUX_CH_DATA1,
+			 * that starts and aux cycle.
+			 * The VBIOS seems to be driving the AUX channel in a strange way.
+			 */
+			if (id->op == GWl && id->addr == DPA_AUX_CH_CTL &&
+			    (id->data & DP_AUX_CH_CTL_SEND_BUSY)){
+				fprintf(stderr, "AUX at %d\n", i);
+				fprintf(stderr, "{%s, %d, \"%s\", %s, %s, %ld},\n", 
+					opnames[id->op], id->count, msgtxt(id->msg), 
+					regname(id->addr),symname(reglist, 
+								  ARRAY_SIZE(reglist), 
+								  id->op, id->addr, 
+								  id->data), id->udelay);
+				/* exit the table, time to run code. */
+				printf("{I,},\n");
+				i = aux(i);
+				id = &iodefs[i];
+			}
+			if (id->op == GWl && id->addr == DPA_AUX_CH_DATA1) {
 				fprintf(stderr, "AUX at %d\n", i);
 				
 				fprintf(stderr, "{%s, %d, \"%s\", %s, %s, %ld},\n", 
@@ -406,6 +425,8 @@ KEY ON A WRITE TO DATA 1
 				i = aux(i);
 				id = &iodefs[i];
 			}
+			if (id->addr >= DPA_AUX_CH_CTL && id->addr <= DPA_AUX_CH_DATA5)
+				continue;
 			if (id->op == GWl && id->addr == _LGC_PALETTE_A){
 				while ((id->addr & ~0x3ff) == _LGC_PALETTE_A){
 					id++,i++;
