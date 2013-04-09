@@ -141,10 +141,10 @@ int main(int argc, char *argv[])
 			if (id->addr >= 0x4f040 && id->addr <= 0x4f050)
 				continue;
 			 */
-			if (id->addr < PCH_PP_CONTROL){
+			if (id->addr == PCH_PP_CONTROL){
 				if (pch_pp_control_seen++ == 0){
-					/* Reset done. Emit 'I'.*/
-					//printf("{I,1},\n");
+				//	printf("{I,1},\n");
+					//continue;
 				}
 			}
 			printf("{%s, %ld, \"%s\", %s, %s, %ld},\n", 

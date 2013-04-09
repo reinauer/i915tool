@@ -262,6 +262,7 @@ int aux(int index)
 		id++, index++;
 		switch(id->addr){
 		case DPA_AUX_CH_CTL:
+WRITE WITH WHATSSTEP SET ENDS IT SO BAIL HERE
 			if (id->op == GRl)
 				break;
 			chwritecount++;
@@ -393,8 +394,13 @@ int main(int argc, char *argv[])
 		} else {
 			/* drive state machines, if nothing to do, then resume. */
 			if (id->op == GRl && 
+KEY ON A WRITE TO DATA 1
 				id->addr >= DPA_AUX_CH_CTL &&
 				id->addr <= DPA_AUX_CH_DATA5) {
+				fprintf(stderr, "AUX at %d\n", i);
+				
+				fprintf(stderr, "{%s, %d, \"%s\", %s, %s, %ld},\n", 
+			       	opnames[id->op], id->count, msgtxt(id->msg), regname(id->addr),symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data), id->udelay);
 				/* exit the table, time to run code. */
 				printf("{I,},\n");
 				i = aux(i);
