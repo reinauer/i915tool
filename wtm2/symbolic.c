@@ -86,7 +86,8 @@ char *symname(struct iodef *id)
 		return name;
 	}
 
-	value = id->data;
+	/* !@#$#@ compiler */
+	value = (u32)id->data;
 
 	/* walk the list. Rip the bits out of addr. If something is left, print it. */
 	for(i = 0, cp = name; r[i].name; i++){
@@ -127,6 +128,38 @@ int main(int argc, char *argv[])
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
 		if (id->op < I)
 			continue;
+		/* stuff we don't know the need for doing. */
+		/* no docs for some of these yet ... */
+		/* works with SDEIIR removed. */
+		if (id->addr == SDEIIR)
+			continue;
+		/* works with DEIIR removed. */
+		if (id->addr == DEIIR)
+			continue;
+		/* works */
+		if (id->addr == 0x4f040)
+			continue;
+		/* works with 4f044 removed. */
+		if (id->addr == 0x4f044)
+			continue;
+		/* works */
+		if (id->addr == 0x4f048)
+			continue;
+		/* works */
+		if (id->addr == 0x4f04c)
+			continue;
+		/* end stuff. */
+		/* don't change the window position. */
+		if (id->addr == _PFA_WIN_POS && id->data){
+			id->data = 0x023000f0; //0x023000f0; 
+		}
+		if (id->addr == _DSPACNTR && id->data){
+			/* you ask for such simple things from the 
+			 * compiler, but it's way too busy being
+			 * terribly clever.
+			id->data = (u32)(DISPLAY_PLANE_ENABLE | DISPPLANE_32BPP);
+			 */
+		}
 		if (id->addr == ILK_DSPCLK_GATE){
 			pass++;
 			if (pass > 1)
