@@ -148,17 +148,22 @@ int main(int argc, char *argv[])
 		/* works */
 		if (id->addr == 0x4f04c)
 			continue;
+		/* works */
+		if (id->addr == 0x4f000)
+			continue;
+		/* works */
+		if (id->addr == 0x4f008)
+			continue;
+		/* works */
+		if (id->addr == 0x4f054)
+			continue;
+		/* works */
+		if (id->addr == 0x4f058)
+			continue;
 		/* end stuff. */
 		/* don't change the window position. */
 		if (id->addr == _PFA_WIN_POS && id->data){
 			id->data = 0x023000f0; //0x023000f0; 
-		}
-		if (id->addr == _DSPACNTR && id->data){
-			/* you ask for such simple things from the 
-			 * compiler, but it's way too busy being
-			 * terribly clever.
-			id->data = (u32)(DISPLAY_PLANE_ENABLE | DISPPLANE_32BPP);
-			 */
 		}
 		if (id->addr == ILK_DSPCLK_GATE){
 			pass++;

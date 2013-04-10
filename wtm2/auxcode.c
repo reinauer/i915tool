@@ -1,5 +1,6 @@
-/* This code is intended to produce a mixed table-driven/code-driven IO. So it sttill has a poke
- * register with magic values but also has intermixed that with code. 
+/* This code is intended to produce a mixed table-driven/code-driven
+ * IO. So it sttill has a poke register with magic values but also has
+ * intermixed that with code.
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -83,7 +84,9 @@ char *symname(struct registers *regs[], int nregs, int op, unsigned long addr, u
 	unsigned long value;
 	int i;
 	name[0] = 0;
-	/* chew up the bits. Each time you find one that works, then suck it out and replace it with a symbol. */
+	/* chew up the bits. Each time you find one that works, then
+	 * suck it out and replace it with a symbol.
+	 */
 	if (addr < nregs)
 		r = regs[addr];
 	if (!r){
@@ -258,9 +261,9 @@ int aux(int index)
 	unsigned char len = 0;
 	int chwritecount = 0;
 	unsigned long host;
-	/* loop until we hit the write to the CTL. Accumulate writes to the
-	 * data registers. Ignore reads. The VBIOS usage of the AUX is very different
-	 * from the kernel.
+	/* loop until we hit the write to the CTL. Accumulate writes
+	 * to the data registers. Ignore reads. The VBIOS usage of the
+	 * AUX is very different from the kernel.
 	 */
 	for(;;id++, index++){
 		if (id->op == GRl)
@@ -385,6 +388,8 @@ char *msgtxt(char *msg)
 int main(int argc, char *argv[])
 {
 	int i;
+	int num_to_change = 2;
+	int num_changed = 0;
 	struct iodef *id = iodefs;
 	/* state machine! */
 	printf("%s\n",prefix);
@@ -395,14 +400,18 @@ int main(int argc, char *argv[])
 			printf("{%s, %d, \"%s\", 0x%lx, 0x%lx, %ld},\n", 
 			opnames[id->op], id->count, msgtxt(id->msg),id->addr, id->data, id->udelay);
 		} else {
-			/* drive state machines, if nothing to do, then resume. */
-			/* if write to DPA_AUX_CH_CTL && DP_AUX_CH_CTL_SEND_BUSY is set,
-			 * that starts an aux cycle. If write to DPA_AUX_CH_DATA1,
-			 * that starts and aux cycle.
-			 * The VBIOS seems to be driving the AUX channel in a strange way.
+			/* drive state machines, if nothing to do,
+			 * then resume.  if write to DPA_AUX_CH_CTL &&
+			 * DP_AUX_CH_CTL_SEND_BUSY is set, that starts
+			 * an aux cycle. If write to DPA_AUX_CH_DATA1,
+			 * that starts and aux cycle.  The VBIOS seems
+			 * to be driving the AUX channel in a strange
+			 * way.
 			 */
 			if (id->op == GWl && id->addr == DPA_AUX_CH_CTL &&
-			    (id->data & DP_AUX_CH_CTL_SEND_BUSY)){
+			    (id->data & DP_AUX_CH_CTL_SEND_BUSY &&
+			     num_changed < num_to_change)){
+				num_changed++;
 				fprintf(stderr, "AUX at %d\n", i);
 				fprintf(stderr, "{%s, %d, \"%s\", %s, %s, %ld},\n", 
 					opnames[id->op], id->count, msgtxt(id->msg), 
@@ -415,7 +424,9 @@ int main(int argc, char *argv[])
 				i = aux(i);
 				id = &iodefs[i];
 			}
-			if (id->op == GWl && id->addr == DPA_AUX_CH_DATA1) {
+			if (id->op == GWl && id->addr == DPA_AUX_CH_DATA1 &&
+			    num_changed < num_to_change) {
+				num_changed++;
 				fprintf(stderr, "AUX at %d\n", i);
 				
 				fprintf(stderr, "{%s, %d, \"%s\", %s, %s, %ld},\n", 
@@ -425,7 +436,12 @@ int main(int argc, char *argv[])
 				i = aux(i);
 				id = &iodefs[i];
 			}
-			if (id->addr >= DPA_AUX_CH_CTL && id->addr <= DPA_AUX_CH_DATA5)
+			/* only ignore these writes if we're still transforming
+			 * aux io
+			 */
+			if (id->addr >= DPA_AUX_CH_CTL
+			    && id->addr <= DPA_AUX_CH_DATA5 &&
+			     num_changed < num_to_change)
 				continue;
 			if (id->op == GWl && id->addr == _LGC_PALETTE_A){
 				while ((id->addr & ~0x3ff) == _LGC_PALETTE_A){
@@ -439,7 +455,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	printf("%s\n", postfix);
-        printf("void runio(u16 aux_ctl, u16 aux_data)\n{\n%s}\n", functions);
+        printf("void runio(u32 aux_ctl, u32 aux_data)\n{\n%s}\n", functions);
 	/* this should not be needed. valgrind sees no errors. !# */
 	fflush(stdout);
 	exit(0);
