@@ -126,6 +126,8 @@ int main(int argc, char *argv[])
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
 		if (id->op < I)
 			continue;
+		if (id->addr == ILK_DSPCLK_GATE)
+			break;
 		if (id->op < GWl) {
 			printf("{%s, 0x%08lx, \"%s\", 0x%lx, 0x%lx, %ld},\n", 
 			opnames[id->op], id->option, id->msg, id->addr, id->data, id->udelay);
@@ -151,6 +153,7 @@ int main(int argc, char *argv[])
 			opnames[id->op], id->option, id->msg, regname(id->addr),symname(id), id->udelay);
 		}
 	}
+	printf("{I,},\n");
 	fflush(stdout);
 	exit(0);
 }
