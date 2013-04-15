@@ -248,6 +248,7 @@ char *auxdest[] = {
 
 int aux(int index)
 {
+	static int count = 0;
 	struct iodef *id = &iodefs[index];
 	/* iterate through the *data* items, accumulating into the in array. 
 	 * then call intel_dp_aux_ch with the pointer to the outarray. 
@@ -260,30 +261,40 @@ int aux(int index)
 	int dest = 0;
 	unsigned char len = 0;
 	int chwritecount = 0;
+	int sentbusy = 0;
 	unsigned long host;
 	/* loop until we hit the write to the CTL. Accumulate writes
 	 * to the data registers. Ignore reads. The VBIOS usage of the
 	 * AUX is very different from the kernel.
 	 */
+	/* Ah, the VBIOS. It's crap. It does a very non-standard
+	 * set of ops on the first aux op. Must remember that.
+	 */
 	for(;;id++, index++){
-		if (id->op == GRl)
-			continue;
-
 		switch(id->addr){
 		case DPA_AUX_CH_CTL:
-			chwritecount++;
+			if (id->op == GWl)
+				chwritecount++;
 			if (chwritecount  > 1){
 				fprintf(stderr, "aux(): more than one write to ch\n");
 			}
-			msglen = (id->data>>20)&0x1f;
-			senddatalen = msglen -1;
-			/* actually, we don't care -- function gets it. */
-			if (id->data & DP_AUX_CH_CTL_SEND_BUSY){
-				index++;
-				goto done;
+			if (id->op == GWl &&
+				id->data & DP_AUX_CH_CTL_SEND_BUSY){
+				msglen = (id->data>>20)&0x1f;
+				senddatalen = msglen -1;
+				if (count++ == 0)
+					goto done;
+				sentbusy++;
+				continue;
+			}
+			if (id->op == GRl && id->data & DP_AUX_CH_CTL_DONE){
+				if (sentbusy)
+					goto done;
 			}
 			break;
 		case DPA_AUX_CH_DATA1:
+			if (id->op == GRl)
+				break;
 			/* defined in the aux standard, e.g. 
 			 * http://hackipedia.org/Hardware/video/connectors/DisplayPort/VESA%20DisplayPort%20Standard%20v1.1a.pdf
 			 */
@@ -295,14 +306,14 @@ int aux(int index)
 				rw = cmd == 0 ? 0 : 1;
 				dest = (id->data>>8) & 0xfffff;
 				len = id->data;
-				emit("|0x%x<<28/*%s*/|%s<<8|0x%x;\n", cmd, rw ? "R" : "W",auxdest[dest], len);
+				emit("|0x%x<<28/*%s*/|%s<<8|0x%x|0x%08x;\n", cmd, rw ? "R" : "W",auxdest[dest], len, id->data);
 			} else {
 				mot = (id->data>>30)&1;
 				i2ccmd = (id->data>>28)&3;
 				rw = i2ccmd == 0 ? 0 : 1;
 				dest = (id->data>>8) & 0xfffff;
 				len = id->data;
-				emit("|%d<<30|0x%x<<28/*%s*/|0x%x<<8|0x%x;\n", mot, i2ccmd, rw ? "R" : "W",dest, len);
+				emit("|%d<<30|0x%x<<28/*%s*/|0x%x<<8|0x%x|0x%08x;\n", mot, i2ccmd, rw ? "R" : "W",dest, len, id->data);
 			}
 			break;
 		case DPA_AUX_CH_DATA2:
@@ -315,18 +326,23 @@ int aux(int index)
 			}
 			break;
 		case DPA_AUX_CH_DATA3:
+		if (id->op == GRl)
+			break;
 			emit("\tauxout[2] = 0x%08x;\n", id->data);
 			break;
 		case DPA_AUX_CH_DATA4:
+		if (id->op == GRl)
+			break;
 			emit("\tauxout[3] = 0x%08x;\n", id->data);
 			break;
 		case DPA_AUX_CH_DATA5:
+		if (id->op == GRl)
+			break;
 			emit("\tauxout[4] = 0x%08x;\n", id->data);
 			break;
 		default:
 			fprintf(stderr, "unexpected in the middle of an AUX CH sequence@%d\n",
 				index);
-			goto done;
 			break;
 		}
 	}
@@ -388,7 +404,8 @@ char *msgtxt(char *msg)
 int main(int argc, char *argv[])
 {
 	int i;
-	int num_to_change = 2;
+	/* no need for this right now. */
+	int num_to_change = 1000;
 	int num_changed = 0;
 	struct iodef *id = iodefs;
 	/* state machine! */
@@ -420,9 +437,10 @@ int main(int argc, char *argv[])
 								  id->op, id->addr, 
 								  id->data), id->udelay);
 				/* exit the table, time to run code. */
-				printf("{I,},\n");
+				printf("{I,%d},\n", num_changed);
 				i = aux(i);
 				id = &iodefs[i];
+				continue;
 			}
 			if (id->op == GWl && id->addr == DPA_AUX_CH_DATA1 &&
 			    num_changed < num_to_change) {
@@ -432,9 +450,10 @@ int main(int argc, char *argv[])
 				fprintf(stderr, "{%s, %d, \"%s\", %s, %s, %ld},\n", 
 			       	opnames[id->op], id->count, msgtxt(id->msg), regname(id->addr),symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data), id->udelay);
 				/* exit the table, time to run code. */
-				printf("{I,},\n");
+				printf("{I,%d},\n", num_changed);
 				i = aux(i);
 				id = &iodefs[i];
+				continue;
 			}
 			/* only ignore these writes if we're still transforming
 			 * aux io

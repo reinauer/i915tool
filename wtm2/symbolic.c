@@ -120,6 +120,7 @@ char *symname(struct iodef *id)
 
 int main(int argc, char *argv[])
 {
+	int dedup = 0;
 	int pass = 0;
 	int i;
 	int pch_pp_control_seen = 0;
@@ -162,9 +163,12 @@ int main(int argc, char *argv[])
 			continue;
 		/* end stuff. */
 		/* don't change the window position. */
+		/* works */
 		if (id->addr == _PFA_WIN_POS && id->data){
-			id->data = 0x023000f0; //0x023000f0; 
+			id->data = 0; //0x023000f0; //0x023000f0; 
 		}
+
+
 		if (id->addr == ILK_DSPCLK_GATE){
 			pass++;
 			if (pass > 1)
@@ -176,20 +180,29 @@ int main(int argc, char *argv[])
 		} else {
 			/* take the opportunity to do some cleanup */
 			/* skip the gtt. */
-			/*
-*/
+			/* works */
 			if (id->addr < 0x7fff)
 				continue;
-			/* these *seem* to be scratch pad registers.
-			 * don't bother.
-			if (id->addr >= 0x4f040 && id->addr <= 0x4f050)
-				continue;
-			 */
+			/* no need to do any PCH_PP_CONTROL stuff */
+			/* works. */
 			if (id->addr == PCH_PP_CONTROL){
+				continue;
 				if (pch_pp_control_seen++ == 0){
 				//	printf("{I,1},\n");
 					//continue;
 				}
+			}
+			/* the final test. Is this a dup?
+			 * last op is ALWAYS an I; no need to check 
+			 * array bounds
+			 */
+			if (id->op == GRl &&
+				id[1].op == GRl &&
+				id->addr == id[1].addr &&
+				id->data == id[1].data){
+				id[1].option++;
+				dedup++;
+				continue;
 			}
 			printf("{%s, %ld, \"%s\", %s, %s, %ld},\n", 
 			opnames[id->op], id->option, id->msg, regname(id->addr),symname(id), id->udelay);
@@ -197,6 +210,7 @@ int main(int argc, char *argv[])
 	}
 	printf("{I,},\n");
 	fflush(stdout);
+	fprintf(stderr, "%d dups deleted\n", dedup);
 	exit(0);
 }
 // cc -g -o prettywtm2regs prettywtm2regs.c

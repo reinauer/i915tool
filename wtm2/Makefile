@@ -14,14 +14,14 @@ i915io.c:wtm2io_step5.c coreboot_start coreboot_end
 
 wtm2io_step5.c: wtm2io_step4.c auxcode.c
 	cc $(CFLAGS) -o auxcode auxcode.c
-	./auxcode < $< > $@
+	./auxcode > $@
 
 wtm2io_step4.c: wtm2io_step3.c
 	grep -v PCH_GMBUS < $< | grep -v PCH_GPIOE > $@
 
 wtm2io_step3.c: wtm2io_step2.c symbolic.c
 	cc $(CFLAGS) -o symbolic symbolic.c
-	./symbolic < $< > $@
+	./symbolic > $@
 
 wtm2io_step2.c: wtm2io_step1.ops ops2c.c
 	cc -o ops2c ops2c.c

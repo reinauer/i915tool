@@ -1780,23 +1780,23 @@ struct registers struct_DSPFW3[]={
 };
 
 struct registers struct_WM0_PIPEA_ILK[]={
-	{" WM0_PIPE_PLANE",WM0_PIPE_PLANE_MASK, 0xffffffff},
-	{" WM0_PIPE_SPRITE ",WM0_PIPE_SPRITE_MASK, 0xffffffff},
-	{" WM0_PIPE_CURSOR", WM0_PIPE_CURSOR_MASK, 0xffffffff},
+	{" WM0_PIPE_PLANE_MASK",WM0_PIPE_PLANE_MASK, 0xffffffff},
+	{" WM0_PIPE_SPRITE_MASK ",WM0_PIPE_SPRITE_MASK, 0xffffffff},
+	{" WM0_PIPE_CURSOR_MASK", WM0_PIPE_CURSOR_MASK, 0xffffffff},
 	{NULL, 0},
 };
 
 struct registers struct_WM0_PIPEB_ILK[]={
-	{" WM0_PIPE_PLANE",WM0_PIPE_PLANE_MASK, 0xffffffff},
-	{" WM0_PIPE_SPRITE ",WM0_PIPE_SPRITE_MASK, 0xffffffff},
-	{" WM0_PIPE_CURSOR", WM0_PIPE_CURSOR_MASK, 0xffffffff},
+	{" WM0_PIPE_PLANE_MASK",WM0_PIPE_PLANE_MASK, 0xffffffff},
+	{" WM0_PIPE_SPRITE_MASK ",WM0_PIPE_SPRITE_MASK, 0xffffffff},
+	{" WM0_PIPE_CURSOR_MASK", WM0_PIPE_CURSOR_MASK, 0xffffffff},
 	{NULL, 0},
 };
 
 struct registers struct_WM0_PIPEC_IVB[]={
-	{" WM0_PIPE_PLANE",WM0_PIPE_PLANE_MASK, 0xffffffff},
-	{" WM0_PIPE_SPRITE ",WM0_PIPE_SPRITE_MASK, 0xffffffff},
-	{" WM0_PIPE_CURSOR", WM0_PIPE_CURSOR_MASK, 0xffffffff},
+	{" WM0_PIPE_PLANE_MASK",WM0_PIPE_PLANE_MASK, 0xffffffff},
+	{" WM0_PIPE_SPRITE_MASK ",WM0_PIPE_SPRITE_MASK, 0xffffffff},
+	{" WM0_PIPE_CURSOR_MASK", WM0_PIPE_CURSOR_MASK, 0xffffffff},
 	{NULL, 0},
 };
 
