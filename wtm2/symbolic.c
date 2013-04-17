@@ -167,6 +167,19 @@ int main(int argc, char *argv[])
 		if (id->addr == _PFA_WIN_POS && id->data){
 			id->data = 0; //0x023000f0; //0x023000f0; 
 		}
+		/* works */
+		if (id->addr == _PFA_WIN_SZ && id->data){
+			id->data = 0; //0x023000f0; //0x023000f0; 
+		}
+
+		if (id->addr == CPU_VGACNTRL && id->data){
+			id->data = 0x80000000; 
+		}
+		/* kernel sets it this way */
+		/* works? */
+		if (id->addr == _PIPEASRC && id->data){
+			id->data = 0x077f0437;
+		}
 
 
 		if (id->addr == ILK_DSPCLK_GATE){
@@ -192,6 +205,14 @@ int main(int argc, char *argv[])
 					//continue;
 				}
 			}
+			/* HACK */
+			/* works! */
+			if (id->addr == _DSPACNTR)
+				id->data = 0xd8004000;
+#if 0
+      1 {GWl, 1, "", _DSPACNTR,  DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000, 0},
+#endif
+			/* END HACK */
 			/* the final test. Is this a dup?
 			 * last op is ALWAYS an I; no need to check 
 			 * array bounds

@@ -142,14 +142,6 @@ char *symname(struct registers *regs[], int nregs, int op, unsigned long addr, u
 
 char functions[1048576], *current = functions;
 
-void emit(const char* format, ...)
-{
-	va_list argptr;
-	va_start(argptr, format);
-	current += vsprintf(current, format, argptr);
-	va_end(argptr);
-}
-
 
 /* aux function. Create the call to the function which does IO on the aux channel
  * we pretty much ignore all writes to CTL after the first one. 
@@ -246,6 +238,21 @@ char *auxdest[] = {
 	[DP_PSR_STATUS] "DP_PSR_STATUS",
 };
 
+char text[1024];
+char *msgtxt(char *msg)
+{
+	char *t = text;
+	*t = 0;
+	if (! msg)
+		return;
+	while (*msg){
+		if (*msg == '"')
+			*t++ = '\\';
+		*t++ = *msg++;
+	}
+	*t++ = 0;
+	return text;
+}
 int aux(int index)
 {
 	static int count = 0;
@@ -276,7 +283,14 @@ int aux(int index)
 			if (id->op == GWl)
 				chwritecount++;
 			if (chwritecount  > 1){
-				fprintf(stderr, "aux(): more than one write to ch\n");
+				fprintf(stderr, "aux(): more than one write to ch@%i\n", index);
+			fprintf(stderr, "{%s, %d, \"%s\", %s, %s, %ld},\n", 
+					opnames[id->op], id->count, msgtxt(id->msg), 
+					regname(id->addr),symname(reglist, 
+								  ARRAY_SIZE(reglist), 
+								  id->op, id->addr, 
+								  id->data), id->udelay);
+
 			}
 			if (id->op == GWl &&
 				id->data & DP_AUX_CH_CTL_SEND_BUSY){
@@ -299,59 +313,65 @@ int aux(int index)
 			 * http://hackipedia.org/Hardware/video/connectors/DisplayPort/VESA%20DisplayPort%20Standard%20v1.1a.pdf
 			 */
 			dp_or_i2c = id->data>>31;
-			emit("\tauxout[0] = %s",
+			printf("\tauxout[0] = %s",
 			     dp_or_i2c ? "1<<31 /* dp */" : "0<<31 /* i2c */");
 			if (dp_or_i2c) { /* dp */
 				cmd = (id->data>>28)&7;
 				rw = cmd == 0 ? 0 : 1;
 				dest = (id->data>>8) & 0xfffff;
 				len = id->data;
-				emit("|0x%x<<28/*%s*/|%s<<8|0x%x|0x%08x;\n", cmd, rw ? "R" : "W",auxdest[dest], len, id->data);
-				emit("printk(BIOS_SPEW, \"%s\");\n", auxdest[dest]);
+				printf("|0x%x<<28/*%s*/|%s<<8|0x%x|0x%08lx;\n", cmd, rw ? "R" : "W",auxdest[dest], len, id->data);
+				printf("printk(BIOS_SPEW, \"%s\");\n", auxdest[dest]);
 			} else {
 				mot = (id->data>>30)&1;
 				i2ccmd = (id->data>>28)&3;
 				rw = i2ccmd == 0 ? 0 : 1;
 				dest = (id->data>>8) & 0xfffff;
 				len = id->data;
-				emit("|%d<<30|0x%x<<28/*%s*/|0x%x<<8|0x%x|0x%08x;\n", mot, i2ccmd, rw ? "R" : "W",dest, len, id->data);
+				printf("|%d<<30|0x%x<<28/*%s*/|0x%x<<8|0x%x|0x%08lx;\n", mot, i2ccmd, rw ? "R" : "W",dest, len, id->data);
 			}
 			break;
 		case DPA_AUX_CH_DATA2:
 		if (id->op == GRl)
 			break;
-			emit("\tauxout[1] = 0x%08x;\n", id->data);
+			printf("\tauxout[1] = 0x%08lx;\n", id->data);
 			if (dp_or_i2c){
 				host = ntohl(id->data);
-				emit("\t/*%s*/\n", symname(drmreglist, sizeof(drmreglist), GWl, dest, host));
+				printf("\t/*%s*/\n", symname(drmreglist, sizeof(drmreglist), GWl, dest, host));
 			}
 			break;
 		case DPA_AUX_CH_DATA3:
 		if (id->op == GRl)
 			break;
-			emit("\tauxout[2] = 0x%08x;\n", id->data);
+			printf("\tauxout[2] = 0x%08lx;\n", id->data);
 			break;
 		case DPA_AUX_CH_DATA4:
 		if (id->op == GRl)
 			break;
-			emit("\tauxout[3] = 0x%08x;\n", id->data);
+			printf("\tauxout[3] = 0x%08lx;\n", id->data);
 			break;
 		case DPA_AUX_CH_DATA5:
 		if (id->op == GRl)
 			break;
-			emit("\tauxout[4] = 0x%08x;\n", id->data);
+			printf("\tauxout[4] = 0x%08lx;\n", id->data);
 			break;
 		default:
 			fprintf(stderr, "unexpected in the middle of an AUX CH sequence@%d\n",
 				index);
+			fprintf(stderr, "{%s, %d, \"%s\", %s, %s, %ld},\n", 
+					opnames[id->op], id->count, msgtxt(id->msg), 
+					regname(id->addr),symname(reglist, 
+								  ARRAY_SIZE(reglist), 
+								  id->op, id->addr, 
+								  id->data), id->udelay);
+
 			break;
 		}
 	}
 	done:
 	/* note; Must always check that abcd0008 applies *i.e. aux dp chan is up */
-	emit("\tintel_dp_aux_ch(aux_ctl, aux_data, auxout, %d, auxin, %d);\n", msglen, rw ? len : 0);
-	//emit("udelay(100000);\n");
-	emit("\tindex = run(index);\n");
+	printf("\tintel_dp_aux_ch(aux_ctl, aux_data, auxout, %d, auxin, %d);\n", msglen, rw ? len : 0);
+	//printf("udelay(100000);\n");
 	return index;
 }
 char *prefix = 
@@ -373,38 +393,18 @@ char *prefix =
 "* along with this program; if not, write to the Free Software\n"
 "* Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA\n"
 "*/\n"
+"/* generated code; do not edit*/"
 "#include <stdint.h>\n"
 "#include <console/console.h>\n"
 "#include <delay.h>\n"
 "#include \"i915io.h\"\n"
-"\n"
-"const struct iodef iodefs[] = {\n"
-"  {V,0},\n"
+"\tint index;\tu32 auxout[16];\n\tu8 auxin[20];\n"
+"void runio(u32 aux_ctl, u32 aux_data, int verbose)\n{\n"
 ;
 
-char *postfix =
-"{I,1},\n"
-"};\n"
-"\n"
-"  int niodefs = sizeof(iodefs)/sizeof(iodefs[0]);\n"
-"\n"
+char *postfix ="}\n"
 ;
 
-char text[1024];
-char *msgtxt(char *msg)
-{
-	char *t = text;
-	*t = 0;
-	if (! msg)
-		return;
-	while (*msg){
-		if (*msg == '"')
-			*t++ = '\\';
-		*t++ = *msg++;
-	}
-	*t++ = 0;
-	return text;
-}
 int main(int argc, char *argv[])
 {
 	int i;
@@ -414,12 +414,12 @@ int main(int argc, char *argv[])
 	struct iodef *id = iodefs;
 	/* state machine! */
 	printf("%s\n",prefix);
-	emit("\tint index;\tu32 auxout[16];\n\tu8 auxin[20];\n");
-	emit("\tindex = run(0);\n");
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
+		if (id->op == I)
+			continue;
 		if ((id->op != GWl) && (id->op != GRl)){
-			printf("{%s, %d, \"%s\", 0x%lx, 0x%lx, %ld},\n", 
-			opnames[id->op], id->count, msgtxt(id->msg),id->addr, id->data, id->udelay);
+			if (id->msg && strlen(id->msg))
+				printf("\tprintk(BIOS_SPEW, \"\%s\");\n", msgtxt(id->msg));
 		} else {
 			/* drive state machines, if nothing to do,
 			 * then resume.  if write to DPA_AUX_CH_CTL &&
@@ -440,8 +440,6 @@ int main(int argc, char *argv[])
 								  ARRAY_SIZE(reglist), 
 								  id->op, id->addr, 
 								  id->data), id->udelay);
-				/* exit the table, time to run code. */
-				printf("{I,%d},\n", num_changed);
 				i = aux(i);
 				id = &iodefs[i];
 				continue;
@@ -453,8 +451,6 @@ int main(int argc, char *argv[])
 				
 				fprintf(stderr, "{%s, %d, \"%s\", %s, %s, %ld},\n", 
 			       	opnames[id->op], id->count, msgtxt(id->msg), regname(id->addr),symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data), id->udelay);
-				/* exit the table, time to run code. */
-				printf("{I,%d},\n", num_changed);
 				i = aux(i);
 				id = &iodefs[i];
 				continue;
@@ -470,15 +466,20 @@ int main(int argc, char *argv[])
 				while ((id->addr & ~0x3ff) == _LGC_PALETTE_A){
 					id++,i++;
 				}
-				printf("{P,},\n");
+				printf("palette()\n");
 			}
 			if (i < sizeof(iodefs)/sizeof(iodefs[0]))
-				printf("{%s, %d, \"%s\", %s, %s, %ld},\n", 
-			       	opnames[id->op], id->count, msgtxt(id->msg), regname(id->addr),symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data), id->udelay);
+				if (id->op == GWl){
+					printf("\tWRITE32(%s,%s);\n",
+					symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data),regname(id->addr));
+				} else {
+					printf("\tif (verbose & vio) READ32(%s);\n",regname(id->addr));
+				}
+				if (id->udelay)
+					printf("\tudelay(%ld)\n", id->udelay);
 		}
 	}
 	printf("%s\n", postfix);
-        printf("void runio(u32 aux_ctl, u32 aux_data, int verbose)\n{\n%s}\n", functions);
 	/* this should not be needed. valgrind sees no errors. !# */
 	fflush(stdout);
 	exit(0);
