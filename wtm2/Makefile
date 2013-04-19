@@ -1,5 +1,8 @@
 # we compile each time because we're using the c compiler
 # to do a lot of parsing of .h files for us. Seems weird, works well.
+# to build from the kernel log:
+#sh kernel2c.sh < kernel.log.stage1  > wtm2io_step2.c 
+# make
 
 CFLAGS=-I.. -g
 TARGET=/usr/local/src/firmware/src/third_party/coreboot/src/mainboard/intel/wtm2/i915io.c
@@ -9,9 +12,9 @@ all: i915io.c
 	echo "DO NOT FORGET TO COPY TO THE COREBOOT TREE"
 i915io.c:wtm2io_step5.c coreboot_start coreboot_end
 	#cat coreboot_start $< coreboot_end > $@
-	cp $< $@
+	#cp $< $@
 # comment this out or change to suit. 
-	cp $@ $(TARGET)
+	#cp $@ $(TARGET)
 
 wtm2io_step5.c: wtm2io_step4.c $(AUXPROGRAM).c
 	cc $(CFLAGS) -o $(AUXPROGRAM) $(AUXPROGRAM).c
