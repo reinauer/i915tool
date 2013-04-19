@@ -25,6 +25,57 @@
  * It aligns well in what it does with a startup code
  * we wrote for IVB. It just does not work.
  * We are hard coding for a panel on the eDP on haswell.
+Extracted contents:
+header:          00 ff ff ff ff ff ff 00
+serial number:   30 e4 79 03 00 00 00 00 00 15
+version:         01 04
+basic params:    a5 1b 12 96 02
+chroma info:     4f d5 a2 59 52 93 26 17 50 54
+established:     00 00 00
+standard:        01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01
+descriptor 1:    6d 6f 00 a0 a0 a4 31 60 30 20 3a 00 10 b5 10 00 00 19
+descriptor 2:    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+descriptor 3:    00 00 00 fe 00 4c 47 20 44 69 73 70 6c 61 79 0a 20 20
+descriptor 4:    00 00 00 fe 00 4c 50 31 32 39 51 45 31 2d 53 50 41 31
+extensions:      00
+checksum:        24
+
+Manufacturer: LGD Model 379 Serial Number 0
+Made week 0 of 2011
+EDID version: 1.4
+Digital display
+8 bits per primary color channel
+DisplayPort interface
+Maximum image size: 27 cm x 18 cm
+Gamma: 250%
+Check DPMS levels
+Supported color formats: RGB 4:4:4
+First detailed timing is preferred timing
+Established timings supported:
+Standard timings supported:
+Detailed timings
+Hex of detail: 6d6f00a0a0a4316030203a0010b510000019
+Did detailed timing
+Detailed mode (IN HEX): Clock 285250 KHz, 110 mm x b5 mm
+               0a00 0a30 0a50 0aa0 hborder 0
+               06a4 06a7 06b1 06d5 vborder 0
+               -hsync -vsync
+Hex of detail: 000000000000000000000000000000000000
+Manufacturer-specified data, tag 0
+Hex of detail: 000000fe004c4720446973706c61790a2020
+ASCII string: LG
+Hex of detail: 000000fe004c503132395145312d53504131
+ASCII string: LP129QE1
+This edid was derived by reading it via the aux channel; i.e.
+aux channel IO is known to work correctly.
+The intel_aux_dp_ch function is like the one defined in the kernel,
+save the inputs are u32s, and they are 'pre-processed' so they do
+not need to be converted from u8s to u32s in byte order.
+When this function is called, PCH_PP_CONTROL has been set to abcd000f.
+The GTT has been set as well.
+
+We do see a flash, and training seems to succeed, but I'm pretty sure
+there's some register we are missing or setting wrong.
  */
 #include <stdint.h>
 #include <console/console.h>
@@ -41,7 +92,7 @@ void runio(u32 aux_ctl, u32 aux_data, int verbose)
 	WRITE32( DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000,_DSPACNTR);
 	WRITE32(0x00000000,_DSPBCNTR);
 	WRITE32(0x80000000,CPU_VGACNTRL);
-	WRITE32(0x74000&0/*0x00000000*/,_DSPASIZE+0xc);
+	WRITE32(0x74000/*0x00000000*/,_DSPASIZE+0xc);
 	WRITE32(0x00000000,_DSPBSURF);
 	WRITE32(0x00000000,0x4f050);
 	WRITE32( DP_LINK_TRAIN_PAT_1 | DP_LINK_TRAIN_PAT_1_CPT | DP_VOLTAGE_0_4 | DP_PRE_EMPHASIS_0 | DP_PORT_WIDTH_1 | DP_PLL_FREQ_270MHZ | DP_SCRAMBLING_DISABLE_IRONLAKE | DP_SYNC_VS_HIGH |0x00000091,DP_A);
@@ -136,94 +187,56 @@ printk(BIOS_SPEW, "DP_DPCD_REV");
 	auxout[0] = 0<<31 /* i2c */|0<<30|0x1<<28/*R*/|0x50<<8|0x0|0x10005000;
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 0);
 	/* end EDID */
+
+	/* get lank rate and lane count. */
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_MAX_LINK_RATE<<8|0x0|0x90000100;
 printk(BIOS_SPEW, "DP_MAX_LINK_RATE");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 0);
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_MAX_LANE_COUNT<<8|0x0|0x90000200;
 printk(BIOS_SPEW, "DP_MAX_LANE_COUNT");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 0);
-	if (verbose & vio) READ32(BLC_PWM_CPU_CTL);
+
+	/* back light. */
 	WRITE32(0x03a903a9,BLC_PWM_CPU_CTL);
-	if (verbose & vio) READ32(BLC_PWM_PCH_CTL2);
 	WRITE32(0x03a903a9,BLC_PWM_PCH_CTL2);
-	if (verbose & vio) READ32(BLC_PWM_PCH_CTL1);
 	WRITE32(0x00000000,BLC_PWM_PCH_CTL1);
-	if (verbose & vio) READ32(0x4f050);
-	if (verbose & vio) READ32(0x64f68);
+
+	/* mystery registers. */
+	/* more reset, prior to training? not really sure. */
 	WRITE32(0x00ffffff,0x64f68);
-	if (verbose & vio) READ32(0x64f6c);
 	WRITE32(0x00040006,0x64f6c);
-	if (verbose & vio) READ32(_FDI_RXB_CHICKEN+0x4);
-	if (verbose & vio) READ32(SDEISR+0x30);
 	WRITE32( PORTB_HOTPLUG_ENABLE |0x10000010,SDEISR+0x30);
-	if (verbose & vio) READ32(SDEISR);
-	if (verbose & vio) READ32(0x64f08);
 	WRITE32(0x00ffffff,0x64f08);
-	if (verbose & vio) READ32(0x64f0c);
 	WRITE32(0x00040006,0x64f0c);
-	if (verbose & vio) READ32(_FDI_RXB_CHICKEN+0x4);
-	if (verbose & vio) READ32(SDEISR+0x30);
 	WRITE32( PORTC_HOTPLUG_ENABLE | PORTB_HOTPLUG_ENABLE |0x10001010,SDEISR+0x30);
-	if (verbose & vio) READ32(SDEISR);
-	if (verbose & vio) READ32(0x4f05c);
 	WRITE32(0x00000008,0x4f05c);
-	if (verbose & vio) READ32(0x4f060);
 	WRITE32(0x00000008,0x4f060);
-	if (verbose & vio) READ32(0x45400);
 	WRITE32(0x80000000,0x45400);
-	if (verbose & vio) READ32(0x45400);
-	if (verbose & vio) READ32(0x4f05c);
-	if (verbose & vio) READ32(CPU_VGACNTRL);
-	if (verbose & vio) READ32(CPU_VGACNTRL);
 	WRITE32(0x80000000,CPU_VGACNTRL);
-	if (verbose & vio) READ32(_CURACNTR);
 	WRITE32(0x00000000,_CURACNTR);
-	if (verbose & vio) READ32(_CURABASE);
 	WRITE32(0x00000000,_CURABASE);
-	if (verbose & vio) READ32(_DSPACNTR);
+
 	WRITE32( DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000,_DSPACNTR);
-	if (verbose & vio) READ32(_DSPASIZE+0xc);
-	WRITE32(0x74000&0/*0x00000000*/,_DSPASIZE+0xc);
-	if (verbose & vio) READ32(_CURBCNTR_IVB);
+	WRITE32(0x74000/*0x00000000*/,_DSPASIZE+0xc);
 	WRITE32(0x00000000,_CURBCNTR_IVB);
-	if (verbose & vio) READ32(_CURBBASE_IVB);
 	WRITE32(0x00000000,_CURBBASE_IVB);
-	if (verbose & vio) READ32(_DSPBCNTR);
 	WRITE32(0x00000000,_DSPBCNTR);
-	if (verbose & vio) READ32(_DSPBSURF);
 	WRITE32(0x00000000,_DSPBSURF);
-	if (verbose & vio) READ32(0x72080);
 	WRITE32(0x00000000,0x72080);
-	if (verbose & vio) READ32(0x72084);
 	WRITE32(0x00000000,0x72084);
-	if (verbose & vio) READ32(_DVSACNTR);
 	WRITE32(0x00000000,_DVSACNTR);
-	if (verbose & vio) READ32(_DVSASURF);
 	WRITE32(0x00000000,_DVSASURF);
-	if (verbose & vio) READ32(0x6f400);
-	if (verbose & vio) READ32(0x4f05c);
-	if (verbose & vio) READ32(0x7f008);
-	if (verbose & vio) READ32(0x61400);
-	if (verbose & vio) READ32(0x4f05c);
-	if (verbose & vio) READ32(_PIPEBCONF);
-	if (verbose & vio) READ32(0x62400);
-	if (verbose & vio) READ32(0x4f05c);
-	if (verbose & vio) READ32(0x72008);
-	if (verbose & vio) READ32(0x4f05c);
-	if (verbose & vio) READ32(0x4f05c);
 	WRITE32(0x00000008,0x4f05c);
-	if (verbose & vio) READ32(0x4f060);
 	WRITE32(0x00000008,0x4f060);
-	if (verbose & vio) READ32(CPU_VGACNTRL);
 	WRITE32(0x80000000,CPU_VGACNTRL);
-	if (verbose & vio) READ32(_DSPASTRIDE);
+	/* this value is suspicious. The VBIOS was in 16 bit mode.
+	 * that said, this is a 4:4:4 panel. I wonder if I screwed that
+	 * up below.
+	 */
 	WRITE32(0x00000640,_DSPASTRIDE);
-	if (verbose & vio) READ32(_DSPAADDR);
 	WRITE32(0x00000000,_DSPAADDR);
-	if (verbose & vio) READ32(_DSPASIZE+0xc);
-	WRITE32(0x74000&0/*0x00000000*/,_DSPASIZE+0xc);
-	if (verbose & vio) READ32(_DSPASTRIDE);
-	if (verbose & vio) READ32(0x7f008);
+	/* bios set it to 0, kernel to 74000, hmm. */
+	WRITE32(0x74000/*0x00000000*/,_DSPASIZE+0xc);
 	auxout[0] = 1<<31 /* dp */|0x0<<28/*W*/|DP_SET_POWER<<8|0x0|0x80060000;
 printk(BIOS_SPEW, "DP_SET_POWER");
 	auxout[1] = 0x01000000;
@@ -233,19 +246,17 @@ printk(BIOS_SPEW, "DP_SET_POWER");
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_DPCD_REV<<8|0x0|0x90000000;
 printk(BIOS_SPEW, "DP_DPCD_REV");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 0);
-	if (verbose & vio) READ32(0x4f014);
 	WRITE32(0x00000018,0x4f014);
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_MAX_DOWNSPREAD<<8|0x0|0x90000300;
 printk(BIOS_SPEW, "DP_MAX_DOWNSPREAD");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 0);
-	if (verbose & vio) READ32(0x4f014);
-	if (verbose & vio) READ32(0x6f030);
+	/* more mystery registers ... */
+	/* so we're doing some stuff here with downspread.
+	 * not sure what yet.
+	 */
 	WRITE32(0x7e62b020,0x6f030);
-	if (verbose & vio) READ32(0x6f034);
 	WRITE32(0x00800000,0x6f034);
-	if (verbose & vio) READ32(0x6f040);
 	WRITE32(0x00041cac,0x6f040);
-	if (verbose & vio) READ32(0x6f044);
 	WRITE32(0x00080000,0x6f044);
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_MAX_DOWNSPREAD<<8|0x0|0x90000300;
 printk(BIOS_SPEW, "DP_MAX_DOWNSPREAD");
@@ -253,92 +264,55 @@ printk(BIOS_SPEW, "DP_MAX_DOWNSPREAD");
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_MAX_DOWNSPREAD<<8|0x0|0x90000300;
 printk(BIOS_SPEW, "DP_MAX_DOWNSPREAD");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 0);
-	if (verbose & vio) READ32(FORCEWAKE_MT_ACK);
 	WRITE32(0x40000006,FORCEWAKE_MT_ACK);
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_MAX_DOWNSPREAD<<8|0x0|0x90000300;
 printk(BIOS_SPEW, "DP_MAX_DOWNSPREAD");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 0);
-	if (verbose & vio) READ32(0x6f000);
+
+	/* more mystery. */
+	/* these numbers just are not documented in the kernel code yet? */
 	WRITE32(0x081f077f,0x6f000);
-	if (verbose & vio) READ32(0x6f004);
 	WRITE32(0x081f077f,0x6f004);
-	if (verbose & vio) READ32(0x6f008);
 	WRITE32(0x07cb07ad,0x6f008);
-	if (verbose & vio) READ32(0x6f00c);
 	WRITE32(0x04570437,0x6f00c);
-	if (verbose & vio) READ32(0x6f010);
 	WRITE32(0x04570437,0x6f010);
-	if (verbose & vio) READ32(0x6f014);
 	WRITE32(0x043d0439,0x6f014);
-	if (verbose & vio) READ32(_PIPEASRC);
 	WRITE32(0x077f0437,_PIPEASRC);
-	if (verbose & vio) READ32(0x7f008);
 	WRITE32(0x00000000,0x7f008);
-	if (verbose & vio) READ32(_TRANSACONF);
 	WRITE32(0x00000000,_TRANSACONF);
-	if (verbose & vio) READ32(0x6f000);
-	if (verbose & vio) READ32(_HTOTAL_A);
 	WRITE32(0x081f077f,_HTOTAL_A);
-	if (verbose & vio) READ32(0x6f004);
-	if (verbose & vio) READ32(_HBLANK_A);
 	WRITE32(0x081f077f,_HBLANK_A);
-	if (verbose & vio) READ32(0x6f008);
-	if (verbose & vio) READ32(_HSYNC_A);
 	WRITE32(0x07cb07ad,_HSYNC_A);
-	if (verbose & vio) READ32(0x6f00c);
-	if (verbose & vio) READ32(_VTOTAL_A);
 	WRITE32(0x04570437,_VTOTAL_A);
-	if (verbose & vio) READ32(0x6f010);
-	if (verbose & vio) READ32(_VBLANK_A);
 	WRITE32(0x04570437,_VBLANK_A);
-	if (verbose & vio) READ32(0x6f014);
-	if (verbose & vio) READ32(_VSYNC_A);
 	WRITE32(0x043d0439,_VSYNC_A);
+
+	/* and again? */
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_MAX_DOWNSPREAD<<8|0x0|0x90000300;
 printk(BIOS_SPEW, "DP_MAX_DOWNSPREAD");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 0);
-	if (verbose & vio) READ32(0x46100);
 	WRITE32(0x20000000,0x46100);
-	if (verbose & vio) READ32(_DSPACNTR);
 	WRITE32( DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000,_DSPACNTR);
-	if (verbose & vio) READ32(_DSPASTRIDE);
 	WRITE32(0x00000640,_DSPASTRIDE);
-	if (verbose & vio) READ32(_DSPAADDR);
 	WRITE32(0x00000000,_DSPAADDR);
-	if (verbose & vio) READ32(_DSPASIZE+0xc);
-	WRITE32(0x74000&0/*0x00000000*/,_DSPASIZE+0xc);
-	if (verbose & vio) READ32(_DSPACNTR);
+	WRITE32(0x74000/*0x00000000*/,_DSPASIZE+0xc);
 	WRITE32( DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000,_DSPACNTR);
-	if (verbose & vio) READ32(_DSPACNTR);
-	if (verbose & vio) READ32(_DSPACNTR);
 	WRITE32( DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000,_DSPACNTR);
-	if (verbose & vio) READ32(_DSPASIZE+0xc);
-	WRITE32(0x74000&0/*0x00000000*/,_DSPASIZE+0xc);
-	if (verbose & vio) READ32(_PFA_WIN_POS);
+	WRITE32(0x74000/*0x00000000*/,_DSPASIZE+0xc);
 	WRITE32(0x00000000,_PFA_WIN_POS);
-	if (verbose & vio) READ32(0x4f050);
-	if (verbose & vio) READ32(_PIPEASRC);
 	WRITE32(0x077f0437,_PIPEASRC);
-	if (verbose & vio) READ32(_PFA_WIN_POS);
 	WRITE32(0x00000000,_PFA_WIN_POS);
-	if (verbose & vio) READ32(_PFA_CTL_1);
 	WRITE32(0x80800000,_PFA_CTL_1);
-	if (verbose & vio) READ32(_PFA_WIN_POS);
-	if (verbose & vio) READ32(0x6f00c);
-	if (verbose & vio) READ32(0x6f000);
-	if (verbose & vio) READ32(_PFA_WIN_SZ);
 	WRITE32(0x00000000,_PFA_WIN_SZ);
-	if (verbose & vio) READ32(0x4f014);
-	if (verbose & vio) READ32(0x6f400);
 	WRITE32(0x00030000,0x6f400);
-	if (verbose & vio) READ32(0x4f014);
-	if (verbose & vio) READ32(0x7f008);
 	WRITE32(0x00000000,0x7f008);
-	if (verbose & vio) READ32(0x4f014);
-	if (verbose & vio) READ32(0x6f400);
 	WRITE32(0x82034002,0x6f400);
-	if (verbose & vio) READ32(0x7f008);
 	WRITE32(0x80000000,0x7f008);
+
+	/* read the EDID again? Hmm.
+	 * it seems to me that this may be just the way vbios
+	 * is structured ...
+	 */
 	auxout[0] = 0<<31 /* i2c */|1<<30|0x0<<28/*W*/|0x50<<8|0x0|0x40005000;
 	auxout[1] = 0x00000000;
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 5, auxin, 0);
@@ -354,21 +328,13 @@ printk(BIOS_SPEW, "DP_MAX_DOWNSPREAD");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 5, auxin, 0);
 	auxout[0] = 0<<31 /* i2c */|0<<30|0x1<<28/*R*/|0x50<<8|0x0|0x10005000;
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 0);
-	if (verbose & vio) READ32(DP_A);
+
+	/* this seems to be the training part for real. */
 	WRITE32( DP_LINK_TRAIN_PAT_1 | DP_LINK_TRAIN_PAT_1_CPT | DP_VOLTAGE_0_4 | DP_PRE_EMPHASIS_0 | DP_PORT_WIDTH_1 | DP_PLL_FREQ_270MHZ | DP_SCRAMBLING_DISABLE_IRONLAKE | DP_SYNC_VS_HIGH |0x00000091,DP_A);
-	if (verbose & vio) READ32(DP_A);
-	if (verbose & vio) READ32(0x4f014);
-	if (verbose & vio) READ32(0x6f410);
 	WRITE32(0x00000021,0x6f410);
-	if (verbose & vio) READ32(DP_A+0x40);
 	WRITE32(0x80000011,DP_A+0x40);
-	if (verbose & vio) READ32(DP_A);
 	WRITE32( DP_PORT_EN | DP_LINK_TRAIN_PAT_1 | DP_LINK_TRAIN_PAT_1_CPT | DP_VOLTAGE_0_4 | DP_PRE_EMPHASIS_0 | DP_PORT_WIDTH_1 | DP_PLL_FREQ_270MHZ | DP_SCRAMBLING_DISABLE_IRONLAKE | DP_SYNC_VS_HIGH |0x80000093,DP_A);
-	if (verbose & vio) READ32(PCH_PP_ON_DELAYS);
-	if (verbose & vio) READ32(PCH_PP_ON_DELAYS);
 	WRITE32( PANEL_PORT_SELECT_LVDS |(/* PANEL_POWER_UP_DELAY_MASK */0x1<<16)|(/* PANEL_LIGHT_ON_DELAY_MASK */0xa<<0)|0x0001000a,PCH_PP_ON_DELAYS);
-	if (verbose & vio) READ32(PCH_PP_STATUS);
-	if (verbose & vio) READ32(PCH_PP_ON_DELAYS);
 	WRITE32( PANEL_PORT_SELECT_LVDS |(/* PANEL_POWER_UP_DELAY_MASK */0x7d0<<16)|(/* PANEL_LIGHT_ON_DELAY_MASK */0xa<<0)|0x07d0000a,PCH_PP_ON_DELAYS);
 	auxout[0] = 1<<31 /* dp */|0x0<<28/*W*/|DP_LINK_BW_SET<<8|0x0|0x80010000;
 printk(BIOS_SPEW, "DP_LINK_BW_SET");
@@ -378,15 +344,12 @@ printk(BIOS_SPEW, "DP_LINK_BW_SET");
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_MAX_LANE_COUNT<<8|0x0|0x90000200;
 printk(BIOS_SPEW, "DP_MAX_LANE_COUNT");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 0);
-	if (verbose & vio) READ32(DP_A);
 	auxout[0] = 1<<31 /* dp */|0x0<<28/*W*/|DP_LANE_COUNT_SET<<8|0x0|0x80010100;
 printk(BIOS_SPEW, "DP_LANE_COUNT_SET");
 	auxout[1] = 0x02000000;
 	/*0x00000002*/
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 5, auxin, 0);
-	if (verbose & vio) READ32(DP_A+0x40);
 	WRITE32(0x80000000,DP_A+0x40);
-	if (verbose & vio) READ32(DP_A);
 	WRITE32( DP_PORT_EN | DP_LINK_TRAIN_PAT_1 | DP_LINK_TRAIN_PAT_1_CPT | DP_VOLTAGE_0_4 | DP_PRE_EMPHASIS_0 | DP_PORT_WIDTH_1 | DP_PLL_FREQ_270MHZ | DP_SYNC_VS_HIGH |0x80000013,DP_A);
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_TRAINING_PATTERN_SET<<8|0x0|0x90010200;
 printk(BIOS_SPEW, "DP_TRAINING_PATTERN_SET");
@@ -408,7 +371,6 @@ printk(BIOS_SPEW, "DP_TRAINING_LANE0_SET");
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_LANE0_1_STATUS<<8|0x1|0x90020201;
 printk(BIOS_SPEW, "DP_LANE0_1_STATUS");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 4, auxin, 1);
-	if (verbose & vio) READ32(DP_A+0x40);
 	WRITE32(0x80000100,DP_A+0x40);
 	auxout[0] = 1<<31 /* dp */|0x1<<28/*R*/|DP_TRAINING_PATTERN_SET<<8|0x0|0x90010200;
 printk(BIOS_SPEW, "DP_TRAINING_PATTERN_SET");
@@ -434,26 +396,18 @@ printk(BIOS_SPEW, "DP_TRAINING_PATTERN_SET");
 	intel_dp_aux_ch(aux_ctl, aux_data, auxout, 5, auxin, 0);
 	/* from kernel */
 	//WRITE32(0x000f3806,  WM0_PIPEA_ILK);
-	/* end fro kernel */
-	if (verbose & vio) READ32(DP_A+0x40);
+	// did not go well when we turned this on!
+	/* end from kernel */
+	/* training is done, final sets? */
 	WRITE32(0x80000200,DP_A+0x40);
-	if (verbose & vio) READ32(DP_A+0x40);
 	WRITE32(0x80000300,DP_A+0x40);
-	if (verbose & vio) READ32(BLC_PWM_CPU_CTL2);
 	WRITE32( PWM_ENABLE |0x80000000,BLC_PWM_CPU_CTL2);
-	if (verbose & vio) READ32(BLC_PWM_PCH_CTL1);
 	WRITE32( PWM_PCH_ENABLE |0x80000000,BLC_PWM_PCH_CTL1);
-	if (verbose & vio) READ32(BLC_PWM_CPU_CTL);
 	WRITE32(0x03a903a9,BLC_PWM_CPU_CTL);
-	if (verbose & vio) READ32(BLC_PWM_CPU_CTL);
 	WRITE32(0x03a903a9,BLC_PWM_CPU_CTL);
-	if (verbose & vio) READ32(BLC_PWM_PCH_CTL2);
 	WRITE32(0x03a903a9,BLC_PWM_PCH_CTL2);
-	if (verbose & vio) READ32(BLC_PWM_PCH_CTL1);
 	WRITE32( PWM_PCH_ENABLE |0x80000000,BLC_PWM_PCH_CTL1);
-	if (verbose & vio) READ32(SDEISR+0x30);
 	WRITE32( PORTC_HOTPLUG_ENABLE | PORTB_HOTPLUG_ENABLE |0x10001010,SDEISR+0x30);
-	if (verbose & vio) READ32(DIGITAL_PORT_HOTPLUG_CNTRL);
 	WRITE32( DIGITAL_PORTA_HOTPLUG_ENABLE |0x00000010,DIGITAL_PORT_HOTPLUG_CNTRL);
 	printk(BIOS_SPEW, "Sleep long and well\n");
 	udelay(5000000);
@@ -469,106 +423,45 @@ printk(BIOS_SPEW, "DP_TRAINING_PATTERN_SET");
 	}
 	printk(BIOS_SPEW, "Wait a bit\n");
 #endif
-	if (verbose & vio) READ32(0x4f05c);
-	if (verbose & vio) READ32(CPU_VGACNTRL);
-	if (verbose & vio) READ32(CPU_VGACNTRL);
 	WRITE32(0x80000000,CPU_VGACNTRL);
-	if (verbose & vio) READ32(_CURACNTR);
 	WRITE32(0x00000000,_CURACNTR);
-	if (verbose & vio) READ32(_CURABASE);
 	WRITE32(0x00000000,_CURABASE);
-	if (verbose & vio) READ32(_DSPACNTR);
 	WRITE32( DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000,_DSPACNTR);
-	if (verbose & vio) READ32(_DSPASIZE+0xc);
-	WRITE32(0x74000&0/*0x00000000*/,_DSPASIZE+0xc);
-	if (verbose & vio) READ32(_CURBCNTR_IVB);
+	WRITE32(0x74000/*0x00000000*/,_DSPASIZE+0xc);
 	WRITE32(0x00000000,_CURBCNTR_IVB);
-	if (verbose & vio) READ32(_CURBBASE_IVB);
 	WRITE32(0x00000000,_CURBBASE_IVB);
-	if (verbose & vio) READ32(_DSPBCNTR);
 	WRITE32(0x00000000,_DSPBCNTR);
-	if (verbose & vio) READ32(_DSPBSURF);
 	WRITE32(0x00000000,_DSPBSURF);
-	if (verbose & vio) READ32(0x72080);
 	WRITE32(0x00000000,0x72080);
-	if (verbose & vio) READ32(0x72084);
 	WRITE32(0x00000000,0x72084);
-	if (verbose & vio) READ32(_DVSACNTR);
 	WRITE32(0x00000000,_DVSACNTR);
-	if (verbose & vio) READ32(_DVSASURF);
 	WRITE32(0x00000000,_DVSASURF);
-	if (verbose & vio) READ32(0x6f400);
-	if (verbose & vio) READ32(0x4f05c);
-	if (verbose & vio) READ32(0x7f008);
-	if (verbose & vio) READ32(0x61400);
-	if (verbose & vio) READ32(0x4f05c);
-	if (verbose & vio) READ32(_PIPEBCONF);
-	if (verbose & vio) READ32(0x62400);
-	if (verbose & vio) READ32(0x4f05c);
-	if (verbose & vio) READ32(0x72008);
-	if (verbose & vio) READ32(0x4f05c);
-	if (verbose & vio) READ32(0x4f05c);
 	WRITE32(0x00000008,0x4f05c);
-	if (verbose & vio) READ32(0x4f060);
 	WRITE32(0x00000008,0x4f060);
-	if (verbose & vio) READ32(CPU_VGACNTRL);
 	WRITE32(0x80000000,CPU_VGACNTRL);
-	if (verbose & vio) READ32(_DSPASTRIDE);
 	WRITE32(0x00000640,_DSPASTRIDE);
-	if (verbose & vio) READ32(_DSPAADDR);
 	WRITE32(0x00000000,_DSPAADDR);
-	if (verbose & vio) READ32(_DSPASIZE+0xc);
-	WRITE32(0x74000&0/*0x00000000*/,_DSPASIZE+0xc);
-	if (verbose & vio) READ32(_DSPASTRIDE);
-	if (verbose & vio) READ32(0x7f008);
-	if (verbose & vio) READ32(_DSPACNTR);
+	WRITE32(0x74000/*0x00000000*/,_DSPASIZE+0xc);
 	WRITE32( DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000,_DSPACNTR);
-	if (verbose & vio) READ32(_DSPASIZE+0xc);
-	WRITE32(0x74000&0/*0x00000000*/,_DSPASIZE+0xc);
-	if (verbose & vio) READ32(_PFA_WIN_POS);
+	WRITE32(0x74000/*0x00000000*/,_DSPASIZE+0xc);
 	WRITE32(0x00000000,_PFA_WIN_POS);
-	if (verbose & vio) READ32(_PFA_WIN_SZ);
 	WRITE32(0x00000000,_PFA_WIN_SZ);
-	if (verbose & vio) READ32(_PIPEASRC);
 	WRITE32(0x077f0437,_PIPEASRC);
-	if (verbose & vio) READ32(_PFA_WIN_POS);
 	WRITE32(0x00000000,_PFA_WIN_POS);
-	if (verbose & vio) READ32(0x4f050);
-	if (verbose & vio) READ32(_PIPEASRC);
 	WRITE32(0x077f0437,_PIPEASRC);
-	if (verbose & vio) READ32(_PFA_WIN_POS);
 	WRITE32(0x00000000,_PFA_WIN_POS);
-	if (verbose & vio) READ32(_PFA_CTL_1);
 	WRITE32(0x80800000,_PFA_CTL_1);
-	if (verbose & vio) READ32(_PFA_WIN_POS);
-	if (verbose & vio) READ32(0x6f00c);
-	if (verbose & vio) READ32(0x6f000);
-	if (verbose & vio) READ32(_PFA_WIN_SZ);
 	WRITE32(0x00000000,_PFA_WIN_SZ);
-	if (verbose & vio) READ32(_DSPACNTR);
 	WRITE32( DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000,_DSPACNTR);
-	if (verbose & vio) READ32(_DSPASTRIDE);
 	WRITE32(0x00000640,_DSPASTRIDE);
-	if (verbose & vio) READ32(_DSPAADDR);
 	WRITE32(0x00000000,_DSPAADDR);
-	if (verbose & vio) READ32(_DSPASIZE+0xc);
-	WRITE32(0x74000&0/*0x00000000*/,_DSPASIZE+0xc);
-	if (verbose & vio) READ32(_DSPACNTR);
+	WRITE32(0x74000/*0x00000000*/,_DSPASIZE+0xc);
 	WRITE32( DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000,_DSPACNTR);
-	if (verbose & vio) READ32(_DSPACNTR);
-	if (verbose & vio) READ32(_DSPACNTR);
 	WRITE32( DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000,_DSPACNTR);
-	if (verbose & vio) READ32(_DSPASIZE+0xc);
-	WRITE32(0x74000&0/*0x00000000*/,_DSPASIZE+0xc);
+	WRITE32(0x74000/*0x00000000*/,_DSPASIZE+0xc);
 	/* from kernel. */
-	WRITE32(0x00074000&0,_DSPASIZE+0xc);
-	if (verbose & vio) READ32(SDEISR+0x30);
+	WRITE32(0x00074000,_DSPASIZE+0xc);
 	WRITE32( PORTC_HOTPLUG_ENABLE | PORTB_HOTPLUG_ENABLE |0x10001010,SDEISR+0x30);
-	if (verbose & vio) READ32(DIGITAL_PORT_HOTPLUG_CNTRL);
 	WRITE32( DIGITAL_PORTA_HOTPLUG_ENABLE |0x00000010,DIGITAL_PORT_HOTPLUG_CNTRL);
-	printk(BIOS_SPEW, "pci dev(0x0,0x2,0x0,0x8)");
-	printk(BIOS_SPEW, "pci dev(0x0,0x1f,0x0,0x10)");
-	printk(BIOS_SPEW, "pci dev(0x0,0x2,0x0,0x0)");
-	printk(BIOS_SPEW, "pci dev(0x0,0x2,0x0,0x2)");
 }
 

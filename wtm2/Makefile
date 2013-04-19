@@ -12,9 +12,9 @@ all: i915io.c
 	echo "DO NOT FORGET TO COPY TO THE COREBOOT TREE"
 i915io.c:wtm2io_step5.c coreboot_start coreboot_end
 	#cat coreboot_start $< coreboot_end > $@
-	#cp $< $@
+	cp $< $@
 # comment this out or change to suit. 
-	#cp $@ $(TARGET)
+	cp $@ $(TARGET)
 
 wtm2io_step5.c: wtm2io_step4.c $(AUXPROGRAM).c
 	cc $(CFLAGS) -o $(AUXPROGRAM) $(AUXPROGRAM).c
