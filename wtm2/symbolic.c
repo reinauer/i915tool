@@ -129,9 +129,11 @@ int main(int argc, char *argv[])
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
 		if (id->op < I)
 			continue;
+#if 0
 		/* stuff we don't know the need for doing. */
 		/* no docs for some of these yet ... */
 		/* works with SDEIIR removed. */
+
 		if (id->addr == SDEIIR)
 			continue;
 		/* works with DEIIR removed. */
@@ -187,6 +189,7 @@ int main(int argc, char *argv[])
 			if (pass > 1)
 				break;
 		}
+#endif
 		if (id->op < GWl) {
 			printf("{%s, 0x%08lx, \"%s\", 0x%lx, 0x%lx, %ld},\n", 
 			opnames[id->op], id->option, id->msg, id->addr, id->data, id->udelay);

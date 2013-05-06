@@ -393,12 +393,13 @@ char *prefix =
 "* along with this program; if not, write to the Free Software\n"
 "* Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA\n"
 "*/\n"
-"/* generated code; do not edit*/"
+"/* generated code; do not edit*/\n"
 "#include <stdint.h>\n"
 "#include <console/console.h>\n"
 "#include <delay.h>\n"
-"#include \"i915io.h\"\n"
+"#include <drivers/intel/gma/i915.h>\n"
 "\tint index;\tu32 auxout[16];\n\tu8 auxin[20];\n"
+"void runio(u32 aux_ctl, u32 aux_data, int verbose);\n"
 "void runio(u32 aux_ctl, u32 aux_data, int verbose)\n{\n"
 ;
 
@@ -409,7 +410,7 @@ int main(int argc, char *argv[])
 {
 	int i;
 	/* no need for this right now. */
-	int num_to_change = 1000;
+	int num_to_change = 0; //1000;
 	int num_changed = 0;
 	struct iodef *id = iodefs;
 	/* state machine! */
@@ -470,10 +471,11 @@ int main(int argc, char *argv[])
 			}
 			if (i < sizeof(iodefs)/sizeof(iodefs[0]))
 				if (id->op == GWl){
-					printf("\tWRITE32(%s,%s);\n",
+					printf("\tio_i915_write32(%s,%s);\n",
 					symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data),regname(id->addr));
 				} else {
-					printf("\tif (verbose & vio) READ32(%s);\n",regname(id->addr));
+					//printf("\tif (verbose & vio) io_i915_read32(%s, %08lx);\n",regname(id->addr), id->data);
+					printf("\tif (verbose & vio) {io_i915_read32(%s);printk(BIOS_SPEW, \"  %08lx\\n\");}\n",regname(id->addr), id->data);
 				}
 				if (id->udelay)
 					printf("\tudelay(%ld)\n", id->udelay);
