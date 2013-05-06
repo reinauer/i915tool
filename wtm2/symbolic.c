@@ -198,18 +198,20 @@ int main(int argc, char *argv[])
 				continue;
 			/* no need to do any PCH_PP_CONTROL stuff */
 			/* works. */
-			if (id->addr == PCH_PP_CONTROL){
+			fprintf(stderr, "WARNING: NOT IGNORING PCH_PP_CONTROL\n");
+			if (0 && id->addr == PCH_PP_CONTROL){
 				continue;
 				if (pch_pp_control_seen++ == 0){
 				//	printf("{I,1},\n");
 					//continue;
 				}
 			}
+#if 0
+			/* turns out this is bogus. It's a 16 bit panel. */
 			/* HACK */
 			/* works! */
 			if (id->addr == _DSPACNTR)
 				id->data = 0xd8004000;
-#if 0
       1 {GWl, 1, "", _DSPACNTR,  DISPPLANE_GAMMA_ENABLE |( DISPPLANE_32BPP_NO_ALPHA &0x18000000)|(/* DISPPLANE_SEL_PIPE(0=A,1=B) */0x0<<24)| DISPPLANE_TRICKLE_FEED_DISABLE /* Ironlake */ |0xd8004000, 0},
 #endif
 			/* END HACK */
