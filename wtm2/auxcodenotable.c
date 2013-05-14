@@ -258,7 +258,7 @@ int aux(int index)
 	static int count = 0;
 	struct iodef *id = &iodefs[index];
 	/* iterate through the *data* items, accumulating into the in array. 
-	 * then call intel_dp_aux_ch with the pointer to the outarray. 
+	 * then call intel_dp_aux_ch_32 with the pointer to the outarray. 
 	 * to make things easier, we take subsequent IOs into other arrays.
 	 */
 	int msglen = 0, senddatalen = 0;
@@ -313,7 +313,7 @@ int aux(int index)
 			 * http://hackipedia.org/Hardware/video/connectors/DisplayPort/VESA%20DisplayPort%20Standard%20v1.1a.pdf
 			 */
 			dp_or_i2c = id->data>>31;
-			printf("\tauxout[0] = %s",
+			printf("\tauxout = %s",
 			     dp_or_i2c ? "1<<31 /* dp */" : "0<<31 /* i2c */");
 			if (dp_or_i2c) { /* dp */
 				cmd = (id->data>>28)&7;
@@ -330,30 +330,35 @@ int aux(int index)
 				len = id->data;
 				printf("|%d<<30|0x%x<<28/*%s*/|0x%x<<8|0x%x|0x%08lx;\n", mot, i2ccmd, rw ? "R" : "W",dest, len, id->data);
 			}
+			printf("\tunpack_aux(auxout, &msg[0], 4);\n");
 			break;
 		case DPA_AUX_CH_DATA2:
 		if (id->op == GRl)
 			break;
-			printf("\tauxout[1] = 0x%08lx;\n", id->data);
+			printf("\tauxout = 0x%08lx;\n", id->data);
 			if (dp_or_i2c){
 				host = ntohl(id->data);
 				printf("\t/*%s*/\n", symname(drmreglist, sizeof(drmreglist), GWl, dest, host));
 			}
+			printf("\tunpack_aux(auxout, &msg[4], 4);\n");
 			break;
 		case DPA_AUX_CH_DATA3:
 		if (id->op == GRl)
 			break;
-			printf("\tauxout[2] = 0x%08lx;\n", id->data);
+			printf("\tauxout = 0x%08lx;\n", id->data);
+			printf("\tunpack_aux(auxout, &msg[8], 4);\n");
 			break;
 		case DPA_AUX_CH_DATA4:
 		if (id->op == GRl)
 			break;
-			printf("\tauxout[3] = 0x%08lx;\n", id->data);
+			printf("\tauxout = 0x%08lx;\n", id->data);
+			printf("\tunpack_aux(auxout, &msg[0xc], 4);\n");
 			break;
 		case DPA_AUX_CH_DATA5:
 		if (id->op == GRl)
 			break;
-			printf("\tauxout[4] = 0x%08lx;\n", id->data);
+			printf("\tauxout = 0x%08lx;\n", id->data);
+			printf("\tunpack_aux(auxout, &msg[0x10], 4);\n");
 			break;
 		default:
 			fprintf(stderr, "unexpected in the middle of an AUX CH sequence@%d\n",
@@ -370,7 +375,7 @@ int aux(int index)
 	}
 	done:
 	/* note; Must always check that abcd0008 applies *i.e. aux dp chan is up */
-	printf("\tintel_dp_aux_ch(aux_ctl, aux_data, auxout, %d, auxin, %d);\n", msglen, rw ? len : 0);
+	printf("\tintel_dp_aux_ch(dp, msg, %d, auxin, %d);\n", msglen, rw ? len : 0);
 	//printf("udelay(100000);\n");
 	return index;
 }
@@ -398,9 +403,10 @@ char *prefix =
 "#include <console/console.h>\n"
 "#include <delay.h>\n"
 "#include <drivers/intel/gma/i915.h>\n"
-"\tint index;\tu32 auxout[16];\n\tu8 auxin[20];\n"
-"void runio(u32 aux_ctl, u32 aux_data, int verbose);\n"
-"void runio(u32 aux_ctl, u32 aux_data, int verbose)\n{\n"
+"#include <arch/io.h>\n"
+"\tint index;\tu32 auxout;\n\tu8 auxin[20];\nu8 msg[32];"
+"void runio(struct intel_dp *dp,  int verbose);\n"
+"void runio(struct intel_dp *dp,  int verbose)\n{\n"
 ;
 
 char *postfix ="}\n"
@@ -410,7 +416,7 @@ int main(int argc, char *argv[])
 {
 	int i;
 	/* no need for this right now. */
-	int num_to_change = 0; //1000;
+	int num_to_change = 1000;
 	int num_changed = 0;
 	struct iodef *id = iodefs;
 	/* state machine! */
@@ -421,6 +427,12 @@ int main(int argc, char *argv[])
 		if ((id->op != GWl) && (id->op != GRl)){
 			if (id->msg && strlen(id->msg))
 				printf("\tprintk(BIOS_SPEW, \"\%s\");\n", msgtxt(id->msg));
+			if (id->op <= Wl && id->op >= Wb)
+				printf("\tout%s(0x%08lx, 0x%08lx);\n", func[id->op], id->data, id->addr);
+			if (id->op <= Rl && id->op >= Rb){
+				printf("\tif (verbose&vio){in%s(0x%08lx);", func[id->op], id->addr);
+				printf("\tprintk(BIOS_SPEW,\"\t%08lx\\n\");}\n", id->data);
+			}
 		} else {
 			/* drive state machines, if nothing to do,
 			 * then resume.  if write to DPA_AUX_CH_CTL &&
@@ -467,18 +479,29 @@ int main(int argc, char *argv[])
 				while ((id->addr & ~0x3ff) == _LGC_PALETTE_A){
 					id++,i++;
 				}
-				printf("palette()\n");
+				printf("\tpalette();\n");
 			}
-			if (i < sizeof(iodefs)/sizeof(iodefs[0]))
+			/* detect a spin */
+			/* GWl followed by GWr or GRl followed by GRl */
+			if (id->addr == id[-1].addr && id->op == GRl && 
+			    id->addr != id[1].addr) {
+				printf("\tspin(0x%08x, 0x%08lx);\n", id->data, id->addr);
+				fprintf(stderr, "Spinning on %08lx\n", id->addr);
+			}
+			if (i < sizeof(iodefs)/sizeof(iodefs[0])){
 				if (id->op == GWl){
 					printf("\tio_i915_write32(%s,%s);\n",
-					symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data),regname(id->addr));
+					       symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data),regname(id->addr));
+					if (id->addr == PCH_PP_CONTROL) printf("\tudelay(600000);\n");
 				} else {
 					//printf("\tif (verbose & vio) io_i915_read32(%s, %08lx);\n",regname(id->addr), id->data);
-					printf("\tif (verbose & vio) {io_i915_read32(%s);printk(BIOS_SPEW, \"  %08lx\\n\");}\n",regname(id->addr), id->data);
+					printf("\tif (verbose & vio) {io_i915_read32(%s);printk(BIOS_SPEW, \"  %08lx\\n\");}\n",
+					       regname(id->addr), id->data);
 				}
-				if (id->udelay)
-					printf("\tudelay(%ld)\n", id->udelay);
+			}
+			if (id->udelay)
+				printf("\tudelay(%ld)\n", id->udelay);
+
 		}
 	}
 	printf("%s\n", postfix);

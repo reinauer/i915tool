@@ -41,8 +41,9 @@ main()
 
 		if (address == 0x1804) {
 			if (size != 'l')
-				fprintf(stderr, "BOTCH at line %d: 1804, but not 'l'\n", lineno);
-			printf("{G%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, _1800, data);
+				fprintf(stderr, "BOTCH at line %d: 1804, but not 'l', skipping\n", lineno);
+			else
+				printf("{G%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, _1800, data);
 			continue;
 		}
 		printf("{%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, address, data);

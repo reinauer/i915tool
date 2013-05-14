@@ -35,3 +35,15 @@ const char *opnames[] = {
   [P] "P",
   [I] "I",
 };
+
+/* anything wrong will cause a compile error. */
+const char *func[] = {
+
+  [Rb] "b",
+  [Rw] "w",
+  [Rl] "l",
+  [Wb] "b",
+  [Ww] "w",
+  [Wl] "l",
+
+};

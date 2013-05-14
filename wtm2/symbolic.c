@@ -127,9 +127,15 @@ int main(int argc, char *argv[])
 	struct iodef *id = iodefs;
 	/* state machine! */
 	for(i = 0; i < sizeof(iodefs)/sizeof(iodefs[0]); i++, id++){
+		/* timers: 0x40 is timer 0, 41 1, 42 2, 43 a contro register. 
+		 * 0x61 is pc speaker. Ignore them.
+		 */
+		if (id->addr > 0x40 && id->addr < 0x62)
+			continue;
+
+#if 0
 		if (id->op < I)
 			continue;
-#if 0
 		/* stuff we don't know the need for doing. */
 		/* no docs for some of these yet ... */
 		/* works with SDEIIR removed. */
@@ -195,6 +201,7 @@ int main(int argc, char *argv[])
 			opnames[id->op], id->option, id->msg, id->addr, id->data, id->udelay);
 		} else {
 			/* take the opportunity to do some cleanup */
+			
 			/* skip the gtt. */
 			/* works */
 			if (id->addr < 0x7fff)
