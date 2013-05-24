@@ -59,7 +59,7 @@ struct iodef {
 	unsigned long data;
 	unsigned long udelay;
 } iodefs[] = {
-#include "wtm2io_step2.c"
+#include "step2.c"
 };
 
 #include "buildregs.c"
@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 			
 			/* skip the gtt. */
 			/* works */
-			if (id->addr < 0x3fffd)
+			if (id->addr < 0x3ffff)
 				continue;
 			/* no need to do any PCH_PP_CONTROL stuff */
 			/* works. */

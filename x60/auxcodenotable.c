@@ -70,7 +70,7 @@ struct iodef {
 	unsigned long data;
 	unsigned long udelay;
 } iodefs[] = {
-#include "wtm2io_step4.c"
+#include "step4.c"
 };
 
 #include "buildregs.c"
