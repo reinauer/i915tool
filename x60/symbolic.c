@@ -145,8 +145,8 @@ int main(int argc, char *argv[])
 				continue;
 			/* no need to do any PCH_PP_CONTROL stuff */
 			/* works. */
-			fprintf(stderr, "WARNING: NOT IGNORING PCH_PP_CONTROL\n");
-			if (0 && id->addr == PCH_PP_CONTROL){
+			if (id->addr == PCH_PP_CONTROL){
+				fprintf(stderr, "WARNING: NOT IGNORING PCH_PP_CONTROL\n");
 				continue;
 				if (pch_pp_control_seen++ == 0){
 				}
