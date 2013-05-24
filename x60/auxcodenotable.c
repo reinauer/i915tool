@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
 #include <sys/io.h>
 #include <time.h>
 #include <sys/time.h>
@@ -12,8 +13,13 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/mman.h>
+#include "drmdefines.h"
 #include "video.h"
-#include "final/i915_reg.h"
+#include "i915_reg.h"
+
+
+/* stuff we need that was not here. */
+#include "undef.h"
 
 int verbose = 0;
 
@@ -485,7 +491,7 @@ int main(int argc, char *argv[])
 			/* GWl followed by GWr or GRl followed by GRl */
 			if (id->addr == id[-1].addr && id->op == GRl && 
 			    id->addr != id[1].addr) {
-				printf("\tspin(0x%08x, 0x%08lx);\n", id->data, id->addr);
+				printf("\tspin(0x%08lx, 0x%08lx);\n", id->data, id->addr);
 				fprintf(stderr, "Spinning on %08lx\n", id->addr);
 			}
 			if (i < sizeof(iodefs)/sizeof(iodefs[0])){

@@ -4,8 +4,9 @@ main()
 {
 	int compress = 1;
 	unsigned char bus, dev, fn, reg;
-	unsigned long _1800 = 0, _cf8=0;
-	int _1800removed = 0,_cf8removed = 0;
+	unsigned long indir = 0, _cf8=0xcf8;
+	unsigned long indiraddr = 0x50a0;
+	int indirremoved = 0,_cf8removed = 0;
 	char cmd, size;
 	unsigned long data, address;
 	int lineno = 0;
@@ -18,9 +19,9 @@ main()
 			continue;
 		}
 
-		if (address == 0x1800){
-			_1800removed++;
-			_1800 = data;
+		if (address == indiraddr){
+			indirremoved++;
+			indir = data;
 			continue;
 		}
 
@@ -39,18 +40,18 @@ main()
 			continue;
 		}
 
-		if (address == 0x1804) {
+		if (address == indiraddr+4) {
 			if (size != 'l')
 				fprintf(stderr, "BOTCH at line %d: 1804, but not 'l', skipping\n", lineno);
 			else
-				printf("{G%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, _1800, data);
+				printf("{G%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, indir, data);
 			continue;
 		}
 		printf("{%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, address, data);
 			
 	}
 
-	fprintf(stderr, "//Removed %d IOs to 1800\n", _1800removed);
+	fprintf(stderr, "//Removed %d IOs to 1800\n", indirremoved);
 	fprintf(stderr, "//Removed %d IOs to cf8\n", _cf8removed);
 	/* never trust anything */
 	fflush(stdout);
