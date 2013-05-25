@@ -1,16 +1,21 @@
 #include <stdio.h>
 
-main()
+main(int argc, char *argv[])
 {
 	int compress = 1;
 	unsigned char bus, dev, fn, reg;
 	unsigned long indir = 0, _cf8=0xcf8;
-	unsigned long indiraddr = 0x50a0;
+	unsigned long indiraddr = 0x50a0, indirdata = 0x50a4;
 	int indirremoved = 0,_cf8removed = 0;
 	char cmd, size;
 	unsigned long data, address;
 	int lineno = 0;
 	char line[80];
+	if (argc > 1)
+		indir = strtoul(argv[1], 0, 0);
+	if (argc > 2)
+		indirdata = strtoul(argv[2], 0, 0);
+		
 	while (gets(line)){
 		lineno++;
 		sscanf(line, "%c%c%lx%lx", &cmd, &size, &data, &address);
@@ -40,7 +45,7 @@ main()
 			continue;
 		}
 
-		if (address == indiraddr+4) {
+		if (address == indirdata) {
 			if (size != 'l')
 				fprintf(stderr, "BOTCH at line %d: 1804, but not 'l', skipping\n", lineno);
 			else
@@ -51,7 +56,7 @@ main()
 			
 	}
 
-	fprintf(stderr, "//Removed %d IOs to 1800\n", indirremoved);
+	fprintf(stderr, "//Removed %d indirect IOs to %08lx\n", indirremoved, indiraddr);
 	fprintf(stderr, "//Removed %d IOs to cf8\n", _cf8removed);
 	/* never trust anything */
 	fflush(stdout);
