@@ -35,4 +35,4 @@ step1.ops: coreboot.log step1.sh
 	./step1.sh coreboot.log step1.ops
 
 clean:
-	rm -f * symbolic auxcode ops2c *~ i915io.c auxcodenotable
+	rm -f symbolic auxcode ops2c *~ i915io.c auxcodenotable step?.c step1.ops

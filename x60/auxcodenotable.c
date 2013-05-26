@@ -491,8 +491,10 @@ int main(int argc, char *argv[])
 			/* GWl followed by GWr or GRl followed by GRl */
 			if (id->addr == id[-1].addr && id->op == GRl && 
 			    id->addr != id[1].addr) {
-				printf("\tspin(0x%08lx, 0x%08lx);\n", id->data, id->addr);
-				fprintf(stderr, "Spinning on %08lx\n", id->addr);
+				printf("\tspin(%s, %s);\n", 
+						symname(reglist, ARRAY_SIZE(reglist), id->op, id->addr, id->data),
+						regname(id->addr));
+				fprintf(stderr, "Spinning on %s\n", regname(id->addr));
 			}
 			if (i < sizeof(iodefs)/sizeof(iodefs[0])){
 				if (id->op == GWl){
