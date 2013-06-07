@@ -1,5 +1,5 @@
 /* generated don't edit */
-#include "final/i915_reg.h"
+#include "i915_reg.h"
 //struct registers { char *name; unsigned long value; unsigned long mask; };
 struct registers struct_DP_DPCD_REV[]={
 	{NULL, 0},

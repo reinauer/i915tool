@@ -1,15 +1,21 @@
 #include <stdio.h>
 
-main()
+main(int argc, char *argv[])
 {
 	int compress = 1;
 	unsigned char bus, dev, fn, reg;
-	unsigned long _1800 = 0, _cf8=0;
-	int _1800removed = 0,_cf8removed = 0;
+	unsigned long indir = 0, _cf8=0xcf8;
+	unsigned long indiraddr = 0x50a0, indirdata = 0x50a4;
+	int indirremoved = 0,_cf8removed = 0;
 	char cmd, size;
 	unsigned long data, address;
 	int lineno = 0;
 	char line[80];
+	if (argc > 1)
+		indir = strtoul(argv[1], 0, 0);
+	if (argc > 2)
+		indirdata = strtoul(argv[2], 0, 0);
+		
 	while (gets(line)){
 		lineno++;
 		sscanf(line, "%c%c%lx%lx", &cmd, &size, &data, &address);
@@ -18,9 +24,9 @@ main()
 			continue;
 		}
 
-		if (address == 0x1800){
-			_1800removed++;
-			_1800 = data;
+		if (address == indiraddr){
+			indirremoved++;
+			indir = data;
 			continue;
 		}
 
@@ -39,18 +45,18 @@ main()
 			continue;
 		}
 
-		if (address == 0x1804) {
+		if (address == indirdata) {
 			if (size != 'l')
 				fprintf(stderr, "BOTCH at line %d: 1804, but not 'l', skipping\n", lineno);
 			else
-				printf("{G%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, _1800, data);
+				printf("{G%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, indir, data);
 			continue;
 		}
 		printf("{%c%c, 1, \"\", 0x%08lx, 0x%08lx, 0},\n", cmd, size, address, data);
 			
 	}
 
-	fprintf(stderr, "//Removed %d IOs to 1800\n", _1800removed);
+	fprintf(stderr, "//Removed %d indirect IOs to %08lx\n", indirremoved, indiraddr);
 	fprintf(stderr, "//Removed %d IOs to cf8\n", _cf8removed);
 	/* never trust anything */
 	fflush(stdout);

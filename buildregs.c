@@ -1,5 +1,5 @@
 /* NO LONGER GENERATED -- sorry -- go ahead and edit. I got lazy. Feel free to fix buildregs.awk */
-#include "final/i915_reg.h"
+#include "i915_reg.h"
 /* mask is unused. */
 struct registers { char *name; int value; unsigned long mask; unsigned long extract, shift;};
 struct registers struct_PRB1_TAIL[]={

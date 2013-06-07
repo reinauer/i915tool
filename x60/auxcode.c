@@ -13,7 +13,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include "video.h"
-#include "final/i915_reg.h"
+#include "i915_reg.h"
 
 int verbose = 0;
 
