@@ -4,7 +4,7 @@
 #sh kernel2c.sh < kernel.log.stage1  > wtm2io_step2.c 
 # make
 
-CFLAGS=-I.. -g
+CFLAGS=-I.. -I../final -g
 TARGET=/usr/local/src/firmware/src/third_party/coreboot/src/mainboard/intel/wtm2/i915io.c
 AUXPROGRAM=auxcodenotable
 
