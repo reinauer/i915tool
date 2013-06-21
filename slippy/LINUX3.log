@@ -1,0 +1,4632 @@
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Linux version 3.8.11 (rminnich@xcpu.mtv.corp.google.com) (gcc version 4.7.x-google 20130114 (prerelease) (4.7.2_cos_gg_c8f69e0) ) #1 SMP Sun Jun 9 15:12:04 PDT 2013
+[    0.000000] Command line: cros_secure console= loglevel=7 console=ttyS0,115200 earlyprintk=ttyS0,115200,keep init=/sbin/init cros_secure oops=panic panic=-1 root=/dev/dm-0 rootwait ro dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=1 dm="1 vroot none ro 1,0 2097152 verity payload=176bf08c-770e-bc42-8baf-316014f21f33+1 hashtree=176bf08c-770e-bc42-8baf-316014f21f33+1 hashstart=2097152 alg=sha1 root_hexdigest=87e5c5813e6dd5d7a7c69923a4fa949ab3f57a9d salt=83f2609127d7b6d5454389cd777b01e94e3708d10a695c0091b709f900fda169" noinitrd cros_debug vt.global_cursor_default=0 kern_guid=176bf08c-770e-bc42-8baf-316014f21f33 add_efi_memmap boot=local noresume noswap i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic 
+[    0.000000] e820: BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x0000000000000fff] type 16
+[    0.000000] BIOS-e820: [mem 0x0000000000001000-0x000000000002ffff] usable
+[    0.000000] BIOS-e820: [mem 0x0000000000030000-0x000000000003ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000040000-0x000000000009ffff] usable
+[    0.000000] BIOS-e820: [mem 0x00000000000a0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x0000000000efffff] usable
+[    0.000000] BIOS-e820: [mem 0x0000000000f00000-0x0000000000ffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000001000000-0x000000007f76afff] usable
+[    0.000000] BIOS-e820: [mem 0x000000007f76b000-0x000000007f7fffff] type 16
+[    0.000000] BIOS-e820: [mem 0x000000007f800000-0x00000000821fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000f0000000-0x00000000f3ffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fed10000-0x00000000fed19fff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fed84000-0x00000000fed84fff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000100000000-0x000000017cdfffff] usable
+[    0.000000] console [earlyser0] enabled
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] SMBIOS 2.7 present.
+[    0.000000] DMI: GOOGLE Slippy, BIOS Google_Slippy.4229.0.2013_06_10_1545 06/10/2013
+[    0.000000] e820: update [mem 0x00000000-0x0000ffff] usable ==> reserved
+[    0.000000] e820: remove [mem 0x000a0000-0x000fffff] usable
+[    0.000000] No AGP bridge found
+[    0.000000] e820: last_pfn = 0x17ce00 max_arch_pfn = 0x400000000
+[    0.000000] MTRR default type: uncachable
+[    0.000000] MTRR fixed ranges enabled:
+[    0.000000]   00000-9FFFF write-back
+[    0.000000]   A0000-BFFFF uncachable
+[    0.000000]   C0000-FFFFF write-back
+[    0.000000] MTRR variable ranges enabled:
+[    0.000000]   0 base 0000000000 mask 7F80000000 write-back
+[    0.000000]   1 base 00D0000000 mask 7FF0000000 write-combining
+[    0.000000]   2 base 00FF800000 mask 7FFF800000 uncachable
+[    0.000000]   3 base 0100000000 mask 7F00000000 write-back
+[    0.000000]   4 disabled
+[    0.000000]   5 disabled
+[    0.000000]   6 disabled
+[    0.000000]   7 disabled
+[    0.000000]   8 disabled
+[    0.000000]   9 disabled
+[    0.000000] x86 PAT enabled: cpu 0, old 0x7040600070406, new 0x7010600070106
+[    0.000000] e820: last_pfn = 0x7f76b max_arch_pfn = 0x400000000
+[    0.000000] initial memory mapped: [mem 0x00000000-0x1fffffff]
+[    0.000000] Base memory trampoline at [ffff880000099000] 99000 size 24576
+[    0.000000] Using GB pages for direct mapping
+[    0.000000] init_memory_mapping: [mem 0x00000000-0x7f76afff]
+[    0.000000]  [mem 0x00000000-0x3fffffff] page 1G
+[    0.000000]  [mem 0x40000000-0x7f5fffff] page 2M
+[    0.000000]  [mem 0x7f600000-0x7f76afff] page 4k
+[    0.000000] kernel direct mapping tables up to 0x7f76afff @ [mem 0x1fffd000-0x1fffffff]
+[    0.000000] init_memory_mapping: [mem 0x100000000-0x17cdfffff]
+[    0.000000]  [mem 0x100000000-0x13fffffff] page 1G
+[    0.000000]  [mem 0x140000000-0x17cdfffff] page 2M
+[    0.000000] kernel direct mapping tables up to 0x17cdfffff @ [mem 0x7f769000-0x7f76afff]
+[    0.000000] ACPI: RSDP 00000000000f0000 00024 (v02 CORE  )
+[    0.000000] ACPI: XSDT 000000007f7750e0 00054 (v01 CORE   COREBOOT 00000000 CORE 00000000)
+[    0.000000] ACPI: FACP 000000007f778f50 000F4 (v03 CORE   COREBOOT 00000000 CORE 00000001)
+[    0.000000] ACPI Error: Gpe0Block - 32-bit FADT register is too long (32 bytes, 256 bits) to convert to GAS struct - 255 bits max, truncating (20121018/tbfadt-201)
+[    0.000000] ACPI BIOS Bug: Warning: 32/64X length mismatch in FADT/Gpe0Block: 256/255 (20121018/tbfadt-567)
+[    0.000000] ACPI: DSDT 000000007f775250 03CF3 (v02 COREv4 COREBOOT 20110725 INTL 20121114)
+[    0.000000] ACPI: FACS 000000007f775210 00040
+[    0.000000] ACPI: HPET 000000007f779050 00038 (v01 CORE   COREBOOT 00000000 CORE 00000000)
+[    0.000000] ACPI: APIC 000000007f779090 0006C (v01 CORE   COREBOOT 00000000 CORE 00000000)
+[    0.000000] ACPI: MCFG 000000007f779100 0003C (v01 CORE   COREBOOT 00000000 CORE 00000000)
+[    0.000000] ACPI: SSDT 000000007f77a000 0122C (v02 CORE   COREBOOT 0000002A CORE 0000002A)
+[    0.000000] ACPI: SSDT 000000007f77b230 0005C (v02 CORE   COREBOOT 0000002A CORE 0000002A)
+[    0.000000] ACPI: Local APIC address 0xfee00000
+[    0.000000]  [ffffea0000000000-ffffea0005ffffff] PMD -> [ffff880178400000-ffff88017c3fffff] on node 0
+[    0.000000] Zone ranges:
+[    0.000000]   DMA      [mem 0x00010000-0x00ffffff]
+[    0.000000]   DMA32    [mem 0x01000000-0xffffffff]
+[    0.000000]   Normal   [mem 0x100000000-0x17cdfffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x00010000-0x0002ffff]
+[    0.000000]   node   0: [mem 0x00040000-0x0009ffff]
+[    0.000000]   node   0: [mem 0x00100000-0x00efffff]
+[    0.000000]   node   0: [mem 0x01000000-0x7f76afff]
+[    0.000000]   node   0: [mem 0x100000000-0x17cdfffff]
+[    0.000000] On node 0 totalpages: 1033195
+[    0.000000]   DMA zone: 58 pages used for memmap
+[    0.000000]   DMA zone: 7 pages reserved
+[    0.000000]   DMA zone: 3647 pages, LIFO batch:0
+[    0.000000]   DMA32 zone: 8094 pages used for memmap
+[    0.000000]   DMA32 zone: 509901 pages, LIFO batch:31
+[    0.000000]   Normal zone: 7992 pages used for memmap
+[    0.000000]   Normal zone: 503496 pages, LIFO batch:31
+[    0.000000] ACPI: PM-Timer IO Port: 0x1008
+[    0.000000] ACPI: Local APIC address 0xfee00000
+[    0.000000] ACPI: LAPIC (acpi_id[0x00] lapic_id[0x00] enabled)
+[    0.000000] ACPI: LAPIC (acpi_id[0x01] lapic_id[0x01] enabled)
+[    0.000000] ACPI: LAPIC (acpi_id[0x02] lapic_id[0x02] enabled)
+[    0.000000] ACPI: LAPIC (acpi_id[0x03] lapic_id[0x03] enabled)
+[    0.000000] ACPI: IOAPIC (id[0x02] address[0xfec00000] gsi_base[0])
+[    0.000000] IOAPIC[0]: apic_id 2, version 32, address 0xfec00000, GSI 0-39
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+[    0.000000] ACPI: IRQ0 used by override.
+[    0.000000] ACPI: IRQ2 used by override.
+[    0.000000] ACPI: IRQ9 used by override.
+[    0.000000] Using ACPI (MADT) for SMP configuration information
+[    0.000000] ACPI: HPET id: 0x8086a201 base: 0xfed00000
+[    0.000000] smpboot: Allowing 4 CPUs, 0 hotplug CPUs
+[    0.000000] nr_irqs_gsi: 56
+[    0.000000] e820: [mem 0x82200000-0xefffffff] available for PCI devices
+[    0.000000] setup_percpu: NR_CPUS:4 nr_cpumask_bits:4 nr_cpu_ids:4 nr_node_ids:1
+[    0.000000] PERCPU: Embedded 27 pages/cpu @ffff88017ca00000 s78976 r8192 d23424 u524288
+[    0.000000] pcpu-alloc: s78976 r8192 d23424 u524288 alloc=1*2097152
+[    0.000000] pcpu-alloc: [0] 0 1 2 3 
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 1017044
+[    0.000000] Kernel command line: cros_secure console= loglevel=7 console=ttyS0,115200 earlyprintk=ttyS0,115200,keep init=/sbin/init cros_secure oops=panic panic=-1 root=/dev/dm-0 rootwait ro dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=1 dm="1 vroot none ro 1,0 2097152 verity payload=176bf08c-770e-bc42-8baf-316014f21f33+1 hashtree=176bf08c-770e-bc42-8baf-316014f21f33+1 hashstart=2097152 alg=sha1 root_hexdigest=87e5c5813e6dd5d7a7c69923a4fa949ab3f57a9d salt=83f2609127d7b6d5454389cd777b01e94e3708d10a695c0091b709f900fda169" noinitrd cros_debug vt.global_cursor_default=0 kern_guid=176bf08c-770e-bc42-8baf-316014f21f33 add_efi_memmap boot=local noresume noswap i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic 
+[    0.000000] device-mapper: init: will configure 1 devices
+[    0.000000] PID hash table entries: 4096 (order: 3, 32768 bytes)
+[    0.000000] Dentry cache hash table entries: 524288 (order: 10, 4194304 bytes)
+[    0.000000] Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes)
+[    0.000000] __ex_table already sorted, skipping sort
+[    0.000000] xsave: enabled xstate_bv 0x7, cntxt size 0x340
+[    0.000000] Disabling VMX on cpu 0
+[    0.000000] Checking aperture...
+[    0.000000] No AGP bridge found
+[    0.000000] Memory: 3983956k/6240256k available (4803k kernel code, 2107476k absent, 148824k reserved, 4026k data, 708k init)
+[    0.000000] SLUB: Genslabs=15, HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.000000] Hierarchical RCU implementation.
+[    0.000000] 	CONFIG_RCU_FANOUT set to non-default value of 32
+[    0.000000] NR_IRQS:4352 nr_irqs:984 16
+[    0.000000] Console: colour dummy device 80x25
+[    0.000000] hpet clockevent registered
+[    0.000000] Initial TSC value: 40989229924
+[    0.001000] tsc: Fast TSC calibration using PIT
+[    0.002000] Initial usec timer 25682474
+[    0.003000] tsc: Detected 1596.411 MHz processor
+[    0.000002] Calibrating delay loop (skipped), value calculated using timer frequency.. 3192.82 BogoMIPS (lpj=1596411)
+[    0.010584] pid_max: default: 32768 minimum: 301
+[    0.014930] Security Framework initialized
+[    0.018904] Yama: becoming mindful.
+[    0.022759] Mount-cache hash table entries: 256
+[    0.028030] Initializing cgroup subsys freezer
+[    0.032148] CPU: Physical Processor ID: 0
+[    0.036101] CPU: Processor Core ID: 0
+[    0.041230] mce: CPU supports 7 MCE banks
+[    0.044237] CPU0: Thermal monitoring enabled (TM1)
+[    0.049395] process: using mwait in idle threads
+[    0.053517] Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+[    0.053517] Last level dTLB entries: 4KB 64, 2MB 0, 4MB 0
+[    0.053517] tlb_flushall_shift: 6
+[    0.068070] Freeing SMP alternatives: 12k freed
+[    0.072156] ACPI: Core revision 20121018
+[    0.078729] acpi_enable!
+[    0.081613] ACPI mode enable smi_command = 0xb2 val = 0xe1
+[    0.086091] ftrace: allocating 21313 entries in 84 pages
+[    0.102894] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+[    0.118357] smpboot: CPU0: Intel(R) Core(TM) i5-4200U CPU @ 1.60GHz (fam: 06, model: 45, stepping: 01)
+[    0.126630] TSC deadline timer enabled
+[    0.126633] Performance Events: no PEBS fmt2+, generic architected perfmon, Intel PMU driver.
+[    0.135693] ... version:                3
+[    0.139665] ... bit width:              48
+[    0.143660] ... generic registers:      4
+[    0.147634] ... value mask:             0000ffffffffffff
+[    0.152923] ... max period:             000000007fffffff
+[    0.158213] ... fixed-purpose events:   3
+[    0.162186] ... event mask:             000000070000000f
+[    0.183286] Disabling VMX on cpu 1
+[    0.187356] NMI watchdog: enabled on all CPUs, permanently consumes one hw-PMU counter.
+[    0.208736] Disabling VMX on cpu 2
+[    0.168626] smpboot: Booting Node   0, Processors  #1 #2 #3 OK
+[    0.226237] Disabling VMX on cpu 3
+[    0.230176] Brought up 4 CPUs
+[    0.235727] smpboot: Total of 4 processors activated (12771.28 BogoMIPS)
+[    0.246605] devtmpfs: initialized
+[    0.250222] RTC time: 13:43:52, date: 05/22/13
+[    0.253361] NET: Registered protocol family 16
+[    0.259228] ACPI: bus type pci registered
+[    0.262257] PCI: MMCONFIG for domain 0000 [bus 00-3f] at [mem 0xf0000000-0xf3ffffff] (base 0xf0000000)
+[    0.271541] PCI: MMCONFIG at [mem 0xf0000000-0xf3ffffff] reserved in E820
+[    0.282020] PCI: Using configuration type 1 for base access
+[    0.287854] bio: create slab <bio-0> at 0
+[    0.290910] ACPI: Added _OSI(Module Device)
+[    0.294920] ACPI: Added _OSI(Processor Device)
+[    0.299988] ACPI: Added _OSI(3.0 _SCP Extensions)
+[    0.304135] ACPI: Added _OSI(Processor Aggregator Device)
+[    0.310499] ACPI: EC: Look up EC in DSDT
+[    0.317748] ACPI: Interpreter enabled
+[    0.320648] ACPI: (supports S0 S3 S5)
+[    0.324531] ACPI: Using IOAPIC for interrupt routing
+[    0.334667] gpiochip_find_base: found new base at 162
+[    0.334685] gpiochip_add: registered GPIOs 162 to 255 on device: INT33C7:00
+[    0.334789] ACPI: Power Resource [TNP0] (off)
+[    0.337899] ACPI: Power Resource [TNP1] (on)
+[    0.342277] ACPI: EC: GPE = 0x24, I/O: command/status = 0x66, data = 0x62
+[    0.349727] ACPI: No dock devices found.
+[    0.353686] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    0.362973] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+[    0.368475] ACPI: PCI Interrupt Routing Table [\_SB_.PCI0._PRT]
+[    0.368702] pci_root PNP0A08:00: [Firmware Info]: MMCONFIG for domain 0000 [bus 00-3f] only partially covers this bridge
+[    0.379343] PCI host bridge to bus 0000:00
+[    0.383311] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    0.389632] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7]
+[    0.395138] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff]
+[    0.401635] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff]
+[    0.408305] pci_bus 0000:00: root bus resource [mem 0x000c0000-0x000c3fff]
+[    0.415967] pci_bus 0000:00: root bus resource [mem 0x000c4000-0x000c7fff]
+[    0.422635] pci_bus 0000:00: root bus resource [mem 0x000c8000-0x000cbfff]
+[    0.429303] pci_bus 0000:00: root bus resource [mem 0x000cc000-0x000cffff]
+[    0.435972] pci_bus 0000:00: root bus resource [mem 0x000d0000-0x000d3fff]
+[    0.443630] pci_bus 0000:00: root bus resource [mem 0x000d4000-0x000d7fff]
+[    0.450299] pci_bus 0000:00: root bus resource [mem 0x000d8000-0x000dbfff]
+[    0.456968] pci_bus 0000:00: root bus resource [mem 0x000dc000-0x000dffff]
+[    0.464625] pci_bus 0000:00: root bus resource [mem 0x000e0000-0x000e3fff]
+[    0.471297] pci_bus 0000:00: root bus resource [mem 0x000e4000-0x000e7fff]
+[    0.477972] pci_bus 0000:00: root bus resource [mem 0x000e8000-0x000ebfff]
+[    0.484651] pci_bus 0000:00: root bus resource [mem 0x000ec000-0x000effff]
+[    0.492314] pci_bus 0000:00: root bus resource [mem 0x000f0000-0x000fffff]
+[    0.498984] pci_bus 0000:00: root bus resource [mem 0x82200001-0xfebfffff]
+[    0.505655] pci_bus 0000:00: root bus resource [mem 0xfed40000-0xfed44fff]
+[    0.512338] pci 0000:00:00.0: [8086:0a04] type 00 class 0x060000
+[    0.512387] pci 0000:00:02.0: [8086:0a16] type 00 class 0x030000
+[    0.512404] pci 0000:00:02.0: reg 10: [mem 0xe0000000-0xe03fffff 64bit]
+[    0.512413] pci 0000:00:02.0: reg 18: [mem 0xd0000000-0xdfffffff 64bit pref]
+[    0.512420] pci 0000:00:02.0: reg 20: [io  0x1800-0x183f]
+[    0.512481] pci 0000:00:14.0: [8086:9c31] type 00 class 0x0c0330
+[    0.512502] pci 0000:00:14.0: reg 10: [mem 0xe0400000-0xe040ffff 64bit]
+[    0.512569] pci 0000:00:14.0: PME# supported from D3hot D3cold
+[    0.512592] pci 0000:00:15.0: [8086:9c60] type 00 class 0x080102
+[    0.512612] pci 0000:00:15.0: reg 10: [mem 0xe0414000-0xe0414fff]
+[    0.512624] pci 0000:00:15.0: reg 14: [mem 0xe0415000-0xe0415fff]
+[    0.512712] pci 0000:00:15.1: [8086:9c61] type 00 class 0x0c8000
+[    0.512731] pci 0000:00:15.1: reg 10: [mem 0xe0416000-0xe0416fff]
+[    0.512743] pci 0000:00:15.1: reg 14: [mem 0xe0417000-0xe0417fff]
+[    0.512832] pci 0000:00:15.2: [8086:9c62] type 00 class 0x0c8000
+[    0.512851] pci 0000:00:15.2: reg 10: [mem 0xe0418000-0xe0418fff]
+[    0.512862] pci 0000:00:15.2: reg 14: [mem 0xe0419000-0xe0419fff]
+[    0.512962] pci 0000:00:1b.0: [8086:9c20] type 00 class 0x040300
+[    0.512978] pci 0000:00:1b.0: reg 10: [mem 0xe0410000-0xe0413fff 64bit]
+[    0.513048] pci 0000:00:1b.0: PME# supported from D0 D3hot D3cold
+[    0.513068] pci 0000:00:1c.0: [8086:9c10] type 01 class 0x060400
+[    0.513139] pci 0000:00:1c.0: PME# supported from D0 D3hot D3cold
+[    0.513172] pci 0000:00:1d.0: [8086:9c26] type 00 class 0x0c0320
+[    0.513195] pci 0000:00:1d.0: reg 10: [mem 0xe041b800-0xe041bbff]
+[    0.513293] pci 0000:00:1d.0: PME# supported from D0 D3hot D3cold
+[    0.513320] pci 0000:00:1f.0: [8086:9c43] type 00 class 0x060100
+[    0.513462] pci 0000:00:1f.2: [8086:9c03] type 00 class 0x010601
+[    0.513480] pci 0000:00:1f.2: reg 10: [io  0x1880-0x1887]
+[    0.513488] pci 0000:00:1f.2: reg 14: [io  0x1890-0x1893]
+[    0.513497] pci 0000:00:1f.2: reg 18: [io  0x1888-0x188f]
+[    0.513506] pci 0000:00:1f.2: reg 1c: [io  0x1894-0x1897]
+[    0.513514] pci 0000:00:1f.2: reg 20: [io  0x1840-0x185f]
+[    0.513523] pci 0000:00:1f.2: reg 24: [mem 0xe041b000-0xe041b7ff]
+[    0.513563] pci 0000:00:1f.2: PME# supported from D3hot
+[    0.513579] pci 0000:00:1f.3: [8086:9c22] type 00 class 0x0c0500
+[    0.513595] pci 0000:00:1f.3: reg 10: [mem 0xe041bc00-0xe041bcff 64bit]
+[    0.513618] pci 0000:00:1f.3: reg 20: [io  0x1860-0x187f]
+[    0.513660] pci 0000:00:1f.6: [8086:9c24] type 00 class 0x118000
+[    0.513693] pci 0000:00:1f.6: reg 10: [mem 0xe041a000-0xe041afff 64bit]
+[    0.513850] pci 0000:00:1c.0: PCI bridge to [bus 01]
+[    0.518079] pci_bus 0000:00: on NUMA node 0
+[    0.518099] ACPI: PCI Interrupt Routing Table [\_SB_.PCI0.RP01._PRT]
+[    0.518358]  pci0000:00: Requesting ACPI _OSC control (0x1d)
+[    0.523731]  pci0000:00: ACPI _OSC control (0x1d) granted
+[    0.529632] ACPI: PCI Interrupt Link [LNKA] (IRQs 1 3 4 5 6 7 10 12 14 15) *11, disabled.
+[    0.537634] ACPI: PCI Interrupt Link [LNKB] (IRQs 1 3 4 5 6 7 11 12 14 15) *10, disabled.
+[    0.545617] ACPI: PCI Interrupt Link [LNKC] (IRQs 1 3 4 5 6 7 10 12 14 15) *11, disabled.
+[    0.553469] ACPI: PCI Interrupt Link [LNKD] (IRQs 1 3 4 5 6 7 *11 12 14 15), disabled.
+[    0.561388] ACPI: PCI Interrupt Link [LNKE] (IRQs 1 3 4 5 6 7 10 12 14 15) *0, disabled.
+[    0.570344] ACPI: PCI Interrupt Link [LNKF] (IRQs 1 3 4 5 6 7 11 12 14 15) *0, disabled.
+[    0.578308] ACPI: PCI Interrupt Link [LNKG] (IRQs 1 3 4 5 6 7 10 12 14 15) *0, disabled.
+[    0.586271] ACPI: PCI Interrupt Link [LNKH] (IRQs 1 3 4 5 6 7 11 12 14 15) *0, disabled.
+[    0.594305] SCSI subsystem initialized
+[    0.598177] ACPI: bus type scsi registered
+[    0.602200] libata version 3.00 loaded.
+[    0.602222] ACPI: bus type usb registered
+[    0.606227] usbcore: registered new interface driver usbfs
+[    0.611545] usbcore: registered new interface driver hub
+[    0.616847] usbcore: registered new device driver usb
+[    0.622144] chromeos_acpi: registering CHSW 0
+[    0.626314] chromeos_acpi: registering VBNV 0
+[    0.631222] chromeos_acpi: registering VBNV 1
+[    0.635538] chromeos_acpi: truncating buffer from 3072 to 1336
+[    0.641167] chromeos_acpi: installed
+[    0.645020] chromeos_acpi: chromeos_acpi: enabling S3 USB wake
+[    0.651960] console [pstore-1] enabled
+[    0.654882] ramoops: attached 0x100000@0xf00000, ecc: 0
+[    0.660160] Advanced Linux Sound Architecture Driver Initialized.
+[    0.665631] PCI: Using ACPI for IRQ routing
+[    0.672186] PCI: pci_cache_line_size set to 64 bytes
+[    0.672238] e820: reserve RAM buffer [mem 0x7f76b000-0x7fffffff]
+[    0.672241] e820: reserve RAM buffer [mem 0x17ce00000-0x17fffffff]
+[    0.672704] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0, 0, 0, 0, 0, 0
+[    0.678214] hpet0: 8 comparators, 64-bit 14.318180 MHz counter
+[    0.685651] Switching to clocksource hpet
+[    0.694824] pnp: PnP ACPI init
+[    0.696603] ACPI: bus type pnp registered
+[    0.700624] pnp 00:00: Plug and Play ACPI device, IDs PNP0c0e (active)
+[    0.700664] pnp 00:01: Plug and Play ACPI device, IDs PNP0c0e (active)
+[    0.700721] system 00:02: [mem 0xfed1c000-0xfed1ffff] has been reserved
+[    0.707307] system 00:02: [mem 0xfed10000-0xfed13fff] has been reserved
+[    0.713913] system 00:02: [mem 0xfed18000-0xfed18fff] has been reserved
+[    0.720520] system 00:02: [mem 0xfed19000-0xfed19fff] has been reserved
+[    0.727128] system 00:02: [mem 0xf0000000-0xf3ffffff] has been reserved
+[    0.734724] system 00:02: [mem 0xfed20000-0xfed3ffff] has been reserved
+[    0.741328] system 00:02: [mem 0xfed40000-0xfed44fff] has been reserved
+[    0.747933] system 00:02: [mem 0xfed45000-0xfed8ffff] could not be reserved
+[    0.754628] system 00:02: [mem 0x00f00000-0x00ffffff] has been reserved
+[    0.761235] system 00:02: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.761418] pnp 00:03: [dma 4]
+[    0.761445] pnp 00:03: Plug and Play ACPI device, IDs PNP0200 (active)
+[    0.761472] pnp 00:04: Plug and Play ACPI device, IDs INT0800 (active)
+[    0.761568] system 00:05: [mem 0xfed00000-0xfed003ff] has been reserved
+[    0.768172] system 00:05: Plug and Play ACPI device, IDs PNP0103 PNP0c01 (active)
+[    0.768213] pnp 00:06: Plug and Play ACPI device, IDs PNP0c04 (active)
+[    0.768278] system 00:07: [io  0x1000-0x10fe] has been reserved
+[    0.773742] system 00:07: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.773776] pnp 00:08: Plug and Play ACPI device, IDs PNP0b00 (active)
+[    0.773822] system 00:09: [io  0x0900-0x09fe] has been reserved
+[    0.780239] system 00:09: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.780287] system 00:0a: [io  0x0200] has been reserved
+[    0.785590] system 00:0a: [io  0x0204] has been reserved
+[    0.790943] system 00:0a: [io  0x0800-0x0803] has been reserved
+[    0.796385] system 00:0a: [io  0x0804-0x08ff] has been reserved
+[    0.802817] system 00:0a: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.802860] pnp 00:0b: Plug and Play ACPI device, IDs PNP0501 (active)
+[    0.802903] pnp 00:0c: Plug and Play ACPI device, IDs PNP0303 PNP030b (active)
+[    0.802952] pnp 00:0d: Plug and Play ACPI device, IDs IFX0102 PNP0c31 (active)
+[    0.803051] system 00:0e: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.803167] pnp: PnP ACPI: found 15 devices
+[    0.807160] ACPI: ACPI bus type pnp unregistered
+[    0.817747] pci 0000:00:1c.0: bridge window [io  0x1000-0x0fff] to [bus 01] add_size 1000
+[    0.817752] pci 0000:00:1c.0: bridge window [mem 0x00100000-0x000fffff 64bit pref] to [bus 01] add_size 200000
+[    0.817755] pci 0000:00:1c.0: bridge window [mem 0x00100000-0x000fffff] to [bus 01] add_size 200000
+[    0.817761] pci 0000:00:1c.0: res[8]=[mem 0x00100000-0x000fffff] get_res_add_size add_size 200000
+[    0.817764] pci 0000:00:1c.0: res[9]=[mem 0x00100000-0x000fffff 64bit pref] get_res_add_size add_size 200000
+[    0.817767] pci 0000:00:1c.0: res[7]=[io  0x1000-0x0fff] get_res_add_size add_size 1000
+[    0.817774] pci 0000:00:1c.0: BAR 8: assigned [mem 0x82300000-0x824fffff]
+[    0.823190] pci 0000:00:1c.0: BAR 9: assigned [mem 0x82500000-0x826fffff 64bit pref]
+[    0.831070] pci 0000:00:1c.0: BAR 7: assigned [io  0x2000-0x2fff]
+[    0.837547] pci 0000:00:1c.0: PCI bridge to [bus 01]
+[    0.842751] pci 0000:00:1c.0:   bridge window [io  0x2000-0x2fff]
+[    0.848240] pci 0000:00:1c.0:   bridge window [mem 0x82300000-0x824fffff]
+[    0.855880] pci 0000:00:1c.0:   bridge window [mem 0x82500000-0x826fffff 64bit pref]
+[    0.863765] pci 0000:00:1c.0: enabling device (0104 -> 0107)
+[    0.869139] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7]
+[    0.869142] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff]
+[    0.869145] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff]
+[    0.869147] pci_bus 0000:00: resource 7 [mem 0x000c0000-0x000c3fff]
+[    0.869149] pci_bus 0000:00: resource 8 [mem 0x000c4000-0x000c7fff]
+[    0.869152] pci_bus 0000:00: resource 9 [mem 0x000c8000-0x000cbfff]
+[    0.869154] pci_bus 0000:00: resource 10 [mem 0x000cc000-0x000cffff]
+[    0.869157] pci_bus 0000:00: resource 11 [mem 0x000d0000-0x000d3fff]
+[    0.869159] pci_bus 0000:00: resource 12 [mem 0x000d4000-0x000d7fff]
+[    0.869161] pci_bus 0000:00: resource 13 [mem 0x000d8000-0x000dbfff]
+[    0.869164] pci_bus 0000:00: resource 14 [mem 0x000dc000-0x000dffff]
+[    0.869166] pci_bus 0000:00: resource 15 [mem 0x000e0000-0x000e3fff]
+[    0.869168] pci_bus 0000:00: resource 16 [mem 0x000e4000-0x000e7fff]
+[    0.869171] pci_bus 0000:00: resource 17 [mem 0x000e8000-0x000ebfff]
+[    0.869173] pci_bus 0000:00: resource 18 [mem 0x000ec000-0x000effff]
+[    0.869175] pci_bus 0000:00: resource 19 [mem 0x000f0000-0x000fffff]
+[    0.869178] pci_bus 0000:00: resource 20 [mem 0x82200001-0xfebfffff]
+[    0.869180] pci_bus 0000:00: resource 21 [mem 0xfed40000-0xfed44fff]
+[    0.869183] pci_bus 0000:01: resource 0 [io  0x2000-0x2fff]
+[    0.869185] pci_bus 0000:01: resource 1 [mem 0x82300000-0x824fffff]
+[    0.869188] pci_bus 0000:01: resource 2 [mem 0x82500000-0x826fffff 64bit pref]
+[    0.869222] NET: Registered protocol family 2
+[    0.873396] TCP established hash table entries: 32768 (order: 7, 524288 bytes)
+[    0.881216] TCP bind hash table entries: 32768 (order: 8, 1048576 bytes)
+[    0.888168] TCP: Hash tables configured (established 32768 bind 32768)
+[    0.893770] TCP: reno registered
+[    0.897530] UDP hash table entries: 2048 (order: 5, 196608 bytes)
+[    0.903078] UDP-Lite hash table entries: 2048 (order: 5, 196608 bytes)
+[    0.909712] NET: Registered protocol family 1
+[    0.914658] pci 0000:00:02.0: Boot video device
+[    0.925692] PCI: CLS 64 bytes, default 64
+[    0.925733] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    0.931324] software IO TLB [mem 0x7b769000-0x7f769000] (64MB) mapped at [ffff88007b769000-ffff88007f768fff]
+[    0.941453] microcode: CPU0 sig=0x40651, pf=0x40, revision=0x10
+[    0.946886] microcode: CPU1 sig=0x40651, pf=0x40, revision=0x10
+[    0.953307] microcode: CPU2 sig=0x40651, pf=0x40, revision=0x10
+[    0.958745] microcode: CPU3 sig=0x40651, pf=0x40, revision=0x10
+[    0.965205] microcode: Microcode Update Driver: v2.00 <tigran@aivazian.fsnet.co.uk>, Peter Oruba
+[    0.976403] msgmni has been set to 7781
+[    0.979746] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
+[    0.986563] io scheduler noop registered
+[    0.990508] io scheduler deadline registered
+[    0.994574] io scheduler cfq registered (default)
+[    0.999770] pcieport 0000:00:1c.0: irq 56 for MSI/MSI-X
+[    0.999860] pcieport 0000:00:1c.0: Signaling PME through PCIe PME interrupt
+[    1.006586] pcie_pme 0000:00:1c.0:pcie01: service driver pcie_pme loaded
+[    1.006601] pci_hotplug: PCI Hot Plug PCI Core version: 0.5
+[    1.011950] pciehp: PCI Express Hot Plug Controller Driver version: 0.4
+[    1.018636] ACPI: AC Adapter [AC] (off-line)
+[    1.023659] input: Lid Switch as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0D:00/input/input0
+[    1.031656] ACPI: Lid Switch [LID0]
+[    1.035584] input: Power Button as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input1
+[    1.043631] ACPI: Power Button [PWRB]
+[    1.047550] input: Sleep Button as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0E:00/input/input2
+[    1.055620] ACPI: Sleep Button [TPAD]
+[    1.059537] input: Sleep Button as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0E:01/input/input3
+[    1.067610] ACPI: Sleep Button [TSCR]
+[    1.071541] input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input4
+[    1.079364] ACPI: Power Button [PWRF]
+[    1.082309] ACPI: Fan [TDP0] (off)
+[    1.086169] ACPI: Fan [TDP1] (on)
+[    1.089291] ACPI: Video Device [GFX0] (multi-head: yes  rom: no  post: no)
+[    1.095982] input: Video Bus as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/LNXVIDEO:00/input/input5
+[    1.105257] ACPI: Requesting acpi_cpufreq
+[    1.109472] Monitor-Mwait will be used to enter C-1 state
+[    1.109488] Monitor-Mwait will be used to enter C-2 state
+[    1.109499] Monitor-Mwait will be used to enter C-3 state
+[    1.109515] ACPI: acpi_idle registered with cpuidle
+[    1.113290] thermal LNXTHERM:00: registered as thermal_zone0
+[    1.117688] ACPI: Thermal Zone [THRM] (44 C)
+[    1.122766] ACPI: Battery Slot [BAT0] (battery absent)
+[    1.127086] Non-volatile memory driver v1.3
+[    1.132176] Linux agpgart interface v0.103
+[    1.136296] tpm_tis tpm_tis: 1.2 TPM (device-id 0xB, rev-id 16)
+[    1.171343] tpm_tis tpm_tis: A TPM error (38) occurred attempting to determine the timeouts
+[    1.214288] tpm_tis tpm_tis: A TPM error (38) occurred attempting to determine the durations
+[    1.221371] tpm_tis tpm_tis: Could not get TPM timeouts and durations
+[    1.232353] [drm] Initialized drm 1.1.0 20060810
+[    1.235937] [drm] Memory usable by graphics device = 2048M
+[    1.241833] i915 0000:00:02.0: setting latency timer to 64
+[    1.262243] W 0xc5100: 0x0
+[    1.263921] W 0x100000: 0x0
+[    1.266597] W 0x100008: 0x0
+[    1.269276] W 0x100010: 0x0
+[    1.271956] W 0x100018: 0x0
+[    1.275625] W 0x100020: 0x0
+[    1.278303] W 0x100028: 0x0
+[    1.280982] W 0x100030: 0x0
+[    1.283659] W 0x100038: 0x0
+[    1.286336] W 0x100040: 0x0
+[    1.289014] W 0x100048: 0x0
+[    1.291691] W 0x100050: 0x0
+[    1.294369] W 0x100058: 0x0
+[    1.298037] W 0x100060: 0x0
+[    1.300713] W 0x100068: 0x0
+[    1.303389] W 0x100070: 0x0
+[    1.306066] W 0x100078: 0x0
+[    1.308743] R 0x145004: 0x780008
+[    1.312520] R 0x145008: 0x780008
+[    1.315324] i915 0000:00:02.0: irq 57 for MSI/MSI-X
+[    1.315337] [drm] Supports vblank timestamp caching Rev 1 (10.10.2010).
+[    1.321916] [drm] Driver supports precise vblank timestamp query.
+[    1.328394] i915 0000:00:02.0: Invalid ROM contents
+[    1.333569] [drm] failed to find VBIOS tables
+[    1.337641] R 0x145d10: 0x5a2404f
+[    1.340448] R 0x130040: 0x40000006
+[    1.344255] R 0x42014: 0x21000002
+[    1.348353] W 0x41000: 0x80000000
+[    1.351194] R 0xe1180: 0x0
+[    1.353846] R 0x64000: 0x91
+[    1.356521] R 0x64000: 0x91
+[    1.359133] R 0x64000: 0x91
+[    1.361809] R 0x64000: 0x91
+[    1.364513] R 0xc7204: 0xabcd000f
+[    1.368284] W 0xc7204: 0xabcd000f
+[    1.371092] R 0xc7208: 0x1900834
+[    1.374867] R 0xc720c: 0x960834
+[    1.377631] R 0xc7210: 0x4af05
+[    1.381363] R 0xc7204: 0xabcd000f
+[    1.384170] R 0xc7200: 0x80000008
+[    1.387967] R 0xc7200: 0x80000008
+[    1.390772] R 0x42014: 0x21000002
+[    1.394570] R 0x64010: 0x300e1
+[    1.397313] W 0x64014: 0x40000000
+[    1.401112] W 0x64010: 0xd23500e1
+[    1.403920] R 0x64010: 0x814500e1
+[    1.407819] R 0x64010: 0x401500e1
+[    1.410660] W 0x64010: 0x521500e1
+[    1.414459] R 0x64014: 0x40000000
+[    1.417267] R 0xc7200: 0x80000008
+[    1.421064] R 0xc7200: 0x80000008
+[    1.423871] R 0x42014: 0x21000002
+[    1.427669] R 0x64010: 0x1500e1
+[    1.430435] W 0x64014: 0x0
+[    1.433095] W 0x64010: 0xd23500e1
+[    1.436894] R 0x64010: 0x801500e1
+[    1.439802] R 0x64010: 0x401500e1
+[    1.443636] W 0x64010: 0x521500e1
+[    1.446445] R 0x64014: 0x40000000
+[    1.450262] R 0xc7204: 0xabcd000f
+[    1.453055] R 0xc7200: 0x80000008
+[    1.456856] R 0xc7200: 0x80000008
+[    1.459663] R 0x42014: 0x21000002
+[    1.463465] R 0x64010: 0x1500e1
+[    1.466230] W 0x64014: 0x9000000e
+[    1.470029] W 0x64010: 0xd24500e1
+[    1.472837] R 0x64010: 0x801500e1
+[    1.476733] R 0x64010: 0x410500e1
+[    1.479573] W 0x64010: 0x530500e1
+[    1.483372] R 0x64014: 0x110a81
+[    1.486136] R 0x64018: 0x1000001
+[    1.489911] R 0x6401c: 0x80020000
+[    1.492718] R 0x64020: 0x100
+[    1.495418] R 0xc6204: 0x18
+[    1.499086] W 0xc7208: 0x1900834
+[    1.501872] W 0xc720c: 0x960834
+[    1.504636] W 0xc7210: 0x4af05
+[    1.508370] R 0xc7210: 0x4af05
+[    1.511111] R 0xc720c: 0x960834
+[    1.514866] R 0xc7208: 0x1900834
+[    1.517652] R 0xc7204: 0xabcd000f
+[    1.521450] R 0xc7200: 0x80000008
+[    1.524257] R 0xc7200: 0x80000008
+[    1.528055] R 0x42014: 0x21000002
+[    1.530862] R 0x64010: 0x10500e1
+[    1.534637] W 0x64014: 0x40005000
+[    1.537445] W 0x64010: 0xd23500e1
+[    1.541244] R 0x64010: 0x810500e1
+[    1.544152] R 0x64010: 0x401500e1
+[    1.547981] W 0x64010: 0x521500e1
+[    1.550789] R 0x64014: 0x0
+[    1.553445] R 0xc7200: 0x80000008
+[    1.557242] R 0xc7200: 0x80000008
+[    1.560049] R 0x42014: 0x21000002
+[    1.563848] R 0x64010: 0x1500e1
+[    1.566612] W 0x64014: 0x40005000
+[    1.570411] W 0x64018: 0x0
+[    1.573067] W 0x64010: 0xd25500e1
+[    1.575874] R 0x64010: 0x801500e1
+[    1.579776] R 0x64010: 0x401500e1
+[    1.582617] W 0x64010: 0x521500e1
+[    1.586418] R 0x64014: 0x0
+[    1.589073] R 0xc7200: 0x80000008
+[    1.591882] R 0xc7200: 0x80000008
+[    1.595680] R 0x42014: 0x21000002
+[    1.598488] R 0x64010: 0x1500e1
+[    1.602243] W 0x64014: 0x50005000
+[    1.605050] W 0x64010: 0xd23500e1
+[    1.608849] R 0x64010: 0x801500e1
+[    1.611756] R 0x64010: 0x401500e1
+[    1.615454] W 0x64010: 0x521500e1
+[    1.619254] R 0x64014: 0x0
+[    1.621910] R 0xc7200: 0x80000008
+[    1.624717] R 0xc7200: 0x80000008
+[    1.628583] R 0x42014: 0x21000002
+[    1.631390] R 0x64010: 0x1500e1
+[    1.635145] W 0x64014: 0x50005000
+[    1.637955] W 0x64010: 0xd24500e1
+[    1.641753] R 0x64010: 0x801500e1
+[    1.644660] R 0x64010: 0x402500e1
+[    1.648425] W 0x64010: 0x522500e1
+[    1.651234] R 0x64014: 0x0
+[    1.653889] R 0xc7200: 0x80000008
+[    1.657687] R 0xc7200: 0x80000008
+[    1.660493] R 0x42014: 0x21000002
+[    1.664292] R 0x64010: 0x2500e1
+[    1.667055] W 0x64014: 0x10005000
+[    1.670854] W 0x64010: 0xd23500e1
+[    1.673661] R 0x64010: 0x802500e1
+[    1.677559] R 0x64010: 0x401500e1
+[    1.680398] W 0x64010: 0x521500e1
+[    1.684196] R 0x64014: 0x0
+[    1.686853] R 0xc7200: 0x80000008
+[    1.689662] R 0xc7200: 0x80000008
+[    1.693460] R 0x42014: 0x21000002
+[    1.696269] R 0x64010: 0x1500e1
+[    1.700026] W 0x64014: 0x40005000
+[    1.702835] W 0x64010: 0xd23500e1
+[    1.706634] R 0x64010: 0x801500e1
+[    1.709543] R 0x64010: 0x401500e1
+[    1.713374] W 0x64010: 0x521500e1
+[    1.716182] R 0x64014: 0x0
+[    1.718835] R 0xc7200: 0x80000008
+[    1.722633] R 0xc7200: 0x80000008
+[    1.725440] R 0x42014: 0x21000002
+[    1.729236] R 0x64010: 0x1500e1
+[    1.731999] W 0x64014: 0x40005000
+[    1.735797] W 0x64018: 0x0
+[    1.738452] W 0x64010: 0xd25500e1
+[    1.742250] R 0x64010: 0x801500e1
+[    1.745157] R 0x64010: 0x401500e1
+[    1.747996] W 0x64010: 0x521500e1
+[    1.751793] R 0x64014: 0x0
+[    1.754447] R 0xc7200: 0x80000008
+[    1.758247] R 0xc7200: 0x80000008
+[    1.761053] R 0x42014: 0x21000002
+[    1.764853] R 0x64010: 0x1500e1
+[    1.767616] W 0x64014: 0x50005000
+[    1.771417] W 0x64010: 0xd23500e1
+[    1.774225] R 0x64010: 0x801500e1
+[    1.778125] R 0x64010: 0x401500e1
+[    1.780967] W 0x64010: 0x521500e1
+[    1.784768] R 0x64014: 0x0
+[    1.787426] R 0xc7200: 0x80000008
+[    1.790235] R 0xc7200: 0x80000008
+[    1.794034] R 0x42014: 0x21000002
+[    1.796844] R 0x64010: 0x1500e1
+[    1.800601] W 0x64014: 0x50005000
+[    1.803410] W 0x64010: 0xd24500e1
+[    1.807211] R 0x64010: 0x801500e1
+[    1.810118] R 0x64010: 0x402500e1
+[    1.813885] W 0x64010: 0x522500e1
+[    1.816693] R 0x64014: 0x0
+[    1.819349] R 0xc7200: 0x80000008
+[    1.823150] R 0xc7200: 0x80000008
+[    1.825958] R 0x42014: 0x21000002
+[    1.829758] R 0x64010: 0x2500e1
+[    1.832522] W 0x64014: 0x50005000
+[    1.836322] W 0x64010: 0xd24500e1
+[    1.839131] R 0x64010: 0x802500e1
+[    1.843029] R 0x64010: 0x402500e1
+[    1.845870] W 0x64010: 0x522500e1
+[    1.849669] R 0x64014: 0xff0000
+[    1.852433] R 0xc7200: 0x80000008
+[    1.856234] R 0xc7200: 0x80000008
+[    1.859042] R 0x42014: 0x21000002
+[    1.862840] R 0x64010: 0x2500e1
+[    1.865607] W 0x64014: 0x50005000
+[    1.869407] W 0x64010: 0xd24500e1
+[    1.872216] R 0x64010: 0x802500e1
+[    1.876114] R 0x64010: 0x402500e1
+[    1.878954] W 0x64010: 0x522500e1
+[    1.882757] R 0x64014: 0xff0000
+[    1.885515] R 0xc7200: 0x80000008
+[    1.889315] R 0xc7200: 0x80000008
+[    1.892121] R 0x42014: 0x21000002
+[    1.895985] R 0x64010: 0x2500e1
+[    1.898751] W 0x64014: 0x50005000
+[    1.902548] W 0x64010: 0xd24500e1
+[    1.905355] R 0x64010: 0x802500e1
+[    1.909252] R 0x64010: 0x402500e1
+[    1.912091] W 0x64010: 0x522500e1
+[    1.915890] R 0x64014: 0xff0000
+[    1.918653] R 0xc7200: 0x80000008
+[    1.922452] R 0xc7200: 0x80000008
+[    1.925257] R 0x42014: 0x21000002
+[    1.929054] R 0x64010: 0x2500e1
+[    1.931817] W 0x64014: 0x50005000
+[    1.935617] W 0x64010: 0xd24500e1
+[    1.938424] R 0x64010: 0x802500e1
+[    1.942321] R 0x64010: 0x402500e1
+[    1.945165] W 0x64010: 0x522500e1
+[    1.948960] R 0x64014: 0xff0000
+[    1.951725] R 0xc7200: 0x80000008
+[    1.955520] R 0xc7200: 0x80000008
+[    1.958329] R 0x42014: 0x21000002
+[    1.962126] R 0x64010: 0x2500e1
+[    1.964890] W 0x64014: 0x50005000
+[    1.968693] W 0x64010: 0xd24500e1
+[    1.971497] R 0x64010: 0x802500e1
+[    1.975394] R 0x64010: 0x402500e1
+[    1.978233] W 0x64010: 0x522500e1
+[    1.982030] R 0x64014: 0xff0000
+[    1.984794] R 0xc7200: 0x80000008
+[    1.987600] R 0xc7200: 0x80000008
+[    1.991398] R 0x42014: 0x21000002
+[    1.995195] R 0x64010: 0x2500e1
+[    1.997959] W 0x64014: 0x50005000
+[    2.000768] W 0x64010: 0xd24500e1
+[    2.004565] R 0x64010: 0x802500e1
+[    2.008461] R 0x64010: 0x402500e1
+[    2.011235] W 0x64010: 0x522500e1
+[    2.015034] R 0x64014: 0xff0000
+[    2.017800] R 0xc7200: 0x80000008
+[    2.020606] R 0xc7200: 0x80000008
+[    2.024402] R 0x42014: 0x21000002
+[    2.028201] R 0x64010: 0x2500e1
+[    2.030964] W 0x64014: 0x50005000
+[    2.033771] W 0x64010: 0xd24500e1
+[    2.037570] R 0x64010: 0x802500e1
+[    2.041467] R 0x64010: 0x402500e1
+[    2.044241] W 0x64010: 0x522500e1
+[    2.048042] R 0x64014: 0x0
+[    2.050698] R 0xc7200: 0x80000008
+[    2.053507] R 0xc7200: 0x80000008
+[    2.057305] R 0x42014: 0x21000002
+[    2.060111] R 0x64010: 0x2500e1
+[    2.063866] W 0x64014: 0x50005000
+[    2.066674] W 0x64010: 0xd24500e1
+[    2.070471] R 0x64010: 0x802500e1
+[    2.073378] R 0x64010: 0x402500e1
+[    2.077209] W 0x64010: 0x522500e1
+[    2.080018] R 0x64014: 0x4c0000
+[    2.083774] R 0xc7200: 0x80000008
+[    2.086581] R 0xc7200: 0x80000008
+[    2.090380] R 0x42014: 0x21000002
+[    2.093189] R 0x64010: 0x2500e1
+[    2.096943] W 0x64014: 0x50005000
+[    2.099752] W 0x64010: 0xd24500e1
+[    2.103551] R 0x64010: 0x802500e1
+[    2.106458] R 0x64010: 0x402500e1
+[    2.110289] W 0x64010: 0x522500e1
+[    2.113096] R 0x64014: 0xa30000
+[    2.115862] R 0xc7200: 0x80000008
+[    2.119659] R 0xc7200: 0x80000008
+[    2.123457] R 0x42014: 0x21000002
+[    2.126264] R 0x64010: 0x2500e1
+[    2.129030] W 0x64014: 0x50005000
+[    2.132829] W 0x64010: 0xd24500e1
+[    2.136627] R 0x64010: 0x802500e1
+[    2.139533] R 0x64010: 0x402500e1
+[    2.142372] W 0x64010: 0x522500e1
+[    2.146172] R 0x64014: 0x420000
+[    2.148935] R 0xc7200: 0x80000008
+[    2.152734] R 0xc7200: 0x80000008
+[    2.155542] R 0x42014: 0x21000002
+[    2.159342] R 0x64010: 0x2500e1
+[    2.162106] W 0x64014: 0x50005000
+[    2.165971] W 0x64010: 0xd24500e1
+[    2.168776] R 0x64010: 0x802500e1
+[    2.172675] R 0x64010: 0x402500e1
+[    2.175514] W 0x64010: 0x522500e1
+[    2.179313] R 0x64014: 0x310000
+[    2.182077] R 0xc7200: 0x80000008
+[    2.185875] R 0xc7200: 0x80000008
+[    2.188680] R 0x42014: 0x21000002
+[    2.192478] R 0x64010: 0x2500e1
+[    2.195240] W 0x64014: 0x50005000
+[    2.199038] W 0x64010: 0xd24500e1
+[    2.201846] R 0x64010: 0x802500e1
+[    2.205745] R 0x64010: 0x402500e1
+[    2.208585] W 0x64010: 0x522500e1
+[    2.212383] R 0x64014: 0x0
+[    2.215038] R 0xc7200: 0x80000008
+[    2.217847] R 0xc7200: 0x80000008
+[    2.221644] R 0x42014: 0x21000002
+[    2.224450] R 0x64010: 0x2500e1
+[    2.228207] W 0x64014: 0x50005000
+[    2.231015] W 0x64010: 0xd24500e1
+[    2.234813] R 0x64010: 0x802500e1
+[    2.237721] R 0x64010: 0x402500e1
+[    2.241419] W 0x64010: 0x522500e1
+[    2.245220] R 0x64014: 0x0
+[    2.247874] R 0xc7200: 0x80000008
+[    2.250683] R 0xc7200: 0x80000008
+[    2.254485] R 0x42014: 0x21000002
+[    2.257290] R 0x64010: 0x2500e1
+[    2.261042] W 0x64014: 0x50005000
+[    2.263852] W 0x64010: 0xd24500e1
+[    2.267649] R 0x64010: 0x802500e1
+[    2.270555] R 0x64010: 0x402500e1
+[    2.274386] W 0x64010: 0x522500e1
+[    2.277194] R 0x64014: 0x0
+[    2.279848] R 0xc7200: 0x80000008
+[    2.283646] R 0xc7200: 0x80000008
+[    2.286453] R 0x42014: 0x21000002
+[    2.290250] R 0x64010: 0x2500e1
+[    2.293013] W 0x64014: 0x50005000
+[    2.296811] W 0x64010: 0xd24500e1
+[    2.299617] R 0x64010: 0x802500e1
+[    2.303514] R 0x64010: 0x402500e1
+[    2.306354] W 0x64010: 0x522500e1
+[    2.310151] R 0x64014: 0x0
+[    2.312807] R 0xc7200: 0x80000008
+[    2.315617] R 0xc7200: 0x80000008
+[    2.319415] R 0x42014: 0x21000002
+[    2.322224] R 0x64010: 0x2500e1
+[    2.325979] W 0x64014: 0x50005000
+[    2.328789] W 0x64010: 0xd24500e1
+[    2.332589] R 0x64010: 0x802500e1
+[    2.335496] R 0x64010: 0x402500e1
+[    2.339328] W 0x64010: 0x522500e1
+[    2.342138] R 0x64014: 0x0
+[    2.344794] R 0xc7200: 0x80000008
+[    2.348590] R 0xc7200: 0x80000008
+[    2.351396] R 0x42014: 0x21000002
+[    2.355192] R 0x64010: 0x2500e1
+[    2.357956] W 0x64014: 0x50005000
+[    2.361753] W 0x64010: 0xd24500e1
+[    2.364559] R 0x64010: 0x802500e1
+[    2.368455] R 0x64010: 0x402500e1
+[    2.371294] W 0x64010: 0x522500e1
+[    2.375092] R 0x64014: 0x140000
+[    2.377855] R 0xc7200: 0x80000008
+[    2.381651] R 0xc7200: 0x80000008
+[    2.384457] R 0x42014: 0x21000002
+[    2.388255] R 0x64010: 0x2500e1
+[    2.391018] W 0x64014: 0x50005000
+[    2.394817] W 0x64010: 0xd24500e1
+[    2.397624] R 0x64010: 0x802500e1
+[    2.401520] R 0x64010: 0x402500e1
+[    2.404358] W 0x64010: 0x522500e1
+[    2.408157] R 0x64014: 0x10000
+[    2.410901] R 0xc7200: 0x80000008
+[    2.414700] R 0xc7200: 0x80000008
+[    2.417506] R 0x42014: 0x21000002
+[    2.421305] R 0x64010: 0x2500e1
+[    2.424069] W 0x64014: 0x50005000
+[    2.427867] W 0x64010: 0xd24500e1
+[    2.430675] R 0x64010: 0x802500e1
+[    2.434639] R 0x64010: 0x402500e1
+[    2.437477] W 0x64010: 0x522500e1
+[    2.441276] R 0x64014: 0x30000
+[    2.444017] R 0xc7200: 0x80000008
+[    2.447814] R 0xc7200: 0x80000008
+[    2.450621] R 0x42014: 0x21000002
+[    2.454421] R 0x64010: 0x2500e1
+[    2.457184] W 0x64014: 0x50005000
+[    2.460982] W 0x64010: 0xd24500e1
+[    2.463789] R 0x64010: 0x802500e1
+[    2.467687] R 0x64010: 0x402500e1
+[    2.470529] W 0x64010: 0x522500e1
+[    2.474331] R 0x64014: 0x800000
+[    2.477094] R 0xc7200: 0x80000008
+[    2.479902] R 0xc7200: 0x80000008
+[    2.483701] R 0x42014: 0x21000002
+[    2.487500] R 0x64010: 0x2500e1
+[    2.490263] W 0x64014: 0x50005000
+[    2.493072] W 0x64010: 0xd24500e1
+[    2.496871] R 0x64010: 0x802500e1
+[    2.500767] R 0x64010: 0x402500e1
+[    2.503607] W 0x64010: 0x522500e1
+[    2.506414] R 0x64014: 0x1a0000
+[    2.510167] R 0xc7200: 0x80000008
+[    2.512975] R 0xc7200: 0x80000008
+[    2.516772] R 0x42014: 0x21000002
+[    2.519579] R 0x64010: 0x2500e1
+[    2.523332] W 0x64014: 0x50005000
+[    2.526140] W 0x64010: 0xd24500e1
+[    2.529939] R 0x64010: 0x802500e1
+[    2.532842] R 0x64010: 0x402500e1
+[    2.536540] W 0x64010: 0x522500e1
+[    2.540337] R 0x64014: 0x100000
+[    2.543101] R 0xc7200: 0x80000008
+[    2.545907] R 0xc7200: 0x80000008
+[    2.549704] R 0x42014: 0x21000002
+[    2.553502] R 0x64010: 0x2500e1
+[    2.556267] W 0x64014: 0x50005000
+[    2.559072] W 0x64010: 0xd24500e1
+[    2.562869] R 0x64010: 0x802500e1
+[    2.566767] R 0x64010: 0x402500e1
+[    2.569607] W 0x64010: 0x522500e1
+[    2.572414] R 0x64014: 0x780000
+[    2.576168] R 0xc7200: 0x80000008
+[    2.578974] R 0xc7200: 0x80000008
+[    2.582770] R 0x42014: 0x21000002
+[    2.585577] R 0x64010: 0x2500e1
+[    2.589331] W 0x64014: 0x50005000
+[    2.592137] W 0x64010: 0xd24500e1
+[    2.595934] R 0x64010: 0x802500e1
+[    2.598842] R 0x64010: 0x402500e1
+[    2.602539] W 0x64010: 0x522500e1
+[    2.606340] R 0x64014: 0xa0000
+[    2.609080] R 0xc7200: 0x80000008
+[    2.611888] R 0xc7200: 0x80000008
+[    2.615684] R 0x42014: 0x21000002
+[    2.618493] R 0x64010: 0x2500e1
+[    2.622248] W 0x64014: 0x50005000
+[    2.625056] W 0x64010: 0xd24500e1
+[    2.628854] R 0x64010: 0x802500e1
+[    2.631762] R 0x64010: 0x402500e1
+[    2.635460] W 0x64010: 0x522500e1
+[    2.639260] R 0x64014: 0xd30000
+[    2.642024] R 0xc7200: 0x80000008
+[    2.644832] R 0xc7200: 0x80000008
+[    2.648628] R 0x42014: 0x21000002
+[    2.652427] R 0x64010: 0x2500e1
+[    2.655193] W 0x64014: 0x50005000
+[    2.658000] W 0x64010: 0xd24500e1
+[    2.661798] R 0x64010: 0x802500e1
+[    2.665694] R 0x64010: 0x402500e1
+[    2.668468] W 0x64010: 0x522500e1
+[    2.672265] R 0x64014: 0xe50000
+[    2.675031] R 0xc7200: 0x80000008
+[    2.677838] R 0xc7200: 0x80000008
+[    2.681636] R 0x42014: 0x21000002
+[    2.685433] R 0x64010: 0x2500e1
+[    2.688197] W 0x64014: 0x50005000
+[    2.691004] W 0x64010: 0xd24500e1
+[    2.694802] R 0x64010: 0x802500e1
+[    2.698699] R 0x64010: 0x402500e1
+[    2.701737] W 0x64010: 0x522500e1
+[    2.704545] R 0x64014: 0x950000
+[    2.708300] R 0xc7200: 0x80000008
+[    2.711107] R 0xc7200: 0x80000008
+[    2.714904] R 0x42014: 0x21000002
+[    2.717713] R 0x64010: 0x2500e1
+[    2.721467] W 0x64014: 0x50005000
+[    2.724275] W 0x64010: 0xd24500e1
+[    2.728074] R 0x64010: 0x802500e1
+[    2.730981] R 0x64010: 0x402500e1
+[    2.734812] W 0x64010: 0x522500e1
+[    2.737620] R 0x64014: 0x5c0000
+[    2.741376] R 0xc7200: 0x80000008
+[    2.744184] R 0xc7200: 0x80000008
+[    2.747982] R 0x42014: 0x21000002
+[    2.750792] R 0x64010: 0x2500e1
+[    2.754548] W 0x64014: 0x50005000
+[    2.757357] W 0x64010: 0xd24500e1
+[    2.761158] R 0x64010: 0x802500e1
+[    2.764066] R 0x64010: 0x402500e1
+[    2.767898] W 0x64010: 0x522500e1
+[    2.770708] R 0x64014: 0x600000
+[    2.774465] R 0xc7200: 0x80000008
+[    2.777274] R 0xc7200: 0x80000008
+[    2.781073] R 0x42014: 0x21000002
+[    2.783882] R 0x64010: 0x2500e1
+[    2.787639] W 0x64014: 0x50005000
+[    2.790448] W 0x64010: 0xd24500e1
+[    2.794245] R 0x64010: 0x802500e1
+[    2.797151] R 0x64010: 0x402500e1
+[    2.800915] W 0x64010: 0x522500e1
+[    2.803721] R 0x64014: 0x900000
+[    2.807476] R 0xc7200: 0x80000008
+[    2.810284] R 0xc7200: 0x80000008
+[    2.814081] R 0x42014: 0x21000002
+[    2.816888] R 0x64010: 0x2500e1
+[    2.820642] W 0x64014: 0x50005000
+[    2.823453] W 0x64010: 0xd24500e1
+[    2.827253] R 0x64010: 0x802500e1
+[    2.830163] R 0x64010: 0x402500e1
+[    2.833992] W 0x64010: 0x522500e1
+[    2.836802] R 0x64014: 0x270000
+[    2.839567] R 0xc7200: 0x80000008
+[    2.843366] R 0xc7200: 0x80000008
+[    2.847165] R 0x42014: 0x21000002
+[    2.849975] R 0x64010: 0x2500e1
+[    2.852741] W 0x64014: 0x50005000
+[    2.856541] W 0x64010: 0xd24500e1
+[    2.860342] R 0x64010: 0x802500e1
+[    2.863251] R 0x64010: 0x402500e1
+[    2.866092] W 0x64010: 0x522500e1
+[    2.869892] R 0x64014: 0x190000
+[    2.872658] R 0xc7200: 0x80000008
+[    2.876459] R 0xc7200: 0x80000008
+[    2.879268] R 0x42014: 0x21000002
+[    2.883067] R 0x64010: 0x2500e1
+[    2.885831] W 0x64014: 0x50005000
+[    2.889630] W 0x64010: 0xd24500e1
+[    2.892440] R 0x64010: 0x802500e1
+[    2.896338] R 0x64010: 0x402500e1
+[    2.899115] W 0x64010: 0x522500e1
+[    2.902917] R 0x64014: 0x500000
+[    2.905685] R 0xc7200: 0x80000008
+[    2.909482] R 0xc7200: 0x80000008
+[    2.912289] R 0x42014: 0x21000002
+[    2.916088] R 0x64010: 0x2500e1
+[    2.918852] W 0x64014: 0x50005000
+[    2.922650] W 0x64010: 0xd24500e1
+[    2.925457] R 0x64010: 0x802500e1
+[    2.929355] R 0x64010: 0x402500e1
+[    2.932193] W 0x64010: 0x522500e1
+[    2.935992] R 0x64014: 0x540000
+[    2.938756] R 0xc7200: 0x80000008
+[    2.942552] R 0xc7200: 0x80000008
+[    2.945359] R 0x42014: 0x21000002
+[    2.949156] R 0x64010: 0x2500e1
+[    2.951920] W 0x64014: 0x50005000
+[    2.955716] W 0x64010: 0xd24500e1
+[    2.958524] R 0x64010: 0x802500e1
+[    2.962420] R 0x64010: 0x402500e1
+[    2.965258] W 0x64010: 0x522500e1
+[    2.969057] R 0x64014: 0x0
+[    2.971777] R 0xc7200: 0x80000008
+[    2.974583] R 0xc7200: 0x80000008
+[    2.978379] R 0x42014: 0x21000002
+[    2.981187] R 0x64010: 0x2500e1
+[    2.984943] W 0x64014: 0x50005000
+[    2.987750] W 0x64010: 0xd24500e1
+[    2.991548] R 0x64010: 0x802500e1
+[    2.994457] R 0x64010: 0x402500e1
+[    2.998155] W 0x64010: 0x522500e1
+[    3.001953] R 0x64014: 0x0
+[    3.004609] R 0xc7200: 0x80000008
+[    3.007418] R 0xc7200: 0x80000008
+[    3.011216] R 0x42014: 0x21000002
+[    3.014023] R 0x64010: 0x2500e1
+[    3.017778] W 0x64014: 0x50005000
+[    3.020585] W 0x64010: 0xd24500e1
+[    3.024382] R 0x64010: 0x802500e1
+[    3.027290] R 0x64010: 0x402500e1
+[    3.031121] W 0x64010: 0x522500e1
+[    3.033931] R 0x64014: 0x0
+[    3.036588] R 0xc7200: 0x80000008
+[    3.040389] R 0xc7200: 0x80000008
+[    3.043199] R 0x42014: 0x21000002
+[    3.046998] R 0x64010: 0x2500e1
+[    3.049761] W 0x64014: 0x50005000
+[    3.053560] W 0x64010: 0xd24500e1
+[    3.056367] R 0x64010: 0x802500e1
+[    3.060265] R 0x64010: 0x402500e1
+[    3.063107] W 0x64010: 0x522500e1
+[    3.066906] R 0x64014: 0x10000
+[    3.069651] R 0xc7200: 0x80000008
+[    3.073451] R 0xc7200: 0x80000008
+[    3.076258] R 0x42014: 0x21000002
+[    3.080055] R 0x64010: 0x2500e1
+[    3.082819] W 0x64014: 0x50005000
+[    3.086616] W 0x64010: 0xd24500e1
+[    3.089425] R 0x64010: 0x802500e1
+[    3.093323] R 0x64010: 0x402500e1
+[    3.096098] W 0x64010: 0x522500e1
+[    3.099900] R 0x64014: 0x10000
+[    3.102642] R 0xc7200: 0x80000008
+[    3.106439] R 0xc7200: 0x80000008
+[    3.109247] R 0x42014: 0x21000002
+[    3.113045] R 0x64010: 0x2500e1
+[    3.115810] W 0x64014: 0x50005000
+[    3.119611] W 0x64010: 0xd24500e1
+[    3.122420] R 0x64010: 0x802500e1
+[    3.126320] R 0x64010: 0x402500e1
+[    3.129096] W 0x64010: 0x522500e1
+[    3.132896] R 0x64014: 0x10000
+[    3.135640] R 0xc7200: 0x80000008
+[    3.138450] R 0xc7200: 0x80000008
+[    3.142251] R 0x42014: 0x21000002
+[    3.146051] R 0x64010: 0x2500e1
+[    3.148818] W 0x64014: 0x50005000
+[    3.151626] W 0x64010: 0xd24500e1
+[    3.155426] R 0x64010: 0x802500e1
+[    3.159325] R 0x64010: 0x402500e1
+[    3.162100] W 0x64010: 0x522500e1
+[    3.165903] R 0x64014: 0x10000
+[    3.168646] R 0xc7200: 0x80000008
+[    3.171454] R 0xc7200: 0x80000008
+[    3.175253] R 0x42014: 0x21000002
+[    3.178059] R 0x64010: 0x2500e1
+[    3.181813] W 0x64014: 0x50005000
+[    3.184621] W 0x64010: 0xd24500e1
+[    3.188421] R 0x64010: 0x802500e1
+[    3.191327] R 0x64010: 0x402500e1
+[    3.195026] W 0x64010: 0x522500e1
+[    3.198824] R 0x64014: 0x10000
+[    3.201568] R 0xc7200: 0x80000008
+[    3.204376] R 0xc7200: 0x80000008
+[    3.208175] R 0x42014: 0x21000002
+[    3.210983] R 0x64010: 0x2500e1
+[    3.214737] W 0x64014: 0x50005000
+[    3.217545] W 0x64010: 0xd24500e1
+[    3.221347] R 0x64010: 0x802500e1
+[    3.224254] R 0x64010: 0x402500e1
+[    3.227954] W 0x64010: 0x522500e1
+[    3.231756] R 0x64014: 0x10000
+[    3.234498] R 0xc7200: 0x80000008
+[    3.237308] R 0xc7200: 0x80000008
+[    3.240711] R 0x42014: 0x21000002
+[    3.244510] R 0x64010: 0x2500e1
+[    3.247274] W 0x64014: 0x50005000
+[    3.251073] W 0x64010: 0xd24500e1
+[    3.253880] R 0x64010: 0x802500e1
+[    3.257779] R 0x64010: 0x402500e1
+[    3.260618] W 0x64010: 0x522500e1
+[    3.264417] R 0x64014: 0x10000
+[    3.267159] R 0xc7200: 0x80000008
+[    3.270956] R 0xc7200: 0x80000008
+[    3.273762] R 0x42014: 0x21000002
+[    3.277561] R 0x64010: 0x2500e1
+[    3.280325] W 0x64014: 0x50005000
+[    3.284122] W 0x64010: 0xd24500e1
+[    3.286930] R 0x64010: 0x802500e1
+[    3.290828] R 0x64010: 0x402500e1
+[    3.293667] W 0x64010: 0x522500e1
+[    3.297466] R 0x64014: 0x10000
+[    3.300209] R 0xc7200: 0x80000008
+[    3.304007] R 0xc7200: 0x80000008
+[    3.306812] R 0x42014: 0x21000002
+[    3.310610] R 0x64010: 0x2500e1
+[    3.313372] W 0x64014: 0x50005000
+[    3.317169] W 0x64010: 0xd24500e1
+[    3.319977] R 0x64010: 0x802500e1
+[    3.323875] R 0x64010: 0x402500e1
+[    3.326713] W 0x64010: 0x522500e1
+[    3.330511] R 0x64014: 0x10000
+[    3.333252] R 0xc7200: 0x80000008
+[    3.336059] R 0xc7200: 0x80000008
+[    3.339855] R 0x42014: 0x21000002
+[    3.342667] R 0x64010: 0x2500e1
+[    3.346418] W 0x64014: 0x50005000
+[    3.349226] W 0x64010: 0xd24500e1
+[    3.353023] R 0x64010: 0x802500e1
+[    3.355930] R 0x64010: 0x402500e1
+[    3.359628] W 0x64010: 0x522500e1
+[    3.363425] R 0x64014: 0x10000
+[    3.366167] R 0xc7200: 0x80000008
+[    3.368975] R 0xc7200: 0x80000008
+[    3.372773] R 0x42014: 0x21000002
+[    3.375579] R 0x64010: 0x2500e1
+[    3.379334] W 0x64014: 0x50005000
+[    3.382142] W 0x64010: 0xd24500e1
+[    3.385941] R 0x64010: 0x802500e1
+[    3.388847] R 0x64010: 0x402500e1
+[    3.392546] W 0x64010: 0x522500e1
+[    3.396346] R 0x64014: 0x10000
+[    3.399088] R 0xc7200: 0x80000008
+[    3.401896] R 0xc7200: 0x80000008
+[    3.405691] R 0x42014: 0x21000002
+[    3.408499] R 0x64010: 0x2500e1
+[    3.412252] W 0x64014: 0x50005000
+[    3.415058] W 0x64010: 0xd24500e1
+[    3.418857] R 0x64010: 0x802500e1
+[    3.421763] R 0x64010: 0x402500e1
+[    3.425459] W 0x64010: 0x522500e1
+[    3.429256] R 0x64014: 0x10000
+[    3.432000] R 0xc7200: 0x80000008
+[    3.434806] R 0xc7200: 0x80000008
+[    3.438605] R 0x42014: 0x21000002
+[    3.441410] R 0x64010: 0x2500e1
+[    3.445165] W 0x64014: 0x50005000
+[    3.447972] W 0x64010: 0xd24500e1
+[    3.451771] R 0x64010: 0x802500e1
+[    3.454680] R 0x64010: 0x402500e1
+[    3.458378] W 0x64010: 0x522500e1
+[    3.462178] R 0x64014: 0x10000
+[    3.464923] R 0xc7200: 0x80000008
+[    3.467732] R 0xc7200: 0x80000008
+[    3.471529] R 0x42014: 0x21000002
+[    3.474339] R 0x64010: 0x2500e1
+[    3.478095] W 0x64014: 0x50005000
+[    3.480905] W 0x64010: 0xd24500e1
+[    3.484704] R 0x64010: 0x802500e1
+[    3.487613] R 0x64010: 0x402500e1
+[    3.491314] W 0x64010: 0x522500e1
+[    3.495114] R 0x64014: 0x10000
+[    3.497858] R 0xc7200: 0x80000008
+[    3.500666] R 0xc7200: 0x80000008
+[    3.504466] R 0x42014: 0x21000002
+[    3.507672] R 0x64010: 0x2500e1
+[    3.510437] W 0x64014: 0x50005000
+[    3.514238] W 0x64010: 0xd24500e1
+[    3.518040] R 0x64010: 0x802500e1
+[    3.520947] R 0x64010: 0x402500e1
+[    3.523788] W 0x64010: 0x522500e1
+[    3.527589] R 0x64014: 0x10000
+[    3.530333] R 0xc7200: 0x80000008
+[    3.534130] R 0xc7200: 0x80000008
+[    3.536937] R 0x42014: 0x21000002
+[    3.540734] R 0x64010: 0x2500e1
+[    3.543496] W 0x64014: 0x50005000
+[    3.547294] W 0x64010: 0xd24500e1
+[    3.550103] R 0x64010: 0x802500e1
+[    3.553999] R 0x64010: 0x402500e1
+[    3.556772] W 0x64010: 0x522500e1
+[    3.560573] R 0x64014: 0x10000
+[    3.563315] R 0xc7200: 0x80000008
+[    3.567114] R 0xc7200: 0x80000008
+[    3.569921] R 0x42014: 0x21000002
+[    3.573722] R 0x64010: 0x2500e1
+[    3.576491] W 0x64014: 0x50005000
+[    3.580289] W 0x64010: 0xd24500e1
+[    3.583098] R 0x64010: 0x802500e1
+[    3.586998] R 0x64010: 0x402500e1
+[    3.589839] W 0x64010: 0x522500e1
+[    3.593640] R 0x64014: 0x9e0000
+[    3.596407] R 0xc7200: 0x80000008
+[    3.600208] R 0xc7200: 0x80000008
+[    3.603016] R 0x42014: 0x21000002
+[    3.606818] R 0x64010: 0x2500e1
+[    3.609583] W 0x64014: 0x50005000
+[    3.613383] W 0x64010: 0xd24500e1
+[    3.616191] R 0x64010: 0x802500e1
+[    3.620091] R 0x64010: 0x402500e1
+[    3.622933] W 0x64010: 0x522500e1
+[    3.626734] R 0x64014: 0x1b0000
+[    3.629499] R 0xc7200: 0x80000008
+[    3.633298] R 0xc7200: 0x80000008
+[    3.636104] R 0x42014: 0x21000002
+[    3.639903] R 0x64010: 0x2500e1
+[    3.642666] W 0x64014: 0x50005000
+[    3.646465] W 0x64010: 0xd24500e1
+[    3.649271] R 0x64010: 0x802500e1
+[    3.653169] R 0x64010: 0x402500e1
+[    3.656007] W 0x64010: 0x522500e1
+[    3.659805] R 0x64014: 0x0
+[    3.662459] R 0xc7200: 0x80000008
+[    3.665267] R 0xc7200: 0x80000008
+[    3.669064] R 0x42014: 0x21000002
+[    3.671870] R 0x64010: 0x2500e1
+[    3.675625] W 0x64014: 0x50005000
+[    3.678433] W 0x64010: 0xd24500e1
+[    3.682231] R 0x64010: 0x802500e1
+[    3.685137] R 0x64010: 0x402500e1
+[    3.688968] W 0x64010: 0x522500e1
+[    3.691773] R 0x64014: 0xa00000
+[    3.695528] R 0xc7200: 0x80000008
+[    3.698335] R 0xc7200: 0x80000008
+[    3.702133] R 0x42014: 0x21000002
+[    3.704939] R 0x64010: 0x2500e1
+[    3.708694] W 0x64014: 0x50005000
+[    3.711502] W 0x64010: 0xd24500e1
+[    3.715299] R 0x64010: 0x802500e1
+[    3.718207] R 0x64010: 0x402500e1
+[    3.722037] W 0x64010: 0x522500e1
+[    3.724844] R 0x64014: 0x500000
+[    3.728600] R 0xc7200: 0x80000008
+[    3.731406] R 0xc7200: 0x80000008
+[    3.735203] R 0x42014: 0x21000002
+[    3.738011] R 0x64010: 0x2500e1
+[    3.741764] W 0x64014: 0x50005000
+[    3.744572] W 0x64010: 0xd24500e1
+[    3.748372] R 0x64010: 0x802500e1
+[    3.751276] R 0x64010: 0x402500e1
+[    3.755041] W 0x64010: 0x522500e1
+[    3.757848] R 0x64014: 0x200000
+[    3.761604] R 0xc7200: 0x80000008
+[    3.764411] R 0xc7200: 0x80000008
+[    3.768208] R 0x42014: 0x21000002
+[    3.771015] R 0x64010: 0x2500e1
+[    3.774770] W 0x64014: 0x50005000
+[    3.777643] W 0x64010: 0xd24500e1
+[    3.781440] R 0x64010: 0x802500e1
+[    3.784346] R 0x64010: 0x402500e1
+[    3.788175] W 0x64010: 0x522500e1
+[    3.790983] R 0x64014: 0x120000
+[    3.793746] R 0xc7200: 0x80000008
+[    3.797542] R 0xc7200: 0x80000008
+[    3.801338] R 0x42014: 0x21000002
+[    3.804145] R 0x64010: 0x2500e1
+[    3.806908] W 0x64014: 0x50005000
+[    3.810707] W 0x64010: 0xd24500e1
+[    3.814504] R 0x64010: 0x802500e1
+[    3.817414] R 0x64010: 0x402500e1
+[    3.820251] W 0x64010: 0x522500e1
+[    3.824050] R 0x64014: 0x300000
+[    3.826814] R 0xc7200: 0x80000008
+[    3.830611] R 0xc7200: 0x80000008
+[    3.833419] R 0x42014: 0x21000002
+[    3.837216] R 0x64010: 0x2500e1
+[    3.839979] W 0x64014: 0x50005000
+[    3.843777] W 0x64010: 0xd24500e1
+[    3.846584] R 0x64010: 0x802500e1
+[    3.850482] R 0x64010: 0x402500e1
+[    3.853321] W 0x64010: 0x522500e1
+[    3.857118] R 0x64014: 0x100000
+[    3.859882] R 0xc7200: 0x80000008
+[    3.863681] R 0xc7200: 0x80000008
+[    3.866487] R 0x42014: 0x21000002
+[    3.870286] R 0x64010: 0x2500e1
+[    3.873048] W 0x64014: 0x50005000
+[    3.876846] W 0x64010: 0xd24500e1
+[    3.879654] R 0x64010: 0x802500e1
+[    3.883551] R 0x64010: 0x402500e1
+[    3.886390] W 0x64010: 0x522500e1
+[    3.890188] R 0x64014: 0x300000
+[    3.892951] R 0xc7200: 0x80000008
+[    3.896750] R 0xc7200: 0x80000008
+[    3.899556] R 0x42014: 0x21000002
+[    3.903353] R 0x64010: 0x2500e1
+[    3.906116] W 0x64014: 0x50005000
+[    3.909913] W 0x64010: 0xd24500e1
+[    3.912721] R 0x64010: 0x802500e1
+[    3.916619] R 0x64010: 0x402500e1
+[    3.919457] W 0x64010: 0x522500e1
+[    3.923255] R 0x64014: 0x130000
+[    3.926018] R 0xc7200: 0x80000008
+[    3.929817] R 0xc7200: 0x80000008
+[    3.932622] R 0x42014: 0x21000002
+[    3.936421] R 0x64010: 0x2500e1
+[    3.939183] W 0x64014: 0x50005000
+[    3.942980] W 0x64010: 0xd24500e1
+[    3.945789] R 0x64010: 0x802500e1
+[    3.949687] R 0x64010: 0x402500e1
+[    3.952525] W 0x64010: 0x522500e1
+[    3.956324] R 0x64014: 0x0
+[    3.958979] R 0xc7200: 0x80000008
+[    3.961788] R 0xc7200: 0x80000008
+[    3.965586] R 0x42014: 0x21000002
+[    3.968394] R 0x64010: 0x2500e1
+[    3.972150] W 0x64014: 0x50005000
+[    3.974960] W 0x64010: 0xd24500e1
+[    3.978761] R 0x64010: 0x802500e1
+[    3.981669] R 0x64010: 0x402500e1
+[    3.985501] W 0x64010: 0x522500e1
+[    3.988311] R 0x64014: 0x50000
+[    3.992044] R 0xc7200: 0x80000008
+[    3.994855] R 0xc7200: 0x80000008
+[    3.998652] R 0x42014: 0x21000002
+[    4.001460] R 0x64010: 0x2500e1
+[    4.005214] W 0x64014: 0x50005000
+[    4.008023] W 0x64010: 0xd24500e1
+[    4.011822] R 0x64010: 0x802500e1
+[    4.014728] R 0x64010: 0x402500e1
+[    4.018558] W 0x64010: 0x522500e1
+[    4.021366] R 0x64014: 0xa30000
+[    4.025120] R 0xc7200: 0x80000008
+[    4.027929] R 0xc7200: 0x80000008
+[    4.031728] R 0x42014: 0x21000002
+[    4.034536] R 0x64010: 0x2500e1
+[    4.038291] W 0x64014: 0x50005000
+[    4.041099] W 0x64010: 0xd24500e1
+[    4.044964] R 0x64010: 0x802500e1
+[    4.047871] R 0x64010: 0x402500e1
+[    4.051702] W 0x64010: 0x522500e1
+[    4.054513] R 0x64014: 0x100000
+[    4.057278] R 0xc7200: 0x80000008
+[    4.061078] R 0xc7200: 0x80000008
+[    4.064878] R 0x42014: 0x21000002
+[    4.067687] R 0x64010: 0x2500e1
+[    4.070452] W 0x64014: 0x50005000
+[    4.074255] W 0x64010: 0xd24500e1
+[    4.078052] R 0x64010: 0x802500e1
+[    4.080962] R 0x64010: 0x402500e1
+[    4.083802] W 0x64010: 0x522500e1
+[    4.087604] R 0x64014: 0x0
+[    4.090260] R 0xc7200: 0x80000008
+[    4.094061] R 0xc7200: 0x80000008
+[    4.096870] R 0x42014: 0x21000002
+[    4.100669] R 0x64010: 0x2500e1
+[    4.103433] W 0x64014: 0x50005000
+[    4.107233] W 0x64010: 0xd24500e1
+[    4.110040] R 0x64010: 0x802500e1
+[    4.113938] R 0x64010: 0x402500e1
+[    4.116712] W 0x64010: 0x522500e1
+[    4.120513] R 0x64014: 0x0
+[    4.123170] R 0xc7200: 0x80000008
+[    4.125981] R 0xc7200: 0x80000008
+[    4.129782] R 0x42014: 0x21000002
+[    4.132591] R 0x64010: 0x2500e1
+[    4.136349] W 0x64014: 0x50005000
+[    4.139159] W 0x64010: 0xd24500e1
+[    4.142961] R 0x64010: 0x802500e1
+[    4.145870] R 0x64010: 0x402500e1
+[    4.149638] W 0x64010: 0x522500e1
+[    4.152450] R 0x64014: 0x190000
+[    4.156206] R 0xc7200: 0x80000008
+[    4.159013] R 0xc7200: 0x80000008
+[    4.162815] R 0x42014: 0x21000002
+[    4.165626] R 0x64010: 0x2500e1
+[    4.169384] W 0x64014: 0x50005000
+[    4.172196] W 0x64010: 0xd24500e1
+[    4.175996] R 0x64010: 0x802500e1
+[    4.178903] R 0x64010: 0x402500e1
+[    4.182735] W 0x64010: 0x522500e1
+[    4.185542] R 0x64014: 0x0
+[    4.188198] R 0xc7200: 0x80000008
+[    4.191998] R 0xc7200: 0x80000008
+[    4.194806] R 0x42014: 0x21000002
+[    4.198604] R 0x64010: 0x2500e1
+[    4.201367] W 0x64014: 0x50005000
+[    4.205166] W 0x64010: 0xd24500e1
+[    4.207972] R 0x64010: 0x802500e1
+[    4.211870] R 0x64010: 0x402500e1
+[    4.214709] W 0x64010: 0x522500e1
+[    4.218509] R 0x64014: 0x0
+[    4.221163] R 0xc7200: 0x80000008
+[    4.223972] R 0xc7200: 0x80000008
+[    4.227769] R 0x42014: 0x21000002
+[    4.231567] R 0x64010: 0x2500e1
+[    4.234332] W 0x64014: 0x50005000
+[    4.237140] W 0x64010: 0xd24500e1
+[    4.240939] R 0x64010: 0x802500e1
+[    4.244838] R 0x64010: 0x402500e1
+[    4.247677] W 0x64010: 0x522500e1
+[    4.250485] R 0x64014: 0x0
+[    4.254132] R 0xc7200: 0x80000008
+[    4.256939] R 0xc7200: 0x80000008
+[    4.260739] R 0x42014: 0x21000002
+[    4.263546] R 0x64010: 0x2500e1
+[    4.267298] W 0x64014: 0x50005000
+[    4.270107] W 0x64010: 0xd24500e1
+[    4.273904] R 0x64010: 0x802500e1
+[    4.276811] R 0x64010: 0x402500e1
+[    4.280641] W 0x64010: 0x522500e1
+[    4.283450] R 0x64014: 0xf0000
+[    4.286192] R 0xc7200: 0x80000008
+[    4.289991] R 0xc7200: 0x80000008
+[    4.292799] R 0x42014: 0x21000002
+[    4.296602] R 0x64010: 0x2500e1
+[    4.299368] W 0x64014: 0x50005000
+[    4.303171] W 0x64010: 0xd24500e1
+[    4.305981] R 0x64010: 0x802500e1
+[    4.309881] R 0x64010: 0x402500e1
+[    4.312751] W 0x64010: 0x522500e1
+[    4.316592] R 0x64014: 0x0
+[    4.319249] R 0xc7200: 0x80000008
+[    4.322058] R 0xc7200: 0x80000008
+[    4.325859] R 0x42014: 0x21000002
+[    4.329660] R 0x64010: 0x2500e1
+[    4.332427] W 0x64014: 0x50005000
+[    4.335238] W 0x64010: 0xd24500e1
+[    4.339038] R 0x64010: 0x802500e1
+[    4.342937] R 0x64010: 0x402500e1
+[    4.345713] W 0x64010: 0x522500e1
+[    4.349513] R 0x64014: 0x0
+[    4.352169] R 0xc7200: 0x80000008
+[    4.354976] R 0xc7200: 0x80000008
+[    4.358776] R 0x42014: 0x21000002
+[    4.361586] R 0x64010: 0x2500e1
+[    4.365342] W 0x64014: 0x50005000
+[    4.368151] W 0x64010: 0xd24500e1
+[    4.371953] R 0x64010: 0x802500e1
+[    4.374861] R 0x64010: 0x402500e1
+[    4.378693] W 0x64010: 0x522500e1
+[    4.381503] R 0x64014: 0x0
+[    4.384159] R 0xc7200: 0x80000008
+[    4.387959] R 0xc7200: 0x80000008
+[    4.390767] R 0x42014: 0x21000002
+[    4.394566] R 0x64010: 0x2500e1
+[    4.397331] W 0x64014: 0x50005000
+[    4.401131] W 0x64010: 0xd24500e1
+[    4.403938] R 0x64010: 0x802500e1
+[    4.407838] R 0x64010: 0x402500e1
+[    4.410678] W 0x64010: 0x522500e1
+[    4.414477] R 0x64014: 0x0
+[    4.417132] R 0xc7200: 0x80000008
+[    4.419940] R 0xc7200: 0x80000008
+[    4.423738] R 0x42014: 0x21000002
+[    4.426545] R 0x64010: 0x2500e1
+[    4.430301] W 0x64014: 0x50005000
+[    4.433110] W 0x64010: 0xd24500e1
+[    4.436909] R 0x64010: 0x802500e1
+[    4.439816] R 0x64010: 0x402500e1
+[    4.443648] W 0x64010: 0x522500e1
+[    4.446455] R 0x64014: 0x0
+[    4.449110] R 0xc7200: 0x80000008
+[    4.452912] R 0xc7200: 0x80000008
+[    4.455718] R 0x42014: 0x21000002
+[    4.459518] R 0x64010: 0x2500e1
+[    4.462283] W 0x64014: 0x50005000
+[    4.466083] W 0x64010: 0xd24500e1
+[    4.468890] R 0x64010: 0x802500e1
+[    4.472790] R 0x64010: 0x402500e1
+[    4.475629] W 0x64010: 0x522500e1
+[    4.479429] R 0x64014: 0x0
+[    4.482085] R 0xc7200: 0x80000008
+[    4.485884] R 0xc7200: 0x80000008
+[    4.488691] R 0x42014: 0x21000002
+[    4.492489] R 0x64010: 0x2500e1
+[    4.495253] W 0x64014: 0x50005000
+[    4.499051] W 0x64010: 0xd24500e1
+[    4.501861] R 0x64010: 0x802500e1
+[    4.505758] R 0x64010: 0x402500e1
+[    4.508533] W 0x64010: 0x522500e1
+[    4.512333] R 0x64014: 0x0
+[    4.514990] R 0xc7200: 0x80000008
+[    4.517800] R 0xc7200: 0x80000008
+[    4.521595] R 0x42014: 0x21000002
+[    4.524403] R 0x64010: 0x2500e1
+[    4.528157] W 0x64014: 0x50005000
+[    4.530965] W 0x64010: 0xd24500e1
+[    4.534768] R 0x64010: 0x802500e1
+[    4.537671] R 0x64010: 0x402500e1
+[    4.541436] W 0x64010: 0x522500e1
+[    4.544245] R 0x64014: 0x0
+[    4.546901] R 0xc7200: 0x80000008
+[    4.550700] R 0xc7200: 0x80000008
+[    4.553507] R 0x42014: 0x21000002
+[    4.557306] R 0x64010: 0x2500e1
+[    4.560071] W 0x64014: 0x50005000
+[    4.563871] W 0x64010: 0xd24500e1
+[    4.566679] R 0x64010: 0x802500e1
+[    4.570577] R 0x64010: 0x402500e1
+[    4.573417] W 0x64010: 0x522500e1
+[    4.577218] R 0x64014: 0x0
+[    4.579873] R 0xc7200: 0x80000008
+[    4.582749] R 0xc7200: 0x80000008
+[    4.586549] R 0x42014: 0x21000002
+[    4.589356] R 0x64010: 0x2500e1
+[    4.593113] W 0x64014: 0x50005000
+[    4.595925] W 0x64010: 0xd24500e1
+[    4.599727] R 0x64010: 0x802500e1
+[    4.602633] R 0x64010: 0x402500e1
+[    4.606335] W 0x64010: 0x522500e1
+[    4.610136] R 0x64014: 0x230000
+[    4.612902] R 0xc7200: 0x80000008
+[    4.615714] R 0xc7200: 0x80000008
+[    4.619511] R 0x42014: 0x21000002
+[    4.623313] R 0x64010: 0x2500e1
+[    4.626079] W 0x64014: 0x50005000
+[    4.628889] W 0x64010: 0xd24500e1
+[    4.632691] R 0x64010: 0x802500e1
+[    4.636592] R 0x64010: 0x402500e1
+[    4.639433] W 0x64010: 0x522500e1
+[    4.642244] R 0x64014: 0x870000
+[    4.645999] R 0xc7200: 0x80000008
+[    4.648808] R 0xc7200: 0x80000008
+[    4.652608] R 0x42014: 0x21000002
+[    4.655415] R 0x64010: 0x2500e1
+[    4.659170] W 0x64014: 0x50005000
+[    4.661979] W 0x64010: 0xd24500e1
+[    4.665778] R 0x64010: 0x802500e1
+[    4.668685] R 0x64010: 0x402500e1
+[    4.672383] W 0x64010: 0x522500e1
+[    4.676182] R 0x64014: 0x20000
+[    4.678926] R 0xc7200: 0x80000008
+[    4.681733] R 0xc7200: 0x80000008
+[    4.685532] R 0x42014: 0x21000002
+[    4.688340] R 0x64010: 0x2500e1
+[    4.692094] W 0x64014: 0x50005000
+[    4.694904] W 0x64010: 0xd24500e1
+[    4.698701] R 0x64010: 0x802500e1
+[    4.701609] R 0x64010: 0x402500e1
+[    4.705306] W 0x64010: 0x522500e1
+[    4.709105] R 0x64014: 0x640000
+[    4.711868] R 0xc7200: 0x80000008
+[    4.714676] R 0xc7200: 0x80000008
+[    4.718474] R 0x42014: 0x21000002
+[    4.722272] R 0x64010: 0x2500e1
+[    4.725039] W 0x64014: 0x50005000
+[    4.727846] W 0x64010: 0xd24500e1
+[    4.731645] R 0x64010: 0x802500e1
+[    4.735542] R 0x64010: 0x402500e1
+[    4.738316] W 0x64010: 0x522500e1
+[    4.742115] R 0x64014: 0x0
+[    4.744770] R 0xc7200: 0x80000008
+[    4.747578] R 0xc7200: 0x80000008
+[    4.751377] R 0x42014: 0x21000002
+[    4.754184] R 0x64010: 0x2500e1
+[    4.757940] W 0x64014: 0x50005000
+[    4.760750] W 0x64010: 0xd24500e1
+[    4.764550] R 0x64010: 0x802500e1
+[    4.767456] R 0x64010: 0x402500e1
+[    4.771221] W 0x64010: 0x522500e1
+[    4.774032] R 0x64014: 0x0
+[    4.776688] R 0xc7200: 0x80000008
+[    4.780488] R 0xc7200: 0x80000008
+[    4.783296] R 0x42014: 0x21000002
+[    4.787095] R 0x64010: 0x2500e1
+[    4.789858] W 0x64014: 0x50005000
+[    4.793659] W 0x64010: 0xd24500e1
+[    4.796466] R 0x64010: 0x802500e1
+[    4.800365] R 0x64010: 0x402500e1
+[    4.803204] W 0x64010: 0x522500e1
+[    4.807004] R 0x64014: 0x0
+[    4.809660] R 0xc7200: 0x80000008
+[    4.812467] R 0xc7200: 0x80000008
+[    4.816267] R 0x42014: 0x21000002
+[    4.819076] R 0x64010: 0x2500e1
+[    4.822831] W 0x64014: 0x50005000
+[    4.825641] W 0x64010: 0xd24500e1
+[    4.829439] R 0x64010: 0x802500e1
+[    4.832347] R 0x64010: 0x402500e1
+[    4.836045] W 0x64010: 0x522500e1
+[    4.839844] R 0x64014: 0x0
+[    4.842500] R 0xc7200: 0x80000008
+[    4.845309] R 0xc7200: 0x80000008
+[    4.849108] R 0x42014: 0x21000002
+[    4.852576] R 0x64010: 0x2500e1
+[    4.855338] W 0x64014: 0x50005000
+[    4.858148] W 0x64010: 0xd24500e1
+[    4.861946] R 0x64010: 0x802500e1
+[    4.865845] R 0x64010: 0x402500e1
+[    4.868619] W 0x64010: 0x522500e1
+[    4.872419] R 0x64014: 0xfe0000
+[    4.875185] R 0xc7200: 0x80000008
+[    4.877993] R 0xc7200: 0x80000008
+[    4.881792] R 0x42014: 0x21000002
+[    4.885591] R 0x64010: 0x2500e1
+[    4.888354] W 0x64014: 0x50005000
+[    4.891164] W 0x64010: 0xd24500e1
+[    4.894964] R 0x64010: 0x802500e1
+[    4.898865] R 0x64010: 0x402500e1
+[    4.901641] W 0x64010: 0x522500e1
+[    4.905445] R 0x64014: 0x0
+[    4.908104] R 0xc7200: 0x80000008
+[    4.910914] R 0xc7200: 0x80000008
+[    4.914717] R 0x42014: 0x21000002
+[    4.917529] R 0x64010: 0x2500e1
+[    4.921288] W 0x64014: 0x50005000
+[    4.924098] W 0x64010: 0xd24500e1
+[    4.927899] R 0x64010: 0x802500e1
+[    4.930810] R 0x64010: 0x402500e1
+[    4.934643] W 0x64010: 0x522500e1
+[    4.937454] R 0x64014: 0x530000
+[    4.941212] R 0xc7200: 0x80000008
+[    4.944022] R 0xc7200: 0x80000008
+[    4.947823] R 0x42014: 0x21000002
+[    4.950634] R 0x64010: 0x2500e1
+[    4.954391] W 0x64014: 0x50005000
+[    4.957202] W 0x64010: 0xd24500e1
+[    4.961004] R 0x64010: 0x802500e1
+[    4.963913] R 0x64010: 0x402500e1
+[    4.967681] W 0x64010: 0x522500e1
+[    4.970491] R 0x64014: 0x410000
+[    4.974247] R 0xc7200: 0x80000008
+[    4.977058] R 0xc7200: 0x80000008
+[    4.980858] R 0x42014: 0x21000002
+[    4.983667] R 0x64010: 0x2500e1
+[    4.987426] W 0x64014: 0x50005000
+[    4.990233] W 0x64010: 0xd24500e1
+[    4.994033] R 0x64010: 0x802500e1
+[    4.996942] R 0x64010: 0x402500e1
+[    5.000710] W 0x64010: 0x522500e1
+[    5.003520] R 0x64014: 0x4d0000
+[    5.007276] R 0xc7200: 0x80000008
+[    5.010088] R 0xc7200: 0x80000008
+[    5.013888] R 0x42014: 0x21000002
+[    5.016697] R 0x64010: 0x2500e1
+[    5.020453] W 0x64014: 0x50005000
+[    5.023264] W 0x64010: 0xd24500e1
+[    5.027064] R 0x64010: 0x802500e1
+[    5.029974] R 0x64010: 0x402500e1
+[    5.033807] W 0x64010: 0x522500e1
+[    5.036617] R 0x64014: 0x530000
+[    5.039387] R 0xc7200: 0x80000008
+[    5.043184] R 0xc7200: 0x80000008
+[    5.046982] R 0x42014: 0x21000002
+[    5.049789] R 0x64010: 0x2500e1
+[    5.052553] W 0x64014: 0x50005000
+[    5.056351] W 0x64010: 0xd24500e1
+[    5.060150] R 0x64010: 0x802500e1
+[    5.063058] R 0x64010: 0x402500e1
+[    5.065896] W 0x64010: 0x522500e1
+[    5.069695] R 0x64014: 0x550000
+[    5.072458] R 0xc7200: 0x80000008
+[    5.076256] R 0xc7200: 0x80000008
+[    5.079064] R 0x42014: 0x21000002
+[    5.082929] R 0x64010: 0x2500e1
+[    5.085692] W 0x64014: 0x50005000
+[    5.089491] W 0x64010: 0xd24500e1
+[    5.092299] R 0x64010: 0x802500e1
+[    5.096196] R 0x64010: 0x402500e1
+[    5.098970] W 0x64010: 0x522500e1
+[    5.102768] R 0x64014: 0x4e0000
+[    5.105532] R 0xc7200: 0x80000008
+[    5.109334] R 0xc7200: 0x80000008
+[    5.112139] R 0x42014: 0x21000002
+[    5.115938] R 0x64010: 0x2500e1
+[    5.118737] W 0x64014: 0x50005000
+[    5.122567] W 0x64010: 0xd24500e1
+[    5.125373] R 0x64010: 0x802500e1
+[    5.129272] R 0x64010: 0x402500e1
+[    5.132110] W 0x64010: 0x522500e1
+[    5.135908] R 0x64014: 0x470000
+[    5.138674] R 0xc7200: 0x80000008
+[    5.142473] R 0xc7200: 0x80000008
+[    5.145279] R 0x42014: 0x21000002
+[    5.149076] R 0x64010: 0x2500e1
+[    5.151841] W 0x64014: 0x50005000
+[    5.155640] W 0x64010: 0xd24500e1
+[    5.158447] R 0x64010: 0x802500e1
+[    5.162344] R 0x64010: 0x402500e1
+[    5.165182] W 0x64010: 0x522500e1
+[    5.168982] R 0x64014: 0xa0000
+[    5.171724] R 0xc7200: 0x80000008
+[    5.175523] R 0xc7200: 0x80000008
+[    5.178329] R 0x42014: 0x21000002
+[    5.182128] R 0x64010: 0x2500e1
+[    5.184891] W 0x64014: 0x50005000
+[    5.188688] W 0x64010: 0xd24500e1
+[    5.191496] R 0x64010: 0x802500e1
+[    5.195394] R 0x64010: 0x402500e1
+[    5.198232] W 0x64010: 0x522500e1
+[    5.202030] R 0x64014: 0x200000
+[    5.204795] R 0xc7200: 0x80000008
+[    5.208591] R 0xc7200: 0x80000008
+[    5.211397] R 0x42014: 0x21000002
+[    5.215196] R 0x64010: 0x2500e1
+[    5.217960] W 0x64014: 0x50005000
+[    5.221757] W 0x64010: 0xd24500e1
+[    5.224565] R 0x64010: 0x802500e1
+[    5.228462] R 0x64010: 0x402500e1
+[    5.231238] W 0x64010: 0x522500e1
+[    5.235033] R 0x64014: 0x200000
+[    5.237798] R 0xc7200: 0x80000008
+[    5.241594] R 0xc7200: 0x80000008
+[    5.244402] R 0x42014: 0x21000002
+[    5.248198] R 0x64010: 0x2500e1
+[    5.250962] W 0x64014: 0x50005000
+[    5.254760] W 0x64010: 0xd24500e1
+[    5.257568] R 0x64010: 0x802500e1
+[    5.261467] R 0x64010: 0x402500e1
+[    5.264306] W 0x64010: 0x522500e1
+[    5.268104] R 0x64014: 0x200000
+[    5.270869] R 0xc7200: 0x80000008
+[    5.273677] R 0xc7200: 0x80000008
+[    5.277474] R 0x42014: 0x21000002
+[    5.281273] R 0x64010: 0x2500e1
+[    5.284036] W 0x64014: 0x50005000
+[    5.286845] W 0x64010: 0xd24500e1
+[    5.290643] R 0x64010: 0x802500e1
+[    5.294539] R 0x64010: 0x402500e1
+[    5.297311] W 0x64010: 0x522500e1
+[    5.301110] R 0x64014: 0x200000
+[    5.303874] R 0xc7200: 0x80000008
+[    5.306681] R 0xc7200: 0x80000008
+[    5.310477] R 0x42014: 0x21000002
+[    5.314274] R 0x64010: 0x2500e1
+[    5.317038] W 0x64014: 0x50005000
+[    5.319845] W 0x64010: 0xd24500e1
+[    5.323643] R 0x64010: 0x802500e1
+[    5.327541] R 0x64010: 0x402500e1
+[    5.330379] W 0x64010: 0x522500e1
+[    5.333187] R 0x64014: 0x200000
+[    5.336941] R 0xc7200: 0x80000008
+[    5.339749] R 0xc7200: 0x80000008
+[    5.343545] R 0x42014: 0x21000002
+[    5.346351] R 0x64010: 0x2500e1
+[    5.350106] W 0x64014: 0x50005000
+[    5.352916] W 0x64010: 0xd24500e1
+[    5.356716] R 0x64010: 0x802500e1
+[    5.359623] R 0x64010: 0x402500e1
+[    5.363323] W 0x64010: 0x522500e1
+[    5.367123] R 0x64014: 0x0
+[    5.369779] R 0xc7200: 0x80000008
+[    5.372588] R 0xc7200: 0x80000008
+[    5.376388] R 0x42014: 0x21000002
+[    5.379196] R 0x64010: 0x2500e1
+[    5.382953] W 0x64014: 0x50005000
+[    5.385764] W 0x64010: 0xd24500e1
+[    5.389697] R 0x64010: 0x802500e1
+[    5.392605] R 0x64010: 0x402500e1
+[    5.395446] W 0x64010: 0x522500e1
+[    5.399247] R 0x64014: 0x0
+[    5.401902] R 0xc7200: 0x80000008
+[    5.405701] R 0xc7200: 0x80000008
+[    5.408509] R 0x42014: 0x21000002
+[    5.412312] R 0x64010: 0x2500e1
+[    5.415078] W 0x64014: 0x50005000
+[    5.418881] W 0x64010: 0xd24500e1
+[    5.421691] R 0x64010: 0x802500e1
+[    5.425589] R 0x64010: 0x402500e1
+[    5.428363] W 0x64010: 0x522500e1
+[    5.432165] R 0x64014: 0x0
+[    5.434820] R 0xc7200: 0x80000008
+[    5.437630] R 0xc7200: 0x80000008
+[    5.441430] R 0x42014: 0x21000002
+[    5.444240] R 0x64010: 0x2500e1
+[    5.447998] W 0x64014: 0x50005000
+[    5.450807] W 0x64010: 0xd24500e1
+[    5.454609] R 0x64010: 0x802500e1
+[    5.457517] R 0x64010: 0x402500e1
+[    5.461283] W 0x64010: 0x522500e1
+[    5.464093] R 0x64014: 0xfe0000
+[    5.467848] R 0xc7200: 0x80000008
+[    5.470657] R 0xc7200: 0x80000008
+[    5.474458] R 0x42014: 0x21000002
+[    5.477267] R 0x64010: 0x2500e1
+[    5.481025] W 0x64014: 0x50005000
+[    5.483835] W 0x64010: 0xd24500e1
+[    5.487637] R 0x64010: 0x802500e1
+[    5.490546] R 0x64010: 0x402500e1
+[    5.494380] W 0x64010: 0x522500e1
+[    5.497190] R 0x64014: 0x0
+[    5.499847] R 0xc7200: 0x80000008
+[    5.503648] R 0xc7200: 0x80000008
+[    5.506458] R 0x42014: 0x21000002
+[    5.510260] R 0x64010: 0x2500e1
+[    5.513027] W 0x64014: 0x50005000
+[    5.516828] W 0x64010: 0xd24500e1
+[    5.519635] R 0x64010: 0x802500e1
+[    5.523535] R 0x64010: 0x402500e1
+[    5.526377] W 0x64010: 0x522500e1
+[    5.530178] R 0x64014: 0x310000
+[    5.532943] R 0xc7200: 0x80000008
+[    5.536743] R 0xc7200: 0x80000008
+[    5.539552] R 0x42014: 0x21000002
+[    5.543349] R 0x64010: 0x2500e1
+[    5.546113] W 0x64014: 0x50005000
+[    5.549911] W 0x64010: 0xd24500e1
+[    5.552719] R 0x64010: 0x802500e1
+[    5.556616] R 0x64010: 0x402500e1
+[    5.559455] W 0x64010: 0x522500e1
+[    5.563255] R 0x64014: 0x320000
+[    5.566020] R 0xc7200: 0x80000008
+[    5.569819] R 0xc7200: 0x80000008
+[    5.572626] R 0x42014: 0x21000002
+[    5.576425] R 0x64010: 0x2500e1
+[    5.579189] W 0x64014: 0x50005000
+[    5.582990] W 0x64010: 0xd24500e1
+[    5.585795] R 0x64010: 0x802500e1
+[    5.589691] R 0x64010: 0x402500e1
+[    5.592465] W 0x64010: 0x522500e1
+[    5.596264] R 0x64014: 0x310000
+[    5.599027] R 0xc7200: 0x80000008
+[    5.602825] R 0xc7200: 0x80000008
+[    5.605632] R 0x42014: 0x21000002
+[    5.609431] R 0x64010: 0x2500e1
+[    5.612195] W 0x64014: 0x50005000
+[    5.615994] W 0x64010: 0xd24500e1
+[    5.618802] R 0x64010: 0x802500e1
+[    5.622700] R 0x64010: 0x402500e1
+[    5.625540] W 0x64010: 0x522500e1
+[    5.629339] R 0x64014: 0x410000
+[    5.632104] R 0xc7200: 0x80000008
+[    5.635903] R 0xc7200: 0x80000008
+[    5.638714] R 0x42014: 0x21000002
+[    5.642514] R 0x64010: 0x2500e1
+[    5.645278] W 0x64014: 0x50005000
+[    5.649077] W 0x64010: 0xd24500e1
+[    5.651886] R 0x64010: 0x802500e1
+[    5.655783] R 0x64010: 0x402500e1
+[    5.658689] W 0x64010: 0x522500e1
+[    5.662489] R 0x64014: 0x540000
+[    5.665253] R 0xc7200: 0x80000008
+[    5.669051] R 0xc7200: 0x80000008
+[    5.671858] R 0x42014: 0x21000002
+[    5.675657] R 0x64010: 0x2500e1
+[    5.678422] W 0x64014: 0x50005000
+[    5.682220] W 0x64010: 0xd24500e1
+[    5.685028] R 0x64010: 0x802500e1
+[    5.688925] R 0x64010: 0x402500e1
+[    5.691764] W 0x64010: 0x522500e1
+[    5.695562] R 0x64014: 0x310000
+[    5.698326] R 0xc7200: 0x80000008
+[    5.701134] R 0xc7200: 0x80000008
+[    5.704931] R 0x42014: 0x21000002
+[    5.708730] R 0x64010: 0x2500e1
+[    5.711494] W 0x64014: 0x50005000
+[    5.714301] W 0x64010: 0xd24500e1
+[    5.718100] R 0x64010: 0x802500e1
+[    5.721996] R 0x64010: 0x402500e1
+[    5.724769] W 0x64010: 0x522500e1
+[    5.728568] R 0x64014: 0x310000
+[    5.731332] R 0xc7200: 0x80000008
+[    5.734141] R 0xc7200: 0x80000008
+[    5.737938] R 0x42014: 0x21000002
+[    5.741735] R 0x64010: 0x2500e1
+[    5.744499] W 0x64014: 0x50005000
+[    5.747306] W 0x64010: 0xd24500e1
+[    5.751106] R 0x64010: 0x802500e1
+[    5.755004] R 0x64010: 0x402500e1
+[    5.757780] W 0x64010: 0x522500e1
+[    5.761580] R 0x64014: 0x2d0000
+[    5.764346] R 0xc7200: 0x80000008
+[    5.767155] R 0xc7200: 0x80000008
+[    5.770955] R 0x42014: 0x21000002
+[    5.774752] R 0x64010: 0x2500e1
+[    5.777514] W 0x64014: 0x50005000
+[    5.780322] W 0x64010: 0xd24500e1
+[    5.784120] R 0x64010: 0x802500e1
+[    5.788017] R 0x64010: 0x402500e1
+[    5.790856] W 0x64010: 0x522500e1
+[    5.793665] R 0x64014: 0x380000
+[    5.797420] R 0xc7200: 0x80000008
+[    5.800227] R 0xc7200: 0x80000008
+[    5.804025] R 0x42014: 0x21000002
+[    5.806834] R 0x64010: 0x2500e1
+[    5.810588] W 0x64014: 0x50005000
+[    5.813395] W 0x64010: 0xd24500e1
+[    5.817194] R 0x64010: 0x802500e1
+[    5.820101] R 0x64010: 0x402500e1
+[    5.823800] W 0x64010: 0x522500e1
+[    5.827597] R 0x64014: 0x300000
+[    5.830361] R 0xc7200: 0x80000008
+[    5.833169] R 0xc7200: 0x80000008
+[    5.836966] R 0x42014: 0x21000002
+[    5.840764] R 0x64010: 0x2500e1
+[    5.843528] W 0x64014: 0x50005000
+[    5.846337] W 0x64010: 0xd24500e1
+[    5.850136] R 0x64010: 0x802500e1
+[    5.854033] R 0x64010: 0x402500e1
+[    5.856808] W 0x64010: 0x522500e1
+[    5.860607] R 0x64014: 0x310000
+[    5.863369] R 0xc7200: 0x80000008
+[    5.866179] R 0xc7200: 0x80000008
+[    5.869976] R 0x42014: 0x21000002
+[    5.873775] R 0x64010: 0x2500e1
+[    5.876539] W 0x64014: 0x50005000
+[    5.879348] W 0x64010: 0xd24500e1
+[    5.883148] R 0x64010: 0x802500e1
+[    5.887046] R 0x64010: 0x402500e1
+[    5.889820] W 0x64010: 0x522500e1
+[    5.893618] R 0x64014: 0xa0000
+[    5.896360] R 0xc7200: 0x80000008
+[    5.899168] R 0xc7200: 0x80000008
+[    5.902966] R 0x42014: 0x21000002
+[    5.905774] R 0x64010: 0x2500e1
+[    5.909528] W 0x64014: 0x50005000
+[    5.912337] W 0x64010: 0xd24500e1
+[    5.916134] R 0x64010: 0x802500e1
+[    5.919042] R 0x64010: 0x402500e1
+[    5.922741] W 0x64010: 0x522500e1
+[    5.925945] R 0x64014: 0x200000
+[    5.929699] R 0xc7200: 0x80000008
+[    5.932507] R 0xc7200: 0x80000008
+[    5.936304] R 0x42014: 0x21000002
+[    5.939112] R 0x64010: 0x2500e1
+[    5.942865] W 0x64014: 0x50005000
+[    5.945673] W 0x64010: 0xd24500e1
+[    5.949471] R 0x64010: 0x802500e1
+[    5.952379] R 0x64010: 0x402500e1
+[    5.956210] W 0x64010: 0x522500e1
+[    5.959021] R 0x64014: 0x0
+[    5.961676] R 0xc7200: 0x80000008
+[    5.965479] R 0xc7200: 0x80000008
+[    5.968286] R 0x42014: 0x21000002
+[    5.972084] R 0x64010: 0x2500e1
+[    5.974848] W 0x64014: 0x50005000
+[    5.978648] W 0x64010: 0xd24500e1
+[    5.981457] R 0x64010: 0x802500e1
+[    5.985353] R 0x64010: 0x402500e1
+[    5.988128] W 0x64010: 0x522500e1
+[    5.991926] R 0x64014: 0x460000
+[    5.994691] R 0xc7200: 0x80000008
+[    5.998488] R 0xc7200: 0x80000008
+[    6.001295] R 0x42014: 0x21000002
+[    6.005095] R 0x64010: 0x2500e1
+[    6.007860] W 0x64014: 0x10005000
+[    6.011661] W 0x64010: 0xd23500e1
+[    6.014467] R 0x64010: 0x802500e1
+[    6.018366] R 0x64010: 0x401500e1
+[    6.021205] W 0x64010: 0x521500e1
+[    6.025007] R 0x64014: 0x0
+[    6.027675] Switching to clocksource tsc
+[    6.027677] [drm] Adding LVDS downclock mode
+[    6.027680] R 0x48254: 0x200
+[    6.027684] R 0xc8254: 0x4000000
+[    6.027710] R 0x48254: 0x200
+[    6.027719] R 0xc2014: 0x4
+[    6.027722] R 0x64100: 0x0
+[    6.027746] R 0x64100: 0x0
+[    6.027769] R 0xc6204: 0x18
+[    6.027771] R 0xe4110: 0x3000c
+[    6.027772] W 0xe4114: 0x40000000
+[    6.027777] W 0xe4110: 0xd235000c
+[    6.027784] R 0xe4110: 0x8145000c
+[    6.027887] R 0xe4110: 0x8145000c
+[    6.027990] R 0xe4110: 0x8145000c
+[    6.028093] R 0xe4110: 0x8145000c
+[    6.028196] R 0xe4110: 0x8145000c
+[    6.028299] R 0xe4110: 0x5145000c
+[    6.028300] W 0xe4110: 0x5345000c
+[    6.028305] W 0xe4114: 0x40000000
+[    6.028310] W 0xe4110: 0xd235000c
+[    6.028318] R 0xe4110: 0x8145000c
+[    6.028421] R 0xe4110: 0x8145000c
+[    6.028524] R 0xe4110: 0x8145000c
+[    6.028627] R 0xe4110: 0x8145000c
+[    6.028729] R 0xe4110: 0x8145000c
+[    6.028832] R 0xe4110: 0x5145000c
+[    6.028833] W 0xe4110: 0x5345000c
+[    6.028838] W 0xe4114: 0x40000000
+[    6.028843] W 0xe4110: 0xd235000c
+[    6.028851] R 0xe4110: 0x8145000c
+[    6.028954] R 0xe4110: 0x8145000c
+[    6.029057] R 0xe4110: 0x8145000c
+[    6.029160] R 0xe4110: 0x8145000c
+[    6.029262] R 0xe4110: 0x8145000c
+[    6.029365] R 0xe4110: 0x5145000c
+[    6.029366] W 0xe4110: 0x5345000c
+[    6.029371] W 0xe4114: 0x40000000
+[    6.029376] W 0xe4110: 0xd235000c
+[    6.029384] R 0xe4110: 0x8145000c
+[    6.029487] R 0xe4110: 0x8145000c
+[    6.029590] R 0xe4110: 0x8145000c
+[    6.029693] R 0xe4110: 0x8145000c
+[    6.029796] R 0xe4110: 0x8145000c
+[    6.029899] R 0xe4110: 0x5145000c
+[    6.029900] W 0xe4110: 0x5345000c
+[    6.029904] W 0xe4114: 0x40000000
+[    6.029909] W 0xe4110: 0xd235000c
+[    6.029917] R 0xe4110: 0x8145000c
+[    6.030020] R 0xe4110: 0x8145000c
+[    6.030123] R 0xe4110: 0x8145000c
+[    6.030226] R 0xe4110: 0x8145000c
+[    6.030329] R 0xe4110: 0x8145000c
+[    6.030432] R 0xe4110: 0x5145000c
+[    6.030433] W 0xe4110: 0x5345000c
+[    6.030440] R 0xc6204: 0x18
+[    6.030442] R 0xe4110: 0x145000c
+[    6.030443] W 0xe4114: 0x0
+[    6.030447] W 0xe4110: 0xd235000c
+[    6.030455] R 0xe4110: 0x8145000c
+[    6.030558] R 0xe4110: 0x8145000c
+[    6.030661] R 0xe4110: 0x8145000c
+[    6.030764] R 0xe4110: 0x8145000c
+[    6.030867] R 0xe4110: 0x8145000c
+[    6.030970] R 0xe4110: 0x5145000c
+[    6.030970] W 0xe4110: 0x5345000c
+[    6.030975] W 0xe4114: 0x0
+[    6.030980] W 0xe4110: 0xd235000c
+[    6.030988] R 0xe4110: 0x8145000c
+[    6.031091] R 0xe4110: 0x8145000c
+[    6.031194] R 0xe4110: 0x8145000c
+[    6.031297] R 0xe4110: 0x8145000c
+[    6.031400] R 0xe4110: 0x8145000c
+[    6.031503] R 0xe4110: 0x5145000c
+[    6.031504] W 0xe4110: 0x5345000c
+[    6.031508] W 0xe4114: 0x0
+[    6.031514] W 0xe4110: 0xd235000c
+[    6.031521] R 0xe4110: 0x8145000c
+[    6.031623] R 0xe4110: 0x8145000c
+[    6.031726] R 0xe4110: 0x8145000c
+[    6.031829] R 0xe4110: 0x8145000c
+[    6.031932] R 0xe4110: 0x8145000c
+[    6.032034] R 0xe4110: 0x5145000c
+[    6.032035] W 0xe4110: 0x5345000c
+[    6.032040] W 0xe4114: 0x0
+[    6.032045] W 0xe4110: 0xd235000c
+[    6.032053] R 0xe4110: 0x8145000c
+[    6.032156] R 0xe4110: 0x8145000c
+[    6.032259] R 0xe4110: 0x8145000c
+[    6.032362] R 0xe4110: 0x8145000c
+[    6.032465] R 0xe4110: 0x8145000c
+[    6.032568] R 0xe4110: 0x5145000c
+[    6.032568] W 0xe4110: 0x5345000c
+[    6.032573] W 0xe4114: 0x0
+[    6.032578] W 0xe4110: 0xd235000c
+[    6.032586] R 0xe4110: 0x8145000c
+[    6.032688] R 0xe4110: 0x8145000c
+[    6.032790] R 0xe4110: 0x8145000c
+[    6.032893] R 0xe4110: 0x8145000c
+[    6.032996] R 0xe4110: 0x8145000c
+[    6.033099] R 0xe4110: 0x5145000c
+[    6.033099] W 0xe4110: 0x5345000c
+[    6.036070] R 0x120010: 0x0
+[    6.036073] R 0x45000: 0x16661056
+[    6.036074] W 0x45000: 0x16663056
+[    6.036077] R 0x101000: 0x0
+[    6.036077] W 0x101000: 0x1
+[    6.036080] W 0x4030: 0x200020
+[    6.036104] W 0x101008: 0x1
+[    6.036108] W 0x4080: 0x0
+[    6.036156] W 0x101008: 0x1
+[    6.036202] W 0x203c: 0x0
+[    6.036212] W 0x2034: 0x0
+[    6.036216] W 0x2030: 0x0
+[    6.036220] R 0x2034: 0x0
+[    6.036221] W 0x2038: 0x1000
+[    6.036224] W 0x203c: 0x1f001
+[    6.036228] R 0x203c: 0x1f001
+[    6.036230] R 0x2038: 0x1000
+[    6.036231] R 0x2034: 0x0
+[    6.036232] R 0x2034: 0x0
+[    6.036234] R 0x2030: 0x0
+[    6.036242] W 0x209c: 0x400040
+[    6.036245] W 0x209c: 0x40004000
+[    6.036248] W 0x229c: 0x28000800
+[    6.036257] W 0x101008: 0x1
+[    6.036260] W 0x20c0: 0x800080
+[    6.036264] W 0x20a8: 0xffffffdf
+[    6.036279] W 0x101008: 0x1
+[    6.036283] W 0x4180: 0x22000
+[    6.036328] W 0x101008: 0x1
+[    6.036485] W 0x1203c: 0x0
+[    6.036496] W 0x12034: 0x0
+[    6.036500] W 0x12030: 0x0
+[    6.036504] R 0x12034: 0x0
+[    6.036505] W 0x12038: 0x23000
+[    6.036508] W 0x1203c: 0x1f001
+[    6.036512] R 0x1203c: 0x1f001
+[    6.036514] R 0x12038: 0x23000
+[    6.036515] R 0x12034: 0x0
+[    6.036517] R 0x12034: 0x0
+[    6.036518] R 0x12030: 0x0
+[    6.036533] W 0x101008: 0x1
+[    6.036536] W 0x4280: 0x43000
+[    6.036580] W 0x101008: 0x1
+[    6.036744] W 0x2203c: 0x0
+[    6.036754] W 0x22034: 0x0
+[    6.036761] W 0x22030: 0x0
+[    6.036769] R 0x22034: 0x0
+[    6.036770] W 0x22038: 0x44000
+[    6.036773] W 0x2203c: 0x1f001
+[    6.036782] R 0x2203c: 0x1f001
+[    6.036786] R 0x22038: 0x44000
+[    6.036788] R 0x22034: 0x0
+[    6.036791] R 0x22034: 0x0
+[    6.036793] R 0x22030: 0x0
+[    6.036902] R 0x21a8: 0xe54d430d
+[    6.037012] R 0x21a8: 0xe54d430d
+[    6.037022] W 0x101008: 0x1
+[    6.037027] W 0x2030: 0x18
+[    6.037046] W 0x4090: 0x18
+[    6.037049] W 0x229c: 0x2000200
+[    6.037053] W 0x2220: 0xffffffff
+[    6.037056] W 0x2228: 0x7fe00000
+[    6.037059] W 0x1229c: 0x2000200
+[    6.037063] W 0x12220: 0xffffffff
+[    6.037066] W 0x12228: 0x7fe00000
+[    6.037070] W 0x2229c: 0x2000200
+[    6.037094] W 0x22220: 0xffffffff
+[    6.037101] W 0x22228: 0x7fe00000
+[    6.037108] R 0x45404: 0x40000000
+[    6.037108] W 0x45404: 0x80000000
+[    6.037113] R 0x45400: 0xc0000000
+[    6.037114] W 0x45400: 0x0
+[    6.037116] W 0x64e00: 0xffffff
+[    6.037120] W 0x64e04: 0x6000e
+[    6.037123] W 0x64e08: 0xd75fff
+[    6.037127] W 0x64e0c: 0x5000a
+[    6.037130] W 0x64e10: 0xc30fff
+[    6.037134] W 0x64e14: 0x40006
+[    6.037137] W 0x64e18: 0x80aaafff
+[    6.037141] W 0x64e1c: 0xb0000
+[    6.037144] W 0x64e20: 0xffffff
+[    6.037148] W 0x64e24: 0x5000a
+[    6.037151] W 0x64e28: 0xd75fff
+[    6.037155] W 0x64e2c: 0xc0004
+[    6.037158] W 0x64e30: 0x80c30fff
+[    6.037161] W 0x64e34: 0xb0000
+[    6.037165] W 0x64e38: 0xffffff
+[    6.037168] W 0x64e3c: 0x40006
+[    6.037172] W 0x64e40: 0x80d75fff
+[    6.037175] W 0x64e44: 0xb0000
+[    6.037179] W 0x64e48: 0xffffff
+[    6.037182] W 0x64e4c: 0x40006
+[    6.037186] W 0x64e60: 0xffffff
+[    6.037189] W 0x64e64: 0x6000e
+[    6.037192] W 0x64e68: 0xd75fff
+[    6.037196] W 0x64e6c: 0x5000a
+[    6.037199] W 0x64e70: 0xc30fff
+[    6.037203] W 0x64e74: 0x40006
+[    6.037206] W 0x64e78: 0x80aaafff
+[    6.037210] W 0x64e7c: 0xb0000
+[    6.037213] W 0x64e80: 0xffffff
+[    6.037217] W 0x64e84: 0x5000a
+[    6.037220] W 0x64e88: 0xd75fff
+[    6.037224] W 0x64e8c: 0xc0004
+[    6.037227] W 0x64e90: 0x80c30fff
+[    6.037230] W 0x64e94: 0xb0000
+[    6.037234] W 0x64e98: 0xffffff
+[    6.037237] W 0x64e9c: 0x40006
+[    6.037241] W 0x64ea0: 0x80d75fff
+[    6.037244] W 0x64ea4: 0xb0000
+[    6.037248] W 0x64ea8: 0xffffff
+[    6.037251] W 0x64eac: 0x40006
+[    6.037255] W 0x64ec0: 0xffffff
+[    6.037258] W 0x64ec4: 0x6000e
+[    6.037262] W 0x64ec8: 0xd75fff
+[    6.037265] W 0x64ecc: 0x5000a
+[    6.037268] W 0x64ed0: 0xc30fff
+[    6.037272] W 0x64ed4: 0x40006
+[    6.037275] W 0x64ed8: 0x80aaafff
+[    6.037279] W 0x64edc: 0xb0000
+[    6.037282] W 0x64ee0: 0xffffff
+[    6.037286] W 0x64ee4: 0x5000a
+[    6.037289] W 0x64ee8: 0xd75fff
+[    6.037293] W 0x64eec: 0xc0004
+[    6.037296] W 0x64ef0: 0x80c30fff
+[    6.037300] W 0x64ef4: 0xb0000
+[    6.037303] W 0x64ef8: 0xffffff
+[    6.037306] W 0x64efc: 0x40006
+[    6.037310] W 0x64f00: 0x80d75fff
+[    6.037313] W 0x64f04: 0xb0000
+[    6.037317] W 0x64f08: 0xffffff
+[    6.037320] W 0x64f0c: 0x40006
+[    6.037324] W 0x64f20: 0xffffff
+[    6.037327] W 0x64f24: 0x6000e
+[    6.037331] W 0x64f28: 0xd75fff
+[    6.037334] W 0x64f2c: 0x5000a
+[    6.037338] W 0x64f30: 0xc30fff
+[    6.037341] W 0x64f34: 0x40006
+[    6.037344] W 0x64f38: 0x80aaafff
+[    6.037348] W 0x64f3c: 0xb0000
+[    6.037351] W 0x64f40: 0xffffff
+[    6.037355] W 0x64f44: 0x5000a
+[    6.037358] W 0x64f48: 0xd75fff
+[    6.037362] W 0x64f4c: 0xc0004
+[    6.037365] W 0x64f50: 0x80c30fff
+[    6.037369] W 0x64f54: 0xb0000
+[    6.037372] W 0x64f58: 0xffffff
+[    6.037376] W 0x64f5c: 0x40006
+[    6.037379] W 0x64f60: 0x80d75fff
+[    6.037382] W 0x64f64: 0xb0000
+[    6.037386] W 0x64f68: 0xffffff
+[    6.037389] W 0x64f6c: 0x40006
+[    6.037393] W 0x64f80: 0xffffff
+[    6.037396] W 0x64f84: 0x7000e
+[    6.037400] W 0x64f88: 0xd75fff
+[    6.037403] W 0x64f8c: 0xf000a
+[    6.037407] W 0x64f90: 0xc30fff
+[    6.037410] W 0x64f94: 0x60006
+[    6.037413] W 0x64f98: 0xaaafff
+[    6.037417] W 0x64f9c: 0x1e0000
+[    6.037420] W 0x64fa0: 0xffffff
+[    6.037424] W 0x64fa4: 0xf000a
+[    6.037427] W 0x64fa8: 0xd75fff
+[    6.037431] W 0x64fac: 0x160004
+[    6.037434] W 0x64fb0: 0xc30fff
+[    6.037438] W 0x64fb4: 0x1e0000
+[    6.037441] W 0x64fb8: 0xffffff
+[    6.037445] W 0x64fbc: 0x60006
+[    6.037448] W 0x64fc0: 0xd75fff
+[    6.037452] W 0x64fc4: 0x1e0000
+[    6.037455] W 0x64fc8: 0xffffff
+[    6.037458] W 0x64fcc: 0x40006
+[    6.037462] W 0x45110: 0x0
+[    6.037465] W 0x4510c: 0x0
+[    6.037469] W 0x45108: 0x0
+[    6.037472] W 0x9404: 0x2000
+[    6.037476] W 0x7010: 0x4000400
+[    6.037479] W 0xb01c: 0x3c4fff8c
+[    6.037482] W 0xb030: 0x20000000
+[    6.037618] R 0x9030: 0xc00
+[    6.037619] W 0x9030: 0xc00
+[    6.037641] R 0x70180: 0x0
+[    6.037642] W 0x70180: 0x4000
+[    6.037646] R 0x7019c: 0x0
+[    6.037647] W 0x7019c: 0x0
+[    6.037651] R 0x71180: 0x0
+[    6.037652] W 0x71180: 0x4000
+[    6.037656] R 0x7119c: 0x0
+[    6.037657] W 0x7119c: 0x0
+[    6.037661] R 0x72180: 0x0
+[    6.037662] W 0x72180: 0x4000
+[    6.037667] R 0x7219c: 0x0
+[    6.037667] W 0x7219c: 0x0
+[    6.037845] R 0x20a0: 0x28a01010
+[    6.037846] W 0x20a0: 0x28a00000
+[    6.037849] W 0x7004: 0x400040
+[    6.037887] R 0x907c: 0x0
+[    6.037888] W 0x907c: 0x10
+[    6.037895] R 0x45280: 0x0
+[    6.037896] W 0x45280: 0x7
+[    6.037901] R 0xc2020: 0x0
+[    6.037902] W 0xc2020: 0x1000
+[    6.037908] R 0x6f400: 0x30000
+[    6.037910] R 0x70008: 0x0
+[    6.037912] R 0x71008: 0x0
+[    6.037913] R 0x72008: 0x0
+[    6.037915] R 0x64000: 0x91
+[    6.037917] R 0x64100: 0x0
+[    6.037919] R 0x64000: 0x91
+[    6.037920] R 0x64100: 0x0
+[    6.037922] R 0x64100: 0x0
+[    6.037924] R 0x70008: 0x0
+[    6.037924] W 0x70008: 0x0
+[    6.037929] R 0x71008: 0x0
+[    6.037929] W 0x71008: 0x0
+[    6.037934] R 0x72008: 0x0
+[    6.037935] W 0x72008: 0x0
+[    6.037939] R 0x64000: 0x91
+[    6.037941] R 0x64100: 0x0
+[    6.037943] R 0x64100: 0x0
+[    6.037944] R 0x64000: 0x91
+[    6.037946] R 0x64100: 0x0
+[    6.037948] R 0x70008: 0x0
+[    6.037949] R 0x71008: 0x0
+[    6.037951] R 0x72008: 0x0
+[    6.037953] R 0x70008: 0x0
+[    6.037954] W 0x70008: 0x0
+[    6.037958] R 0x71008: 0x0
+[    6.037959] W 0x71008: 0x0
+[    6.037963] R 0x72008: 0x0
+[    6.037964] W 0x72008: 0x0
+[    6.037968] R 0x70008: 0x0
+[    6.037969] W 0x70008: 0x0
+[    6.037974] R 0x71008: 0x0
+[    6.037974] W 0x71008: 0x0
+[    6.037979] R 0x72008: 0x0
+[    6.037980] W 0x72008: 0x0
+[    6.037984] R 0x70008: 0x0
+[    6.037985] W 0x70008: 0x0
+[    6.037989] R 0x71008: 0x0
+[    6.037990] W 0x71008: 0x0
+[    6.037994] R 0x72008: 0x0
+[    6.037995] W 0x72008: 0x0
+[    6.037999] W 0x2098: 0xeffe
+[    6.038007] W 0x44004: 0xffffffff
+[    6.038010] W 0x4400c: 0x0
+[    6.038015] W 0x44014: 0xffffffff
+[    6.038019] W 0x4401c: 0x0
+[    6.038024] W 0xc4004: 0xffffffff
+[    6.038028] W 0xc400c: 0x0
+[    6.038051] R 0x44008: 0x0
+[    6.038052] W 0x44008: 0x0
+[    6.038054] W 0x44004: 0x4fffdef7
+[    6.038058] W 0x4400c: 0xb0002529
+[    6.038065] R 0x44018: 0x0
+[    6.038065] W 0x44018: 0x0
+[    6.038068] W 0x44014: 0xffffffdf
+[    6.038072] W 0x4401c: 0x401021
+[    6.038079] R 0xc4008: 0x0
+[    6.038080] W 0xc4008: 0x0
+[    6.038083] W 0xc4004: 0xff17ffff
+[    6.038087] W 0xc400c: 0xe80000
+[    6.038095] R 0xc4030: 0x100010
+[    6.038096] W 0xc4030: 0x101010
+[    6.038108] R 0xc7204: 0xabcd000f
+[    6.038111] R 0xc7200: 0x80000008
+[    6.038113] R 0xc7200: 0x80000008
+[    6.038115] R 0x42014: 0x21000002
+[    6.038116] R 0x64010: 0x1500e1
+[    6.038117] W 0x64014: 0x90040002
+[    6.038120] W 0x64010: 0xd24500e1
+[    6.038125] R 0x64010: 0x801500e1
+[    6.038227] R 0x64010: 0x801500e1
+[    6.038330] R 0x64010: 0x801500e1
+[    6.038431] R 0x64010: 0x801500e1
+[    6.038533] R 0x64010: 0x803500e1
+[    6.038641] R 0x64010: 0x404500e1
+[    6.038642] W 0x64010: 0x524500e1
+[    6.038646] R 0x64014: 0xe04c
+[    6.038649] R 0xc7200: 0x80000008
+[    6.038651] R 0xc7200: 0x80000008
+[    6.038653] R 0x42014: 0x21000002
+[    6.038654] R 0x64010: 0x4500e1
+[    6.038655] W 0x64014: 0x90050002
+[    6.038658] W 0x64010: 0xd24500e1
+[    6.038663] R 0x64010: 0x804500e1
+[    6.038764] R 0x64010: 0x804500e1
+[    6.038866] R 0x64010: 0x804500e1
+[    6.038969] R 0x64010: 0x804500e1
+[    6.039070] R 0x64010: 0x802500e1
+[    6.039172] R 0x64010: 0x404500e1
+[    6.039173] W 0x64010: 0x524500e1
+[    6.039177] R 0x64014: 0xe04c
+[    6.039185] [drm] Adding LVDS downclock mode
+[    6.039191] R 0xc4000: 0xc00000
+[    6.039195] R 0xc6204: 0x18
+[    6.039198] R 0xe4110: 0x145000c
+[    6.039198] W 0xe4114: 0x80060000
+[    6.039203] W 0xe4118: 0x1000000
+[    6.039208] W 0xe4110: 0xd255000c
+[    6.039216] R 0xe4110: 0x8145000c
+[    6.039319] R 0xe4110: 0x8145000c
+[    6.039422] R 0xe4110: 0x8145000c
+[    6.039525] R 0xe4110: 0x8145000c
+[    6.039638] R 0xe4110: 0x8145000c
+[    6.039741] R 0xe4110: 0x5145000c
+[    6.039742] W 0xe4110: 0x5345000c
+[    6.039747] W 0xe4114: 0x80060000
+[    6.039752] W 0xe4118: 0x1000000
+[    6.039757] W 0xe4110: 0xd255000c
+[    6.039763] R 0xe4110: 0x8145000c
+[    6.039867] R 0xe4110: 0x8145000c
+[    6.039970] R 0xe4110: 0x8145000c
+[    6.040072] R 0xe4110: 0x8145000c
+[    6.040176] R 0xe4110: 0x8145000c
+[    6.040279] R 0xe4110: 0x5145000c
+[    6.040279] W 0xe4110: 0x5345000c
+[    6.040284] W 0xe4114: 0x80060000
+[    6.040289] W 0xe4118: 0x1000000
+[    6.040294] W 0xe4110: 0xd255000c
+[    6.040302] R 0xe4110: 0x8145000c
+[    6.040405] R 0xe4110: 0x8145000c
+[    6.040508] R 0xe4110: 0x8145000c
+[    6.040611] R 0xe4110: 0x8145000c
+[    6.040713] R 0xe4110: 0x8145000c
+[    6.040816] R 0xe4110: 0x5145000c
+[    6.040817] W 0xe4110: 0x5345000c
+[    6.040821] W 0xe4114: 0x80060000
+[    6.040827] W 0xe4118: 0x1000000
+[    6.040832] W 0xe4110: 0xd255000c
+[    6.040838] R 0xe4110: 0x8145000c
+[    6.040941] R 0xe4110: 0x8145000c
+[    6.041044] R 0xe4110: 0x8145000c
+[    6.041147] R 0xe4110: 0x8145000c
+[    6.041250] R 0xe4110: 0x8145000c
+[    6.041353] R 0xe4110: 0x5145000c
+[    6.041354] W 0xe4110: 0x5345000c
+[    6.041358] W 0xe4114: 0x80060000
+[    6.041364] W 0xe4118: 0x1000000
+[    6.041369] W 0xe4110: 0xd255000c
+[    6.041377] R 0xe4110: 0x8145000c
+[    6.041480] R 0xe4110: 0x8145000c
+[    6.041583] R 0xe4110: 0x8145000c
+[    6.041686] R 0xe4110: 0x8145000c
+[    6.041789] R 0xe4110: 0x8145000c
+[    6.041892] R 0xe4110: 0x5145000c
+[    6.041892] W 0xe4110: 0x5345000c
+[    6.043644] R 0xc6204: 0x18
+[    6.043647] R 0xe4110: 0x145000c
+[    6.043647] W 0xe4114: 0x80060000
+[    6.043651] W 0xe4118: 0x1000000
+[    6.043655] W 0xe4110: 0xd255000c
+[    6.043663] R 0xe4110: 0x8145000c
+[    6.043766] R 0xe4110: 0x8145000c
+[    6.043869] R 0xe4110: 0x8145000c
+[    6.043972] R 0xe4110: 0x8145000c
+[    6.044075] R 0xe4110: 0x8145000c
+[    6.044178] R 0xe4110: 0x5145000c
+[    6.044178] W 0xe4110: 0x5345000c
+[    6.044183] W 0xe4114: 0x80060000
+[    6.044188] W 0xe4118: 0x1000000
+[    6.044194] W 0xe4110: 0xd255000c
+[    6.044202] R 0xe4110: 0x8145000c
+[    6.044305] R 0xe4110: 0x8145000c
+[    6.044408] R 0xe4110: 0x8145000c
+[    6.044510] R 0xe4110: 0x8145000c
+[    6.044614] R 0xe4110: 0x8145000c
+[    6.044715] R 0xe4110: 0x5145000c
+[    6.044716] W 0xe4110: 0x5345000c
+[    6.044721] W 0xe4114: 0x80060000
+[    6.044726] W 0xe4118: 0x1000000
+[    6.044731] W 0xe4110: 0xd255000c
+[    6.044739] R 0xe4110: 0x8145000c
+[    6.044842] R 0xe4110: 0x8145000c
+[    6.044945] R 0xe4110: 0x8145000c
+[    6.045048] R 0xe4110: 0x8145000c
+[    6.045151] R 0xe4110: 0x8145000c
+[    6.045254] R 0xe4110: 0x5145000c
+[    6.045254] W 0xe4110: 0x5345000c
+[    6.045259] W 0xe4114: 0x80060000
+[    6.045264] W 0xe4118: 0x1000000
+[    6.045270] W 0xe4110: 0xd255000c
+[    6.045278] R 0xe4110: 0x8145000c
+[    6.045381] R 0xe4110: 0x8145000c
+[    6.045484] R 0xe4110: 0x8145000c
+[    6.045587] R 0xe4110: 0x8145000c
+[    6.045689] R 0xe4110: 0x8145000c
+[    6.045792] R 0xe4110: 0x5145000c
+[    6.045792] W 0xe4110: 0x5345000c
+[    6.045797] W 0xe4114: 0x80060000
+[    6.045802] W 0xe4118: 0x1000000
+[    6.045808] W 0xe4110: 0xd255000c
+[    6.045815] R 0xe4110: 0x8145000c
+[    6.045918] R 0xe4110: 0x8145000c
+[    6.046022] R 0xe4110: 0x8145000c
+[    6.046124] R 0xe4110: 0x8145000c
+[    6.046227] R 0xe4110: 0x8145000c
+[    6.046330] R 0xe4110: 0x5145000c
+[    6.046331] W 0xe4110: 0x5345000c
+[    6.047637] R 0xc6204: 0x18
+[    6.047639] R 0xe4110: 0x145000c
+[    6.047640] W 0xe4114: 0x80060000
+[    6.047645] W 0xe4118: 0x1000000
+[    6.047650] W 0xe4110: 0xd255000c
+[    6.047658] R 0xe4110: 0x8145000c
+[    6.047760] R 0xe4110: 0x8145000c
+[    6.047863] R 0xe4110: 0x8145000c
+[    6.047966] R 0xe4110: 0x8145000c
+[    6.048069] R 0xe4110: 0x8145000c
+[    6.048172] R 0xe4110: 0x5145000c
+[    6.048172] W 0xe4110: 0x5345000c
+[    6.048177] W 0xe4114: 0x80060000
+[    6.048182] W 0xe4118: 0x1000000
+[    6.048188] W 0xe4110: 0xd255000c
+[    6.048195] R 0xe4110: 0x8145000c
+[    6.048298] R 0xe4110: 0x8145000c
+[    6.048401] R 0xe4110: 0x8145000c
+[    6.048504] R 0xe4110: 0x8145000c
+[    6.048607] R 0xe4110: 0x8145000c
+[    6.048711] R 0xe4110: 0x5145000c
+[    6.048711] W 0xe4110: 0x5345000c
+[    6.048716] W 0xe4114: 0x80060000
+[    6.048721] W 0xe4118: 0x1000000
+[    6.048726] W 0xe4110: 0xd255000c
+[    6.048734] R 0xe4110: 0x8145000c
+[    6.048837] R 0xe4110: 0x8145000c
+[    6.048940] R 0xe4110: 0x8145000c
+[    6.049043] R 0xe4110: 0x8145000c
+[    6.049146] R 0xe4110: 0x8145000c
+[    6.049249] R 0xe4110: 0x5145000c
+[    6.049250] W 0xe4110: 0x5345000c
+[    6.049254] W 0xe4114: 0x80060000
+[    6.049260] W 0xe4118: 0x1000000
+[    6.049265] W 0xe4110: 0xd255000c
+[    6.049273] R 0xe4110: 0x8145000c
+[    6.049376] R 0xe4110: 0x8145000c
+[    6.049479] R 0xe4110: 0x8145000c
+[    6.049582] R 0xe4110: 0x8145000c
+[    6.049683] R 0xe4110: 0x8145000c
+[    6.049786] R 0xe4110: 0x5145000c
+[    6.049787] W 0xe4110: 0x5345000c
+[    6.049792] W 0xe4114: 0x80060000
+[    6.049797] W 0xe4118: 0x1000000
+[    6.049802] W 0xe4110: 0xd255000c
+[    6.049810] R 0xe4110: 0x8145000c
+[    6.049913] R 0xe4110: 0x8145000c
+[    6.050016] R 0xe4110: 0x8145000c
+[    6.050119] R 0xe4110: 0x8145000c
+[    6.050222] R 0xe4110: 0x8145000c
+[    6.050325] R 0xe4110: 0x5145000c
+[    6.050325] W 0xe4110: 0x5345000c
+[    6.051635] R 0xc6204: 0x18
+[    6.051637] R 0xe4110: 0x145000c
+[    6.051638] W 0xe4114: 0x9000000e
+[    6.051642] W 0xe4110: 0xd245000c
+[    6.051650] R 0xe4110: 0x8145000c
+[    6.051753] R 0xe4110: 0x8145000c
+[    6.051856] R 0xe4110: 0x8145000c
+[    6.051959] R 0xe4110: 0x8145000c
+[    6.052062] R 0xe4110: 0x8145000c
+[    6.052165] R 0xe4110: 0x5145000c
+[    6.052166] W 0xe4110: 0x5345000c
+[    6.052170] W 0xe4114: 0x9000000e
+[    6.052176] W 0xe4110: 0xd245000c
+[    6.052183] R 0xe4110: 0x8145000c
+[    6.052286] R 0xe4110: 0x8145000c
+[    6.052389] R 0xe4110: 0x8145000c
+[    6.052492] R 0xe4110: 0x8145000c
+[    6.052595] R 0xe4110: 0x8145000c
+[    6.052697] R 0xe4110: 0x5145000c
+[    6.052698] W 0xe4110: 0x5345000c
+[    6.052702] W 0xe4114: 0x9000000e
+[    6.052708] W 0xe4110: 0xd245000c
+[    6.052715] R 0xe4110: 0x8145000c
+[    6.052818] R 0xe4110: 0x8145000c
+[    6.052921] R 0xe4110: 0x8145000c
+[    6.053024] R 0xe4110: 0x8145000c
+[    6.053127] R 0xe4110: 0x8145000c
+[    6.053230] R 0xe4110: 0x5145000c
+[    6.053231] W 0xe4110: 0x5345000c
+[    6.053235] W 0xe4114: 0x9000000e
+[    6.053241] W 0xe4110: 0xd245000c
+[    6.053248] R 0xe4110: 0x8145000c
+[    6.053351] R 0xe4110: 0x8145000c
+[    6.053454] R 0xe4110: 0x8145000c
+[    6.053557] R 0xe4110: 0x8145000c
+[    6.053659] R 0xe4110: 0x8145000c
+[    6.053762] R 0xe4110: 0x5145000c
+[    6.053763] W 0xe4110: 0x5345000c
+[    6.053768] W 0xe4114: 0x9000000e
+[    6.053773] W 0xe4110: 0xd245000c
+[    6.053781] R 0xe4110: 0x8145000c
+[    6.053884] R 0xe4110: 0x8145000c
+[    6.053987] R 0xe4110: 0x8145000c
+[    6.054090] R 0xe4110: 0x8145000c
+[    6.054192] R 0xe4110: 0x8145000c
+[    6.054295] R 0xe4110: 0x5145000c
+[    6.054296] W 0xe4110: 0x5345000c
+[    6.055633] R 0xc6204: 0x18
+[    6.055636] R 0xe4110: 0x145000c
+[    6.055636] W 0xe4114: 0x9000000e
+[    6.055640] W 0xe4110: 0xd245000c
+[    6.055645] R 0xe4110: 0x8145000c
+[    6.055749] R 0xe4110: 0x8145000c
+[    6.055852] R 0xe4110: 0x8145000c
+[    6.055954] R 0xe4110: 0x8145000c
+[    6.056058] R 0xe4110: 0x8145000c
+[    6.056161] R 0xe4110: 0x5145000c
+[    6.056161] W 0xe4110: 0x5345000c
+[    6.056166] W 0xe4114: 0x9000000e
+[    6.056171] W 0xe4110: 0xd245000c
+[    6.056179] R 0xe4110: 0x8145000c
+[    6.056282] R 0xe4110: 0x8145000c
+[    6.056385] R 0xe4110: 0x8145000c
+[    6.056488] R 0xe4110: 0x8145000c
+[    6.056591] R 0xe4110: 0x8145000c
+[    6.056693] R 0xe4110: 0x5145000c
+[    6.056693] W 0xe4110: 0x5345000c
+[    6.056698] W 0xe4114: 0x9000000e
+[    6.056703] W 0xe4110: 0xd245000c
+[    6.056711] R 0xe4110: 0x8145000c
+[    6.056814] R 0xe4110: 0x8145000c
+[    6.056917] R 0xe4110: 0x8145000c
+[    6.057020] R 0xe4110: 0x8145000c
+[    6.057123] R 0xe4110: 0x8145000c
+[    6.057226] R 0xe4110: 0x5145000c
+[    6.057226] W 0xe4110: 0x5345000c
+[    6.057231] W 0xe4114: 0x9000000e
+[    6.057236] W 0xe4110: 0xd245000c
+[    6.057244] R 0xe4110: 0x8145000c
+[    6.057347] R 0xe4110: 0x8145000c
+[    6.057450] R 0xe4110: 0x8145000c
+[    6.057553] R 0xe4110: 0x8145000c
+[    6.057656] R 0xe4110: 0x8145000c
+[    6.057759] R 0xe4110: 0x5145000c
+[    6.057760] W 0xe4110: 0x5345000c
+[    6.057764] W 0xe4114: 0x9000000e
+[    6.057771] W 0xe4110: 0xd245000c
+[    6.057779] R 0xe4110: 0x8145000c
+[    6.057882] R 0xe4110: 0x8145000c
+[    6.057985] R 0xe4110: 0x8145000c
+[    6.058088] R 0xe4110: 0x8145000c
+[    6.058191] R 0xe4110: 0x8145000c
+[    6.058294] R 0xe4110: 0x5145000c
+[    6.058295] W 0xe4110: 0x5345000c
+[    6.059628] R 0xc6204: 0x18
+[    6.059630] R 0xe4110: 0x145000c
+[    6.059631] W 0xe4114: 0x9000000e
+[    6.059636] W 0xe4110: 0xd245000c
+[    6.059643] R 0xe4110: 0x8145000c
+[    6.059746] R 0xe4110: 0x8145000c
+[    6.059849] R 0xe4110: 0x8145000c
+[    6.059952] R 0xe4110: 0x8145000c
+[    6.060055] R 0xe4110: 0x8145000c
+[    6.060158] R 0xe4110: 0x5145000c
+[    6.060159] W 0xe4110: 0x5345000c
+[    6.060164] W 0xe4114: 0x9000000e
+[    6.060169] W 0xe4110: 0xd245000c
+[    6.060177] R 0xe4110: 0x8145000c
+[    6.060280] R 0xe4110: 0x8145000c
+[    6.060383] R 0xe4110: 0x8145000c
+[    6.060486] R 0xe4110: 0x8145000c
+[    6.060589] R 0xe4110: 0x8145000c
+[    6.060691] R 0xe4110: 0x5145000c
+[    6.060692] W 0xe4110: 0x5345000c
+[    6.060697] W 0xe4114: 0x9000000e
+[    6.060702] W 0xe4110: 0xd245000c
+[    6.060710] R 0xe4110: 0x8145000c
+[    6.060813] R 0xe4110: 0x8145000c
+[    6.060916] R 0xe4110: 0x8145000c
+[    6.061019] R 0xe4110: 0x8145000c
+[    6.061122] R 0xe4110: 0x8145000c
+[    6.061225] R 0xe4110: 0x5145000c
+[    6.061225] W 0xe4110: 0x5345000c
+[    6.061230] W 0xe4114: 0x9000000e
+[    6.061235] W 0xe4110: 0xd245000c
+[    6.061243] R 0xe4110: 0x8145000c
+[    6.061346] R 0xe4110: 0x8145000c
+[    6.061449] R 0xe4110: 0x8145000c
+[    6.061552] R 0xe4110: 0x8145000c
+[    6.061654] R 0xe4110: 0x8145000c
+[    6.061757] R 0xe4110: 0x5145000c
+[    6.061758] W 0xe4110: 0x5345000c
+[    6.061763] W 0xe4114: 0x9000000e
+[    6.061768] W 0xe4110: 0xd245000c
+[    6.061776] R 0xe4110: 0x8145000c
+[    6.061879] R 0xe4110: 0x8145000c
+[    6.061982] R 0xe4110: 0x8145000c
+[    6.062085] R 0xe4110: 0x8145000c
+[    6.062188] R 0xe4110: 0x8145000c
+[    6.062291] R 0xe4110: 0x5145000c
+[    6.062291] W 0xe4110: 0x5345000c
+[    6.063628] R 0xc6204: 0x18
+[    6.063630] R 0xe4110: 0x145000c
+[    6.063631] W 0xe4114: 0x80060000
+[    6.063635] W 0xe4118: 0x2000000
+[    6.063641] W 0xe4110: 0xd255000c
+[    6.063648] R 0xe4110: 0x8145000c
+[    6.063751] R 0xe4110: 0x8145000c
+[    6.063854] R 0xe4110: 0x8145000c
+[    6.063957] R 0xe4110: 0x8145000c
+[    6.064060] R 0xe4110: 0x8145000c
+[    6.064163] R 0xe4110: 0x5145000c
+[    6.064164] W 0xe4110: 0x5345000c
+[    6.064169] W 0xe4114: 0x80060000
+[    6.064174] W 0xe4118: 0x2000000
+[    6.064179] W 0xe4110: 0xd255000c
+[    6.064187] R 0xe4110: 0x8145000c
+[    6.064290] R 0xe4110: 0x8145000c
+[    6.064393] R 0xe4110: 0x8145000c
+[    6.064496] R 0xe4110: 0x8145000c
+[    6.064599] R 0xe4110: 0x8145000c
+[    6.064701] R 0xe4110: 0x5145000c
+[    6.064702] W 0xe4110: 0x5345000c
+[    6.064707] W 0xe4114: 0x80060000
+[    6.064712] W 0xe4118: 0x2000000
+[    6.064717] W 0xe4110: 0xd255000c
+[    6.064725] R 0xe4110: 0x8145000c
+[    6.064828] R 0xe4110: 0x8145000c
+[    6.064931] R 0xe4110: 0x8145000c
+[    6.065034] R 0xe4110: 0x8145000c
+[    6.065137] R 0xe4110: 0x8145000c
+[    6.065240] R 0xe4110: 0x5145000c
+[    6.065241] W 0xe4110: 0x5345000c
+[    6.065245] W 0xe4114: 0x80060000
+[    6.065251] W 0xe4118: 0x2000000
+[    6.065256] W 0xe4110: 0xd255000c
+[    6.065264] R 0xe4110: 0x8145000c
+[    6.065367] R 0xe4110: 0x8145000c
+[    6.065470] R 0xe4110: 0x8145000c
+[    6.065573] R 0xe4110: 0x8145000c
+[    6.065676] R 0xe4110: 0x8145000c
+[    6.065779] R 0xe4110: 0x5145000c
+[    6.065779] W 0xe4110: 0x5345000c
+[    6.065784] W 0xe4114: 0x80060000
+[    6.065790] W 0xe4118: 0x2000000
+[    6.065792] W 0xe4110: 0xd255000c
+[    6.065795] R 0xe4110: 0x8145000c
+[    6.065896] R 0xe4110: 0x8145000c
+[    6.065999] R 0xe4110: 0x8145000c
+[    6.066102] R 0xe4110: 0x8145000c
+[    6.066205] R 0xe4110: 0x8145000c
+[    6.066308] R 0xe4110: 0x5145000c
+[    6.066309] W 0xe4110: 0x5345000c
+[    6.067538] W 0x101008: 0x1
+[    7.158805] W 0xa094: 0x0
+[    7.158807] R 0x120000: 0x0
+[    7.158937] R 0x145998: 0x40414
+[    7.158938] R 0x145948: 0x45c
+[    7.158939] W 0xa090: 0x0
+[    7.158945] W 0xa098: 0x3e80000
+[    7.158953] W 0xa09c: 0x28001e
+[    7.158962] W 0xa0a0: 0x1e
+[    7.158965] W 0xa0a8: 0x1e848
+[    7.158972] W 0xa0ac: 0x19
+[    7.158977] W 0x2054: 0xa
+[    7.158987] W 0x12054: 0xa
+[    7.159006] W 0x22054: 0xa
+[    7.159016] W 0xa0b0: 0x0
+[    7.159021] W 0xa0b4: 0x3e8
+[    7.159029] W 0xa0b8: 0xc350
+[    7.159035] W 0xa0bc: 0x249f0
+[    7.159041] W 0xa0c0: 0xfa00
+[    7.159047] [drm] Enabling RC6 states: RC6 on, RC6p off, RC6pp off
+[    7.159048] W 0xa090: 0x88040000
+[    7.159053] W 0xa008: 0x14000000
+[    7.159058] W 0xa00c: 0x18000000
+[    7.159063] W 0xa010: 0xf4240
+[    7.159069] W 0xa014: 0x14040000
+[    7.159074] W 0xa02c: 0x4000
+[    7.159077] W 0xa030: 0x4000
+[    7.159080] W 0xa068: 0x101d0
+[    7.159084] W 0xa06c: 0x55730
+[    7.159087] W 0xa070: 0xa
+[    7.159091] W 0xa024: 0xd92
+[    7.159094] R 0x138124: 0x0
+[    7.159095] W 0x138128: 0x0
+[    7.159098] W 0x138124: 0x80000008
+[    7.159101] R 0x138124: 0x10
+[    7.159102] W 0x138128: 0x0
+[    7.159105] R 0x138124: 0x10
+[    7.159105] W 0x138128: 0x0
+[    7.159108] W 0x138124: 0x8000000c
+[    7.159111] R 0x138124: 0x0
+[    7.159112] R 0x138128: 0x80000014
+[    7.159113] W 0x138128: 0x0
+[    7.159116] W 0xa008: 0x14000000
+[    7.159120] W 0xa014: 0x14000000
+[    7.159123] W 0x4402c: 0x70
+[    7.159127] W 0x44024: 0x0
+[    7.159130] W 0xa168: 0x0
+[    7.159134] R 0x138124: 0x0
+[    7.159134] W 0x138128: 0x0
+[    7.159137] W 0x138124: 0x80000005
+[    7.159140] R 0x138124: 0x1
+[    7.159141] R 0x138128: 0x0
+[    7.159142] W 0x138128: 0x0
+[    7.159147] R 0x138124: 0x1
+[    7.159147] W 0x138128: 0x1014
+[    7.159150] W 0x138124: 0x80000008
+[    7.159154] R 0x138124: 0x0
+[    7.159155] W 0x138128: 0x0
+[    7.159157] R 0x138124: 0x0
+[    7.159158] W 0x138128: 0xf13
+[    7.159161] W 0x138124: 0x80000008
+[    7.159164] R 0x138124: 0x0
+[    7.159165] W 0x138128: 0x0
+[    7.159168] R 0x138124: 0x0
+[    7.159168] W 0x138128: 0xe12
+[    7.159171] W 0x138124: 0x80000008
+[    7.159174] R 0x138124: 0x0
+[    7.159175] W 0x138128: 0x0
+[    7.159178] R 0x138124: 0x0
+[    7.159178] W 0x138128: 0xd11
+[    7.159181] W 0x138124: 0x80000008
+[    7.159184] R 0x138124: 0x0
+[    7.159185] W 0x138128: 0x0
+[    7.159188] R 0x138124: 0x0
+[    7.159189] W 0x138128: 0xc10
+[    7.159191] W 0x138124: 0x80000008
+[    7.159195] R 0x138124: 0x0
+[    7.159195] W 0x138128: 0x0
+[    7.159198] R 0x138124: 0x0
+[    7.159199] W 0x138128: 0xb0f
+[    7.159201] W 0x138124: 0x80000008
+[    7.159205] R 0x138124: 0x0
+[    7.159206] W 0x138128: 0x0
+[    7.159208] R 0x138124: 0x0
+[    7.159209] W 0x138128: 0x80e
+[    7.159212] W 0x138124: 0x80000008
+[    7.159215] R 0x138124: 0x0
+[    7.159216] W 0x138128: 0x0
+[    7.159218] R 0x138124: 0x0
+[    7.159219] W 0x138128: 0x80d
+[    7.159222] W 0x138124: 0x80000008
+[    7.159225] R 0x138124: 0x0
+[    7.159226] W 0x138128: 0x0
+[    7.159229] R 0x138124: 0x0
+[    7.159229] W 0x138128: 0x80c
+[    7.159232] W 0x138124: 0x80000008
+[    7.159236] R 0x138124: 0x0
+[    7.159236] W 0x138128: 0x0
+[    7.159239] R 0x138124: 0x0
+[    7.159240] W 0x138128: 0x80b
+[    7.159242] W 0x138124: 0x80000008
+[    7.159246] R 0x138124: 0x0
+[    7.159246] W 0x138128: 0x0
+[    7.159249] R 0x138124: 0x0
+[    7.159250] W 0x138128: 0x80a
+[    7.159252] W 0x138124: 0x80000008
+[    7.159256] R 0x138124: 0x0
+[    7.159257] W 0x138128: 0x0
+[    7.159259] R 0x138124: 0x0
+[    7.159260] W 0x138128: 0x809
+[    7.159263] W 0x138124: 0x80000008
+[    7.159266] R 0x138124: 0x0
+[    7.159267] W 0x138128: 0x0
+[    7.159270] R 0x138124: 0x0
+[    7.159270] W 0x138128: 0x808
+[    7.159273] W 0x138124: 0x80000008
+[    7.159276] R 0x138124: 0x0
+[    7.159277] W 0x138128: 0x0
+[    7.159280] R 0x138124: 0x0
+[    7.159280] W 0x138128: 0x807
+[    7.159283] W 0x138124: 0x80000008
+[    7.159287] R 0x138124: 0x0
+[    7.159287] W 0x138128: 0x0
+[    7.159290] R 0x138124: 0x0
+[    7.159291] W 0x138128: 0x806
+[    7.159293] W 0x138124: 0x80000008
+[    7.159297] R 0x138124: 0x0
+[    7.159297] W 0x138128: 0x0
+[    7.159300] R 0x138124: 0x0
+[    7.159301] W 0x138128: 0x805
+[    7.159303] W 0x138124: 0x80000008
+[    7.159307] R 0x138124: 0x0
+[    7.159308] W 0x138128: 0x0
+[    7.159310] R 0x138124: 0x0
+[    7.159311] W 0x138128: 0x804
+[    7.159314] W 0x138124: 0x80000008
+[    7.159317] R 0x138124: 0x0
+[    7.159318] W 0x138128: 0x0
+[    8.821683] fbcon: inteldrmfb (fb0) is primary device
+[    8.821692] R 0x4400c: 0xb0002529
+[    8.821693] W 0x4400c: 0x30002529
+[    8.821694] R 0x44018: 0x0
+[    8.821695] R 0x44008: 0x0
+[    8.821696] R 0x44028: 0x16
+[    8.821697] W 0x44024: 0x16
+[    8.821702] W 0x44028: 0x16
+[    8.821704] W 0x4400c: 0xb0002529
+[    8.821706] R 0x44024: 0x16
+[    8.821707] W 0x44024: 0x0
+[    8.821708] W 0xa008: 0x12000000
+[    8.821709] W 0xa014: 0x14000000
+[    8.821735] R 0x45404: 0xc0000000
+[    8.821736] W 0x45404: 0x0
+[    8.821736] R 0x4400c: 0xb0002529
+[    8.821737] W 0x4400c: 0x30002529
+[    8.821738] R 0x70008: 0x0
+[    8.821740] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 4400c
+[    8.821741] R 0x7f008: 0x0
+[    8.821742] R 0x44018: 0x0
+[    8.821743] R 0x70180: 0x4000
+[    8.821743] R 0x44008: 0x0
+[    8.821744] R 0x44028: 0x54
+[    8.821745] W 0x6f030: 0x7e19e420
+[    8.821746] W 0x44024: 0x54
+[    8.821747] W 0x6f034: 0x20f580
+[    8.821748] W 0x6f040: 0x1142c
+[    8.821749] W 0x6f044: 0x41eb0
+[    8.821750] W 0x44028: 0x54
+[    8.821751] W 0x6f028: 0x0
+[    8.821752] W 0x4400c: 0xb0002529
+[    8.821753] W 0x6f000: 0x59f04ff
+[    8.821754] R 0x44024: 0x54
+[    8.821754] W 0x44024: 0x0
+[    8.821755] W 0x6f004: 0x59f04ff
+[    8.821756] W 0xa008: 0x10000000
+[    8.821758] W 0x6f008: 0x53f050f
+[    8.821759] W 0xa014: 0x14000000
+[    8.821760] W 0x6f00c: 0x331031f
+[    8.821761] W 0x6f010: 0x331031f
+[    8.821763] W 0x6f014: 0x3230320
+[    8.821765] W 0x6001c: 0x4ff031f
+[    8.821766] R 0x7f008: 0x0
+[    8.821767] W 0x7f008: 0x0
+[    8.821770] W 0x49010: 0x78000000
+[    8.821772] W 0x49014: 0x0
+[    8.821774] W 0x49018: 0x7800
+[    8.821775] W 0x4901c: 0x0
+[    8.821776] W 0x49020: 0x0
+[    8.821778] W 0x49024: 0x78000000
+[    8.821779] W 0x49030: 0x0
+[    8.821781] W 0x49034: 0x0
+[    8.821782] W 0x49038: 0x0
+[    8.821783] W 0x49040: 0x0
+[    8.821785] W 0x49044: 0x0
+[    8.821786] W 0x49048: 0x0
+[    8.821787] W 0x49028: 0x0
+[    8.821789] W 0x70180: 0x41000000
+[    8.821797] R 0x70180: 0x41000000
+[    8.821798] W 0x70180: 0x59004000
+[    8.821799] W 0x70188: 0x1400
+[    8.821801] R 0x7019c: 0x0
+[    8.821802] W 0x7019c: 0x74000
+[    8.821803] W 0x701a4: 0x0
+[    8.821805] R 0x145d10: 0x5a2404f
+[    8.821806] W 0x45110: 0x0
+[    8.821808] W 0x4510c: 0x0
+[    8.821809] W 0x45108: 0x0
+[    8.821810] R 0x45270: 0x0
+[    8.821811] W 0x45270: 0x20
+[    8.821814] R 0x145d10: 0x5a2404f
+[    8.821816] R 0x45100: 0x783818
+[    8.821817] W 0x45100: 0x93806
+[    8.821818] W 0x45110: 0x0
+[    8.821820] W 0x4510c: 0x0
+[    8.821821] W 0x45108: 0x0
+[    8.821822] R 0x145d10: 0x5a2404f
+[    8.821825] R 0xc7204: 0xabcd000f
+[    8.821827] R 0xc7200: 0x80000008
+[    8.821829] R 0xc7204: 0xabcd000f
+[    8.821830] R 0xc7204: 0xabcd000f
+[    8.821831] W 0xc7204: 0xabcd0007
+[    8.821835] R 0xc7204: 0xabcd0007
+[    8.821836] R 0xc7200: 0x80000008
+[    8.837549] W 0x46100: 0x20000000
+[    8.837551] R 0xc7200: 0x80000008
+[    8.837553] R 0xc7200: 0x80000008
+[    8.837553] R 0x42014: 0x21000002
+[    8.837554] R 0x64010: 0x4500e1
+[    8.837555] W 0x64014: 0x80060000
+[    8.837556] W 0x64018: 0x1000000
+[    8.837557] W 0x64010: 0xd25500e1
+[    8.837558] R 0x64010: 0x804500e1
+[    8.837659] R 0x64010: 0x804500e1
+[    8.837759] R 0x64010: 0x804500e1
+[    8.837860] R 0x64010: 0x804500e1
+[    8.837961] R 0x64010: 0x801500e1
+[    8.838062] R 0x64010: 0x401500e1
+[    8.838062] W 0x64010: 0x521500e1
+[    8.838064] R 0x64014: 0x0
+[    8.838064] R 0x64040: 0x0
+[    8.838065] W 0x64040: 0x80040080
+[    8.838066] W 0x64000: 0x80000000
+[    8.838668] R 0xc7200: 0x80000008
+[    8.838669] R 0xc7200: 0x80000008
+[    8.838670] R 0x42014: 0x21000002
+[    8.838671] R 0x64010: 0x1500e1
+[    8.838671] W 0x64014: 0x80010008
+[    8.838672] W 0x64018: 0xa810000
+[    8.838673] W 0x6401c: 0x0
+[    8.838674] W 0x64020: 0x1000000
+[    8.838675] W 0x64010: 0xd2d500e1
+[    8.838676] R 0x64010: 0x801500e1
+[    8.838777] R 0x64010: 0x801500e1
+[    8.838878] R 0x64010: 0x801500e1
+[    8.838979] R 0x64010: 0x801500e1
+[    8.839080] R 0x64010: 0x801500e1
+[    8.839180] R 0x64010: 0x401500e1
+[    8.839181] W 0x64010: 0x521500e1
+[    8.839182] R 0x64014: 0x0
+[    8.839183] R 0x64040: 0x80040080
+[    8.839184] W 0x64040: 0x80040080
+[    8.839185] W 0x64000: 0x80000000
+[    8.839187] R 0xc7200: 0x80000008
+[    8.839188] R 0xc7200: 0x80000008
+[    8.839189] R 0x42014: 0x21000002
+[    8.839189] R 0x64010: 0x1500e1
+[    8.839190] W 0x64014: 0x80010200
+[    8.839191] W 0x64018: 0x21000000
+[    8.839192] W 0x64010: 0xd25500e1
+[    8.839193] R 0x64010: 0x801500e1
+[    8.839294] R 0x64010: 0x801500e1
+[    8.839395] R 0x64010: 0x801500e1
+[    8.839495] R 0x64010: 0x801500e1
+[    8.839596] R 0x64010: 0x801500e1
+[    8.839697] R 0x64010: 0x401500e1
+[    8.839698] W 0x64010: 0x521500e1
+[    8.839699] R 0x64014: 0x0
+[    8.839700] R 0xc7200: 0x80000008
+[    8.839702] R 0xc7200: 0x80000008
+[    8.839702] R 0x42014: 0x21000002
+[    8.839703] R 0x64010: 0x1500e1
+[    8.839704] W 0x64014: 0x80010300
+[    8.839705] W 0x64018: 0x0
+[    8.839706] W 0x64010: 0xd25500e1
+[    8.839707] R 0x64010: 0x801500e1
+[    8.839807] R 0x64010: 0x801500e1
+[    8.839908] R 0x64010: 0x801500e1
+[    8.840009] R 0x64010: 0x801500e1
+[    8.840110] R 0x64010: 0x801500e1
+[    8.840211] R 0x64010: 0x401500e1
+[    8.840211] W 0x64010: 0x521500e1
+[    8.840212] R 0x64014: 0x0
+[    8.840314] R 0xc7200: 0x80000008
+[    8.840315] R 0xc7200: 0x80000008
+[    8.840316] R 0x42014: 0x21000002
+[    8.840317] R 0x64010: 0x1500e1
+[    8.840317] W 0x64014: 0x90020205
+[    8.840318] W 0x64010: 0xd24500e1
+[    8.840319] R 0x64010: 0x801500e1
+[    8.840420] R 0x64010: 0x801500e1
+[    8.840521] R 0x64010: 0x801500e1
+[    8.840622] R 0x64010: 0x801500e1
+[    8.840723] R 0x64010: 0x802500e1
+[    8.840823] R 0x64010: 0x407500e1
+[    8.840824] W 0x64010: 0x527500e1
+[    8.840825] R 0x64014: 0x10080
+[    8.840826] R 0x64018: 0x0
+[    8.840827] R 0x64040: 0x80040080
+[    8.840828] W 0x64040: 0x80040180
+[    8.840829] W 0x64000: 0x80000000
+[    8.840830] R 0xc7200: 0x80000008
+[    8.840832] R 0xc7200: 0x80000008
+[    8.840832] R 0x42014: 0x21000002
+[    8.840833] R 0x64010: 0x7500e1
+[    8.840834] W 0x64014: 0x80010200
+[    8.840835] W 0x64018: 0x22000000
+[    8.840836] W 0x64010: 0xd25500e1
+[    8.840837] R 0x64010: 0x807500e1
+[    8.840938] R 0x64010: 0x807500e1
+[    8.841038] R 0x64010: 0x807500e1
+[    8.841139] R 0x64010: 0x807500e1
+[    8.841240] R 0x64010: 0x801500e1
+[    8.841341] R 0x64010: 0x401500e1
+[    8.841341] W 0x64010: 0x521500e1
+[    8.841343] R 0x64014: 0x0
+[    8.841344] R 0xc7200: 0x80000008
+[    8.841345] R 0xc7200: 0x80000008
+[    8.841346] R 0x42014: 0x21000002
+[    8.841347] R 0x64010: 0x1500e1
+[    8.841347] W 0x64014: 0x80010300
+[    8.841348] W 0x64018: 0x0
+[    8.841349] W 0x64010: 0xd25500e1
+[    8.841350] R 0x64010: 0x801500e1
+[    8.841451] R 0x64010: 0x801500e1
+[    8.841552] R 0x64010: 0x801500e1
+[    8.841653] R 0x64010: 0x801500e1
+[    8.841754] R 0x64010: 0x801500e1
+[    8.841854] R 0x64010: 0x401500e1
+[    8.841855] W 0x64010: 0x521500e1
+[    8.841856] R 0x64014: 0x0
+[    8.842257] R 0xc7200: 0x80000008
+[    8.842259] R 0xc7200: 0x80000008
+[    8.842259] R 0x42014: 0x21000002
+[    8.842260] R 0x64010: 0x1500e1
+[    8.842261] W 0x64014: 0x90020205
+[    8.842262] W 0x64010: 0xd24500e1
+[    8.842263] R 0x64010: 0x801500e1
+[    8.842364] R 0x64010: 0x801500e1
+[    8.842464] R 0x64010: 0x801500e1
+[    8.842565] R 0x64010: 0x801500e1
+[    8.842666] R 0x64010: 0x802500e1
+[    8.842767] R 0x64010: 0x407500e1
+[    8.842767] W 0x64010: 0x527500e1
+[    8.842768] R 0x64014: 0x70081
+[    8.842769] R 0x64018: 0x0
+[    8.842770] R 0x64040: 0x80040180
+[    8.842771] W 0x64040: 0x80040200
+[    8.842772] R 0x64044: 0x0
+[    8.844543] R 0x64044: 0x0
+[    8.844544] [drm:intel_dp_set_link_train] *ERROR* Timed out waiting for DP idle patterns
+[    8.844545] W 0x64040: 0x80040300
+[    8.844546] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 64040
+[    8.844547] W 0x64000: 0x80000000
+[    8.844549] R 0xc7200: 0x80000008
+[    8.844550] R 0xc7200: 0x80000008
+[    8.844551] R 0x42014: 0x21000002
+[    8.844552] R 0x64010: 0x7500e1
+[    8.844552] W 0x64014: 0x80010200
+[    8.844553] W 0x64018: 0x0
+[    8.844554] W 0x64010: 0xd25500e1
+[    8.844555] R 0x64010: 0x807500e1
+[    8.844656] R 0x64010: 0x807500e1
+[    8.844757] R 0x64010: 0x807500e1
+[    8.844858] R 0x64010: 0x807500e1
+[    8.844959] R 0x64010: 0x801500e1
+[    8.845059] R 0x64010: 0x401500e1
+[    8.845060] W 0x64010: 0x521500e1
+[    8.845061] R 0x64014: 0x0
+[    8.845062] W 0x4a000: 0x0
+[    8.845063] W 0x4a004: 0x10101
+[    8.845064] W 0x4a008: 0x20202
+[    8.845065] W 0x4a00c: 0x30303
+[    8.845066] W 0x4a010: 0x40404
+[    8.845067] W 0x4a014: 0x50505
+[    8.845068] W 0x4a018: 0x60606
+[    8.845069] W 0x4a01c: 0x70707
+[    8.845070] W 0x4a020: 0x80808
+[    8.845071] W 0x4a024: 0x90909
+[    8.845072] W 0x4a028: 0xa0a0a
+[    8.845073] W 0x4a02c: 0xb0b0b
+[    8.845074] W 0x4a030: 0xc0c0c
+[    8.845075] W 0x4a034: 0xd0d0d
+[    8.845076] W 0x4a038: 0xe0e0e
+[    8.845077] W 0x4a03c: 0xf0f0f
+[    8.845078] W 0x4a040: 0x101010
+[    8.845079] W 0x4a044: 0x111111
+[    8.845080] W 0x4a048: 0x121212
+[    8.845081] W 0x4a04c: 0x131313
+[    8.845082] W 0x4a050: 0x141414
+[    8.845083] W 0x4a054: 0x151515
+[    8.845084] W 0x4a058: 0x161616
+[    8.845085] W 0x4a05c: 0x171717
+[    8.845086] W 0x4a060: 0x181818
+[    8.845087] W 0x4a064: 0x191919
+[    8.845088] W 0x4a068: 0x1a1a1a
+[    8.845089] W 0x4a06c: 0x1b1b1b
+[    8.845090] W 0x4a070: 0x1c1c1c
+[    8.845091] W 0x4a074: 0x1d1d1d
+[    8.845092] W 0x4a078: 0x1e1e1e
+[    8.845093] W 0x4a07c: 0x1f1f1f
+[    8.845094] W 0x4a080: 0x202020
+[    8.845095] W 0x4a084: 0x212121
+[    8.845096] W 0x4a088: 0x222222
+[    8.845097] W 0x4a08c: 0x232323
+[    8.845097] W 0x4a090: 0x242424
+[    8.845098] W 0x4a094: 0x252525
+[    8.845099] W 0x4a098: 0x262626
+[    8.845100] W 0x4a09c: 0x272727
+[    8.845101] W 0x4a0a0: 0x282828
+[    8.845102] W 0x4a0a4: 0x292929
+[    8.845103] W 0x4a0a8: 0x2a2a2a
+[    8.845104] W 0x4a0ac: 0x2b2b2b
+[    8.845105] W 0x4a0b0: 0x2c2c2c
+[    8.845106] W 0x4a0b4: 0x2d2d2d
+[    8.845107] W 0x4a0b8: 0x2e2e2e
+[    8.845108] W 0x4a0bc: 0x2f2f2f
+[    8.845109] W 0x4a0c0: 0x303030
+[    8.845110] W 0x4a0c4: 0x313131
+[    8.845111] W 0x4a0c8: 0x323232
+[    8.845112] W 0x4a0cc: 0x333333
+[    8.845113] W 0x4a0d0: 0x343434
+[    8.845114] W 0x4a0d4: 0x353535
+[    8.845115] W 0x4a0d8: 0x363636
+[    8.845116] W 0x4a0dc: 0x373737
+[    8.845117] W 0x4a0e0: 0x383838
+[    8.845118] W 0x4a0e4: 0x393939
+[    8.845119] W 0x4a0e8: 0x3a3a3a
+[    8.845120] W 0x4a0ec: 0x3b3b3b
+[    8.845121] W 0x4a0f0: 0x3c3c3c
+[    8.845122] W 0x4a0f4: 0x3d3d3d
+[    8.845123] W 0x4a0f8: 0x3e3e3e
+[    8.845124] W 0x4a0fc: 0x3f3f3f
+[    8.845125] W 0x4a100: 0x404040
+[    8.845126] W 0x4a104: 0x414141
+[    8.845127] W 0x4a108: 0x424242
+[    8.845128] W 0x4a10c: 0x434343
+[    8.845129] W 0x4a110: 0x444444
+[    8.845130] W 0x4a114: 0x454545
+[    8.845131] W 0x4a118: 0x464646
+[    8.845132] W 0x4a11c: 0x474747
+[    8.845133] W 0x4a120: 0x484848
+[    8.845134] W 0x4a124: 0x494949
+[    8.845135] W 0x4a128: 0x4a4a4a
+[    8.845136] W 0x4a12c: 0x4b4b4b
+[    8.845137] W 0x4a130: 0x4c4c4c
+[    8.845138] W 0x4a134: 0x4d4d4d
+[    8.845139] W 0x4a138: 0x4e4e4e
+[    8.845139] W 0x4a13c: 0x4f4f4f
+[    8.845140] W 0x4a140: 0x505050
+[    8.845141] W 0x4a144: 0x515151
+[    8.845142] W 0x4a148: 0x525252
+[    8.845143] W 0x4a14c: 0x535353
+[    8.845144] W 0x4a150: 0x545454
+[    8.845145] W 0x4a154: 0x555555
+[    8.845146] W 0x4a158: 0x565656
+[    8.845147] W 0x4a15c: 0x575757
+[    8.845148] W 0x4a160: 0x585858
+[    8.845149] W 0x4a164: 0x595959
+[    8.845150] W 0x4a168: 0x5a5a5a
+[    8.845151] W 0x4a16c: 0x5b5b5b
+[    8.845152] W 0x4a170: 0x5c5c5c
+[    8.845153] W 0x4a174: 0x5d5d5d
+[    8.845154] W 0x4a178: 0x5e5e5e
+[    8.845155] W 0x4a17c: 0x5f5f5f
+[    8.845156] W 0x4a180: 0x606060
+[    8.845157] W 0x4a184: 0x616161
+[    8.845158] W 0x4a188: 0x626262
+[    8.845159] W 0x4a18c: 0x636363
+[    8.845160] W 0x4a190: 0x646464
+[    8.845161] W 0x4a194: 0x656565
+[    8.845162] W 0x4a198: 0x666666
+[    8.845163] W 0x4a19c: 0x676767
+[    8.845164] W 0x4a1a0: 0x686868
+[    8.845165] W 0x4a1a4: 0x696969
+[    8.845166] W 0x4a1a8: 0x6a6a6a
+[    8.845167] W 0x4a1ac: 0x6b6b6b
+[    8.845168] W 0x4a1b0: 0x6c6c6c
+[    8.845169] W 0x4a1b4: 0x6d6d6d
+[    8.845170] W 0x4a1b8: 0x6e6e6e
+[    8.845171] W 0x4a1bc: 0x6f6f6f
+[    8.845172] W 0x4a1c0: 0x707070
+[    8.845173] W 0x4a1c4: 0x717171
+[    8.845174] W 0x4a1c8: 0x727272
+[    8.845175] W 0x4a1cc: 0x737373
+[    8.845176] W 0x4a1d0: 0x747474
+[    8.845177] W 0x4a1d4: 0x757575
+[    8.845178] W 0x4a1d8: 0x767676
+[    8.845179] W 0x4a1dc: 0x777777
+[    8.845180] W 0x4a1e0: 0x787878
+[    8.845180] W 0x4a1e4: 0x797979
+[    8.845181] W 0x4a1e8: 0x7a7a7a
+[    8.845182] W 0x4a1ec: 0x7b7b7b
+[    8.845183] W 0x4a1f0: 0x7c7c7c
+[    8.845184] W 0x4a1f4: 0x7d7d7d
+[    8.845185] W 0x4a1f8: 0x7e7e7e
+[    8.845186] W 0x4a1fc: 0x7f7f7f
+[    8.845187] W 0x4a200: 0x808080
+[    8.845188] W 0x4a204: 0x818181
+[    8.845189] W 0x4a208: 0x828282
+[    8.845190] W 0x4a20c: 0x838383
+[    8.845191] W 0x4a210: 0x848484
+[    8.845192] W 0x4a214: 0x858585
+[    8.845193] W 0x4a218: 0x868686
+[    8.845194] W 0x4a21c: 0x878787
+[    8.845195] W 0x4a220: 0x888888
+[    8.845196] W 0x4a224: 0x898989
+[    8.845197] W 0x4a228: 0x8a8a8a
+[    8.845198] W 0x4a22c: 0x8b8b8b
+[    8.845199] W 0x4a230: 0x8c8c8c
+[    8.845200] W 0x4a234: 0x8d8d8d
+[    8.845201] W 0x4a238: 0x8e8e8e
+[    8.845202] W 0x4a23c: 0x8f8f8f
+[    8.845203] W 0x4a240: 0x909090
+[    8.845204] W 0x4a244: 0x919191
+[    8.845205] W 0x4a248: 0x929292
+[    8.845206] W 0x4a24c: 0x939393
+[    8.845207] W 0x4a250: 0x949494
+[    8.845208] W 0x4a254: 0x959595
+[    8.845209] W 0x4a258: 0x969696
+[    8.845210] W 0x4a25c: 0x979797
+[    8.845211] W 0x4a260: 0x989898
+[    8.845212] W 0x4a264: 0x999999
+[    8.845213] W 0x4a268: 0x9a9a9a
+[    8.845214] W 0x4a26c: 0x9b9b9b
+[    8.845215] W 0x4a270: 0x9c9c9c
+[    8.845216] W 0x4a274: 0x9d9d9d
+[    8.845217] W 0x4a278: 0x9e9e9e
+[    8.845218] W 0x4a27c: 0x9f9f9f
+[    8.845219] W 0x4a280: 0xa0a0a0
+[    8.845220] W 0x4a284: 0xa1a1a1
+[    8.845221] W 0x4a288: 0xa2a2a2
+[    8.845222] W 0x4a28c: 0xa3a3a3
+[    8.845223] W 0x4a290: 0xa4a4a4
+[    8.845223] W 0x4a294: 0xa5a5a5
+[    8.845224] W 0x4a298: 0xa6a6a6
+[    8.845225] W 0x4a29c: 0xa7a7a7
+[    8.845226] W 0x4a2a0: 0xa8a8a8
+[    8.845227] W 0x4a2a4: 0xa9a9a9
+[    8.845228] W 0x4a2a8: 0xaaaaaa
+[    8.845229] W 0x4a2ac: 0xababab
+[    8.845230] W 0x4a2b0: 0xacacac
+[    8.845231] W 0x4a2b4: 0xadadad
+[    8.845232] W 0x4a2b8: 0xaeaeae
+[    8.845233] W 0x4a2bc: 0xafafaf
+[    8.845234] W 0x4a2c0: 0xb0b0b0
+[    8.845235] W 0x4a2c4: 0xb1b1b1
+[    8.845236] W 0x4a2c8: 0xb2b2b2
+[    8.845237] W 0x4a2cc: 0xb3b3b3
+[    8.845238] W 0x4a2d0: 0xb4b4b4
+[    8.845239] W 0x4a2d4: 0xb5b5b5
+[    8.845240] W 0x4a2d8: 0xb6b6b6
+[    8.845241] W 0x4a2dc: 0xb7b7b7
+[    8.845242] W 0x4a2e0: 0xb8b8b8
+[    8.845243] W 0x4a2e4: 0xb9b9b9
+[    8.845244] W 0x4a2e8: 0xbababa
+[    8.845245] W 0x4a2ec: 0xbbbbbb
+[    8.845246] W 0x4a2f0: 0xbcbcbc
+[    8.845247] W 0x4a2f4: 0xbdbdbd
+[    8.845248] W 0x4a2f8: 0xbebebe
+[    8.845249] W 0x4a2fc: 0xbfbfbf
+[    8.845250] W 0x4a300: 0xc0c0c0
+[    8.845251] W 0x4a304: 0xc1c1c1
+[    8.845252] W 0x4a308: 0xc2c2c2
+[    8.845253] W 0x4a30c: 0xc3c3c3
+[    8.845254] W 0x4a310: 0xc4c4c4
+[    8.845255] W 0x4a314: 0xc5c5c5
+[    8.845256] W 0x4a318: 0xc6c6c6
+[    8.845257] W 0x4a31c: 0xc7c7c7
+[    8.845258] W 0x4a320: 0xc8c8c8
+[    8.845259] W 0x4a324: 0xc9c9c9
+[    8.845260] W 0x4a328: 0xcacaca
+[    8.845261] W 0x4a32c: 0xcbcbcb
+[    8.845262] W 0x4a330: 0xcccccc
+[    8.845263] W 0x4a334: 0xcdcdcd
+[    8.845264] W 0x4a338: 0xcecece
+[    8.845265] W 0x4a33c: 0xcfcfcf
+[    8.845265] W 0x4a340: 0xd0d0d0
+[    8.845266] W 0x4a344: 0xd1d1d1
+[    8.845267] W 0x4a348: 0xd2d2d2
+[    8.845268] W 0x4a34c: 0xd3d3d3
+[    8.845269] W 0x4a350: 0xd4d4d4
+[    8.845270] W 0x4a354: 0xd5d5d5
+[    8.845271] W 0x4a358: 0xd6d6d6
+[    8.845272] W 0x4a35c: 0xd7d7d7
+[    8.845273] W 0x4a360: 0xd8d8d8
+[    8.845274] W 0x4a364: 0xd9d9d9
+[    8.845275] W 0x4a368: 0xdadada
+[    8.845276] W 0x4a36c: 0xdbdbdb
+[    8.845277] W 0x4a370: 0xdcdcdc
+[    8.845278] W 0x4a374: 0xdddddd
+[    8.845279] W 0x4a378: 0xdedede
+[    8.845280] W 0x4a37c: 0xdfdfdf
+[    8.845281] W 0x4a380: 0xe0e0e0
+[    8.845282] W 0x4a384: 0xe1e1e1
+[    8.845283] W 0x4a388: 0xe2e2e2
+[    8.845284] W 0x4a38c: 0xe3e3e3
+[    8.845285] W 0x4a390: 0xe4e4e4
+[    8.845286] W 0x4a394: 0xe5e5e5
+[    8.845287] W 0x4a398: 0xe6e6e6
+[    8.845288] W 0x4a39c: 0xe7e7e7
+[    8.845289] W 0x4a3a0: 0xe8e8e8
+[    8.845290] W 0x4a3a4: 0xe9e9e9
+[    8.845291] W 0x4a3a8: 0xeaeaea
+[    8.845292] W 0x4a3ac: 0xebebeb
+[    8.845293] W 0x4a3b0: 0xececec
+[    8.845294] W 0x4a3b4: 0xededed
+[    8.845295] W 0x4a3b8: 0xeeeeee
+[    8.845296] W 0x4a3bc: 0xefefef
+[    8.845297] W 0x4a3c0: 0xf0f0f0
+[    8.845298] W 0x4a3c4: 0xf1f1f1
+[    8.845299] W 0x4a3c8: 0xf2f2f2
+[    8.845300] W 0x4a3cc: 0xf3f3f3
+[    8.845301] W 0x4a3d0: 0xf4f4f4
+[    8.845302] W 0x4a3d4: 0xf5f5f5
+[    8.845303] W 0x4a3d8: 0xf6f6f6
+[    8.845304] W 0x4a3dc: 0xf7f7f7
+[    8.845305] W 0x4a3e0: 0xf8f8f8
+[    8.845306] W 0x4a3e4: 0xf9f9f9
+[    8.845306] W 0x4a3e8: 0xfafafa
+[    8.845307] W 0x4a3ec: 0xfbfbfb
+[    8.845308] W 0x4a3f0: 0xfcfcfc
+[    8.845309] W 0x4a3f4: 0xfdfdfd
+[    8.845310] W 0x4a3f8: 0xfefefe
+[    8.845311] W 0x4a3fc: 0xffffff
+[    8.845312] W 0x6f410: 0x21
+[    8.845313] W 0x6f400: 0x82000000
+[    8.845314] R 0x7f008: 0x0
+[    8.845315] W 0x7f008: 0x80000000
+[    8.845316] R 0x70040: 0x0
+[    8.845321] R 0x4400c: 0xb0002529
+[    8.845322] W 0x4400c: 0x30002529
+[    8.845323] R 0x44018: 0x0
+[    8.845324] R 0x44008: 0x8
+[    8.845325] W 0x44008: 0x8
+[    8.845326] R 0x44028: 0x0
+[    8.845327] W 0x4400c: 0xb0002529
+[    8.846542] R 0x7f008: 0xc0000000
+[    8.846542] R 0x70180: 0x59004000
+[    8.846543] W 0x70180: 0xd9004000
+[    8.846544] R 0x7019c: 0x74000
+[    8.846545] W 0x7019c: 0x74000
+[    8.846546] R 0x70040: 0x1
+[    8.861971] R 0x4400c: 0xb0002529
+[    8.861985] W 0x4400c: 0x30002529
+[    8.861986] R 0x44018: 0x0
+[    8.861987] R 0x44008: 0x8
+[    8.861987] W 0x44008: 0x8
+[    8.861989] R 0x44028: 0x0
+[    8.861989] W 0x4400c: 0xb0002529
+[    8.862531] R 0xc7204: 0xabcd0007
+[    8.862532] R 0x70040: 0x2
+[    8.880518] R 0x64000: 0x80000001
+[    8.880518] R 0x6f400: 0x82000000
+[    8.880519] R 0x6f400: 0x82000000
+[    8.880520] R 0x64000: 0x80000001
+[    8.880521] R 0x6f400: 0x82000000
+[    8.880522] R 0x64100: 0x0
+[    8.880523] R 0x64100: 0x0
+[    8.880524] R 0x64000: 0x80000001
+[    8.880524] R 0x6f400: 0x82000000
+[    8.880525] R 0x64100: 0x0
+[    8.880526] R 0x7f008: 0xc0000000
+[    8.880527] R 0x71008: 0x0
+[    8.880528] R 0x72008: 0x0
+[    8.880538] R 0xc7204: 0xabcd0007
+[    8.880543] W 0x4a000: 0x0
+[    8.880544] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 4a000
+[    8.880546] W 0x4a004: 0x10101
+[    8.880547] W 0x4a008: 0x20202
+[    8.880548] W 0x4a00c: 0x30303
+[    8.880549] W 0x4a010: 0x40404
+[    8.880550] W 0x4a014: 0x50505
+[    8.880550] W 0x4a018: 0x60606
+[    8.880551] W 0x4a01c: 0x70707
+[    8.880552] W 0x4a020: 0x80808
+[    8.880553] W 0x4a024: 0x90909
+[    8.880554] W 0x4a028: 0xa0a0a
+[    8.880555] W 0x4a02c: 0xb0b0b
+[    8.880556] W 0x4a030: 0xc0c0c
+[    8.880557] W 0x4a034: 0xd0d0d
+[    8.880558] W 0x4a038: 0xe0e0e
+[    8.880559] W 0x4a03c: 0xf0f0f
+[    8.880560] W 0x4a040: 0x101010
+[    8.880561] W 0x4a044: 0x111111
+[    8.880562] W 0x4a048: 0x121212
+[    8.880563] W 0x4a04c: 0x131313
+[    8.880564] W 0x4a050: 0x141414
+[    8.880565] W 0x4a054: 0x151515
+[    8.880566] W 0x4a058: 0x161616
+[    8.880567] W 0x4a05c: 0x171717
+[    8.880568] W 0x4a060: 0x181818
+[    8.880569] W 0x4a064: 0x191919
+[    8.880570] W 0x4a068: 0x1a1a1a
+[    8.880571] W 0x4a06c: 0x1b1b1b
+[    8.880572] W 0x4a070: 0x1c1c1c
+[    8.880573] W 0x4a074: 0x1d1d1d
+[    8.880574] W 0x4a078: 0x1e1e1e
+[    8.880575] W 0x4a07c: 0x1f1f1f
+[    8.880576] W 0x4a080: 0x202020
+[    8.880577] W 0x4a084: 0x212121
+[    8.880578] W 0x4a088: 0x222222
+[    8.880579] W 0x4a08c: 0x232323
+[    8.880580] W 0x4a090: 0x242424
+[    8.880581] W 0x4a094: 0x252525
+[    8.880582] W 0x4a098: 0x262626
+[    8.880583] W 0x4a09c: 0x272727
+[    8.880584] W 0x4a0a0: 0x282828
+[    8.880585] W 0x4a0a4: 0x292929
+[    8.880586] W 0x4a0a8: 0x2a2a2a
+[    8.880587] W 0x4a0ac: 0x2b2b2b
+[    8.880588] W 0x4a0b0: 0x2c2c2c
+[    8.880589] W 0x4a0b4: 0x2d2d2d
+[    8.880590] W 0x4a0b8: 0x2e2e2e
+[    8.880591] W 0x4a0bc: 0x2f2f2f
+[    8.880592] W 0x4a0c0: 0x303030
+[    8.880593] W 0x4a0c4: 0x313131
+[    8.880594] W 0x4a0c8: 0x323232
+[    8.880595] W 0x4a0cc: 0x333333
+[    8.880596] W 0x4a0d0: 0x343434
+[    8.880597] W 0x4a0d4: 0x353535
+[    8.880598] W 0x4a0d8: 0x363636
+[    8.880598] W 0x4a0dc: 0x373737
+[    8.880599] W 0x4a0e0: 0x383838
+[    8.880600] W 0x4a0e4: 0x393939
+[    8.880601] W 0x4a0e8: 0x3a3a3a
+[    8.880602] W 0x4a0ec: 0x3b3b3b
+[    8.880603] W 0x4a0f0: 0x3c3c3c
+[    8.880604] W 0x4a0f4: 0x3d3d3d
+[    8.880605] W 0x4a0f8: 0x3e3e3e
+[    8.880606] W 0x4a0fc: 0x3f3f3f
+[    8.880607] W 0x4a100: 0x404040
+[    8.880608] W 0x4a104: 0x414141
+[    8.880609] W 0x4a108: 0x424242
+[    8.880610] W 0x4a10c: 0x434343
+[    8.880611] W 0x4a110: 0x444444
+[    8.880612] W 0x4a114: 0x454545
+[    8.880613] W 0x4a118: 0x464646
+[    8.880614] W 0x4a11c: 0x474747
+[    8.880615] W 0x4a120: 0x484848
+[    8.880616] W 0x4a124: 0x494949
+[    8.880617] W 0x4a128: 0x4a4a4a
+[    8.880618] W 0x4a12c: 0x4b4b4b
+[    8.880619] W 0x4a130: 0x4c4c4c
+[    8.880620] W 0x4a134: 0x4d4d4d
+[    8.880621] W 0x4a138: 0x4e4e4e
+[    8.880622] W 0x4a13c: 0x4f4f4f
+[    8.880623] W 0x4a140: 0x505050
+[    8.880624] W 0x4a144: 0x515151
+[    8.880625] W 0x4a148: 0x525252
+[    8.880626] W 0x4a14c: 0x535353
+[    8.880627] W 0x4a150: 0x545454
+[    8.880628] W 0x4a154: 0x555555
+[    8.880629] W 0x4a158: 0x565656
+[    8.880630] W 0x4a15c: 0x575757
+[    8.880631] W 0x4a160: 0x585858
+[    8.880632] W 0x4a164: 0x595959
+[    8.880633] W 0x4a168: 0x5a5a5a
+[    8.880634] W 0x4a16c: 0x5b5b5b
+[    8.880635] W 0x4a170: 0x5c5c5c
+[    8.880636] W 0x4a174: 0x5d5d5d
+[    8.880637] W 0x4a178: 0x5e5e5e
+[    8.880638] W 0x4a17c: 0x5f5f5f
+[    8.880639] W 0x4a180: 0x606060
+[    8.880640] W 0x4a184: 0x616161
+[    8.880640] W 0x4a188: 0x626262
+[    8.880641] W 0x4a18c: 0x636363
+[    8.880642] W 0x4a190: 0x646464
+[    8.880643] W 0x4a194: 0x656565
+[    8.880644] W 0x4a198: 0x666666
+[    8.880645] W 0x4a19c: 0x676767
+[    8.880646] W 0x4a1a0: 0x686868
+[    8.880647] W 0x4a1a4: 0x696969
+[    8.880648] W 0x4a1a8: 0x6a6a6a
+[    8.880649] W 0x4a1ac: 0x6b6b6b
+[    8.880650] W 0x4a1b0: 0x6c6c6c
+[    8.880651] W 0x4a1b4: 0x6d6d6d
+[    8.880652] W 0x4a1b8: 0x6e6e6e
+[    8.880653] W 0x4a1bc: 0x6f6f6f
+[    8.880654] W 0x4a1c0: 0x707070
+[    8.880655] W 0x4a1c4: 0x717171
+[    8.880656] W 0x4a1c8: 0x727272
+[    8.880657] W 0x4a1cc: 0x737373
+[    8.880658] W 0x4a1d0: 0x747474
+[    8.880659] W 0x4a1d4: 0x757575
+[    8.880660] W 0x4a1d8: 0x767676
+[    8.880661] W 0x4a1dc: 0x777777
+[    8.880662] W 0x4a1e0: 0x787878
+[    8.880663] W 0x4a1e4: 0x797979
+[    8.880664] W 0x4a1e8: 0x7a7a7a
+[    8.880665] W 0x4a1ec: 0x7b7b7b
+[    8.880666] W 0x4a1f0: 0x7c7c7c
+[    8.880667] W 0x4a1f4: 0x7d7d7d
+[    8.880668] W 0x4a1f8: 0x7e7e7e
+[    8.880669] W 0x4a1fc: 0x7f7f7f
+[    8.880670] W 0x4a200: 0x808080
+[    8.880671] W 0x4a204: 0x818181
+[    8.880672] W 0x4a208: 0x828282
+[    8.880673] W 0x4a20c: 0x838383
+[    8.880674] W 0x4a210: 0x848484
+[    8.880675] W 0x4a214: 0x858585
+[    8.880676] W 0x4a218: 0x868686
+[    8.880677] W 0x4a21c: 0x878787
+[    8.880678] W 0x4a220: 0x888888
+[    8.880679] W 0x4a224: 0x898989
+[    8.880680] W 0x4a228: 0x8a8a8a
+[    8.880681] W 0x4a22c: 0x8b8b8b
+[    8.880682] W 0x4a230: 0x8c8c8c
+[    8.880683] W 0x4a234: 0x8d8d8d
+[    8.880684] W 0x4a238: 0x8e8e8e
+[    8.880685] W 0x4a23c: 0x8f8f8f
+[    8.880686] W 0x4a240: 0x909090
+[    8.880687] W 0x4a244: 0x919191
+[    8.880688] W 0x4a248: 0x929292
+[    8.880689] W 0x4a24c: 0x939393
+[    8.880690] W 0x4a250: 0x949494
+[    8.880691] W 0x4a254: 0x959595
+[    8.880692] W 0x4a258: 0x969696
+[    8.880693] W 0x4a25c: 0x979797
+[    8.880694] W 0x4a260: 0x989898
+[    8.880695] W 0x4a264: 0x999999
+[    8.880696] W 0x4a268: 0x9a9a9a
+[    8.880697] W 0x4a26c: 0x9b9b9b
+[    8.880697] W 0x4a270: 0x9c9c9c
+[    8.880698] W 0x4a274: 0x9d9d9d
+[    8.880699] W 0x4a278: 0x9e9e9e
+[    8.880700] W 0x4a27c: 0x9f9f9f
+[    8.880701] W 0x4a280: 0xa0a0a0
+[    8.880702] W 0x4a284: 0xa1a1a1
+[    8.880703] W 0x4a288: 0xa2a2a2
+[    8.880704] W 0x4a28c: 0xa3a3a3
+[    8.880705] W 0x4a290: 0xa4a4a4
+[    8.880706] W 0x4a294: 0xa5a5a5
+[    8.880707] W 0x4a298: 0xa6a6a6
+[    8.880708] W 0x4a29c: 0xa7a7a7
+[    8.880709] W 0x4a2a0: 0xa8a8a8
+[    8.880710] W 0x4a2a4: 0xa9a9a9
+[    8.880711] W 0x4a2a8: 0xaaaaaa
+[    8.880712] W 0x4a2ac: 0xababab
+[    8.880713] W 0x4a2b0: 0xacacac
+[    8.880714] W 0x4a2b4: 0xadadad
+[    8.880715] W 0x4a2b8: 0xaeaeae
+[    8.880716] W 0x4a2bc: 0xafafaf
+[    8.880717] W 0x4a2c0: 0xb0b0b0
+[    8.880718] W 0x4a2c4: 0xb1b1b1
+[    8.880719] W 0x4a2c8: 0xb2b2b2
+[    8.880720] W 0x4a2cc: 0xb3b3b3
+[    8.880721] W 0x4a2d0: 0xb4b4b4
+[    8.880722] W 0x4a2d4: 0xb5b5b5
+[    8.880723] W 0x4a2d8: 0xb6b6b6
+[    8.880724] W 0x4a2dc: 0xb7b7b7
+[    8.880725] W 0x4a2e0: 0xb8b8b8
+[    8.880726] W 0x4a2e4: 0xb9b9b9
+[    8.880727] W 0x4a2e8: 0xbababa
+[    8.880728] W 0x4a2ec: 0xbbbbbb
+[    8.880729] W 0x4a2f0: 0xbcbcbc
+[    8.880730] W 0x4a2f4: 0xbdbdbd
+[    8.880731] W 0x4a2f8: 0xbebebe
+[    8.880732] W 0x4a2fc: 0xbfbfbf
+[    8.880733] W 0x4a300: 0xc0c0c0
+[    8.880734] W 0x4a304: 0xc1c1c1
+[    8.880735] W 0x4a308: 0xc2c2c2
+[    8.880736] W 0x4a30c: 0xc3c3c3
+[    8.880737] W 0x4a310: 0xc4c4c4
+[    8.880738] W 0x4a314: 0xc5c5c5
+[    8.880739] W 0x4a318: 0xc6c6c6
+[    8.880740] W 0x4a31c: 0xc7c7c7
+[    8.880741] W 0x4a320: 0xc8c8c8
+[    8.880742] W 0x4a324: 0xc9c9c9
+[    8.880743] W 0x4a328: 0xcacaca
+[    8.880744] W 0x4a32c: 0xcbcbcb
+[    8.880745] W 0x4a330: 0xcccccc
+[    8.880746] W 0x4a334: 0xcdcdcd
+[    8.880747] W 0x4a338: 0xcecece
+[    8.880748] W 0x4a33c: 0xcfcfcf
+[    8.880749] W 0x4a340: 0xd0d0d0
+[    8.880750] W 0x4a344: 0xd1d1d1
+[    8.880751] W 0x4a348: 0xd2d2d2
+[    8.880752] W 0x4a34c: 0xd3d3d3
+[    8.880753] W 0x4a350: 0xd4d4d4
+[    8.880754] W 0x4a354: 0xd5d5d5
+[    8.880755] W 0x4a358: 0xd6d6d6
+[    8.880756] W 0x4a35c: 0xd7d7d7
+[    8.880757] W 0x4a360: 0xd8d8d8
+[    8.880758] W 0x4a364: 0xd9d9d9
+[    8.880759] W 0x4a368: 0xdadada
+[    8.880760] W 0x4a36c: 0xdbdbdb
+[    8.880761] W 0x4a370: 0xdcdcdc
+[    8.880761] W 0x4a374: 0xdddddd
+[    8.880762] W 0x4a378: 0xdedede
+[    8.880763] W 0x4a37c: 0xdfdfdf
+[    8.880764] W 0x4a380: 0xe0e0e0
+[    8.880765] W 0x4a384: 0xe1e1e1
+[    8.880766] W 0x4a388: 0xe2e2e2
+[    8.880767] W 0x4a38c: 0xe3e3e3
+[    8.880768] W 0x4a390: 0xe4e4e4
+[    8.880769] W 0x4a394: 0xe5e5e5
+[    8.880770] W 0x4a398: 0xe6e6e6
+[    8.880771] W 0x4a39c: 0xe7e7e7
+[    8.880772] W 0x4a3a0: 0xe8e8e8
+[    8.880773] W 0x4a3a4: 0xe9e9e9
+[    8.880774] W 0x4a3a8: 0xeaeaea
+[    8.880775] W 0x4a3ac: 0xebebeb
+[    8.880776] W 0x4a3b0: 0xececec
+[    8.880777] W 0x4a3b4: 0xededed
+[    8.880778] W 0x4a3b8: 0xeeeeee
+[    8.880779] W 0x4a3bc: 0xefefef
+[    8.880780] W 0x4a3c0: 0xf0f0f0
+[    8.880781] W 0x4a3c4: 0xf1f1f1
+[    8.880782] W 0x4a3c8: 0xf2f2f2
+[    8.880783] W 0x4a3cc: 0xf3f3f3
+[    8.880784] W 0x4a3d0: 0xf4f4f4
+[    8.880785] W 0x4a3d4: 0xf5f5f5
+[    8.880786] W 0x4a3d8: 0xf6f6f6
+[    8.880787] W 0x4a3dc: 0xf7f7f7
+[    8.880788] W 0x4a3e0: 0xf8f8f8
+[    8.880789] W 0x4a3e4: 0xf9f9f9
+[    8.880790] W 0x4a3e8: 0xfafafa
+[    8.880791] W 0x4a3ec: 0xfbfbfb
+[    8.880792] W 0x4a3f0: 0xfcfcfc
+[    8.880793] W 0x4a3f4: 0xfdfdfd
+[    8.880794] W 0x4a3f8: 0xfefefe
+[    8.880795] W 0x4a3fc: 0xffffff
+[    8.880797] W 0x4a000: 0x0
+[    8.880798] W 0x4a004: 0x10101
+[    8.880799] W 0x4a008: 0x20202
+[    8.880800] W 0x4a00c: 0x30303
+[    8.880801] W 0x4a010: 0x40404
+[    8.880802] W 0x4a014: 0x50505
+[    8.880803] W 0x4a018: 0x60606
+[    8.880804] W 0x4a01c: 0x70707
+[    8.880805] W 0x4a020: 0x80808
+[    8.880806] W 0x4a024: 0x90909
+[    8.880807] W 0x4a028: 0xa0a0a
+[    8.880808] W 0x4a02c: 0xb0b0b
+[    8.880809] W 0x4a030: 0xc0c0c
+[    8.880810] W 0x4a034: 0xd0d0d
+[    8.880811] W 0x4a038: 0xe0e0e
+[    8.880812] W 0x4a03c: 0xf0f0f
+[    8.880813] W 0x4a040: 0x101010
+[    8.880814] W 0x4a044: 0x111111
+[    8.880815] W 0x4a048: 0x121212
+[    8.880816] W 0x4a04c: 0x131313
+[    8.880817] W 0x4a050: 0x141414
+[    8.880818] W 0x4a054: 0x151515
+[    8.880819] W 0x4a058: 0x161616
+[    8.880820] W 0x4a05c: 0x171717
+[    8.880821] W 0x4a060: 0x181818
+[    8.880822] W 0x4a064: 0x191919
+[    8.880823] W 0x4a068: 0x1a1a1a
+[    8.880824] W 0x4a06c: 0x1b1b1b
+[    8.880825] W 0x4a070: 0x1c1c1c
+[    8.880826] W 0x4a074: 0x1d1d1d
+[    8.880827] W 0x4a078: 0x1e1e1e
+[    8.880828] W 0x4a07c: 0x1f1f1f
+[    8.880829] W 0x4a080: 0x202020
+[    8.880830] W 0x4a084: 0x212121
+[    8.880831] W 0x4a088: 0x222222
+[    8.880832] W 0x4a08c: 0x232323
+[    8.880833] W 0x4a090: 0x242424
+[    8.880834] W 0x4a094: 0x252525
+[    8.880834] W 0x4a098: 0x262626
+[    8.880835] W 0x4a09c: 0x272727
+[    8.880836] W 0x4a0a0: 0x282828
+[    8.880837] W 0x4a0a4: 0x292929
+[    8.880838] W 0x4a0a8: 0x2a2a2a
+[    8.880839] W 0x4a0ac: 0x2b2b2b
+[    8.880840] W 0x4a0b0: 0x2c2c2c
+[    8.880841] W 0x4a0b4: 0x2d2d2d
+[    8.880842] W 0x4a0b8: 0x2e2e2e
+[    8.880843] W 0x4a0bc: 0x2f2f2f
+[    8.880844] W 0x4a0c0: 0x303030
+[    8.880845] W 0x4a0c4: 0x313131
+[    8.880846] W 0x4a0c8: 0x323232
+[    8.880847] W 0x4a0cc: 0x333333
+[    8.880848] W 0x4a0d0: 0x343434
+[    8.880849] W 0x4a0d4: 0x353535
+[    8.880850] W 0x4a0d8: 0x363636
+[    8.880851] W 0x4a0dc: 0x373737
+[    8.880852] W 0x4a0e0: 0x383838
+[    8.880853] W 0x4a0e4: 0x393939
+[    8.880854] W 0x4a0e8: 0x3a3a3a
+[    8.880855] W 0x4a0ec: 0x3b3b3b
+[    8.880856] W 0x4a0f0: 0x3c3c3c
+[    8.880857] W 0x4a0f4: 0x3d3d3d
+[    8.880858] W 0x4a0f8: 0x3e3e3e
+[    8.880859] W 0x4a0fc: 0x3f3f3f
+[    8.880860] W 0x4a100: 0x404040
+[    8.880861] W 0x4a104: 0x414141
+[    8.880862] W 0x4a108: 0x424242
+[    8.880863] W 0x4a10c: 0x434343
+[    8.880864] W 0x4a110: 0x444444
+[    8.880865] W 0x4a114: 0x454545
+[    8.880866] W 0x4a118: 0x464646
+[    8.880867] W 0x4a11c: 0x474747
+[    8.880868] W 0x4a120: 0x484848
+[    8.880869] W 0x4a124: 0x494949
+[    8.880870] W 0x4a128: 0x4a4a4a
+[    8.880871] W 0x4a12c: 0x4b4b4b
+[    8.880872] W 0x4a130: 0x4c4c4c
+[    8.880873] W 0x4a134: 0x4d4d4d
+[    8.880874] W 0x4a138: 0x4e4e4e
+[    8.880875] W 0x4a13c: 0x4f4f4f
+[    8.880876] W 0x4a140: 0x505050
+[    8.880877] W 0x4a144: 0x515151
+[    8.880878] W 0x4a148: 0x525252
+[    8.880879] W 0x4a14c: 0x535353
+[    8.880880] W 0x4a150: 0x545454
+[    8.880881] W 0x4a154: 0x555555
+[    8.880882] W 0x4a158: 0x565656
+[    8.880883] W 0x4a15c: 0x575757
+[    8.880884] W 0x4a160: 0x585858
+[    8.880885] W 0x4a164: 0x595959
+[    8.880886] W 0x4a168: 0x5a5a5a
+[    8.880887] W 0x4a16c: 0x5b5b5b
+[    8.880888] W 0x4a170: 0x5c5c5c
+[    8.880888] W 0x4a174: 0x5d5d5d
+[    8.880889] W 0x4a178: 0x5e5e5e
+[    8.880890] W 0x4a17c: 0x5f5f5f
+[    8.880891] W 0x4a180: 0x606060
+[    8.880892] W 0x4a184: 0x616161
+[    8.880893] W 0x4a188: 0x626262
+[    8.880894] W 0x4a18c: 0x636363
+[    8.880895] W 0x4a190: 0x646464
+[    8.880896] W 0x4a194: 0x656565
+[    8.880897] W 0x4a198: 0x666666
+[    8.880898] W 0x4a19c: 0x676767
+[    8.880899] W 0x4a1a0: 0x686868
+[    8.880900] W 0x4a1a4: 0x696969
+[    8.880901] W 0x4a1a8: 0x6a6a6a
+[    8.880902] W 0x4a1ac: 0x6b6b6b
+[    8.880903] W 0x4a1b0: 0x6c6c6c
+[    8.880904] W 0x4a1b4: 0x6d6d6d
+[    8.880905] W 0x4a1b8: 0x6e6e6e
+[    8.880906] W 0x4a1bc: 0x6f6f6f
+[    8.880907] W 0x4a1c0: 0x707070
+[    8.880908] W 0x4a1c4: 0x717171
+[    8.880909] W 0x4a1c8: 0x727272
+[    8.880910] W 0x4a1cc: 0x737373
+[    8.880911] W 0x4a1d0: 0x747474
+[    8.880912] W 0x4a1d4: 0x757575
+[    8.880913] W 0x4a1d8: 0x767676
+[    8.880914] W 0x4a1dc: 0x777777
+[    8.880915] W 0x4a1e0: 0x787878
+[    8.880916] W 0x4a1e4: 0x797979
+[    8.880917] W 0x4a1e8: 0x7a7a7a
+[    8.880918] W 0x4a1ec: 0x7b7b7b
+[    8.880919] W 0x4a1f0: 0x7c7c7c
+[    8.880920] W 0x4a1f4: 0x7d7d7d
+[    8.880921] W 0x4a1f8: 0x7e7e7e
+[    8.880922] W 0x4a1fc: 0x7f7f7f
+[    8.880923] W 0x4a200: 0x808080
+[    8.880924] W 0x4a204: 0x818181
+[    8.880925] W 0x4a208: 0x828282
+[    8.880926] W 0x4a20c: 0x838383
+[    8.880927] W 0x4a210: 0x848484
+[    8.880928] W 0x4a214: 0x858585
+[    8.880929] W 0x4a218: 0x868686
+[    8.880930] W 0x4a21c: 0x878787
+[    8.880931] W 0x4a220: 0x888888
+[    8.880932] W 0x4a224: 0x898989
+[    8.880933] W 0x4a228: 0x8a8a8a
+[    8.880934] W 0x4a22c: 0x8b8b8b
+[    8.880935] W 0x4a230: 0x8c8c8c
+[    8.880936] W 0x4a234: 0x8d8d8d
+[    8.880937] W 0x4a238: 0x8e8e8e
+[    8.880938] W 0x4a23c: 0x8f8f8f
+[    8.880939] W 0x4a240: 0x909090
+[    8.880940] W 0x4a244: 0x919191
+[    8.880941] W 0x4a248: 0x929292
+[    8.880942] W 0x4a24c: 0x939393
+[    8.880943] W 0x4a250: 0x949494
+[    8.880944] W 0x4a254: 0x959595
+[    8.880945] W 0x4a258: 0x969696
+[    8.880946] W 0x4a25c: 0x979797
+[    8.880947] W 0x4a260: 0x989898
+[    8.880948] W 0x4a264: 0x999999
+[    8.880949] W 0x4a268: 0x9a9a9a
+[    8.880950] W 0x4a26c: 0x9b9b9b
+[    8.880950] W 0x4a270: 0x9c9c9c
+[    8.880951] W 0x4a274: 0x9d9d9d
+[    8.880952] W 0x4a278: 0x9e9e9e
+[    8.880953] W 0x4a27c: 0x9f9f9f
+[    8.880954] W 0x4a280: 0xa0a0a0
+[    8.880955] W 0x4a284: 0xa1a1a1
+[    8.880956] W 0x4a288: 0xa2a2a2
+[    8.880957] W 0x4a28c: 0xa3a3a3
+[    8.880958] W 0x4a290: 0xa4a4a4
+[    8.880959] W 0x4a294: 0xa5a5a5
+[    8.880960] W 0x4a298: 0xa6a6a6
+[    8.880961] W 0x4a29c: 0xa7a7a7
+[    8.880962] W 0x4a2a0: 0xa8a8a8
+[    8.880963] W 0x4a2a4: 0xa9a9a9
+[    8.880964] W 0x4a2a8: 0xaaaaaa
+[    8.880965] W 0x4a2ac: 0xababab
+[    8.880966] W 0x4a2b0: 0xacacac
+[    8.880967] W 0x4a2b4: 0xadadad
+[    8.880968] W 0x4a2b8: 0xaeaeae
+[    8.880969] W 0x4a2bc: 0xafafaf
+[    8.880970] W 0x4a2c0: 0xb0b0b0
+[    8.880971] W 0x4a2c4: 0xb1b1b1
+[    8.880972] W 0x4a2c8: 0xb2b2b2
+[    8.880973] W 0x4a2cc: 0xb3b3b3
+[    8.880974] W 0x4a2d0: 0xb4b4b4
+[    8.880975] W 0x4a2d4: 0xb5b5b5
+[    8.880976] W 0x4a2d8: 0xb6b6b6
+[    8.880977] W 0x4a2dc: 0xb7b7b7
+[    8.880978] W 0x4a2e0: 0xb8b8b8
+[    8.880979] W 0x4a2e4: 0xb9b9b9
+[    8.880980] W 0x4a2e8: 0xbababa
+[    8.880981] W 0x4a2ec: 0xbbbbbb
+[    8.880982] W 0x4a2f0: 0xbcbcbc
+[    8.880983] W 0x4a2f4: 0xbdbdbd
+[    8.880984] W 0x4a2f8: 0xbebebe
+[    8.880985] W 0x4a2fc: 0xbfbfbf
+[    8.880986] W 0x4a300: 0xc0c0c0
+[    8.880987] W 0x4a304: 0xc1c1c1
+[    8.880988] W 0x4a308: 0xc2c2c2
+[    8.880989] W 0x4a30c: 0xc3c3c3
+[    8.880990] W 0x4a310: 0xc4c4c4
+[    8.880991] W 0x4a314: 0xc5c5c5
+[    8.880992] W 0x4a318: 0xc6c6c6
+[    8.880993] W 0x4a31c: 0xc7c7c7
+[    8.880994] W 0x4a320: 0xc8c8c8
+[    8.880995] W 0x4a324: 0xc9c9c9
+[    8.880996] W 0x4a328: 0xcacaca
+[    8.880997] W 0x4a32c: 0xcbcbcb
+[    8.880998] W 0x4a330: 0xcccccc
+[    8.880999] W 0x4a334: 0xcdcdcd
+[    8.881000] W 0x4a338: 0xcecece
+[    8.881001] W 0x4a33c: 0xcfcfcf
+[    8.881002] W 0x4a340: 0xd0d0d0
+[    8.881003] W 0x4a344: 0xd1d1d1
+[    8.881004] W 0x4a348: 0xd2d2d2
+[    8.881005] W 0x4a34c: 0xd3d3d3
+[    8.881006] W 0x4a350: 0xd4d4d4
+[    8.881007] W 0x4a354: 0xd5d5d5
+[    8.881008] W 0x4a358: 0xd6d6d6
+[    8.881009] W 0x4a35c: 0xd7d7d7
+[    8.881010] W 0x4a360: 0xd8d8d8
+[    8.881011] W 0x4a364: 0xd9d9d9
+[    8.881012] W 0x4a368: 0xdadada
+[    8.881013] W 0x4a36c: 0xdbdbdb
+[    8.881014] W 0x4a370: 0xdcdcdc
+[    8.881015] W 0x4a374: 0xdddddd
+[    8.881015] W 0x4a378: 0xdedede
+[    8.881016] W 0x4a37c: 0xdfdfdf
+[    8.881017] W 0x4a380: 0xe0e0e0
+[    8.881018] W 0x4a384: 0xe1e1e1
+[    8.881019] W 0x4a388: 0xe2e2e2
+[    8.881020] W 0x4a38c: 0xe3e3e3
+[    8.881021] W 0x4a390: 0xe4e4e4
+[    8.881022] W 0x4a394: 0xe5e5e5
+[    8.881023] W 0x4a398: 0xe6e6e6
+[    8.881024] W 0x4a39c: 0xe7e7e7
+[    8.881025] W 0x4a3a0: 0xe8e8e8
+[    8.881026] W 0x4a3a4: 0xe9e9e9
+[    8.881027] W 0x4a3a8: 0xeaeaea
+[    8.881028] W 0x4a3ac: 0xebebeb
+[    8.881029] W 0x4a3b0: 0xececec
+[    8.881030] W 0x4a3b4: 0xededed
+[    8.881031] W 0x4a3b8: 0xeeeeee
+[    8.881032] W 0x4a3bc: 0xefefef
+[    8.881033] W 0x4a3c0: 0xf0f0f0
+[    8.881034] W 0x4a3c4: 0xf1f1f1
+[    8.881035] W 0x4a3c8: 0xf2f2f2
+[    8.881036] W 0x4a3cc: 0xf3f3f3
+[    8.881037] W 0x4a3d0: 0xf4f4f4
+[    8.881038] W 0x4a3d4: 0xf5f5f5
+[    8.881039] W 0x4a3d8: 0xf6f6f6
+[    8.881040] W 0x4a3dc: 0xf7f7f7
+[    8.881041] W 0x4a3e0: 0xf8f8f8
+[    8.881042] W 0x4a3e4: 0xf9f9f9
+[    8.881043] W 0x4a3e8: 0xfafafa
+[    8.881044] W 0x4a3ec: 0xfbfbfb
+[    8.881045] W 0x4a3f0: 0xfcfcfc
+[    8.881046] W 0x4a3f4: 0xfdfdfd
+[    8.881047] W 0x4a3f8: 0xfefefe
+[    8.881048] W 0x4a3fc: 0xffffff
+[    8.885559] Console: switching to colour frame buffer device 160x50
+[    8.885562] W 0x4a000: 0x0
+[    8.885563] W 0x4a004: 0x10101
+[    8.885564] W 0x4a008: 0x20202
+[    8.885565] W 0x4a00c: 0x30303
+[    8.885566] W 0x4a010: 0x40404
+[    8.885567] W 0x4a014: 0x50505
+[    8.885568] W 0x4a018: 0x60606
+[    8.885569] W 0x4a01c: 0x70707
+[    8.885570] W 0x4a020: 0x80808
+[    8.885571] W 0x4a024: 0x90909
+[    8.885572] W 0x4a028: 0xa0a0a
+[    8.885573] W 0x4a02c: 0xb0b0b
+[    8.885574] W 0x4a030: 0xc0c0c
+[    8.885575] W 0x4a034: 0xd0d0d
+[    8.885576] W 0x4a038: 0xe0e0e
+[    8.885577] W 0x4a03c: 0xf0f0f
+[    8.885578] W 0x4a040: 0x101010
+[    8.885579] W 0x4a044: 0x111111
+[    8.885580] W 0x4a048: 0x121212
+[    8.885581] W 0x4a04c: 0x131313
+[    8.885582] W 0x4a050: 0x141414
+[    8.885583] W 0x4a054: 0x151515
+[    8.885584] W 0x4a058: 0x161616
+[    8.885585] W 0x4a05c: 0x171717
+[    8.885586] W 0x4a060: 0x181818
+[    8.885587] W 0x4a064: 0x191919
+[    8.885588] W 0x4a068: 0x1a1a1a
+[    8.885589] W 0x4a06c: 0x1b1b1b
+[    8.885590] W 0x4a070: 0x1c1c1c
+[    8.885591] W 0x4a074: 0x1d1d1d
+[    8.885592] W 0x4a078: 0x1e1e1e
+[    8.885593] W 0x4a07c: 0x1f1f1f
+[    8.885593] W 0x4a080: 0x202020
+[    8.885594] W 0x4a084: 0x212121
+[    8.885595] W 0x4a088: 0x222222
+[    8.885596] W 0x4a08c: 0x232323
+[    8.885597] W 0x4a090: 0x242424
+[    8.885598] W 0x4a094: 0x252525
+[    8.885599] W 0x4a098: 0x262626
+[    8.885600] W 0x4a09c: 0x272727
+[    8.885601] W 0x4a0a0: 0x282828
+[    8.885602] W 0x4a0a4: 0x292929
+[    8.885603] W 0x4a0a8: 0x2a2a2a
+[    8.885604] W 0x4a0ac: 0x2b2b2b
+[    8.885605] W 0x4a0b0: 0x2c2c2c
+[    8.885606] W 0x4a0b4: 0x2d2d2d
+[    8.885607] W 0x4a0b8: 0x2e2e2e
+[    8.885608] W 0x4a0bc: 0x2f2f2f
+[    8.885609] W 0x4a0c0: 0x303030
+[    8.885610] W 0x4a0c4: 0x313131
+[    8.885611] W 0x4a0c8: 0x323232
+[    8.885612] W 0x4a0cc: 0x333333
+[    8.885613] W 0x4a0d0: 0x343434
+[    8.885614] W 0x4a0d4: 0x353535
+[    8.885615] W 0x4a0d8: 0x363636
+[    8.885616] W 0x4a0dc: 0x373737
+[    8.885617] W 0x4a0e0: 0x383838
+[    8.885618] W 0x4a0e4: 0x393939
+[    8.885619] W 0x4a0e8: 0x3a3a3a
+[    8.885620] W 0x4a0ec: 0x3b3b3b
+[    8.885621] W 0x4a0f0: 0x3c3c3c
+[    8.885622] W 0x4a0f4: 0x3d3d3d
+[    8.885623] W 0x4a0f8: 0x3e3e3e
+[    8.885624] W 0x4a0fc: 0x3f3f3f
+[    8.885625] W 0x4a100: 0x404040
+[    8.885626] W 0x4a104: 0x414141
+[    8.885627] W 0x4a108: 0x424242
+[    8.885628] W 0x4a10c: 0x434343
+[    8.885629] W 0x4a110: 0x444444
+[    8.885630] W 0x4a114: 0x454545
+[    8.885631] W 0x4a118: 0x464646
+[    8.885632] W 0x4a11c: 0x474747
+[    8.885632] W 0x4a120: 0x484848
+[    8.885633] W 0x4a124: 0x494949
+[    8.885634] W 0x4a128: 0x4a4a4a
+[    8.885635] W 0x4a12c: 0x4b4b4b
+[    8.885636] W 0x4a130: 0x4c4c4c
+[    8.885637] W 0x4a134: 0x4d4d4d
+[    8.885638] W 0x4a138: 0x4e4e4e
+[    8.885639] W 0x4a13c: 0x4f4f4f
+[    8.885640] W 0x4a140: 0x505050
+[    8.885641] W 0x4a144: 0x515151
+[    8.885642] W 0x4a148: 0x525252
+[    8.885643] W 0x4a14c: 0x535353
+[    8.885644] W 0x4a150: 0x545454
+[    8.885645] W 0x4a154: 0x555555
+[    8.885646] W 0x4a158: 0x565656
+[    8.885647] W 0x4a15c: 0x575757
+[    8.885648] W 0x4a160: 0x585858
+[    8.885649] W 0x4a164: 0x595959
+[    8.885650] W 0x4a168: 0x5a5a5a
+[    8.885651] W 0x4a16c: 0x5b5b5b
+[    8.885652] W 0x4a170: 0x5c5c5c
+[    8.885653] W 0x4a174: 0x5d5d5d
+[    8.885654] W 0x4a178: 0x5e5e5e
+[    8.885655] W 0x4a17c: 0x5f5f5f
+[    8.885656] W 0x4a180: 0x606060
+[    8.885657] W 0x4a184: 0x616161
+[    8.885658] W 0x4a188: 0x626262
+[    8.885659] W 0x4a18c: 0x636363
+[    8.885660] W 0x4a190: 0x646464
+[    8.885661] W 0x4a194: 0x656565
+[    8.885662] W 0x4a198: 0x666666
+[    8.885663] W 0x4a19c: 0x676767
+[    8.885664] W 0x4a1a0: 0x686868
+[    8.885665] W 0x4a1a4: 0x696969
+[    8.885666] W 0x4a1a8: 0x6a6a6a
+[    8.885667] W 0x4a1ac: 0x6b6b6b
+[    8.885668] W 0x4a1b0: 0x6c6c6c
+[    8.885669] W 0x4a1b4: 0x6d6d6d
+[    8.885670] W 0x4a1b8: 0x6e6e6e
+[    8.885671] W 0x4a1bc: 0x6f6f6f
+[    8.885672] W 0x4a1c0: 0x707070
+[    8.885673] W 0x4a1c4: 0x717171
+[    8.885674] W 0x4a1c8: 0x727272
+[    8.885675] W 0x4a1cc: 0x737373
+[    8.885676] W 0x4a1d0: 0x747474
+[    8.885677] W 0x4a1d4: 0x757575
+[    8.885678] W 0x4a1d8: 0x767676
+[    8.885679] W 0x4a1dc: 0x777777
+[    8.885680] W 0x4a1e0: 0x787878
+[    8.885681] W 0x4a1e4: 0x797979
+[    8.885682] W 0x4a1e8: 0x7a7a7a
+[    8.885683] W 0x4a1ec: 0x7b7b7b
+[    8.885684] W 0x4a1f0: 0x7c7c7c
+[    8.885685] W 0x4a1f4: 0x7d7d7d
+[    8.885686] W 0x4a1f8: 0x7e7e7e
+[    8.885687] W 0x4a1fc: 0x7f7f7f
+[    8.885688] W 0x4a200: 0x808080
+[    8.885689] W 0x4a204: 0x818181
+[    8.885689] W 0x4a208: 0x828282
+[    8.885690] W 0x4a20c: 0x838383
+[    8.885691] W 0x4a210: 0x848484
+[    8.885692] W 0x4a214: 0x858585
+[    8.885693] W 0x4a218: 0x868686
+[    8.885694] W 0x4a21c: 0x878787
+[    8.885695] W 0x4a220: 0x888888
+[    8.885696] W 0x4a224: 0x898989
+[    8.885697] W 0x4a228: 0x8a8a8a
+[    8.885698] W 0x4a22c: 0x8b8b8b
+[    8.885699] W 0x4a230: 0x8c8c8c
+[    8.885700] W 0x4a234: 0x8d8d8d
+[    8.885701] W 0x4a238: 0x8e8e8e
+[    8.885702] W 0x4a23c: 0x8f8f8f
+[    8.885703] W 0x4a240: 0x909090
+[    8.885704] W 0x4a244: 0x919191
+[    8.885705] W 0x4a248: 0x929292
+[    8.885706] W 0x4a24c: 0x939393
+[    8.885707] W 0x4a250: 0x949494
+[    8.885708] W 0x4a254: 0x959595
+[    8.885709] W 0x4a258: 0x969696
+[    8.885710] W 0x4a25c: 0x979797
+[    8.885711] W 0x4a260: 0x989898
+[    8.885712] W 0x4a264: 0x999999
+[    8.885713] W 0x4a268: 0x9a9a9a
+[    8.885714] W 0x4a26c: 0x9b9b9b
+[    8.885715] W 0x4a270: 0x9c9c9c
+[    8.885716] W 0x4a274: 0x9d9d9d
+[    8.885717] W 0x4a278: 0x9e9e9e
+[    8.885718] W 0x4a27c: 0x9f9f9f
+[    8.885719] W 0x4a280: 0xa0a0a0
+[    8.885720] W 0x4a284: 0xa1a1a1
+[    8.885721] W 0x4a288: 0xa2a2a2
+[    8.885722] W 0x4a28c: 0xa3a3a3
+[    8.885723] W 0x4a290: 0xa4a4a4
+[    8.885724] W 0x4a294: 0xa5a5a5
+[    8.885725] W 0x4a298: 0xa6a6a6
+[    8.885726] W 0x4a29c: 0xa7a7a7
+[    8.885727] W 0x4a2a0: 0xa8a8a8
+[    8.885728] W 0x4a2a4: 0xa9a9a9
+[    8.885729] W 0x4a2a8: 0xaaaaaa
+[    8.885730] W 0x4a2ac: 0xababab
+[    8.885731] W 0x4a2b0: 0xacacac
+[    8.885732] W 0x4a2b4: 0xadadad
+[    8.885733] W 0x4a2b8: 0xaeaeae
+[    8.885734] W 0x4a2bc: 0xafafaf
+[    8.885735] W 0x4a2c0: 0xb0b0b0
+[    8.885736] W 0x4a2c4: 0xb1b1b1
+[    8.885737] W 0x4a2c8: 0xb2b2b2
+[    8.885738] W 0x4a2cc: 0xb3b3b3
+[    8.885739] W 0x4a2d0: 0xb4b4b4
+[    8.885740] W 0x4a2d4: 0xb5b5b5
+[    8.885741] W 0x4a2d8: 0xb6b6b6
+[    8.885742] W 0x4a2dc: 0xb7b7b7
+[    8.885743] W 0x4a2e0: 0xb8b8b8
+[    8.885744] W 0x4a2e4: 0xb9b9b9
+[    8.885744] W 0x4a2e8: 0xbababa
+[    8.885745] W 0x4a2ec: 0xbbbbbb
+[    8.885746] W 0x4a2f0: 0xbcbcbc
+[    8.885747] W 0x4a2f4: 0xbdbdbd
+[    8.885748] W 0x4a2f8: 0xbebebe
+[    8.885749] W 0x4a2fc: 0xbfbfbf
+[    8.885750] W 0x4a300: 0xc0c0c0
+[    8.885751] W 0x4a304: 0xc1c1c1
+[    8.885752] W 0x4a308: 0xc2c2c2
+[    8.885753] W 0x4a30c: 0xc3c3c3
+[    8.885754] W 0x4a310: 0xc4c4c4
+[    8.885755] W 0x4a314: 0xc5c5c5
+[    8.885756] W 0x4a318: 0xc6c6c6
+[    8.885757] W 0x4a31c: 0xc7c7c7
+[    8.885758] W 0x4a320: 0xc8c8c8
+[    8.885759] W 0x4a324: 0xc9c9c9
+[    8.885760] W 0x4a328: 0xcacaca
+[    8.885761] W 0x4a32c: 0xcbcbcb
+[    8.885762] W 0x4a330: 0xcccccc
+[    8.885763] W 0x4a334: 0xcdcdcd
+[    8.885764] W 0x4a338: 0xcecece
+[    8.885765] W 0x4a33c: 0xcfcfcf
+[    8.885766] W 0x4a340: 0xd0d0d0
+[    8.885767] W 0x4a344: 0xd1d1d1
+[    8.885768] W 0x4a348: 0xd2d2d2
+[    8.885769] W 0x4a34c: 0xd3d3d3
+[    8.885770] W 0x4a350: 0xd4d4d4
+[    8.885771] W 0x4a354: 0xd5d5d5
+[    8.885772] W 0x4a358: 0xd6d6d6
+[    8.885773] W 0x4a35c: 0xd7d7d7
+[    8.885774] W 0x4a360: 0xd8d8d8
+[    8.885775] W 0x4a364: 0xd9d9d9
+[    8.885776] W 0x4a368: 0xdadada
+[    8.885777] W 0x4a36c: 0xdbdbdb
+[    8.885778] W 0x4a370: 0xdcdcdc
+[    8.885779] W 0x4a374: 0xdddddd
+[    8.885780] W 0x4a378: 0xdedede
+[    8.885781] W 0x4a37c: 0xdfdfdf
+[    8.885782] W 0x4a380: 0xe0e0e0
+[    8.885783] W 0x4a384: 0xe1e1e1
+[    8.885784] W 0x4a388: 0xe2e2e2
+[    8.885785] W 0x4a38c: 0xe3e3e3
+[    8.885786] W 0x4a390: 0xe4e4e4
+[    8.885787] W 0x4a394: 0xe5e5e5
+[    8.885788] W 0x4a398: 0xe6e6e6
+[    8.885789] W 0x4a39c: 0xe7e7e7
+[    8.885790] W 0x4a3a0: 0xe8e8e8
+[    8.885791] W 0x4a3a4: 0xe9e9e9
+[    8.885792] W 0x4a3a8: 0xeaeaea
+[    8.885793] W 0x4a3ac: 0xebebeb
+[    8.885794] W 0x4a3b0: 0xececec
+[    8.885795] W 0x4a3b4: 0xededed
+[    8.885796] W 0x4a3b8: 0xeeeeee
+[    8.885797] W 0x4a3bc: 0xefefef
+[    8.885798] W 0x4a3c0: 0xf0f0f0
+[    8.885799] W 0x4a3c4: 0xf1f1f1
+[    8.885800] W 0x4a3c8: 0xf2f2f2
+[    8.885801] W 0x4a3cc: 0xf3f3f3
+[    8.885802] W 0x4a3d0: 0xf4f4f4
+[    8.885803] W 0x4a3d4: 0xf5f5f5
+[    8.885804] W 0x4a3d8: 0xf6f6f6
+[    8.885805] W 0x4a3dc: 0xf7f7f7
+[    8.885806] W 0x4a3e0: 0xf8f8f8
+[    8.885807] W 0x4a3e4: 0xf9f9f9
+[    8.885808] W 0x4a3e8: 0xfafafa
+[    8.885808] W 0x4a3ec: 0xfbfbfb
+[    8.885809] W 0x4a3f0: 0xfcfcfc
+[    8.885810] W 0x4a3f4: 0xfdfdfd
+[    8.885811] W 0x4a3f8: 0xfefefe
+[    8.885812] W 0x4a3fc: 0xffffff
+[    8.890307] W 0x4a000: 0x0
+[    8.890308] W 0x4a004: 0x10101
+[    8.890309] W 0x4a008: 0x20202
+[    8.890310] W 0x4a00c: 0x30303
+[    8.890311] W 0x4a010: 0x40404
+[    8.890312] W 0x4a014: 0x50505
+[    8.890313] W 0x4a018: 0x60606
+[    8.890314] W 0x4a01c: 0x70707
+[    8.890315] W 0x4a020: 0x80808
+[    8.890316] W 0x4a024: 0x90909
+[    8.890317] W 0x4a028: 0xa0a0a
+[    8.890318] W 0x4a02c: 0xb0b0b
+[    8.890319] W 0x4a030: 0xc0c0c
+[    8.890320] W 0x4a034: 0xd0d0d
+[    8.890321] W 0x4a038: 0xe0e0e
+[    8.890322] W 0x4a03c: 0xf0f0f
+[    8.890323] W 0x4a040: 0x101010
+[    8.890324] W 0x4a044: 0x111111
+[    8.890325] W 0x4a048: 0x121212
+[    8.890326] W 0x4a04c: 0x131313
+[    8.890327] W 0x4a050: 0x141414
+[    8.890328] W 0x4a054: 0x151515
+[    8.890329] W 0x4a058: 0x161616
+[    8.890330] W 0x4a05c: 0x171717
+[    8.890331] W 0x4a060: 0x181818
+[    8.890332] W 0x4a064: 0x191919
+[    8.890333] W 0x4a068: 0x1a1a1a
+[    8.890334] W 0x4a06c: 0x1b1b1b
+[    8.890335] W 0x4a070: 0x1c1c1c
+[    8.890336] W 0x4a074: 0x1d1d1d
+[    8.890337] W 0x4a078: 0x1e1e1e
+[    8.890338] W 0x4a07c: 0x1f1f1f
+[    8.890339] W 0x4a080: 0x202020
+[    8.890340] W 0x4a084: 0x212121
+[    8.890341] W 0x4a088: 0x222222
+[    8.890342] W 0x4a08c: 0x232323
+[    8.890343] W 0x4a090: 0x242424
+[    8.890344] W 0x4a094: 0x252525
+[    8.890345] W 0x4a098: 0x262626
+[    8.890346] W 0x4a09c: 0x272727
+[    8.890346] W 0x4a0a0: 0x282828
+[    8.890347] W 0x4a0a4: 0x292929
+[    8.890348] W 0x4a0a8: 0x2a2a2a
+[    8.890349] W 0x4a0ac: 0x2b2b2b
+[    8.890350] W 0x4a0b0: 0x2c2c2c
+[    8.890351] W 0x4a0b4: 0x2d2d2d
+[    8.890352] W 0x4a0b8: 0x2e2e2e
+[    8.890353] W 0x4a0bc: 0x2f2f2f
+[    8.890354] W 0x4a0c0: 0x303030
+[    8.890355] W 0x4a0c4: 0x313131
+[    8.890356] W 0x4a0c8: 0x323232
+[    8.890357] W 0x4a0cc: 0x333333
+[    8.890358] W 0x4a0d0: 0x343434
+[    8.890359] W 0x4a0d4: 0x353535
+[    8.890360] W 0x4a0d8: 0x363636
+[    8.890361] W 0x4a0dc: 0x373737
+[    8.890362] W 0x4a0e0: 0x383838
+[    8.890363] W 0x4a0e4: 0x393939
+[    8.890364] W 0x4a0e8: 0x3a3a3a
+[    8.890365] W 0x4a0ec: 0x3b3b3b
+[    8.890366] W 0x4a0f0: 0x3c3c3c
+[    8.890367] W 0x4a0f4: 0x3d3d3d
+[    8.890368] W 0x4a0f8: 0x3e3e3e
+[    8.890369] W 0x4a0fc: 0x3f3f3f
+[    8.890370] W 0x4a100: 0x404040
+[    8.890371] W 0x4a104: 0x414141
+[    8.890372] W 0x4a108: 0x424242
+[    8.890373] W 0x4a10c: 0x434343
+[    8.890374] W 0x4a110: 0x444444
+[    8.890375] W 0x4a114: 0x454545
+[    8.890376] W 0x4a118: 0x464646
+[    8.890377] W 0x4a11c: 0x474747
+[    8.890378] W 0x4a120: 0x484848
+[    8.890379] W 0x4a124: 0x494949
+[    8.890380] W 0x4a128: 0x4a4a4a
+[    8.890381] W 0x4a12c: 0x4b4b4b
+[    8.890382] W 0x4a130: 0x4c4c4c
+[    8.890383] W 0x4a134: 0x4d4d4d
+[    8.890384] W 0x4a138: 0x4e4e4e
+[    8.890385] W 0x4a13c: 0x4f4f4f
+[    8.890386] W 0x4a140: 0x505050
+[    8.890387] W 0x4a144: 0x515151
+[    8.890388] W 0x4a148: 0x525252
+[    8.890389] W 0x4a14c: 0x535353
+[    8.890390] W 0x4a150: 0x545454
+[    8.890391] W 0x4a154: 0x555555
+[    8.890392] W 0x4a158: 0x565656
+[    8.890393] W 0x4a15c: 0x575757
+[    8.890393] W 0x4a160: 0x585858
+[    8.890394] W 0x4a164: 0x595959
+[    8.890395] W 0x4a168: 0x5a5a5a
+[    8.890396] W 0x4a16c: 0x5b5b5b
+[    8.890397] W 0x4a170: 0x5c5c5c
+[    8.890399] W 0x4a174: 0x5d5d5d
+[    8.890400] W 0x4a178: 0x5e5e5e
+[    8.890401] W 0x4a17c: 0x5f5f5f
+[    8.890402] W 0x4a180: 0x606060
+[    8.890402] W 0x4a184: 0x616161
+[    8.890403] W 0x4a188: 0x626262
+[    8.890404] W 0x4a18c: 0x636363
+[    8.890405] W 0x4a190: 0x646464
+[    8.890406] W 0x4a194: 0x656565
+[    8.890407] W 0x4a198: 0x666666
+[    8.890408] W 0x4a19c: 0x676767
+[    8.890409] W 0x4a1a0: 0x686868
+[    8.890410] W 0x4a1a4: 0x696969
+[    8.890411] W 0x4a1a8: 0x6a6a6a
+[    8.890412] W 0x4a1ac: 0x6b6b6b
+[    8.890413] W 0x4a1b0: 0x6c6c6c
+[    8.890414] W 0x4a1b4: 0x6d6d6d
+[    8.890415] W 0x4a1b8: 0x6e6e6e
+[    8.890416] W 0x4a1bc: 0x6f6f6f
+[    8.890417] W 0x4a1c0: 0x707070
+[    8.890418] W 0x4a1c4: 0x717171
+[    8.890419] W 0x4a1c8: 0x727272
+[    8.890420] W 0x4a1cc: 0x737373
+[    8.890421] W 0x4a1d0: 0x747474
+[    8.890422] W 0x4a1d4: 0x757575
+[    8.890423] W 0x4a1d8: 0x767676
+[    8.890424] W 0x4a1dc: 0x777777
+[    8.890425] W 0x4a1e0: 0x787878
+[    8.890426] W 0x4a1e4: 0x797979
+[    8.890427] W 0x4a1e8: 0x7a7a7a
+[    8.890428] W 0x4a1ec: 0x7b7b7b
+[    8.890429] W 0x4a1f0: 0x7c7c7c
+[    8.890430] W 0x4a1f4: 0x7d7d7d
+[    8.890431] W 0x4a1f8: 0x7e7e7e
+[    8.890432] W 0x4a1fc: 0x7f7f7f
+[    8.890433] W 0x4a200: 0x808080
+[    8.890434] W 0x4a204: 0x818181
+[    8.890435] W 0x4a208: 0x828282
+[    8.890436] W 0x4a20c: 0x838383
+[    8.890437] W 0x4a210: 0x848484
+[    8.890438] W 0x4a214: 0x858585
+[    8.890439] W 0x4a218: 0x868686
+[    8.890439] W 0x4a21c: 0x878787
+[    8.890440] W 0x4a220: 0x888888
+[    8.890441] W 0x4a224: 0x898989
+[    8.890442] W 0x4a228: 0x8a8a8a
+[    8.890443] W 0x4a22c: 0x8b8b8b
+[    8.890444] W 0x4a230: 0x8c8c8c
+[    8.890445] W 0x4a234: 0x8d8d8d
+[    8.890446] W 0x4a238: 0x8e8e8e
+[    8.890447] W 0x4a23c: 0x8f8f8f
+[    8.890448] W 0x4a240: 0x909090
+[    8.890449] W 0x4a244: 0x919191
+[    8.890450] W 0x4a248: 0x929292
+[    8.890451] W 0x4a24c: 0x939393
+[    8.890452] W 0x4a250: 0x949494
+[    8.890453] W 0x4a254: 0x959595
+[    8.890454] W 0x4a258: 0x969696
+[    8.890455] W 0x4a25c: 0x979797
+[    8.890456] W 0x4a260: 0x989898
+[    8.890457] W 0x4a264: 0x999999
+[    8.890458] W 0x4a268: 0x9a9a9a
+[    8.890459] W 0x4a26c: 0x9b9b9b
+[    8.890460] W 0x4a270: 0x9c9c9c
+[    8.890461] W 0x4a274: 0x9d9d9d
+[    8.890462] W 0x4a278: 0x9e9e9e
+[    8.890463] W 0x4a27c: 0x9f9f9f
+[    8.890464] W 0x4a280: 0xa0a0a0
+[    8.890465] W 0x4a284: 0xa1a1a1
+[    8.890466] W 0x4a288: 0xa2a2a2
+[    8.890467] W 0x4a28c: 0xa3a3a3
+[    8.890468] W 0x4a290: 0xa4a4a4
+[    8.890469] W 0x4a294: 0xa5a5a5
+[    8.890470] W 0x4a298: 0xa6a6a6
+[    8.890471] W 0x4a29c: 0xa7a7a7
+[    8.890472] W 0x4a2a0: 0xa8a8a8
+[    8.890473] W 0x4a2a4: 0xa9a9a9
+[    8.890474] W 0x4a2a8: 0xaaaaaa
+[    8.890474] W 0x4a2ac: 0xababab
+[    8.890475] W 0x4a2b0: 0xacacac
+[    8.890476] W 0x4a2b4: 0xadadad
+[    8.890477] W 0x4a2b8: 0xaeaeae
+[    8.890478] W 0x4a2bc: 0xafafaf
+[    8.890479] W 0x4a2c0: 0xb0b0b0
+[    8.890480] W 0x4a2c4: 0xb1b1b1
+[    8.890481] W 0x4a2c8: 0xb2b2b2
+[    8.890482] W 0x4a2cc: 0xb3b3b3
+[    8.890483] W 0x4a2d0: 0xb4b4b4
+[    8.890484] W 0x4a2d4: 0xb5b5b5
+[    8.890485] W 0x4a2d8: 0xb6b6b6
+[    8.890486] W 0x4a2dc: 0xb7b7b7
+[    8.890487] W 0x4a2e0: 0xb8b8b8
+[    8.890488] W 0x4a2e4: 0xb9b9b9
+[    8.890489] W 0x4a2e8: 0xbababa
+[    8.890490] W 0x4a2ec: 0xbbbbbb
+[    8.890493] W 0x4a2f0: 0xbcbcbc
+[    8.890494] W 0x4a2f4: 0xbdbdbd
+[    8.890495] W 0x4a2f8: 0xbebebe
+[    8.890496] W 0x4a2fc: 0xbfbfbf
+[    8.890497] W 0x4a300: 0xc0c0c0
+[    8.890498] W 0x4a304: 0xc1c1c1
+[    8.890499] W 0x4a308: 0xc2c2c2
+[    8.890500] W 0x4a30c: 0xc3c3c3
+[    8.890501] W 0x4a310: 0xc4c4c4
+[    8.890502] W 0x4a314: 0xc5c5c5
+[    8.890503] W 0x4a318: 0xc6c6c6
+[    8.890504] W 0x4a31c: 0xc7c7c7
+[    8.890505] W 0x4a320: 0xc8c8c8
+[    8.890506] W 0x4a324: 0xc9c9c9
+[    8.890507] W 0x4a328: 0xcacaca
+[    8.890508] W 0x4a32c: 0xcbcbcb
+[    8.890509] W 0x4a330: 0xcccccc
+[    8.890510] W 0x4a334: 0xcdcdcd
+[    8.890511] W 0x4a338: 0xcecece
+[    8.890512] W 0x4a33c: 0xcfcfcf
+[    8.890512] W 0x4a340: 0xd0d0d0
+[    8.890513] W 0x4a344: 0xd1d1d1
+[    8.890514] W 0x4a348: 0xd2d2d2
+[    8.890515] W 0x4a34c: 0xd3d3d3
+[    8.890516] W 0x4a350: 0xd4d4d4
+[    8.890517] W 0x4a354: 0xd5d5d5
+[    8.890518] W 0x4a358: 0xd6d6d6
+[    8.890519] W 0x4a35c: 0xd7d7d7
+[    8.890521] W 0x4a360: 0xd8d8d8
+[    8.890522] W 0x4a364: 0xd9d9d9
+[    8.890523] W 0x4a368: 0xdadada
+[    8.890523] W 0x4a36c: 0xdbdbdb
+[    8.890524] W 0x4a370: 0xdcdcdc
+[    8.890525] W 0x4a374: 0xdddddd
+[    8.890526] W 0x4a378: 0xdedede
+[    8.890527] W 0x4a37c: 0xdfdfdf
+[    8.890528] W 0x4a380: 0xe0e0e0
+[    8.890529] W 0x4a384: 0xe1e1e1
+[    8.890530] W 0x4a388: 0xe2e2e2
+[    8.890531] W 0x4a38c: 0xe3e3e3
+[    8.890532] W 0x4a390: 0xe4e4e4
+[    8.890533] W 0x4a394: 0xe5e5e5
+[    8.890534] W 0x4a398: 0xe6e6e6
+[    8.890535] W 0x4a39c: 0xe7e7e7
+[    8.890536] W 0x4a3a0: 0xe8e8e8
+[    8.890537] W 0x4a3a4: 0xe9e9e9
+[    8.890538] W 0x4a3a8: 0xeaeaea
+[    8.890539] W 0x4a3ac: 0xebebeb
+[    8.890540] W 0x4a3b0: 0xececec
+[    8.890541] W 0x4a3b4: 0xededed
+[    8.890542] W 0x4a3b8: 0xeeeeee
+[    8.890543] W 0x4a3bc: 0xefefef
+[    8.890544] W 0x4a3c0: 0xf0f0f0
+[    8.890545] W 0x4a3c4: 0xf1f1f1
+[    8.890546] W 0x4a3c8: 0xf2f2f2
+[    8.890547] W 0x4a3cc: 0xf3f3f3
+[    8.890548] W 0x4a3d0: 0xf4f4f4
+[    8.890549] W 0x4a3d4: 0xf5f5f5
+[    8.890550] W 0x4a3d8: 0xf6f6f6
+[    8.890551] W 0x4a3dc: 0xf7f7f7
+[    8.890552] W 0x4a3e0: 0xf8f8f8
+[    8.890553] W 0x4a3e4: 0xf9f9f9
+[    8.890554] W 0x4a3e8: 0xfafafa
+[    8.890555] W 0x4a3ec: 0xfbfbfb
+[    8.890556] W 0x4a3f0: 0xfcfcfc
+[    8.890557] W 0x4a3f4: 0xfdfdfd
+[    8.890558] W 0x4a3f8: 0xfefefe
+[    8.890559] W 0x4a3fc: 0xffffff
+[   13.845197] i915 0000:00:02.0: fb0: inteldrmfb frame buffer device
+[   13.851694] i915 0000:00:02.0: registered panic notifier
+[   13.857008] [drm] Initialized i915 1.6.0 20080730 for 0000:00:02.0 on minor 0
+[   13.864357] loop: module loaded
+[   13.867193] ahci 0000:00:1f.2: version 3.0
+[   13.867239] ahci 0000:00:1f.2: irq 58 for MSI/MSI-X
+[   13.867267] ahci: SSS flag set, parallel bus scan disabled
+[   13.872632] ahci 0000:00:1f.2: AHCI 0001.0300 32 slots 4 ports 6 Gbps 0x1 impl SATA mode
+[   13.880582] ahci 0000:00:1f.2: flags: 64bit ncq ilck stag pm led clo only pio slum part deso sadm sds apst 
+[   13.890946] ahci 0000:00:1f.2: setting latency timer to 64
+[   13.891275] scsi0 : ahci
+[   13.892955] scsi1 : ahci
+[   13.895623] scsi2 : ahci
+[   13.898299] scsi3 : ahci
+[   13.900965] ata1: SATA max UDMA/133 abar m2048@0xe041b000 port 0xe041b100 irq 58
+[   13.907801] ata2: DUMMY
+[   13.910386] ata3: DUMMY
+[   13.912977] ata4: DUMMY
+[   13.915642] hso: /mnt/host/source/src/third_party/kernel-next/drivers/net/usb/hso.c: Option Wireless
+[   13.924882] usbcore: registered new interface driver hso
+[   13.930186] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[   13.936798] ehci-pci: EHCI PCI platform driver
+[   13.940903] ehci-pci 0000:00:1d.0: setting latency timer to 64
+[   13.940907] ehci-pci 0000:00:1d.0: EHCI Host Controller
+[   13.946184] ehci-pci 0000:00:1d.0: new USB bus registered, assigned bus number 1
+[   13.954015] ehci-pci 0000:00:1d.0: debug port 2
+[   13.961999] ehci-pci 0000:00:1d.0: cache line size of 64 is not supported
+[   13.962016] ehci-pci 0000:00:1d.0: irq 19, io mem 0xe041b800
+[   13.972036] ehci-pci 0000:00:1d.0: USB 2.0 started, EHCI 1.00
+[   13.976491] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[   13.983168] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[   13.991315] usb usb1: Product: EHCI Host Controller
+[   13.995499] usb usb1: Manufacturer: Linux 3.8.11 ehci_hcd
+[   14.000811] usb usb1: SerialNumber: 0000:00:1d.0
+[   14.006034] hub 1-0:1.0: USB hub found
+[   14.009970] hub 1-0:1.0: 10 ports detected
+[   14.014172] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[   14.019680] uhci_hcd: USB Universal Host Controller Interface driver
+[   14.026012] ata1: SATA link up 6.0 Gbps (SStatus 133 SControl 300)
+[   14.032754] xhci_hcd 0000:00:14.0: setting latency timer to 64
+[   14.032758] xhci_hcd 0000:00:14.0: xHCI Host Controller
+[   14.038050] ata1.00: ATA-9: SanDisk SSD i100 16GB, 11.56.00, max UDMA/133
+[   14.038100] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 2
+[   14.038244] xhci_hcd 0000:00:14.0: cache line size of 64 is not supported
+[   14.038311] xhci_hcd 0000:00:14.0: irq 59 for MSI/MSI-X
+[   14.038386] usb usb2: New USB device found, idVendor=1d6b, idProduct=0002
+[   14.038387] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[   14.038389] usb usb2: Product: xHCI Host Controller
+[   14.038390] usb usb2: Manufacturer: Linux 3.8.11 xhci_hcd
+[   14.038392] usb usb2: SerialNumber: 0000:00:14.0
+[   14.038470] xHCI xhci_add_endpoint called for root hub
+[   14.038471] xHCI xhci_check_bandwidth called for root hub
+[   14.038495] hub 2-0:1.0: USB hub found
+[   14.038518] hub 2-0:1.0: 9 ports detected
+[   14.038732] xhci_hcd 0000:00:14.0: xHCI Host Controller
+[   14.038767] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 3
+[   14.038794] usb usb3: New USB device found, idVendor=1d6b, idProduct=0003
+[   14.038795] usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[   14.038797] usb usb3: Product: xHCI Host Controller
+[   14.038798] usb usb3: Manufacturer: Linux 3.8.11 xhci_hcd
+[   14.038799] usb usb3: SerialNumber: 0000:00:14.0
+[   14.038868] xHCI xhci_add_endpoint called for root hub
+[   14.038869] xHCI xhci_check_bandwidth called for root hub
+[   14.038889] hub 3-0:1.0: USB hub found
+[   14.038901] hub 3-0:1.0: 4 ports detected
+[   14.139326] ata1.00: 31277232 sectors, multi 1: LBA48 NCQ (depth 31/32)
+[   14.146309] ata1.00: configured for UDMA/133
+[   14.150470] scsi 0:0:0:0: Direct-Access     ATA      SanDisk SSD i100 11.5 PQ: 0 ANSI: 5
+[   14.158628] sd 0:0:0:0: [sda] 31277232 512-byte logical blocks: (16.0 GB/14.9 GiB)
+[   14.165562] sd 0:0:0:0: [sda] Write Protect is off
+[   14.170738] sd 0:0:0:0: [sda] Mode Sense: 00 3a 00 00
+[   14.170754] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[   14.170769] usbcore: registered new interface driver cdc_acm
+[   14.170770] cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+[   14.170770] Initializing USB Mass Storage driver...
+[   14.170789] usbcore: registered new interface driver usb-storage
+[   14.170790] USB Mass Storage support registered.
+[   14.170799] usbcore: registered new interface driver ums-realtek
+[   14.170821] usbcore: registered new interface driver usbserial
+[   14.170829] usbcore: registered new interface driver usbserial_generic
+[   14.170835] usbserial: USB Serial support registered for generic
+[   14.170892] i8042: PNP: PS/2 Controller [PNP0303:PS2K] at 0x60,0x64 irq 1
+[   14.170893] i8042: PNP: PS/2 appears to have AUX port disabled, if this is incorrect please boot with i8042.nopnp
+[   14.253624]  sda: sda1 sda2 sda3 sda4 sda5 sda6 sda7 sda8 sda9 sda10 sda11 sda12
+[   14.260981] sd 0:0:0:0: [sda] Attached SCSI disk
+[   14.352764] usb 1-1: new high-speed USB device number 2 using ehci-pci
+[   14.473068] usb 1-1: New USB device found, idVendor=8087, idProduct=8000
+[   14.478717] usb 1-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[   14.486581] hub 1-1:1.0: USB hub found
+[   14.489554] hub 1-1:1.0: 8 ports detected
+[   14.647558] usb 2-2: new low-speed USB device number 2 using xhci_hcd
+[   14.685711] usb 2-2: New USB device found, idVendor=045e, idProduct=00db
+[   14.689637] i8042: Can't read CTR while initializing i8042
+[   14.689642] i8042: probe of i8042 failed with error -5
+[   14.689980] rtc_cmos 00:08: RTC can wake from S4
+[   14.690193] rtc_cmos 00:08: rtc core: registered rtc_cmos as rtc0
+[   14.690243] rtc0: alarms up to one month, 242 bytes nvram, hpet irqs
+[   14.690296] i801_smbus 0000:00:1f.3: SMBus using PCI Interrupt
+[   14.725470] hpet1: lost 1 rtc interrupts
+[   14.729416] usb 2-2: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[   14.736150] usb 2-2: Product: Natural\xffffffc2\xffffffae Ergonomic Keyboard 4000
+[   14.736276] device-mapper: ioctl: 4.23.1-ioctl (2012-12-18) initialised: dm-devel@redhat.com
+[   14.736328] device-mapper: verity-chromeos: dm-verity-chromeos registered
+[   14.736330] device-mapper: bootcache: version 0.1.0 loaded
+[   14.736420] cpuidle: using governor ladder
+[   14.767586] usb 2-2: Manufacturer: Microsoft
+[   14.767675] cpuidle: using governor menu
+[   14.767890] gsmi version 1.0 loaded
+[   14.767927] usbcore: registered new interface driver usbhid
+[   14.767928] usbhid: USB HID core driver
+[   14.788789] usb 2-2: ep 0x81 - rounding interval to 64 microframes, ep desc says 80 microframes
+[   14.797018] usb 2-2: ep 0x82 - rounding interval to 64 microframes, ep desc says 80 microframes
+[   14.806148] __add_probed_i2c_device failed to register device 9-67
+[   14.812745] Netfilter messages via NETLINK v0.30.
+[   14.816900] nf_conntrack version 0.5.0 (16384 buckets, 65536 max)
+[   14.823442] ctnetlink v0.93: registering with nfnetlink.
+[   14.828840] ip_tables: (C) 2000-2006 Netfilter Core Team
+[   14.834151] TCP: cubic registered
+[   14.836937] Initializing XFRM netlink socket
+[   14.842093] NET: Registered protocol family 10
+[   14.846350] NET: Registered protocol family 17
+[   14.851848]   Magic number: 13:708:736
+[   14.855294] ALSA device list:
+[   14.858036]   No soundcards found.
+[   14.860876] Warning: unable to open an initial console.
+[   14.866162] device-mapper: init: attempting early device configuration.
+[   14.872928] device-mapper: init: adding target '0 2097152 verity payload=176bf08c-770e-bc42-8baf-316014f21f33+1 hashtree=176bf08c-770e-bc42-8baf-316014f21f33+1 hashstart=2097152 alg=sha1 root_hexdigest=87e5c5813e6dd5d7a7c69923a4fa949ab3f57a9d salt=83f2609127d7b6d5454389cd777b01e94e3708d10a695c0091b709f900fda169'
+[   14.900688] device-mapper: verity: Argument 0: 'payload=176bf08c-770e-bc42-8baf-316014f21f33+1'
+[   14.909772] device-mapper: verity: Argument 1: 'hashtree=176bf08c-770e-bc42-8baf-316014f21f33+1'
+[   14.918904] device-mapper: verity: Argument 2: 'hashstart=2097152'
+[   14.924411] device-mapper: verity: Argument 3: 'alg=sha1'
+[   14.929722] device-mapper: verity: Argument 4: 'root_hexdigest=87e5c5813e6dd5d7a7c69923a4fa949ab3f57a9d'
+[   14.940021] device-mapper: verity: Argument 5: 'salt=83f2609127d7b6d5454389cd777b01e94e3708d10a695c0091b709f900fda169'
+[   14.951892] bio: create slab <bio-1> at 1
+[   14.954915] device-mapper: init: dm-0 is ready
+[   14.961531] EXT4-fs (dm-0): couldn't mount as ext3 due to feature incompatibilities
+[   14.968760] EXT4-fs (dm-0): mounting ext2 file system using the ext4 subsystem
+[   14.977273] EXT4-fs (dm-0): mounted filesystem without journal. Opts: (null)
+[   14.983016] VFS: Mounted root (ext2 filesystem) readonly on device 254:0.
+[   14.995509] devtmpfs: mounted
+[   14.998490] Freeing unused kernel memory: 708k freed
+[   15.002790] Write protecting the kernel read-only data: 8192k
+[   15.011544] Freeing unused kernel memory: 1328k freed
+[   15.016492] Freeing unused kernel memory: 220k freed
+[   15.234353] udevd[85]: starting version 171
+[   15.272730] Unsafe core_pattern used with suid_dumpable=2. Pipe handler or fully qualified core dump path required.
+[   15.291731] EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: commit=600
+[   15.302155] EXT4-fs (sda8): mounted filesystem with ordered data mode. Opts: commit=600
+[   15.312590] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 71280
+[   15.319612] [drm:i915_write32] *ERROR* Unclaimed write to 71280
+[   15.326032] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7129c
+[   15.334091] [drm:i915_write32] *ERROR* Unclaimed write to 7129c
+[   15.339526] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 72280
+[   15.348312] [drm:i915_write32] *ERROR* Unclaimed write to 72280
+[   15.353751] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7229c
+[   15.362732] [drm:i915_write32] *ERROR* Unclaimed write to 7229c
+[   15.368208] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 70280
+[   15.376236] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 71280
+[   15.385214] [drm:i915_write32] *ERROR* Unclaimed write to 71280
+[   15.390651] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7129c
+[   15.392054] bio: create slab <bio-2> at 2
+[   15.393199] EXT4-fs (dm-1): mounted filesystem with ordered data mode. Opts: discard,commit=600
+[   15.411731] [drm:i915_write32] *ERROR* Unclaimed write to 7129c
+[   15.418161] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 72280
+[   15.426158] [drm:i915_write32] *ERROR* Unclaimed write to 72280
+[   15.431912] EXT4-fs (sda1): re-mounted. Opts: commit=600,data=ordered
+[   15.439153] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7229c
+[   15.447140] [drm:i915_write32] *ERROR* Unclaimed write to 7229c
+[   15.452623] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to c7204
+[   15.462663] [drm] Adding LVDS downclock mode
+[   15.476923] init: ureadahead main process (235) terminated with status 5
+[   15.520568] [drm] Adding LVDS downclock mode
+[   15.524687] [drm] Adding LVDS downclock mode
+[   15.581506] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 71280
+[   15.588520] [drm:i915_write32] *ERROR* Unclaimed write to 71280
+[   15.594945] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7129c
+[   15.602999] [drm:i915_write32] *ERROR* Unclaimed write to 7129c
+[   15.608438] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 72280
+[   15.617418] [drm:i915_write32] *ERROR* Unclaimed write to 72280
+[   15.622858] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7229c
+[   15.631838] [drm:i915_write32] *ERROR* Unclaimed write to 7229c
+[   15.655021] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 70280
+[   15.662044] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 71280
+[   15.670016] [drm:i915_write32] *ERROR* Unclaimed write to 71280
+[   15.676444] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7129c
+[   15.684432] [drm:i915_write32] *ERROR* Unclaimed write to 7129c
+[   15.690865] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 72280
+[   15.698853] [drm:i915_write32] *ERROR* Unclaimed write to 72280
+[   15.705284] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7229c
+[   15.713276] [drm:i915_write32] *ERROR* Unclaimed write to 7229c
+[   15.718769] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 70280
+[   15.727784] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 71280
+[   15.735757] [drm:i915_write32] *ERROR* Unclaimed write to 71280
+[   15.741195] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7129c
+[   15.750175] [drm:i915_write32] *ERROR* Unclaimed write to 7129c
+[   15.755616] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 72280
+[   15.763606] [drm:i915_write32] *ERROR* Unclaimed write to 72280
+[   15.770037] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7229c
+[   15.778030] [drm:i915_write32] *ERROR* Unclaimed write to 7229c
+[   15.784525] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 64014
+[   15.793553] [drm] Adding LVDS downclock mode
+[   15.851329] [drm] Adding LVDS downclock mode
+[   15.855438] [drm] Adding LVDS downclock mode
+[   15.912287] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 71280
+[   15.919305] [drm:i915_write32] *ERROR* Unclaimed write to 71280
+[   15.925733] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7129c
+[   15.933726] [drm:i915_write32] *ERROR* Unclaimed write to 7129c
+[   15.940159] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 72280
+[   15.948154] [drm:i915_write32] *ERROR* Unclaimed write to 72280
+[   15.953598] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7229c
+[   15.962588] [drm:i915_write32] *ERROR* Unclaimed write to 7229c
+[   16.495089] Chromium OS LSM: init_module locked module="/lib/modules/3.8.11/kernel/net/ipv6/netfilter/ip6_tables.ko" pid=317 cmdline="/sbin/modprobe ip6_tables -q"
+[   16.508725] Chromium OS LSM: dev(254,0): read-only
+[   16.513905] Chromium OS LSM: module locking engaged.
+[   16.520830] ip6_tables: (C) 2000-2006 Netfilter Core Team
+[   16.521845] init: tcsd main process (353) terminated with status 137
+[   16.521866] init: tcsd main process ended, respawning
+[   16.739145] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 70280
+[   16.746164] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 71280
+[   16.754146] [drm:i915_write32] *ERROR* Unclaimed write to 71280
+[   16.760574] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7129c
+[   16.768568] [drm:i915_write32] *ERROR* Unclaimed write to 7129c
+[   16.775006] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 72280
+[   16.782989] [drm:i915_write32] *ERROR* Unclaimed write to 72280
+[   16.789421] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7229c
+[   16.797413] [drm:i915_write32] *ERROR* Unclaimed write to 7229c
+[   16.802943] cfg80211: Calling CRDA to update world regulatory domain
+[   16.802982] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 70280
+[   16.802998] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 71280
+[   16.803003] [drm:i915_write32] *ERROR* Unclaimed write to 71280
+[   16.803008] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7129c
+[   16.803013] [drm:i915_write32] *ERROR* Unclaimed write to 7129c
+[   16.803020] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 72280
+[   16.803025] [drm:i915_write32] *ERROR* Unclaimed write to 72280
+[   16.803030] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7229c
+[   16.803034] [drm:i915_write32] *ERROR* Unclaimed write to 7229c
+[   16.803171] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 70280
+[   16.803187] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 71280
+[   16.803192] [drm:i915_write32] *ERROR* Unclaimed write to 71280
+[   16.803197] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7129c
+[   16.803202] [drm:i915_write32] *ERROR* Unclaimed write to 7129c
+[   16.803208] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 72280
+[   16.803213] [drm:i915_write32] *ERROR* Unclaimed write to 72280
+[   16.803218] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 7229c
+[   16.803223] [drm:i915_write32] *ERROR* Unclaimed write to 7229c
+[   16.803515] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 64014
+[   16.804571] [drm] Adding LVDS downclock mode
+[   16.859789] [drm] Adding LVDS downclock mode
+[   17.203943] [drm:i915_write32] *ERROR* Unclaimed write to 68080
+[   17.208835] [drm:i915_write32] *ERROR* Unclaimed write to 68074
+[   18.287077] [drm:intel_dp_set_link_train] *ERROR* Timed out waiting for DP idle patterns
+[   18.294087] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 64040
+[   18.553074] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 48254
+[   18.660475] init: disable_echo main process (78) killed by TERM signal
+[   18.720565] [drm] Adding LVDS downclock mode
+[   18.778334] [drm] Adding LVDS downclock mode
+[   19.609525] [drm] Adding LVDS downclock mode
+[   19.670702] [drm] Adding LVDS downclock mode
+[   19.731934] [drm] Adding LVDS downclock mode
+[   19.790175] [drm] Adding LVDS downclock mode
+[   20.672658] CPU2: Core power limit notification (total events = 1)
+[   20.672660] CPU3: Core power limit notification (total events = 1)
+[   20.672664] CPU3: Package power limit notification (total events = 1)
+[   20.672666] CPU0: Core power limit notification (total events = 1)
+[   20.672668] CPU1: Core power limit notification (total events = 1)
+[   20.672669] CPU0: Package power limit notification (total events = 1)
+[   20.672670] CPU1: Package power limit notification (total events = 1)
+[   20.673665] CPU3: Core power limit normal
+[   20.673666] CPU0: Core power limit normal
+[   20.673668] CPU1: Core power limit normal
+[   20.673669] CPU0: Package power limit normal
+[   20.673670] CPU1: Package power limit normal
+[   20.673671] CPU3: Package power limit normal
+[   20.740991] CPU2: Core power limit normal
+[   20.808284] [drm] Adding LVDS downclock mode
+[   20.867788] [drm] Adding LVDS downclock mode
+[   22.711450] low_mem: setting minfree to 211968 kB
+[   22.743666] fuse init (API version 7.20)
+[   22.792949] zsmalloc: module is from the staging directory, the quality is unknown, you have been warned.
+[   22.805354] zram: module is from the staging directory, the quality is unknown, you have been warned.
+[   22.813934] zram: num_devices not specified. Using default: 1
+[   22.817584] isl29018: module is from the staging directory, the quality is unknown, you have been warned.
+[   22.828772] zram: Creating 1 devices ...
+[   22.848015] snd_hda_intel 0000:00:1b.0: irq 60 for MSI/MSI-X
+[   22.857150] input: Microsoft Natural\xffffffc2\xffffffae Ergonomic Keyboard 4000 as /devices/pci0000:00/0000:00:14.0/usb2/2-2/2-2:1.0/input/input6
+[   22.869185] microsoft 0003:045E:00DB.0001: input,hidraw0: USB HID v1.11 Keyboard [Microsoft Natural\xffffffc2\xffffffae Ergonomic Keyboard 4000] on usb-0000:00:14.0-2/input0
+[   22.883367] Adding 5839192k swap on /dev/zram0.  Priority:-1 extents:1 across:5839192k SS
+[   22.890749] input: Microsoft Natural\xffffffc2\xffffffae Ergonomic Keyboard 4000 as /devices/pci0000:00/0000:00:14.0/usb2/2-2/2-2:1.1/input/input7
+[   22.893599] input: HDA Intel PCH Line as /devices/pci0000:00/0000:00:1b.0/sound/card0/input8
+[   22.893738] input: HDA Intel PCH Mic as /devices/pci0000:00/0000:00:1b.0/sound/card0/input9
+[   22.922310] microsoft 0003:045E:00DB.0002: input,hidraw1: USB HID v1.11 Device [Microsoft Natural\xffffffc2\xffffffae Ergonomic Keyboard 4000] on usb-0000:00:14.0-2/input1
+[   22.934722] Bluetooth: Core ver 2.16
+[   22.939565] NET: Registered protocol family 31
+[   22.943685] Bluetooth: HCI device and connection manager initialized
+[   22.949329] Bluetooth: HCI socket layer initialized
+[   22.957296] Bluetooth: L2CAP socket layer initialized
+[   22.964944] Bluetooth: SCO socket layer initialized
+[   23.063435] i2c /dev entries driver
+[   28.029506] init: bootcache main process (4163) terminated with status 2
+[   53.121689] init: tlsdated main process (3058) killed by TERM signal
+[  376.929216] [drm] Adding LVDS downclock mode
+[  377.224446] [drm:i915_write32] *ERROR* Unclaimed write to 68080
+[  377.228938] [drm:i915_write32] *ERROR* Unclaimed write to 68074
+[  378.439915] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to c7204
+[  378.488574] [drm] Adding LVDS downclock mode
+[  378.548060] [drm] Adding LVDS downclock mode
+[  462.008469] [drm] Adding LVDS downclock mode
+[  462.394031] [drm:intel_dp_set_link_train] *ERROR* Timed out waiting for DP idle patterns
+[  462.401061] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to 64040
+[  462.660191] [drm:i915_write32] *ERROR* Unknown unclaimed register before writing to c7204
+[  462.668343] [drm] Adding LVDS downclock mode
