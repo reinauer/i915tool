@@ -1,0 +1,1 @@
+binary vbioses are a pain. This tool, assuming it works, will be able to extract initialization code from the kernel driver.
